@@ -1,0 +1,11 @@
+<svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" width="872.8427" height="872.8427" viewBox="0 0 872.8427 872.8427">
+  <title>scale</title>
+  <g>
+    <line x1="827.8427" y1="45" x2="545" y2="327.8427" style="fill: none;stroke: #fff;stroke-linecap: round;stroke-linejoin: round;stroke-width: 90px"/>
+    <polyline points="545 45 827.843 45 827.843 327.843" style="fill: none;stroke: #fff;stroke-linecap: round;stroke-linejoin: round;stroke-width: 90px"/>
+  </g>
+  <g>
+    <line x1="45" y1="827.8427" x2="327.8427" y2="545" style="fill: none;stroke: #fff;stroke-linecap: round;stroke-linejoin: round;stroke-width: 90px"/>
+    <polyline points="45 545 45 827.843 327.843 827.843" style="fill: none;stroke: #fff;stroke-linecap: round;stroke-linejoin: round;stroke-width: 90px"/>
+  </g>
+</svg>

@@ -1,0 +1,5 @@
+SetEnvIf Origin "http(s)?://(www\.)?(google.com|staging.google.com|development.google.com|localhost|localhost:3000|kinoji.elkhantour.com)$" AccessControlAllowOrigin=$0
+Header add Access-Control-Allow-Origin %{AccessControlAllowOrigin}e env=AccessControlAllowOrigin
+Header merge Vary Origin
+Header add Access-Control-Allow-Headers "origin, x-requested-with, content-type"
+Header add Access-Control-Allow-Methods "PUT, GET, POST, DELETE, OPTIONS"

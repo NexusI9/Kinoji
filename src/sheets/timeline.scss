@@ -1,0 +1,599 @@
+@use "style.scss";
+
+#Earth{
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: filter,opacity, 1s ease;
+    transition-delay: 0.4s;
+  
+    canvas{
+      position: absolute;
+      top:0;
+    }
+  }
+  
+  
+  #timeline_wrapper{
+    display: inline-block;
+    position: absolute;
+    width: 100%;
+    height: 35vh;
+    bottom: 0;
+    overflow: auto;
+  
+    &::-webkit-scrollbar{
+      width: 0;
+      display: none;
+    }
+  }
+  
+  #timeline_settings{
+    position: fixed;
+    margin-right: 3vw;
+    right: 0;
+    display: flex;
+    flex-direction: row-reverse;
+  
+    #country_select{
+      margin: 0 2%;
+      float: right;
+      left: 10%;
+      background: none;
+      border: none;
+      list-style: none;
+      padding: 0;
+      z-index: 2;
+      pointer-events: none;
+      margin-right: 25px;
+  
+      & li > div{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+      .ico{
+        background-color: transparent;
+      }
+  
+      small{ margin: 0; margin-right: 10px; }
+  
+      *:first-of-type li{
+  
+        &::after{
+          content:'';
+          width: 10px;
+          height: 10px;
+          display: block;
+          background-size: contain;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-image: url('./../assets/listarrow.svg');
+          margin-right: 7px;
+        }
+      }
+  
+      li{
+  
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        cursor: pointer;
+        pointer-events: auto;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+        user-select: none;
+        justify-content: space-between;
+  
+        span{
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+  
+  
+        &[name="china"]{
+          span{ background-image:url('./../assets/countries/china.svg'); }
+        }
+        &[name="japan"]{
+          span{ background-image:url('./../assets/countries/japan.svg'); }
+        }
+        &[name="taiwan"]{
+          span{ background-image:url('./../assets/countries/taiwan.svg'); }
+        }
+        &[name="vietnam"]{
+          span{ background-image:url('./../assets/countries/vietnam.svg'); }
+        }
+        &[name="indonesia"]{
+          span{ background-image:url('./../assets/countries/indonesia.svg'); }
+        }
+        &[name="russia"]{
+          span{ background-image:url('./../assets/countries/russia.svg'); }
+        }
+        &[name="south korea"]{
+          span{ background-image:url('./../assets/countries/korea.svg'); }
+        }
+        &[name="india"]{
+          span{ background-image:url('./../assets/countries/india.svg'); }
+        }
+        &[name="world"]{
+          span{ background-image:url('./../assets/countries/worldwide.svg'); }
+        }
+  
+        &:not(:first-of-type){
+          pointer-events: none;
+          border: none;
+  
+          &::before{
+            visibility: none;
+          }
+  
+          &:hover{
+            transform: scale(1);
+          }
+        }
+  
+  
+  
+      }
+    }
+  
+    #history_sidelist{
+      width: 250px;
+      transition: opacity 0.2s ease-out;
+      ul{
+        color: var(--settingsDark);
+        list-style: none;
+        padding-left: 10px;
+        position: absolute;
+        top: 0;
+        max-height: 40vh;
+        overflow-y: auto;
+        &:first-of-type{ position: relative; }
+        &::-webkit-scrollbar-track {
+          background: #6c6c6c2e;
+          border-radius: 13px;
+        }
+      }
+  
+      p{ color:var(--paper); }
+  
+      .dot_events{
+        &:hover{ transform:none; }
+      }
+      li{
+        display: flex;
+        position: relative;
+  
+        &:not(:last-of-type){
+          section{
+            &:first-of-type::before {
+                content: '';
+                width: 0.5px;
+                display: block;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                background: var(--paper);
+            }
+          }
+        }
+  
+        section{
+          &:first-of-type{
+            display: flex;
+            justify-content: center;
+            margin-right: 10px;
+          }
+          &:last-of-type{
+            margin-right: 20px;
+            margin-bottom: 6px;
+          }
+        }
+  
+      }
+  
+      & > section{
+        transition: opacity 0.2s ease;
+        position: relative;
+      }
+  
+    }
+  }
+  
+  
+  
+  
+  .sideContent li section:first-of-type, .sideEvents li section:first-of-type{ color: var(--lightblue); }
+  .sideContent li[name='movies']  section:first-of-type{ color: var(--red); }
+
+  
+#date_container{
+    display: inline-block;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: fixed;
+    color: white;
+  
+    & > section{
+      position: fixed;
+      height: 100vh;
+    }
+  
+    &:not([data-country='world']){
+      #Earth{
+        opacity: 0.3;
+      }
+    }
+  
+  }
+  
+  
+  #list_timeline{
+    display: grid;
+    grid-template-columns: repeat(8,25vw);
+    width: max-content;
+    position: absolute;
+    column-gap: 10vw;
+    top: 5vh;
+    white-space: nowrap;
+  }
+  
+  #chrono{
+    width: 100%;
+    height: 100vh;
+    display: block;
+    position:relative;
+    top:0;
+    left: 0;
+    opacity: 0.3;
+  }
+  
+  #chrono_timeline{
+    height: calc(100vh/4);
+    display: flex;
+    align-items: center;
+    position: fixed;
+    bottom: 4vh;
+  
+    & > *{
+      position: absolute;
+    }
+  
+    #chrono_bar{
+      height: 1px;
+      min-width: 90%;
+      width: 300vw;
+  
+      &::after {
+        content: '';
+        width: 106%;
+        display: block;
+        height: 100%;
+        transform: translateX(-2%);
+        background: linear-gradient(90deg,transparent, white 5%, white 95%, transparent);
+      }
+    }
+  }
+  
+  
+  #chrono_events_bar{
+    position: relative;
+  }
+  
+  .chrono_small_events{
+    transition: left 0.3s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position:absolute;
+  
+    p{
+      margin: 0;
+      padding-left: 0;
+    }
+  
+    .longevity{
+      position: absolute;
+      display: block;
+      height: 1px;
+      left: 0px;
+      z-index: 0;
+      background: linear-gradient(45deg, var(--lightblue), transparent);
+    }
+  
+    section{
+      white-space: nowrap;
+      text-align: center;
+      margin: 5px;
+      position: absolute;
+      overflow: hidden;
+      max-width: 125px;
+      text-overflow: ellipsis;
+    }
+  
+  }
+  
+  
+  .dot_events{
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background: #ffffff;
+    border: solid 4px;
+    z-index: 2;
+    transition: transform 0.2s ease;
+    pointer-events: auto;
+  
+    &.small{
+      width: 7px;
+      height: 7px;
+      border-width: 3px;
+    }
+  
+    &:hover{
+      transform: scale(1.2);
+    }
+  }
+  
+  
+  .chrono_event_detail{
+  
+    opacity: 0;
+    transition: opacity 0.3s;
+    color: black;
+    padding: 10px;
+    width: max-content;
+    max-width: 400px !important;
+    z-index: 2;
+    text-align: left !important;
+    transform: translateY(-100%);
+    top: 0;
+    
+  
+    h4, p{ color:var(--paper);;}
+    a{ color: va(--paper) !important; }
+    img{
+      max-width: 100%;
+      transition: filter 0.3s ease;
+    }
+    .source{ float: right; }
+  
+    .movie_poster{
+      max-width:100%;
+      box-shadow: none;
+      section{margin:0 !important;}
+      img{box-shadow: none;}
+    }
+  
+    & > div{
+    @include style.card();
+    background:var(--blue70);
+    display: block;
+    overflow: hidden;
+    position: relative;
+    height: min-content;
+    box-shadow: 0 3px 3px rgba(0 0 0 / 20%);
+    box-sizing: border-box;
+    padding: 10px 7px;
+
+      .detail_content{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        justify-content: flex-start;
+      }
+  
+      .detail_header{
+        white-space: pre-line;
+      }
+    }
+  
+    p{
+      background:transparent !important;
+      white-space: normal !important;
+    }
+  
+    h4,h3{ margin: 0; }
+  
+    &:has(.detail_content)> div{
+      display: grid;
+      grid-template-columns: 100px auto;
+      column-gap: 10px;
+    }
+  
+    .summary{
+      white-space: normal;
+    }
+  
+    .content_group_movies{
+        display: block !important;
+        & > div{
+          display: flex;
+          flex-wrap: nowrap;
+          overflow: auto;
+        }
+        .carousel{
+          margin-top: 10px;
+          .movie_poster{
+            margin-right: 8px;
+            box-shadow:none;
+          }
+        }
+      }
+  
+      .content_list_event{
+        padding: 5px 0;
+        display: flex;
+        word-wrap: break-word;
+        justify-content: space-between;
+        gap:20px;
+  
+        .content{
+          flex-direction: row;
+          column-gap: 10px;
+          display: flex;
+          white-space: break-spaces;
+        }
+  
+        .hyperlink{
+          display: flex;
+          align-items: center;
+        }
+  
+        &:not(:last-of-type){
+          border-bottom: solid var(--settingsDark) 1px;
+        }
+  
+      }
+  }
+  
+  
+  
+  .group{
+    & > span{
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  
+      *{
+        color: white;
+        font-weight: bold;
+      }
+    }
+  }
+  
+  
+  .chrono_movies{
+  
+    color:var(--red);
+  
+    .dot_events{
+      //box-shadow: 0 0 10px 0px var(--red);
+    }
+  
+    &.group{
+      & > span{ background-color: var(--red); }
+      .chrono_event_detail{
+        img{
+          width: 100px;
+          padding: 0;
+        }
+  
+        & > span{  background-color: var(--lightblue); }
+      }
+    }
+  }
+  
+  
+  
+  .chrono_mixed{
+    &.group{
+      & > span{
+        background-image: linear-gradient(var(--lightblue) 49%, var(--red) 50%);
+        border: none;
+        width: 28px;
+        height: 28px;
+        *{ color: var(--blue90); position: relative;}
+        &::before{
+          content: '';
+          width: 75%;
+          height: 75%;
+          position: absolute;
+          background: white;
+          border-radius: 100%;
+        }
+      }
+    }
+  }
+  
+  
+  .chrono_label {
+    width: max-content;
+    text-align: left;
+    overflow: visible;
+    transform: rotate(45deg);
+    transform-origin: center left;
+    left: 25%;
+    top: 50%;
+    margin: 5;
+    backdrop-filter: blur(4px);
+  }
+  
+  .chrono_small_events {
+    .chrono_label{
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+  
+      p{
+        text-overflow: ellipsis;
+        white-space: pre;
+        overflow: hidden;
+        pointer-events: none;
+      }
+    }
+  }
+  
+  .chrono_events {
+    flex-direction: column-reverse;
+    color:var(--lightblue);
+    .dot_events{
+      //box-shadow: 0 0 10px 0px var(--lightblue);
+    }
+  
+    &.group{
+      & > span{ background-color: var(--lightblue); }
+    }
+  }
+  
+  .chrono_segments{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    pointer-events: none;
+    transition: left 0.4s ease-out;
+  
+    h4, p{
+      margin: 0;
+      color:var(--paper);
+    }
+  
+    section{
+      position: absolute;
+      width: 100%;
+      text-align: center;
+    }
+  
+  
+  
+    .chrono_pillar{
+      width: 2px;
+      height: 100%;
+      display: block;
+      border-left: dashed var(--paper) 1px;
+      position: absolute;
+      color: var(--paper);
+      display: flex;
+      flex-direction: column-reverse;
+      justify-content: flex-end;
+      pointer-events: none;
+      transition: margin-left 0.3s ease-out;
+  
+      p{
+        color: var(--paper);
+        transform: translate(-50%, -110%);
+        position: absolute;
+      }
+  
+      &:last-of-type{
+        position: relative;
+      }
+    }
+  
+  }
+  

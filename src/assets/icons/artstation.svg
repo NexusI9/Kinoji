@@ -1,0 +1,16 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="105.8" height="93.1" viewBox="0 0 105.8 93.1">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ffffff;
+      }
+
+    </style>
+  </defs>
+  <title>artstation</title>
+  <g>
+    <path class="cls-1" d="M51.4,123.3l8.9,15.4h0a10.7,10.7,0,0,0,9.5,5.9h59.3l-12.3-21.3Z" transform="translate(-51.4 -51.5)"/>
+    <path class="cls-1" d="M157.2,123.4a10.6,10.6,0,0,0-1.7-5.8L120.7,57.2a10.6,10.6,0,0,0-9.4-5.7H92.9l53.7,93,8.5-14.7C156.7,127,157.2,125.8,157.2,123.4Z" transform="translate(-51.4 -51.5)"/>
+    <polygon class="cls-1" points="56.7 56.6 32.8 15.1 8.8 56.6 56.7 56.6"/>
+  </g>
+</svg>

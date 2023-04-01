@@ -1,0 +1,154 @@
+
+@media only screen and (max-width: 1000px){
+  footer{
+    opacity: 1;
+    grid-template-rows: 1fr 2fr 1fr;
+    grid-template-columns: none;
+
+    #footerLinks {
+      width: 100%;
+      justify-content: space-between;
+      & > *{ margin: 0;}
+    }
+  }
+
+  .bannerFilter{
+    min-height: 20vh;
+  }
+}
+
+@media only screen and (max-width: 800px){
+
+  #videobanner{
+    min-height: calc(100vw*9/16);
+    & > div:not(:first-of-type){
+      justify-content: flex-start;
+    }
+    img{ width: 200px; }
+    #vimeoContainer{
+      height: calc(100vw*9/16);
+    }
+  }
+
+  .category_header{
+    align-items: flex-start;
+    #displayOptions{
+      justify-content: flex-end;
+      align-items: flex-end;
+      flex-direction: column;
+      row-gap: 10px;
+      margin-bottom: 10px;
+    }
+  }
+
+
+  #tag_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #counter{
+    position: relative;
+    top: initial;
+    transform: none;
+    flex-direction: row;
+    min-height: auto;
+    width: 100%;
+  }
+
+  #tagbox_wrapper{
+    position: relative;
+    transform: none;
+    top: 0;
+    left: 0;
+    min-height: auto;
+    height: auto;
+    flex-direction: initial;
+    margin-top: 59px;
+  }
+
+  .settings_container{
+    padding: 80px 4%;
+  }
+
+  #alphaPreview{
+    display: none;
+  }
+
+  #cinedir{
+    transform: none;
+    margin: auto;
+  }
+
+  #dir_container {
+    & > .alphaList{
+      width: 100%;
+    }
+  }
+  .movie_poster{
+      width: calc((100vw / 4.9));
+      height: 30vw;
+  }
+
+  .highlight_wrapper{
+    margin:0;
+    width: 100%;
+    .highlight{
+      .movie_banner{
+        margin-top: 0;
+      }
+    }
+  }
+
+
+  .movie_banner{
+    margin-top: 50px;
+    margin-bottom: 30px;
+    grid-template-columns: 30% auto;
+    .summary{
+      width: 100%;
+    }
+  }
+
+  .movie_thumbnails{
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  #banner_logo_search{
+    .search_bar{
+      min-width: 80vw;
+    }
+  }
+
+
+}
+
+@media only screen and (max-width: 500px){
+
+  #movie_page_wrapper{
+    margin-top: 90px;
+  }
+
+
+  .movie_thumbnails{
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+
+  .rubrique{
+    min-width: 80%;
+  }
+
+  #aboutKinoji{
+    grid-template-columns: none;
+    grid-template-rows:1fr 1fr;
+  }
+
+
+  .movie_poster{
+      width: calc((100vw / 3.65));
+      height: 40vw;
+  }
+
+}
