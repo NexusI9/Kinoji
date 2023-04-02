@@ -12,35 +12,53 @@ function Worldmap(){
 
 	const history= useRef();				//History Blob (all countries, 3D coordinate, events, movies, segments, 3D meshes)
 	const scene = useRef(new Earth({
-		onUnfocus: () => setCountry(),
+		onUnfocus: () => setCountry(country),
 		onFlagClick: (val) => setCountry(val)
 	}));
 
-	const onDropdownChange = (val) => {
-		//setCountry( val.props.value );
-	}
-
+	const onDropdownChange = (val) => setCountry(val);
 
 	useEffect(() => {
 
 		document.title = "KINO寺 - Worldmap";
 
-		const ListItem = ({value}) => ( <li name={value} className='microFilter'><div><span className='ico'></span><small>{value}</small></div></li> );
-		const droplist = (ar) => [ <ListItem key='listelement_world' value='world' />, ...ar  ];
+		const ListItem = ({value}) => ( 
+					<div className='microFilter'>
+						<span className='ico country' name={value}></span>
+						<small>{value}</small>
+					</div>
+				);
+
 
 		FetchAPI.post({type:'getAllHistory'}).then(result => {
 
 			//---fill up blob object (movies/events/segments)
 			const newCountries = result.data.map( histoCountry => {
-				const ctr = Countries.filter(item => item.name.toLowerCase() === histoCountry.name.toLowerCase() ); //prev object
-				const history = {history: histoCountry};
-				const list =  {list: <ListItem key={'listelement_'+histoCountry.name} value={histoCountry.name} /> }
-			 	delete histoCountry.name;
-				return Object.assign({}, ...ctr, history, list);
+				const ctr = Countries.filter(item => item.name.toLowerCase() === histoCountry.name.toLowerCase() )[0]; //prev object
+				const id = ctr.name;
+				return ({ 
+					...ctr,
+					history: histoCountry,
+					dropdown: {
+						id:id,
+						item: <ListItem key={'listelement_'+histoCountry.name} value={histoCountry.name} /> 
+					}
+				});
 			});
 
 			history.current= newCountries;
-			setDropdown( droplist(newCountries.filter( country => country.list ).map(item => item.list)) );
+
+			setDropdown([
+				{ 
+					name:'world',
+					dropdown: {
+						id:'world', 
+						item:<ListItem key='listelement_world' value='world' /> 
+					}
+				}, 
+				...newCountries
+			]);
+
 			scene.current.countries = newCountries;
 			scene.current.init();
 
@@ -53,7 +71,6 @@ function Worldmap(){
 
 		if(!country){ return; }
 			//use retrieved name to check history (now fetched and available)
-			const {name} = country;
 			setCountry(country); 
 			scene.current.goTo(country); 
 
@@ -62,17 +79,17 @@ function Worldmap(){
 return(
     <div id="date_container" className="settings_container" data-country={country && country.name || 'world'}>
 					<div id="Earth"></div>
-					{country && <Timeline country={ country } width={300}/> }
+					{country?.history && <Timeline country={ country } width={300}/> }
 					<div id="timeline_settings">
-						{console.log(country)}
 						{country && <SideList country={country.name} /> }
-						<DropDown 
+						{ <DropDown 
 							list={dropdown} 
 							id='country_select' 
 							name='country' 
 							onChange={ onDropdownChange } 
-							selected={ country ? country.name : null }
-						/>
+							filter={ e => e.dropdown.item }
+							selected={ country?.dropdown }
+						/>	}
 					</div>
   </div>
 );

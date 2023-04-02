@@ -2,37 +2,39 @@ import { useState, useEffect } from 'react';
 import { move } from '../../lib/utilities';
 
 
-const DropDown = ({ list, onChange=(_)=>0, name, id, selected }) => {
+const DropDown = ({ list, onChange=(_)=>0, name, id, filter, selected }) => {
 
-    const [ active, setActive ] = useState(false);
-    const [ organized, setOrganized ] = useState();
+    const [expand, setExpand] = useState(false);
+    const [organized, setOrganized ] = useState(list);
   
     useEffect(() => {
-      if(list && selected ){
-        const sel = selected;
-        const index = list.findIndex( item => item.key === sel.key );
-        move(list, index, 0);
+
+      console.log(selected);
+
+      if(list && selected){ 
+        const index = list.findIndex( ({dropdown}) => dropdown.id === selected.id );
+        let newList = [...list]
+        move(newList, index < 0 ? 0 : index, 0)
+        return setOrganized( newList  );
+      }else{
+        return setOrganized( [...list] );
       }
+
   
-      setOrganized( [...list] );
-  
-    },[selected, list])
-  
-    const onClick = (slt) => active && onChange(slt);
-  
-    const ListElement = ({value, item, switchActive = false}) => (
-      <div value={value} onClick={ () => { onClick(item); if(switchActive){ setActive(!active); } } }>{item}</div>
-    )
-  
-  
-  
+    },[selected,list])
+
+
+    
     return(
-      <ul name={name} className={active ? 'dropdown active' : 'dropdown'} id={id} >
+      <ul name={name} className={expand ? 'dropdown active' : 'dropdown'} id={id} >
+        {console.log(organized)}
         {
-          organized ? organized.map( (item,i) => {
-              if(!active){ return <ListElement key={'dropdown_'+item.props.value} value={item.props.value} item={item} switchActive={i === 0} /> }
-              else{ return <ListElement key={'dropdown_'+item.props.value} value={item.props.value} item={item} switchActive={true} /> }
-          }) : <></>
+          organized && organized.map( (item,i) => 
+            <li key={'dropdown_item'+i} onClick={ () => {
+              setExpand(!expand);
+              onChange(item);
+            }}>{ filter ? filter(item) : item} </li> 
+            )
         }
       </ul>
     );

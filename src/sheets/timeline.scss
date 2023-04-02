@@ -72,6 +72,12 @@
           margin-right: 7px;
         }
       }
+
+      &.active{
+        li{
+          &, &:not(:first-of-type){ pointer-events: auto; }
+        }
+      }
   
       li{
   
@@ -92,39 +98,9 @@
           background-position: center;
         }
   
-  
-        &[name="china"]{
-          span{ background-image:url('./../assets/countries/china.svg'); }
-        }
-        &[name="japan"]{
-          span{ background-image:url('./../assets/countries/japan.svg'); }
-        }
-        &[name="taiwan"]{
-          span{ background-image:url('./../assets/countries/taiwan.svg'); }
-        }
-        &[name="vietnam"]{
-          span{ background-image:url('./../assets/countries/vietnam.svg'); }
-        }
-        &[name="indonesia"]{
-          span{ background-image:url('./../assets/countries/indonesia.svg'); }
-        }
-        &[name="russia"]{
-          span{ background-image:url('./../assets/countries/russia.svg'); }
-        }
-        &[name="south korea"]{
-          span{ background-image:url('./../assets/countries/korea.svg'); }
-        }
-        &[name="india"]{
-          span{ background-image:url('./../assets/countries/india.svg'); }
-        }
-        &[name="world"]{
-          span{ background-image:url('./../assets/countries/worldwide.svg'); }
-        }
-  
         &:not(:first-of-type){
-          pointer-events: none;
           border: none;
-  
+          pointer-events: none;
           &::before{
             visibility: none;
           }

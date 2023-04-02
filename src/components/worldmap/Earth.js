@@ -3,6 +3,9 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import Label from './Earth.label';
+import FresnelShader from './Earth.FresnelShader';
+import MouseRaycaster from './Earth.MouseRaycaster';
+import { INIT_HEIGHT, INIT_WIDTH } from './Earth.constants';
 
 const globe = {
 	model: require('../../assets/earth/globe.gltf'),
@@ -20,95 +23,8 @@ const getCountryFromUUID = (countries, uuid) => {
 	return filtered.length > 0 ? filtered[0] : null;
 }
 
-const BACKGROUND = 0x000000;
-const INIT_WIDTH =  window.innerWidth;
-const INIT_HEIGHT = window.innerHeight;
 
 
-const FresnelShader = {
-
-	uniforms: {},
-
-	vertexShader: `
-    varying vec3 vPositionW;
-		varying vec3 vNormalW;
-    varying vec2 vUv;
-
-		void main() {
-
-     vUv = uv;
-
-		 vPositionW = vec3( vec4( position, 1.0 ) * modelMatrix);
-		 vNormalW = normalize( vec3( vec4( normal, 0.0 ) * modelMatrix ) );
-
-			gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-
-		}`,
-
-	fragmentShader: `
-    varying vec3 vPositionW;
-		varying vec3 vNormalW;
-    uniform sampler2D texture1;
-    uniform sampler2D talpha;
-
-    varying vec2 vUv;
-
-		void main() {
-
-			vec3 color = vec3(1., 0.2, 0.2);
-			vec3 viewDirectionW = normalize(cameraPosition - vPositionW);
-			float fresnelTerm = dot(viewDirectionW, vNormalW);
-			fresnelTerm = clamp(0.4 - fresnelTerm, 0., 1.);
-
-      vec4 tex = texture2D(texture1, vUv).rgba;
-			//gl_FragColor =  vec4(tex.r, tex.g, tex.b, 1.) *  vec4( color * fresnelTerm, 1.);
-			gl_FragColor =  vec4(tex.r, tex.g, tex.b, tex.a);
-
-
-		}`
-
-};
-
-
-class MouseRaycaster{
-
-	constructor({targets, camera, onDetect=()=>0, onRelease=()=>0, getUuid}){
-		this.targets = targets;
-		this.camera = camera;
-		this.onDetect = onDetect;
-		this.onRelease = onRelease;
-
-		this.getUuid = getUuid || this.defaultGetUuid;  //so triggers only once when hover
-		this.lastUuid = null;
-
-		this.released = true;
-
-	}
-
-	defaultGetUuid(obj){ return obj; }
-
-	ray(e){
-
-		let mouse = new THREE.Vector2();
-		mouse.x = (e.clientX / INIT_WIDTH) * 2 - 1 ;
-		mouse.y =  - (e.clientY / INIT_HEIGHT) * 2 + 1 ;
-
-		let raycaster = new THREE.Raycaster();
-		raycaster.setFromCamera( mouse, this.camera );
-		var intersects = raycaster.intersectObjects( this.targets );
-
-		if(intersects.length === 1 && this.onDetect &&  this.lastUuid != this.getUuid(intersects[0]) ){
-				this.released = false;
-				this.lastUuid = this.getUuid(intersects[0]);
-				this.onDetect(intersects[0]);
-			}
-
-		if(intersects.length === 0 && this.onRelease && !this.released){ this.released=true; this.onRelease(); }
-
-		return raycaster;
-	}
-
-}
 
 export default class Earth{
 
@@ -119,6 +35,19 @@ export default class Earth{
 	this.scene = null;
 	this.camera = null;
 	this.controls = null;
+
+	this.responsive = {
+		smallScreen: () => {
+			this.width = window.innerWidth;
+			this.height = window.innerHeight/1.7;
+			if(this.cameria){ this.camera.position.z = 0.6; }
+		  },
+		  largeScreen: () => {
+			this.width = INIT_WIDTH;
+			this.height = INIT_HEIGHT;
+			if(this.camera){ this.camera.position.z = 0.5; }
+		  }
+	}
 
 
 	this.width = INIT_WIDTH;
@@ -165,12 +94,22 @@ export default class Earth{
 
   }
   events(){
-      //window.addEventListener( 'scroll', this.onScroll.bind(this) );
-      window.addEventListener( 'resize', this.onWindowResize.bind(this), false );
-      document.getElementById('Earth').addEventListener('mousemove', this.onMouseMove.bind(this) );
-			document.getElementById('Earth').addEventListener('mousedown', this.onMouseDown.bind(this));
-			document.getElementById('Earth').addEventListener('mouseup', this.onMouseUp.bind(this));
-			document.getElementById('Earth').addEventListener('click', this.onClick.bind(this));
+	//window.addEventListener( 'scroll', this.onScroll.bind(this) );
+	window.matchMedia('(min-width: 1440px)').addEventListener("change", () => {
+		this.responsive.largeScreen();
+		this.onWindowResize();
+	});
+	window.matchMedia('(max-width: 1440px)').addEventListener("change", () => {
+		this.responsive.smallScreen();
+		this.onWindowResize();
+	});
+
+    //-)window.addEventListener( 'resize', this.onWindowResize.bind(this), false );
+    document.getElementById('Earth').addEventListener('mousemove', this.onMouseMove.bind(this) );
+	document.getElementById('Earth').addEventListener('mousedown', this.onMouseDown.bind(this));
+	document.getElementById('Earth').addEventListener('mouseup', this.onMouseUp.bind(this));
+	document.getElementById('Earth').addEventListener('click', this.onClick.bind(this));
+
   }
 
   _init_(){
@@ -206,187 +145,190 @@ export default class Earth{
     this.controls.enableZoom = false;
     // to disable pan
     this.controls.enablePan = false;
-		this.controls.enableDamping = true
+	this.controls.enableDamping = true
     this.camera.position.z = 130;
+	this.camera.position.z = 130;
 
 
 		/* returns object on hover, then use UUID of hovered flag to get country name and set this.lastCountry */
-		this.mrc = new MouseRaycaster({
-			camera:this.camera,
-			targets: this.countries.map( country => country.geo.flag.mesh ),
-			getUuid: (f) => f.object.uuid,
-			onDetect: (flag) => {
-				this.stopRotate();
-				this.lastCountry = null;
-				this.lastCountry = getCountryFromUUID(this.countries, flag.object.uuid);
+	this.mrc = new MouseRaycaster({
+		camera:this.camera,
+		targets: this.countries.map( country => country.geo.flag.mesh ),
+		getUuid: (f) => f.object.uuid,
+		onDetect: (flag) => {
+			this.stopRotate();
+			this.lastCountry = null;
+			this.lastCountry = getCountryFromUUID(this.countries, flag.object.uuid);
 
-				gsap.to(flag.object.scale, {
-					duration:0.2,
-					x:1.3,
-					y:1.3,
-					z:1.3
-				});
+			gsap.to(flag.object.scale, {
+				duration:0.2,
+				x:1.3,
+				y:1.3,
+				z:1.3
+			});
 
-			},
-			onRelease: () => {
-				if(!this.locked){ this.startRotate(); }
-				this.lastCountry = null;
-			}
-		});
+		},
+		onRelease: () => {
+			if(!this.locked){ this.startRotate(); }
+			this.lastCountry = null;
+		}
+	});
 
-		this.events();
+	this.events();
 
   }
 
-  addAura(){
-    const geometry = new THREE.PlaneGeometry( 27, 27 );
-    const texture = {
-      base: new THREE.TextureLoader().load(aura.texture),
-      alpha: new THREE.TextureLoader().load(aura.alpha)
-    }
-    const material = new THREE.MeshBasicMaterial({
+	addAura(){
+	const geometry = new THREE.PlaneGeometry( 27, 27 );
+	const texture = {
+		base: new THREE.TextureLoader().load(aura.texture),
+		alpha: new THREE.TextureLoader().load(aura.alpha)
+	}
+	const material = new THREE.MeshBasicMaterial({
 			color:0xff0000,
-      alphaMap: texture.alpha,
+		alphaMap: texture.alpha,
 			transparent:true,
 			depthTest:false
-    });
+	});
 
 
-    this.plane = new THREE.Mesh( geometry, material );
+	this.plane = new THREE.Mesh( geometry, material );
 		this.plane.renderOrder = 0;
-    this.scene.add( this.plane );
-  }
-	addGrid(){
-		const size = 20;
-		const divisions = 20;
-
-		const gridHelper = {
-			x: new THREE.GridHelper( size, divisions ),
-			y: new THREE.GridHelper( size, divisions ),
-			z: new THREE.GridHelper( size, divisions )
-		}
-
-		this.scene.add( gridHelper.z );
-
-		gridHelper.x.rotateX(Math.PI / 2);
-		this.scene.add( gridHelper.x );
-
-		gridHelper.y.rotateZ(Math.PI / 2);
-		this.scene.add( gridHelper.y );
+	this.scene.add( this.plane );
 	}
-  addModel(){
+	addGrid(){
+	const size = 20;
+	const divisions = 20;
 
-    this.loader.load(
-      globe.model,
-      (gltf) => {
+	const gridHelper = {
+		x: new THREE.GridHelper( size, divisions ),
+		y: new THREE.GridHelper( size, divisions ),
+		z: new THREE.GridHelper( size, divisions )
+	}
 
-        const texture = new THREE.TextureLoader().load(globe.texture);
-        texture.minFilter = THREE.NearestFilter;
-        const alpha = new THREE.TextureLoader().load(globe.alpha);
-        alpha.minFilter = THREE.NearestFilter;
+	this.scene.add( gridHelper.z );
 
-        const material = new THREE.ShaderMaterial({
-            uniforms:
-            {
-              texture1: { type:'t', value: texture },
-              talpha: { type:'t', value: alpha }
-            },
-            vertexShader: FresnelShader.vertexShader,
-            fragmentShader: FresnelShader.fragmentShader,
-            transparent:true,
-          });
+	gridHelper.x.rotateX(Math.PI / 2);
+	this.scene.add( gridHelper.x );
 
-        this.earth = gltf.scene.children[0];
+	gridHelper.y.rotateZ(Math.PI / 2);
+	this.scene.add( gridHelper.y );
+	}
+	addModel(){
 
-        this.earth.material = material;
-        this.earth.scale.set(0.1,-0.1,0.1);
+	this.loader.load(
+	globe.model,
+	(gltf) => {
 
-        this.group.add(this.earth);
+	const texture = new THREE.TextureLoader().load(globe.texture);
+	texture.minFilter = THREE.NearestFilter;
+	const alpha = new THREE.TextureLoader().load(globe.alpha);
+	alpha.minFilter = THREE.NearestFilter;
 
-      },function(xhr){
+	const material = new THREE.ShaderMaterial({
+		uniforms:
+		{
+			texture1: { type:'t', value: texture },
+			talpha: { type:'t', value: alpha }
+		},
+		vertexShader: FresnelShader.vertexShader,
+		fragmentShader: FresnelShader.fragmentShader,
+		transparent:true,
+		});
 
-      },function(error){
-      }
-    );
+	this.earth = gltf.scene.children[0];
+
+	this.earth.material = material;
+	this.earth.scale.set(0.1,-0.1,0.1);
+
+	this.group.add(this.earth);
+
+	},function(xhr){
+
+	},function(error){
+	}
+	);
 
 
-  }
+	}
 	addLines(){
 
-		this.countries.map( country => {
-			const label = new Label({
-				start:country.geo.location,
-				country:country.name,
-				parent:this.group,
-				length:country.geo.length || 1.4
-			});
-      country.geo = Object.assign({},country.geo, label.render());
+	this.countries.map( country => {
+		const label = new Label({
+			start:country.geo.location,
+			country:country.name,
+			parent:this.group,
+			length:country.geo.length || 1.4
 		});
+	country.geo = Object.assign({},country.geo, label.render());
+	});
 
 
 	}
 	addMask(){
-		const geometry = new THREE.CircleGeometry( 9, 32 );
-		const material = new THREE.MeshBasicMaterial({ color: 0xff0000, colorWrite:false});
-		this.circle = new THREE.Mesh( geometry, material );
-		this.circle.renderOrder = 0;
-		this.scene.add( this.circle );
+	const geometry = new THREE.CircleGeometry( 9, 32 );
+	const material = new THREE.MeshBasicMaterial({ color: 0xff0000, colorWrite:false});
+	this.circle = new THREE.Mesh( geometry, material );
+	this.circle.renderOrder = 0;
+	this.scene.add( this.circle );
 	}
 
-  _render_(){
-		if(this.rotate && this.group){ this.group.rotation.set(  this.group.rotation.x,  this.group.rotation.y + this.speed,  this.group.rotation.z ); }
-    if(this.plane && this.circle){
-			this.plane.lookAt(this.camera.position);
-			this.circle.lookAt(this.camera.position);
+	_render_(){
+
+	if(this.rotate && this.group){ this.group.rotation.set(  this.group.rotation.x,  this.group.rotation.y + this.speed,  this.group.rotation.z ); }
+
+	if(this.plane && this.circle){
+		this.plane.lookAt(this.camera.position);
+		this.circle.lookAt(this.camera.position);
+	}
+
+	this.countries.forEach((country) => {
+		if(country.geo.flag && this.rotate){
+			country.geo.flag.mesh.lookAt(this.camera.position);
+			const distance = 1/(country.geo.flag.mesh.position.distanceTo(this.camera.position) / 100);
+			country.geo.flag.mesh.scale.set(distance, distance, distance);
 		}
 
-		this.countries.forEach((country) => {
-			if(country.geo.flag && this.rotate){
-				country.geo.flag.mesh.lookAt(this.camera.position);
-				const distance = 1/(country.geo.flag.mesh.position.distanceTo(this.camera.position) / 100);
-				country.geo.flag.mesh.scale.set(distance, distance, distance);
-			}
-
-		});
+	});
 
 
-    this.controls.update();
-    this.renderer.render( this.scene, this.camera );
-    if(this.show){ requestAnimationFrame( this._render_.bind(this) ); }
+	this.controls.update();
+	this.renderer.render( this.scene, this.camera );
+	if(this.show){ requestAnimationFrame( this._render_.bind(this) ); }
 
-  }
+	}
 
 	displayFlag(state){
 
-		this.countries.forEach( country => {
-			if(state){ country.geo.line.mesh.visible = state; }
-			gsap.to( country.geo.flag.material, 0.3, {opacity: state ? 1 : 0 });
-			gsap.to( country.geo.line.material, 0.3, {opacity: state ? 1 : 0 }).then( () => country.geo.line.mesh.visible = state );
-		});
+	this.countries.forEach( country => {
+		if(state){ country.geo.line.mesh.visible = state; }
+		gsap.to( country.geo.flag.material, 0.3, {opacity: state ? 1 : 0 });
+		gsap.to( country.geo.line.material, 0.3, {opacity: state ? 1 : 0 }).then( () => country.geo.line.mesh.visible = state );
+	});
 
 
-		this.showFlag = state;
+	this.showFlag = state;
 
 	}
 
   //events
 
-  onWindowResize() {
+	onWindowResize() {
 
-    if(  document.getElementById("Earth") == null ){ return; }
+		if(  document.getElementById("Earth") == null ){ return; }
 
-    this.camera.aspect = this.width / this.height;
-  	this.camera.updateProjectionMatrix();
+		this.camera.aspect = this.width / this.height;
+		this.camera.updateProjectionMatrix();
 
 
-    this.renderer.setSize( this.width, this.height );
-    this._render_();
+		this.renderer.setSize( this.width, this.height );
+		this._render_();
 
-  }
+	}
 
-  onMouseMove(e){
-		this.mrc.ray(e);
-  }
+	onMouseMove(e){
+			this.mrc.ray(e);
+	}
 
 	onMouseDown(){
 
@@ -415,45 +357,31 @@ export default class Earth{
 		this.customMouseUp();
 	}
 
-  onScroll(){
+	onScroll(){
 
-    /*if(  document.getElementById("Earth") == null ){ return; }
-    if(window.innerHeight < lastDiv.getBoundingClientRect().top && this.show == true){ this.show = false; }
-    else if(window.innerHeight > lastDiv.getBoundingClientRect().top && this.show == false){ this.show = true; this._render_(); }
-		*/
-  }
+		/*if(  document.getElementById("Earth") == null ){ return; }
+		if(window.innerHeight < lastDiv.getBoundingClientRect().top && this.show == true){ this.show = false; }
+		else if(window.innerHeight > lastDiv.getBoundingClientRect().top && this.show == false){ this.show = true; this._render_(); }
+			*/
+	}
 
-  smallScreen(){
-    if(!this.camera){ return; }
-    this.width = window.innerWidth;
-    this.height = window.innerHeight/1.7;
-    this.camera.position.z = 0.6;
-    this.onWindowResize();
-  }
 
-  largeScreen(){
-    if(!this.camera){ return; }
-    this.width = INIT_WIDTH;
-    this.height = INIT_HEIGHT;
-    this.camera.position.z = 0.5;
-    this.onWindowResize();
-  }
 
-  touchMove(e){
-    e.preventDefault();
-    this.mousePos.x = e.touches[0].clientX / window.innerWidth - 0.5;
-    this.mousePos.y = e.touches[0].clientY / window.innerHeight - 1;
+	touchMove(e){
+		e.preventDefault();
+		this.mousePos.x = e.touches[0].clientX / window.innerWidth - 0.5;
+		this.mousePos.y = e.touches[0].clientY / window.innerHeight - 1;
 
-  }
+	}
 
-  play(){
-    this.show = true;
-    this._render_();
-  }
+	play(){
+		this.show = true;
+		this._render_();
+	}
 
-  stop(){
-    this.show = false;
-  }
+	stop(){
+		this.show = false;
+	}
 
 	stopRotate(){
 		this.rotate = false;
@@ -477,12 +405,12 @@ export default class Earth{
 
 	goTo(country){
 
-		if(!country){ return; }
+		if(!country || !country.geo){ return; }
 		this.locked = true;
 
 		this.stopRotate();
 		this.displayFlag(false);
-		console.log(country);
+
 		gsap.to( this.camera.position, {
 			x: country.geo.rotate.x,
 			y: country.geo.rotate.y,
@@ -510,8 +438,5 @@ export default class Earth{
 		}
 	}
 
-	setTimelinePos(){
-
-	}
 
 }

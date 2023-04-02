@@ -17,7 +17,7 @@ export function ObjectToEvent(item){
       case 'movie':
       return{
         label: item.title|| '',
-        header:  <Link to={'/movie/'+item.id} className='link' replace>{item.title}<span className='light'> ({getMovieYear(item)})</span></Link>,
+        header:  <Link to={'/movies/'+item.id} className='link' replace>{item.title}<span className='light'> ({getMovieYear(item)})</span></Link>,
         begin: getMovieYear(item),
         end:null,
         subtext: <span className='link underline'><DirectorLabel id={item.director} popup={false} /></span>,
@@ -139,13 +139,13 @@ export function minMax(ar){
 
   let min = 10000;
   let max = -10000;
-
-  Object.keys(ar).forEach( key => {
-    ar[key].forEach( item => {
+  
+  Object.keys(ar).forEach( key => 
+    Array.isArray(ar[key]) && ar[key].forEach( item => {
       if( (item.begin && item.begin < min) || (item.date && getMovieYear(item) < min )){ min = item.begin || getMovieYear(item); }
       if( (item.being && item.bein > max ) || (item.date && getMovieYear(item) > max )){ max = item.begin || getMovieYear(item); }
-    });
-  });
+    })
+  );
 
   return { min:min, max:max }
 

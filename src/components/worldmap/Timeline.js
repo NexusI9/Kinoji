@@ -96,8 +96,7 @@ const Timeline = ({ country, width }) => {
         setMinMax(minMax(history));
       }
 
-
-  },[country]);
+  },[]);
 
 
   return(

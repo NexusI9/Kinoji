@@ -1500,13 +1500,26 @@ a{
     height: 20px;
     transition: opacity 0.3s ease, transform 0.3s ease;
 
-   }
+  }
 
-   &[alt="tmdb icon"]{
-     &, &:hover{
-       background-color: transparent;
-     }
-   }
+  &[alt="tmdb icon"]{
+    &, &:hover{
+      background-color: transparent;
+    }
+  }
+
+  &.country{
+    &[name="china"]{ background-image:url('./../assets/countries/china.svg'); }
+    &[name="japan"]{ background-image:url('./../assets/countries/japan.svg'); }
+    &[name="taiwan"]{ background-image:url('./../assets/countries/taiwan.svg'); }
+    &[name="vietnam"]{ background-image:url('./../assets/countries/vietnam.svg'); }
+    &[name="indonesia"]{ background-image:url('./../assets/countries/indonesia.svg'); }
+    &[name="russia"]{ background-image:url('./../assets/countries/russia.svg'); }
+    &[name="south korea"]{ background-image:url('./../assets/countries/korea.svg'); }
+    &[name="india"]{ background-image:url('./../assets/countries/india.svg'); }
+    &[name="world"]{ background-image:url('./../assets/countries/worldwide.svg'); }
+
+  }
 
    #micro_name &{ mask-image: url("../assets/az.svg"); }
    #micro_year &{ mask-image: url("../assets/calendar.svg"); }

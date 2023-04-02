@@ -60,7 +60,7 @@ const SideList = ({ country }) => {
 		</div>
 		<ul className='sideContent'>
 			{
-				 hasHistory(country, category) ? country[0].history[category].map( (item,i) => <ListElement key={'list_'+item.name+i} element={item} category={category} /> ) : <div />
+				 hasHistory(country, category) && country[0].history[category].map( (item,i) => <ListElement key={'list_'+item.name+i} element={item} category={category} /> )
 			}
 		</ul>
 	</div>
