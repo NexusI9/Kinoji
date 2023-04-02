@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import { Fragment } from 'react';
 
 export const SoloContent = ({object, type}) => (
-    <div>
-      { object.poster ? <div>{object.poster}</div> : <></> }
+    <>
+      { object.poster && object.poster }
       <div className='detail_content'>
           <div className='detail_header'>
             <h4>{object.header}</h4>
@@ -12,7 +12,7 @@ export const SoloContent = ({object, type}) => (
           <small className='summary'>{object.summary}</small>
           {object.footer}
       </div>
-    </div>);
+    </>);
 
 export const GroupContent = ({ object, type, date}) =>{
 

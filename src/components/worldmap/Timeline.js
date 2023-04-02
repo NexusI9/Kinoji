@@ -15,31 +15,30 @@ const Timeline = ({ country, width }) => {
 
   const mapElements = (frise) => {
     //map de group into element, returns an array
+
     const ar = [];
     const map = {
       segments: ({item,id}) => <Segment key={id} object={item} width={BAR_WIDTH} minmax={minmax} />,
       
       solo: ({ item, type, id }) => <Event
         key={id}
-        date={item.begin ? item.begin : getMovieYear(item) }
+        date={item.begin ? [item.begin, item.end] : [getMovieYear(item)] }
         object={ ObjectToEvent(item) }
         type={type}
         width={BAR_WIDTH}
         minmax={minmax}
-        onHover={ (e) => setActivePopup(e) }
         id={id}
         killswitch={ activePopup === id ? false : true }
       />,
 
       group: ({ item, type, date, id}) =>  <Event
         key={id}
-        date={date}
+        date={[date]}
         object={ item.objects.map(mv => ObjectToEvent(mv)) }
         type={type}
         width={BAR_WIDTH}
         minmax={minmax}
         id={id}
-        onHover={ (e) => setActivePopup(e) }
         killswitch={ activePopup === id ? false : true }
         />
     }
@@ -96,7 +95,7 @@ const Timeline = ({ country, width }) => {
         setMinMax(minMax(history));
       }
 
-  },[]);
+  },[country]);
 
 
   return(

@@ -237,12 +237,14 @@
   
     section{
       white-space: nowrap;
-      text-align: center;
       margin: 5px;
       position: absolute;
       overflow: hidden;
-      max-width: 125px;
       text-overflow: ellipsis;
+    }
+
+    .chrono_label{
+      max-width: 125px;
     }
   
   }
@@ -258,7 +260,8 @@
     z-index: 2;
     transition: transform 0.2s ease;
     pointer-events: auto;
-  
+    &, *{ cursor: pointer; }
+    
     &.small{
       width: 7px;
       height: 7px;
@@ -271,22 +274,41 @@
   }
   
   
-  .chrono_event_detail{
+  .chrono_popup{
   
+    @include style.card();
+    background:var(--blue70);
+    display: block;
+
     opacity: 0;
     transition: opacity 0.3s;
     color: black;
     padding: 10px;
     width: max-content;
-    max-width: 400px !important;
+    max-width: 400px;
     z-index: 2;
-    text-align: left !important;
     transform: translateY(-100%);
     top: 0;
+    overflow: hidden;
+    position: relative;
+    height: min-content;
+    box-shadow: 0 3px 3px rgba(0 0 0 / 20%);
+    box-sizing: border-box;
+    padding: 10px 7px;
+    text-align: left;
+    color: var(--paper);
+
+    .detail_content{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      justify-content: flex-start;
+      text-align: left;
+      white-space: break-spaces;
+    }
     
   
-    h4, p{ color:var(--paper);;}
-    a{ color: va(--paper) !important; }
+    h4, p, a{ color:var(--paper); }
     img{
       max-width: 100%;
       transition: filter 0.3s ease;
@@ -300,28 +322,7 @@
       img{box-shadow: none;}
     }
   
-    & > div{
-    @include style.card();
-    background:var(--blue70);
-    display: block;
-    overflow: hidden;
-    position: relative;
-    height: min-content;
-    box-shadow: 0 3px 3px rgba(0 0 0 / 20%);
-    box-sizing: border-box;
-    padding: 10px 7px;
-
-      .detail_content{
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        justify-content: flex-start;
-      }
-  
-      .detail_header{
-        white-space: pre-line;
-      }
-    }
+    
   
     p{
       background:transparent !important;
@@ -329,12 +330,7 @@
     }
   
     h4,h3{ margin: 0; }
-  
-    &:has(.detail_content)> div{
-      display: grid;
-      grid-template-columns: 100px auto;
-      column-gap: 10px;
-    }
+
   
     .summary{
       white-space: normal;
@@ -403,14 +399,10 @@
   .chrono_movies{
   
     color:var(--red);
-  
-    .dot_events{
-      //box-shadow: 0 0 10px 0px var(--red);
-    }
-  
+    
     &.group{
       & > span{ background-color: var(--red); }
-      .chrono_event_detail{
+      .chrono_popup{
         img{
           width: 100px;
           padding: 0;
@@ -418,6 +410,16 @@
   
         & > span{  background-color: var(--lightblue); }
       }
+    }
+
+    &.solo{
+      display: flex;
+      .chrono_popup{
+        display: grid;
+        grid-template-columns: 100px auto;
+        gap: 10px;
+      }
+
     }
   }
   
@@ -453,7 +455,11 @@
     left: 25%;
     top: 50%;
     margin: 5;
-    backdrop-filter: blur(4px);
+
+    small{
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
   
   .chrono_small_events {
@@ -473,9 +479,6 @@
   .chrono_events {
     flex-direction: column-reverse;
     color:var(--lightblue);
-    .dot_events{
-      //box-shadow: 0 0 10px 0px var(--lightblue);
-    }
   
     &.group{
       & > span{ background-color: var(--lightblue); }
@@ -506,9 +509,9 @@
       width: 2px;
       height: 100%;
       display: block;
-      border-left: dashed var(--paper) 1px;
+      border-left: dashed var(--blue30) 1px;
       position: absolute;
-      color: var(--paper);
+      color: var(--blue30);
       display: flex;
       flex-direction: column-reverse;
       justify-content: flex-end;
@@ -516,7 +519,7 @@
       transition: margin-left 0.3s ease-out;
   
       p{
-        color: var(--paper);
+        color: var(--blue30);
         transform: translate(-50%, -110%);
         position: absolute;
       }

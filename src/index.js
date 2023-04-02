@@ -5,12 +5,16 @@ import './sheets/style.scss';
 import './sheets/smallscreen.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
+import { store } from './lib/store';
 
 ReactDOM.render(
   <React.StrictMode>
+    <Provider store={store}>
     <Router>
       <App />
     </Router>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

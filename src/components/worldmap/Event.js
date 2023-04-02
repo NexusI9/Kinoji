@@ -1,22 +1,45 @@
-import { useState, useEffect } from 'react';
-
+import { useState, useEffect, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { dateToPosition } from './Timeline.helper';
 import { SoloContent, GroupContent } from './Event.children';
+import { AnimatePresence, motion } from 'framer-motion';
 
-const Event = ({ object, type, date, minmax, width, id, ...props}) => {
+
+const Event = ({ object, type, date, minmax, width, id}) => {
+
 
     const [ opacity, setOpacity ] = useState(0);
-    const [ hoverDot, setHoverDot ] = useState(false);
-    let activated = false;
-    let hoverContent = false;
+    let activated = useRef();
+    const lastActive = useSelector( state => state.timeline.token);
+    const setActive = useDispatch();
+    const timeout = useRef();
     const soloGroup = Array.isArray(object) ? 'group' : 'solo';
   
-    useEffect( () => setOpacity(props.killswitch ? 0 : 1) ,[props]);
+    useEffect( () => setOpacity(lastActive === id ? 1 : 0 ) ,[lastActive]);
   
+    const handleOnMouseLeave = () => {
+      clearTimeout(timeout.current);
+      timeout.current = setTimeout( () => {
+        if(!activated.current){
+          setOpacity(0);
+          setActive({type:'SET_ACTIVE_POPUP', token:0});
+        }
+      },20);
+
+      activated.current = false;
+    }
     //Inner Elements
     const Label = () => {
       switch(soloGroup){
-        case 'solo': return <><div className='longevity'></div><section className='chrono_label'><small><b>{object.label}</b></small></section></>;
+        case 'solo': return <>
+            <div 
+              className='longevity'
+              style={{width: date[1] &&  dateToPosition(minmax, date[1], width, 10) - dateToPosition(minmax, date[0], width, 10) +'px'}}
+            ></div>
+            <section className='chrono_label'>
+              <small><b>{object.label}</b></small>
+              </section>
+              </>;
         case 'group': return <></>;
         default: return <></>;
       }
@@ -31,39 +54,45 @@ const Event = ({ object, type, date, minmax, width, id, ...props}) => {
     const Content = () => {
       switch(soloGroup){
         case 'solo': return <SoloContent object={object} type={type} />;
-        case 'group': return <GroupContent object={object} type={type} date={date} />;
+        case 'group': return <GroupContent object={object} type={type} date={date[0]} />;
         default: return <></>;
       }
     }
   
 
     //Events
-    function onHover(dsp){
-      setOpacity( dsp ? 1 : 0);
-    }
-  
     return(
           <div
             className={'chrono_small_events chrono_'+type+' '+soloGroup }
-            style={{left:dateToPosition(minmax, date, width,10)+'px'}}
+            style={{left:dateToPosition(minmax, date[0], width,10)+'px'}}
             >
-  
+
             <span className='dot_events'
-              onMouseEnter={ () => { setHoverDot(true); if(props.onHover){ props.onHover(id); } if(!activated){ activated = true; onHover(true); }else{ activated = false; onHover(false); } } }
-              onMouseLeave={ () =>  { if(hoverContent) { setHoverDot(false); activated = false; onHover(false); } } }
+              onMouseEnter={ () => { 
+                   activated.current = true; 
+                   setOpacity(1);
+                   setActive({type:'SET_ACTIVE_POPUP', token:id});
+                }}
+              onMouseLeave={ handleOnMouseLeave }
             >
-            <Number />
+              <Number />
             </span>
             <Label />
-            <section
-              className='chrono_event_detail'
-              data-poster={object.poster ? 1 : 0}
-              style={{ opacity:opacity, zIndex: opacity === 1 ? 20 : 0 }}
-              onMouseEnter={ () => {  hoverContent = true; if(activated){ onHover(true); } } }
-              onMouseLeave={ () => { setHoverDot(false); hoverContent = false; activated = false; onHover(false); }  }
-            >
-            { hoverDot ? <Content /> : <></> }
-            </section>
+            <AnimatePresence exitBeforeEnter>
+              { opacity && 
+                  <motion.section 
+                  className='chrono_popup'
+                  key={'popup_'+id}
+                  initial={{opacity:0, zIndex:0}}
+                  animate={{opacity:1, zIndex:20, transition:{duration:0.1}}}
+                  exit={{opacity:0, zIndex:0, transition:{duration:0.1}}}
+                  onMouseEnter={ () => activated.current = true }
+                  onMouseLeave={ handleOnMouseLeave }
+                >
+                  <Content />
+                </motion.section> 
+                }
+              </AnimatePresence>
           </div>
     );
   

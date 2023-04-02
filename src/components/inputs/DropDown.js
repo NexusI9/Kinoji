@@ -27,7 +27,6 @@ const DropDown = ({ list, onChange=(_)=>0, name, id, filter, selected }) => {
     },[selected,list])
 
 
-    
     return(
       <ul name={name} className={expand ? 'dropdown active' : 'dropdown'} id={id} >
           {organized.map( (item,i) => i === 0 &&  

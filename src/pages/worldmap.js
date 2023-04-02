@@ -70,11 +70,17 @@ function Worldmap(){
 	}, [Countries]);
 
 	useEffect( () => {
-
+		
 		if(!country){ return; }
 			//use retrieved name to check history (now fetched and available)
-			setCountry(country); 
-			scene.current.goTo(country); 
+			switch(country.name){
+				case'world':
+					return scene.current.reset();
+				default:
+					setCountry(country); 
+					return scene.current.goTo(country); 
+			}
+
 
 	},[country]);
 
