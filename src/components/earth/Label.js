@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import Flag from './Earth.Flag';
+import Flag from './Flag';
 
 export default class Label{
 

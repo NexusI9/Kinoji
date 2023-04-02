@@ -1,7 +1,8 @@
 
-import { RadioLabel } from '../components/inputs';
-import { useState } from 'react';
+import { RadioLabel } from '../inputs';
+import { useEffect, useState } from 'react';
 import { hasHistory, setEventDate } from '../../lib/utilities';
+import { motion } from 'framer-motion';
 
 const SideList = ({ country }) => {
 
@@ -27,22 +28,23 @@ const SideList = ({ country }) => {
 					<span className='dot_events small'></span>
 				</section>
 				<section>
-					<p style={{margin:0, padding:0}}>{header}</p>
+					<p style={{margin:0, padding:0}}><small><b>{header}</b></small></p>
 					<small>{subtext}</small>
 				</section>
 			</li>
 		);
 
 	}
+
 	const categories = [
-		{
-			value:'segments',
-			label:'Eras',
-			checked:true,
-		},
 		{
 			value:'movies',
 			label:'Movies',
+			checked:true
+		},
+		{
+			value:'segments',
+			label:'Eras',
 		},
 		{
 			value:'events',
@@ -53,14 +55,13 @@ const SideList = ({ country }) => {
 
 
 	return(
-
-		<div id="history_sidelist"  className='toReveal' style={{opacity: hasHistory(country) ? 1 : 0, pointerEvents: hasHistory(country) ? 'auto' : 'none' }} >
+		<div id="history_sidelist"  className='toReveal' >
 		<div>
 			<RadioLabel id='historadio' labels={categories} onClick={ setCategory } />
 		</div>
 		<ul className='sideContent'>
 			{
-				 hasHistory(country, category) && country[0].history[category].map( (item,i) => <ListElement key={'list_'+item.name+i} element={item} category={category} /> )
+			  country.history[category]?.map( (item,i) => <ListElement key={'list_'+item.name+i} element={item} category={category} /> )
 			}
 		</ul>
 	</div>

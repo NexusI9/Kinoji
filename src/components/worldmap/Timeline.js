@@ -1,4 +1,4 @@
-import { hasHistory, getMovieYear } from '../../lib/utilities';
+import { getMovieYear } from '../../lib/utilities';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { container } from '../../lib/variants';

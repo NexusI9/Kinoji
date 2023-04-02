@@ -33,10 +33,11 @@
     margin-right: 3vw;
     right: 0;
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: column;
+    gap: 15px;
   
     #country_select{
-      margin: 0 2%;
+      margin: 0;
       float: right;
       left: 10%;
       background: none;
@@ -57,21 +58,6 @@
       }
   
       small{ margin: 0; margin-right: 10px; }
-  
-      *:first-of-type li{
-  
-        &::after{
-          content:'';
-          width: 10px;
-          height: 10px;
-          display: block;
-          background-size: contain;
-          background-position: center;
-          background-repeat: no-repeat;
-          background-image: url('./../assets/listarrow.svg');
-          margin-right: 7px;
-        }
-      }
 
       &.active{
         li{
@@ -79,52 +65,21 @@
         }
       }
   
-      li{
-  
-        display: flex;
-        width: 100%;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        align-items: center;
-        cursor: pointer;
-        pointer-events: auto;
-        transition: opacity 0.2s ease, transform 0.2s ease;
-        user-select: none;
-        justify-content: space-between;
-  
-        span{
-          background-size: contain;
-          background-repeat: no-repeat;
-          background-position: center;
-        }
-  
-        &:not(:first-of-type){
-          border: none;
-          pointer-events: none;
-          &::before{
-            visibility: none;
-          }
-  
-          &:hover{
-            transform: scale(1);
-          }
-        }
-  
-  
-  
-      }
     }
   
     #history_sidelist{
       width: 250px;
       transition: opacity 0.2s ease-out;
       ul{
+        -webkit-mask-image: linear-gradient(0deg, transparent 0%, black 5%, black 95%, transparent 100%);
         color: var(--settingsDark);
         list-style: none;
         padding-left: 10px;
+        padding-top: 20px;
+        padding-bottom: 20px;
         position: absolute;
         top: 0;
-        max-height: 40vh;
+        max-height: 30vh;
         overflow-y: auto;
         &:first-of-type{ position: relative; }
         &::-webkit-scrollbar-track {

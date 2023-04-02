@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { INIT_HEIGHT, INIT_WIDTH } from './Earth.constants';
+import { INIT_HEIGHT, INIT_WIDTH } from './Constants';
 
 export default class MouseRaycaster{
 

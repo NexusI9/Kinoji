@@ -59,7 +59,6 @@ export function group(ar){
   const moviesSolo = [];
   const eventsSolo = [];
 
-
   if( ar.events && ar.movies ){
 
     //-------set Group Mixed

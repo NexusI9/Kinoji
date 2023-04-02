@@ -2,10 +2,10 @@ import { gsap } from 'gsap';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import Label from './Earth.label';
-import FresnelShader from './Earth.FresnelShader';
-import MouseRaycaster from './Earth.MouseRaycaster';
-import { INIT_HEIGHT, INIT_WIDTH } from './Earth.constants';
+import Label from './Label';
+import FresnelShader from './FresnelShader';
+import MouseRaycaster from './MouseRaycaster';
+import { INIT_HEIGHT, INIT_WIDTH } from './Constants';
 
 const globe = {
 	model: require('../../assets/earth/globe.gltf'),

@@ -2,13 +2,15 @@
 import {DropDown } from '../components/inputs';
 import { useEffect, useState, useRef } from 'react';
 import FetchAPI from '../lib/fetchapi';
-import { Earth, Countries, Timeline, SideList } from '../components/worldmap/';
+import { Countries, Timeline, SideList } from '../components/worldmap';
+import { Earth } from '../components/earth';
+import { AnimatePresence } from 'framer-motion';
 
 
 function Worldmap(){
 
-	const [ country, setCountry ] = useState(); 				//selected country : name
-	const [ dropdown, setDropdown ] = useState([]);			//list of countries from history dtb
+	const [ country, setCountry ] = useState(); 		//selected country : name
+	const [ dropdown, setDropdown ] = useState([]);		//list of countries from history dtb
 
 	const history= useRef();				//History Blob (all countries, 3D coordinate, events, movies, segments, 3D meshes)
 	const scene = useRef(new Earth({
@@ -81,7 +83,6 @@ return(
 					<div id="Earth"></div>
 					{country?.history && <Timeline country={ country } width={300}/> }
 					<div id="timeline_settings">
-						{country && <SideList country={country.name} /> }
 						{ <DropDown 
 							list={dropdown} 
 							id='country_select' 
@@ -90,6 +91,9 @@ return(
 							filter={ e => e.dropdown.item }
 							selected={ country?.dropdown }
 						/>	}
+						<AnimatePresence>
+							{country && country.history && <SideList country={country} /> }
+						</AnimatePresence>
 					</div>
   </div>
 );
