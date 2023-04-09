@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import kinojilogo from '../../assets/logo.svg';
 import { TMDBLink } from '../inputs';
 import { motion } from 'framer-motion';
@@ -19,8 +19,8 @@ const Footer = () => {
     {
       header:"Search tools",
       content:[
-        { label:'Glossary', link:'/list' },
-        { label:'Worldmap', link:'/world' },
+        { label:'Glossary', link:'/glossary' },
+        { label:'Worldmap', link:'/worldmap' },
         { label:'Tags and colours picker', link:'/tags' }
       ]
     },
@@ -37,7 +37,7 @@ const Footer = () => {
     <motion.footer variants={container} initial='initial' animate='animate' exit='exit' >
 
         <section id="footerInfo">
-          <img alt='kinoji logo' style={{width:'100px'}} src={kinojilogo}/>
+          <img alt='kinoji logo' style={{width:'100px'}} src={kinojilogo.src}/>
           <p className='discrete'>Kinoji is an online cinematography library focused on Asia and auteur cinema</p>
         </section>
         <section id="footerLinks">
@@ -46,7 +46,7 @@ const Footer = () => {
               <div key={'footerlist'+item.header}>
                 <h4>{item.header}</h4>
                 <ul>
-                  {item.content.map( list => <li key={'footersublist'+list.label}><Link className='light link' to={list.link}>{list.label}</Link></li>)}
+                  {item.content.map( list => <li key={'footersublist'+list.label}><Link className='light link' href={list.link}>{list.label}</Link></li>)}
                 </ul>
               </div>
             )

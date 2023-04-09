@@ -1,9 +1,9 @@
 
-import {DropDown } from '../components/inputs';
+import {DropDown } from '@/components/inputs';
 import { useEffect, useState, useRef } from 'react';
-import FetchAPI from '../lib/fetchapi';
-import { Countries, Timeline, SideList } from '../components/worldmap';
-import { Earth } from '../components/earth';
+import useAPI from '@/lib/api';
+import { Countries, Timeline, SideList } from '@/components/worldmap';
+import { Earth } from '@/components/earth';
 import { AnimatePresence } from 'framer-motion';
 
 
@@ -11,18 +11,21 @@ function Worldmap(){
 
 	const [ country, setCountry ] = useState(); 		//selected country : name
 	const [ dropdown, setDropdown ] = useState([]);		//list of countries from history dtb
-
+	
 	const history= useRef();				//History Blob (all countries, 3D coordinate, events, movies, segments, 3D meshes)
-	const scene = useRef(new Earth({
-		onUnfocus: () => setCountry(country),
-		onFlagClick: (val) => setCountry(val)
-	}));
+	const scene = useRef();
 
 	const onDropdownChange = (val) => setCountry(val);
 
 	useEffect(() => {
 
+		scene.current = new Earth({
+			onUnfocus: () => setCountry(country),
+			onFlagClick: (val) => setCountry(val)
+		});
+
 		document.title = "KINO寺 - Worldmap";
+		const {post} = useAPI();
 
 		const ListItem = ({value}) => ( 
 					<div className='microFilter'>
@@ -32,7 +35,7 @@ function Worldmap(){
 				);
 
 
-		FetchAPI.post({type:'getAllHistory'}).then(result => {
+		post({type:'getAllHistory'}).then(result => {
 
 			//---fill up blob object (movies/events/segments)
 			const newCountries = result.data.map( histoCountry => {
@@ -66,7 +69,7 @@ function Worldmap(){
 
 		});
 
-		return ( <div /> )
+		return () => {}
 	}, [Countries]);
 
 	useEffect( () => {

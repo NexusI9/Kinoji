@@ -1,24 +1,34 @@
-import FetchAPI from '../lib/fetchapi';
+import useAPI from '@/lib/api';
 import {useEffect, useState} from 'react';
-import { useParams } from 'react-router-dom';
-import { Banner } from '../components/header';
-import { Flow } from '../components/movieobject';
+import { useRouter } from 'next/router';
+import { Banner } from '@/components/header';
+import { Flow } from '@/components/movieobject';
 
-import { container } from '../lib/variants.js';
+import { container } from '@/lib/variants.js';
 import { motion } from 'framer-motion';
+
+import noposter from '@/assets/noposter.jpg';
 
 function Director(){
 
-  const { id } = useParams();
+  const router = useRouter();
+  const { id } = router.query;
   const [ director, setDirector ] = useState([]);
   const [ movies, setMovies ] = useState([]);
 
   useEffect(() => {
-    FetchAPI.post({type:'getDirector', id:id}).then( result => {
-      setDirector(result.data);
-      document.title = 'KINO寺 - Director: '+ (result.data[0].name || '');
-    });
-    FetchAPI.post({type:'getMoviesFromDir', id:id}).then( result => setMovies(result.data) );
+
+    if(id){
+
+      const { post } = useAPI(); 
+      post({type:'getDirector', id:id}).then( result => {
+        setDirector(result.data);
+        document.title = 'KINO寺 - Director: '+ (result.data[0].name || '');
+      });
+      post({type:'getMoviesFromDir', id:id}).then( result => setMovies(result.data) );
+
+    }
+
   }, [id]);
 
 
@@ -28,7 +38,7 @@ return(
     director.map( infos =>
       <Banner
         key={'director_banner_'+infos.id}
-        visual={<img alt={'poster_banner_'+infos.name} src={infos.poster || require('../assets/noposter.jpg') } /> }
+        visual={<img alt={'poster_banner_'+infos.name} src={infos.poster || noposter } /> }
         category={'director'}
         header={infos.name}
         summary={infos.summary}

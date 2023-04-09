@@ -5,7 +5,6 @@ import { container } from '../../lib/variants';
 import Event from './Event';
 import Segment from './Segment';
 import { ObjectToEvent, group, minMax } from './Timeline.helper';
-import '../../sheets/timeline.scss';
 
 
 //CORE

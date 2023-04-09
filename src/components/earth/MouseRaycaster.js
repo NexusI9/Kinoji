@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { INIT_HEIGHT, INIT_WIDTH } from './Constants';
+
 
 export default class MouseRaycaster{
 
@@ -21,8 +21,8 @@ export default class MouseRaycaster{
 	ray(e){
 
 		let mouse = new THREE.Vector2();
-		mouse.x = (e.clientX / INIT_WIDTH) * 2 - 1 ;
-		mouse.y =  - (e.clientY / INIT_HEIGHT) * 2 + 1 ;
+		mouse.x = (e.clientX / window.innerWidth) * 2 - 1 ;
+		mouse.y =  - (e.clientY / window.innerHeight) * 2 + 1 ;
 
 		let raycaster = new THREE.Raycaster();
 		raycaster.setFromCamera( mouse, this.camera );

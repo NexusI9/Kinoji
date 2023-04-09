@@ -1,7 +1,7 @@
 import { getMovieYear, setEventDate, truncate } from '../../lib/utilities';
 import { Poster } from '../movieobject';
 import { DirectorLabel } from '../api';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 
 export function ObjectToEvent(item){
@@ -17,7 +17,7 @@ export function ObjectToEvent(item){
       case 'movie':
       return{
         label: item.title|| '',
-        header:  <Link to={'/movies/'+item.id} className='link' replace>{item.title}<span className='light'> ({getMovieYear(item)})</span></Link>,
+        header:  <Link href={'/movies/'+item.id} className='link' replace>{item.title}<span className='light'> ({getMovieYear(item)})</span></Link>,
         begin: getMovieYear(item),
         end:null,
         subtext: <span className='link underline'><DirectorLabel id={item.director} popup={false} /></span>,

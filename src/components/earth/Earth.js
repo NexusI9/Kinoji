@@ -5,25 +5,29 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import Label from './Label';
 import FresnelShader from './FresnelShader';
 import MouseRaycaster from './MouseRaycaster';
-import { INIT_HEIGHT, INIT_WIDTH } from './Constants';
+
+import earthModel from '../../assets/earth/globe.gltf';
+import earthTexture from '../../assets/earth/texture.png';
+import earthAlpha from '../../assets/earth/alpha_texture.png';
+
+import auraTexture from '../../assets/earth/aura.png';
+import auraAlpha from '../../assets/earth/alpha_aura.png';
 
 const globe = {
-	model: require('../../assets/earth/globe.gltf'),
-	texture: require('../../assets/earth/texture.png'),
-	alpha: require('../../assets/earth/alpha_texture.png')
+	model: earthModel,
+	texture: earthTexture,
+	alpha: earthAlpha
 }
 
 const aura = {
-	texure: require('../../assets/earth/aura.png'),
-	alpha: require('../../assets/earth/alpha_aura.png')
+	texture: auraTexture,
+	alpha: auraAlpha
 }
 
 const getCountryFromUUID = (countries, uuid) => {
-	const filtered = countries.filter( country => country.geo.flag.mesh.uuid === uuid);
+	const filtered = countries.filter( country =>  country.geo.flag.mesh.uuid === uuid);
 	return filtered.length > 0 ? filtered[0] : null;
 }
-
-
 
 
 export default class Earth{
@@ -43,15 +47,15 @@ export default class Earth{
 			if(this.cameria){ this.camera.position.z = 0.6; }
 		  },
 		  largeScreen: () => {
-			this.width = INIT_WIDTH;
-			this.height = INIT_HEIGHT;
+			this.width = window.innerWidth;
+			this.height = window.innerHeight;
 			if(this.camera){ this.camera.position.z = 0.5; }
 		  }
 	}
 
 
-	this.width = INIT_WIDTH;
-	this.height = INIT_HEIGHT;
+	this.width = window.innerWidth;
+	this.height = window.innerHeight;
 
 	//meshes
 	this.countries = countries;
@@ -179,22 +183,25 @@ export default class Earth{
   }
 
 	addAura(){
+
 	const geometry = new THREE.PlaneGeometry( 27, 27 );
+
 	const texture = {
-		base: new THREE.TextureLoader().load(aura.texture),
-		alpha: new THREE.TextureLoader().load(aura.alpha)
+		base: new THREE.TextureLoader().load(aura.texture.src),
+		alpha: new THREE.TextureLoader().load(aura.alpha.src)
 	}
 	const material = new THREE.MeshBasicMaterial({
-			color:0xff0000,
+		color:0xff0000,
 		alphaMap: texture.alpha,
-			transparent:true,
-			depthTest:false
+		transparent:true,
+		depthTest:false
 	});
 
 
 	this.plane = new THREE.Mesh( geometry, material );
-		this.plane.renderOrder = 0;
+	this.plane.renderOrder = 0;
 	this.scene.add( this.plane );
+
 	}
 	addGrid(){
 	const size = 20;
@@ -220,9 +227,9 @@ export default class Earth{
 	globe.model,
 	(gltf) => {
 
-	const texture = new THREE.TextureLoader().load(globe.texture);
+	const texture = new THREE.TextureLoader().load(globe.texture.src);
 	texture.minFilter = THREE.NearestFilter;
-	const alpha = new THREE.TextureLoader().load(globe.alpha);
+	const alpha = new THREE.TextureLoader().load(globe.alpha.src);
 	alpha.minFilter = THREE.NearestFilter;
 
 	const material = new THREE.ShaderMaterial({

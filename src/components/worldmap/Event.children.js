@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Fragment } from 'react';
 
 export const SoloContent = ({object, type}) => (
@@ -27,7 +27,7 @@ export const GroupContent = ({ object, type, date}) =>{
         </div>
         <div className='hyperlink'>
           {
-            event.type === 'movie' ? <Link to={'/movies/'+event.id}><span className='ico eye'></span></Link> : <span target='_blank' href={event.src} className='ico hyperlink'></span>
+            event.type === 'movie' ? <Link href={'/movies/'+event.id}><span className='ico eye'></span></Link> : <span target='_blank' href={event.src} className='ico hyperlink'></span>
           }
         </div>
     </div>

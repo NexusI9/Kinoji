@@ -1,19 +1,17 @@
 import { useState } from 'react';
-import { useLocation, useSearchParams } from 'react-router-dom';
-import { setParam } from '../../lib/utilities';
+import { useRouter } from 'next/router';
 import Switcher from './Switcher';
 import MicroFilters from './MicroFilters';
 
 const MovieSettings = (props) => {
 
     const [mosaic, setMosaic] = useState(false);
-    const [ params, setParams ] = useSearchParams({});
-    const mosaicParam = params.get('mosaic');
-    const location = useLocation();
+    const router = useRouter();
+    const mosaicParam = router.query.mosaic;
   
   
     const onSwitch = (e) => {
-      setParams(  setParam(location, {mosaic: e ? 1 : 0})  );
+      router.push(router.pathname, {mosaic: e ? 1 : 0});
       props.onChange({ type:"switch", value:e });
     }
   

@@ -1,5 +1,5 @@
 //Movie Objects
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { DirectorLabel } from '../api';
 import { getMovieYear,} from '../../lib/utilities.js';
 import { TagLabel, TMDBLink } from '../inputs';
@@ -17,7 +17,7 @@ const Banner = ({ movie, summary=true, linked=true, spheros=false, tags=true}) =
           <section>
             <div className='header'>
             { linked ?
-              <Link to={`/movies/${movie.id}`}>
+              <Link href={`/movies/${movie.id}`}>
                 <h3 className='title'>{movie.title} <span className='date light'>{ date }</span></h3>
               </Link> :
                 <h1>{movie.title} <span className='date light'>{date}</span></h1>

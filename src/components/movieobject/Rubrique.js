@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import FetchAPI from '../../lib/fetchapi';
+import useAPI from '../../lib/api';
 import { firstSentenceOf } from '../../lib/utilities.js';
 import { ArrowLabel } from '../inputs';
 import Poster from './Poster';
@@ -10,7 +10,8 @@ const Rubrique = ({ genre, direction='vertical' }) => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() =>{
-    FetchAPI.post({type:'getMoviesFromGenre', genre:genre.name, limit: "6"}).then(result => { return setMovies(result.data); });
+    const {post} = useAPI();
+    post({type:'getMoviesFromGenre', genre:genre.name, limit: "6"}).then(result => { return setMovies(result.data); });
   },[genre]);
 
   return(

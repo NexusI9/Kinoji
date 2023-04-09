@@ -1,11 +1,11 @@
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/router';
 
 
 const SquareButton = ({id, type="arrow"}) => {
 
-    const navigate = useNavigate();
+    const router = useRouter();
     return(
-          <section id={id || ''} className={'squareButton ' + type }> <span id="arrowMenu" onClick={() => navigate(-1)}></span></section>
+          <section id={id || ''} className={'squareButton ' + type }> <span id="arrowMenu" onClick={() => router.back()}></span></section>
     )
   }
 

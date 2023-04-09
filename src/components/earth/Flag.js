@@ -12,7 +12,7 @@ export default class Flag{
 	render(){
 
 		const path = require("../../assets/earth/flags/"+this.name.toLowerCase()+".png");
-		const texture = new THREE.TextureLoader().load(path);
+		const texture = new THREE.TextureLoader().load(path.default.src);
 
 		const material = new THREE.MeshBasicMaterial({
 			color: 0xffffff,

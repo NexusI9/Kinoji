@@ -1,11 +1,11 @@
-import { Link, useNavigate } from "react-router-dom"
+import { useRouter } from "next/router";
 
 const Cta = ({type='primary', to, children}) => {
 
-    const navigate = useNavigate();
+    const router = useRouter();
 
     return( 
-        <a onClick={ () => navigate(to) } className={`cta ${type}`} >{children}</a>
+        <a onClick={ () => router.push({pathname:to}) } className={`cta ${type}`} >{children}</a>
     )};
 
 export default Cta;

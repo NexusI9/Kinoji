@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './sheets/style.scss';
 import './sheets/smallscreen.scss';
-import App from './App';
+import App from './pages';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { store } from './lib/store';

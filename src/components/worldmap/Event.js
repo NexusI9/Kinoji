@@ -78,7 +78,7 @@ const Event = ({ object, type, date, minmax, width, id}) => {
               <Number />
             </span>
             <Label />
-            <AnimatePresence exitBeforeEnter>
+            <AnimatePresence mode='wait'>
               { opacity && 
                   <motion.section 
                   className='chrono_popup'

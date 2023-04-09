@@ -1,9 +1,9 @@
 
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 
 const ArrowLabel = ({ label, link, ico='smallarrow' }) => (
-    <Link to={link} className='arrowlabel'><small>{label}</small><span className={`ico ${ico}`}></span></Link>
+    <Link href={link} className='arrowlabel'><small>{label}</small><span className={`ico ${ico}`}></span></Link>
   );
 
 export default ArrowLabel;

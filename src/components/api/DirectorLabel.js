@@ -1,10 +1,10 @@
-import FetchAPI from '../../lib/fetchapi';
+import useAPI from '../../lib/api';
 import { useState, useEffect } from 'react';
 import { Popup, Separator } from '../misc';
 import { Banner } from '../header';
 import { Poster } from '../movieobject';
 import { firstSentenceOf } from '../../lib/utilities';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 const DirectorLabel = ({id, popup=true}) => {
 
@@ -17,11 +17,11 @@ const DirectorLabel = ({id, popup=true}) => {
 
 
     useEffect(() => {
-
-      FetchAPI.post({type:'getDirectorFromId', id:id}).then( result => { return setDir(result.data); });
+      const { post } = useAPI();
+      post({type:'getDirectorFromId', id:id}).then( result => { return setDir(result.data); });
 
       if(hover && dir && popup){
-        FetchAPI.post({type:'getMoviesFromDir', id:id}).then( result => {
+          post({type:'getMoviesFromDir', id:id}).then( result => {
           const movies = result.data;
           setPop({
             content:
@@ -45,7 +45,7 @@ const DirectorLabel = ({id, popup=true}) => {
 
     return (
       <div style={{display:'inline-block'}}  onMouseEnter={ onMouseEnter } onMouseLeave={ onMouseLeave } >
-        <Link to={/director/+id} className='underline link' replace>{ dir ? dir.name : ''}</Link>
+        <Link href={/director/+id} className='underline link' replace>{ dir ? dir.name : ''}</Link>
         { pop ? <Popup content={pop.content}  event={pop.event} margin={20} /> : <></> }
       </div>
   );

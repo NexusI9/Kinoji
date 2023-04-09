@@ -1,6 +1,6 @@
 //Movie Objects
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useRouter } from 'next/router';
 
 import { XMasonry, XBlock } from 'react-xmasonry';
 import { getMovieYear } from '../../lib/utilities.js';
@@ -12,8 +12,8 @@ import Bundle from './Bundle.js';
 const Flow = ({ movies }) => {
 
   const step = 4;
-  const [ params, setParams ] = useSearchParams({});
-  const mosaicParam = params.get('mosaic');
+  const router = useRouter();
+  const mosaicParam = router.query.mosaic;
   //events
   const onChange = (e) => {
     switch(e.type){

@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { ArrowLabel } from '../inputs';
 import { Mosaic, Banner } from '../movieobject';
 import { LabelBar } from '../header';
-import FetchAPI from '../../lib/fetchapi';
+import useAPI from '../../lib/api';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const variants = {
@@ -19,7 +19,6 @@ const variants = {
 }
 
 const Highlights = ({number=3, speed=5000}) => {
-
 
     const [ movies, setMovies ] = useState();
     const [ active, setActive ] = useState(false);
@@ -40,7 +39,8 @@ const Highlights = ({number=3, speed=5000}) => {
 
         clearInterval(interval.current);
 
-        FetchAPI.post({type:'getRandomMovies', limit:number*2}).then( result => {
+        const {post} = useAPI();
+        post({type:'getRandomMovies', limit:number*2}).then( result => {
             const {data} = result;
             const splitted = [];
             const chunkSize = 2;

@@ -1,6 +1,7 @@
-import { container } from '../lib/variants.js';
+import { container } from '@/lib/variants.js';
 import { motion } from 'framer-motion';
 import {useEffect} from 'react';
+
 
 const About = (props) => {
 

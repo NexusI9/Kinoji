@@ -1,7 +1,7 @@
 //Movie Objects
 import  { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import FetchAPI from '../../lib/fetchapi';
+import { useRouter } from 'next/router';
+import useAPI from '../../lib/api';
 import {
   sortThumbnails,
   shuffle_array,
@@ -14,17 +14,19 @@ import Thumbnail from './Thumbnail';
 
 const Mosaic = ({ movie, animate, random=false, limit }) => {
 
-  const [ params ] = useSearchParams();
+  const router = useRouter();
+  let { colours } = router.query;
   const [ pics, setPics ] = useState([]);
 
   useEffect(() => {
 
-    const colours = paramsToArray((params.get('colours')));
+    colours = paramsToArray(colours);
     let shot_list = [];
 
     //fetch filtered or all pics
     if(colours){
-      shot_list = FetchAPI.post({type:'getShotsWithColours',id:movie.id, colours:colours}).then( result => result.data.length > 0 ? result.data.map(shots => shots.shots) : movie.shots.split(';')  );
+      const {post} = useAPI();
+      shot_list = post({type:'getShotsWithColours',id:movie.id, colours:colours}).then( result => result.data.length > 0 ? result.data.map(shots => shots.shots) : movie.shots.split(';')  );
     }else{
       shot_list = new Promise( resolve => resolve( movie.shots.split(';') ) );
     }
@@ -38,7 +40,7 @@ const Mosaic = ({ movie, animate, random=false, limit }) => {
     return () => shot_list = [];
     
 
-  }, [params, random, movie]);
+  }, [colours, random, movie]);
 
 
   return(

@@ -1128,7 +1128,7 @@ a{
   #tools_search_bar{
     display: grid;
     max-width: 30vw;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     width: max-content;
     justify-content: space-around;

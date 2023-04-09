@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Spheros } from '../components/misc';
 import FetchAPI from '../lib/fetchapi';
 
@@ -15,7 +15,7 @@ const Highway = ({number}) => {
         <div id="highway">
             <Spheros number={5}/>
             {
-              shots && shots.map(shot => <Link to={'/movie/'+shot.id+'/shot/'+shot.name} className='floatingShots' key={shot.id+shot.name}><img key={'floating'+shot.path} src={process.env.PUBLIC_URL+shot.path}/><span className='overlay'></span></Link>)
+              shots && shots.map(shot => <Link href={'/movie/'+shot.id+'/shot/'+shot.name} className='floatingShots' key={shot.id+shot.name}><img key={'floating'+shot.path} src={process.env.PUBLIC_URL+shot.path}/><span className='overlay'></span></Link>)
             }
         </div>
     );

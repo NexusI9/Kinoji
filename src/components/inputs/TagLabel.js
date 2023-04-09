@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import FetchAPI from '../../lib/fetchapi';
+import Link from 'next/link';
+import useAPI from '../../lib/api';
 import { Popup } from '../misc';
 
 
@@ -14,8 +14,8 @@ const TagLabel = ({label, discrete=false, popup=true}) => {
     const onMouseLeave = () => setHover();
     
     useEffect(() => {
-    
-      FetchAPI.post({type:'getTagSummary', tag:label}).then(result => setSummary(result.data.summary));
+      const {post} =  useAPI();
+      post({type:'getTagSummary', tag:label}).then(result => setSummary(result.data.summary));
     
       if(summary && hover){
         setPop({
@@ -31,7 +31,7 @@ const TagLabel = ({label, discrete=false, popup=true}) => {
     
     return(
       <>
-        <Link to={'/search?tags='+label} onMouseEnter={ onMouseEnter } onMouseLeave={onMouseLeave}>
+        <Link href={'/search?tags='+label} onMouseEnter={ onMouseEnter } onMouseLeave={onMouseLeave}>
           <span className={discrete ? 'label tagLabel grey' : 'label tagLabel'}>
           <svg className='' version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
             viewBox="0 0 1136 1136" style={{enableBackground:'new 0 0 1136 1136'}} xmlSpace="preserve">

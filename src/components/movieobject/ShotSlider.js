@@ -1,9 +1,9 @@
-import FetchAPI from "../../lib/fetchapi";
+import useAPI from "../../lib/api";
 import { useState, useEffect, useRef } from 'react';
 import { ArrowLabel } from "../inputs";
 import { DirectorLabel } from "../api";
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 const variants = {
     content:{
@@ -40,8 +40,8 @@ const ShotSlider = ({number=6}) => {
     }
 
     useEffect(() => {
-
-        FetchAPI.post({type:'getRandomShots', limit:number}).then( result => {
+        const { post } = useAPI();
+        post({type:'getRandomShots', limit:number}).then( result => {
             shots.current = result.data;
             setShot( shots.current[index.current] ) 
         });
@@ -71,7 +71,7 @@ const ShotSlider = ({number=6}) => {
             currentShot && <>
                 <AnimatePresence mode='wait'>
                     <motion.img 
-                        src={process.env.PUBLIC_URL+currentShot.path} 
+                        src={currentShot.path} 
                         key={currentShot.path}
                         variants={variants.content}
                         initial='initial'
@@ -101,7 +101,7 @@ const ShotSlider = ({number=6}) => {
                             exit='exit'
                         >
                             <section>
-                                <h4><Link to={`/movies/${currentShot.movie.id}`}>{ currentShot.movie.title }</Link> <span className="light"> ({currentShot.movie.date?.split('-')[0]})</span></h4>
+                                <h4><Link href={`/movies/${currentShot.movie.id}`}>{ currentShot.movie.title }</Link> <span className="light"> ({currentShot.movie.date?.split('-')[0]})</span></h4>
                                 <div><DirectorLabel id={currentShot.movie.director} popup={false} /> (director) </div>
                             </section>
                             <ArrowLabel link={`/movies/${currentShot.movie.id}`} label='see the shots'/>

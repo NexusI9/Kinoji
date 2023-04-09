@@ -1,9 +1,9 @@
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useRouter} from 'next/router';
 import { LabelBar } from '../components/header';
 import { Poster, Rubrique, Flow } from '../components/movieobject';
 import { Card, TagLabel, ColourLabel } from '../components/inputs';
 import { useState, useEffect } from 'react';
-import FetchAPI from '../lib/fetchapi';
+import useAPI from '../lib/api';
 import { container } from '../lib/variants';
 import { motion } from 'framer-motion';
 import { getDirectorDate, paramsToArray } from '../lib/utilities';
@@ -29,8 +29,8 @@ const GlobalSearch = ({query}) => {
   }
 
   useEffect(() => {
-
-    FetchAPI.post({type:'getSuggestion',suggestion:query}).then(result => setContent(result.data) );
+    const {post} = useAPI();
+    post({type:'getSuggestion',suggestion:query}).then(result => setContent(result.data) );
 
   },[query]);
 
@@ -63,9 +63,9 @@ const TagSearch = ({tags, colours, subjects}) => {
   const [ movies, setMovies ] = useState([]);
 
   useEffect(() => {
-
-      if( (tags && !colours) || (tags && colours) ){ FetchAPI.post({type:'getMoviesFromTags', tags:paramsToArray(tags)}).then( results => setMovies(results.data) ); }
-      else if(colours && !tags){ FetchAPI.post({type:'getMoviesFromColours', colours:paramsToArray(colours)}).then( results => setMovies(results.data) ); }
+      const {post} = useAPI();
+      if( (tags && !colours) || (tags && colours) ){ post({type:'getMoviesFromTags', tags:paramsToArray(tags)}).then( results => setMovies(results.data) ); }
+      else if(colours && !tags){ post({type:'getMoviesFromColours', colours:paramsToArray(colours)}).then( results => setMovies(results.data) ); }
 
   },[tags, colours]);
 
@@ -92,12 +92,19 @@ const TagSearch = ({tags, colours, subjects}) => {
 
 function Search(){
 
-  const [ params, setParams ] = useSearchParams();
-  const { query, tags, colours, subjects } = Object.fromEntries(params);
+  const router = useRouter();
+  const params = router.query;
+  const [ queries, setQueries ] = useState();
 
   useEffect( () => {
-    document.title = "KINO寺 - Search" + (query ? ': \"'+ query + "\"" : '');
-  },[]);
+    if( params ){
+      const { query, tags, colours, subjects } = params;
+      document.title = "KINO寺 - Search" + (query ? ': \"'+ query + "\"" : '');
+      setQueries(params);
+      console.log(params);
+    }
+
+  },[ params ]);
 
   return(
     <motion.div
@@ -106,9 +113,15 @@ function Search(){
       animate='animate'
       exit='exit'
       id='search_container'
-      >
-    { query ? <GlobalSearch query={query} /> : <></> }
-    { (tags || colours || subjects) && !query ? <TagSearch tags={tags} colours={colours}  subjects={subjects} /> : <></> }
+    >
+      { queries && queries.query && <GlobalSearch query={queries.query} /> }
+      { queries &&
+        (queries.tags || 
+        queries.colours || 
+        queries.subjects) && 
+        !queries.query && 
+        <TagSearch tags={queries.tags} colours={queries.colours}  subjects={queries.subjects} />
+      }
     </motion.div>
   );
 }
