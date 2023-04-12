@@ -7,8 +7,8 @@ import useAPI from '@/lib/api';
 import { container } from '@/lib/variants.js';
 import { motion } from 'framer-motion';
 import { getDirectorDate } from '@/lib/utilities';
-
 import noposter from '@/assets/noposter.jpg';
+import Head from 'next/head';
 
 
 export default function Collections(){
@@ -23,7 +23,6 @@ export default function Collections(){
   useEffect( () => {
 
     if(collection){
-      document.title = `KINO寺 - Collection: ${collection}`;
       const {post} = useAPI();
       post({type:'getGenre', genre:collection}).then( ({data}) =>  setInfos(data) );
       post({type:'getMoviesFromGenre', genre:collection, limit:null}).then( ({data}) => setMovies(data) );
@@ -43,6 +42,9 @@ export default function Collections(){
       key='solo_rubriques_container'
       className='container'
     >
+      <Head>
+        <title>KINO寺 Collection { collection && ": "+collection }</title>
+      </Head>
       {collection &&
         <>
           { movies && infos && infos.map( info => <Banner visual={<Pile movies={movies} />} category='collection' key={'banner_'+info.tag} header={info.name} summary={info.summary} source={info.source} spheros={true}/>) }

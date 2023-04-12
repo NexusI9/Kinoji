@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { RadioLabel} from '@/components/inputs';
 import { DirectorLabel } from '@/components/api';
 import { setDate, List, Preview, SubMovies, SubPreview } from '@/components/glossary';
+import Head from 'next/head';
 
 const Glossary = () => {
 
@@ -63,11 +64,12 @@ const Glossary = () => {
   const [ listType, setListType ] = useState(content[0]);
   const [ preview, setPreview ] = useState(dft);
 
-  useEffect( () => {
-  	document.title = "KINO寺 - Glossary";
-  },[]);
+
   return(
       <>
+      <Head>
+        <title>Movies and directors glossary</title>
+      </Head>
         <div id="dir_container" className="settings_container">
 
             <RadioLabel

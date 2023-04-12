@@ -4,16 +4,16 @@ import { motion } from 'framer-motion';
 import { container } from '@/lib/variants.js';
 import { ShotSlider } from '@/components/movieobject';
 import { HomeHeader, LatestMovies, ListSelection, AboutKinoji, Highlights } from '@/components/home';
+import Head from 'next/head';
 
 
 export default function Home(props){
 
-  useEffect( () => {
-    document.title = "KINO寺 - The portal to author and asia cinema";
-  },[]);
 
   return(<>
-
+        <Head>
+          <title>KINOJI: The portal to author and asia cinema</title>
+        </Head>
         <motion.main
             variants={container}
             initial='initial'

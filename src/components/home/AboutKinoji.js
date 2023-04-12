@@ -15,7 +15,6 @@ const AboutKinoji = () => {
             Kinoji is an online cinematography library that focuses on Asian and author cinema. 
             <br/>
             The website serves as a search engine and gathering place for movie enthusiasts and artists who are looking for inspiration or hoping to increase their knowledge about Asian cinema. With a mission to educate and inform,
-            <br/>
             Kinoji provides a comprehensive database of movies and directors, making it easy for users to discover new films and expand their cinematic horizons. 
             </p>
           </div>

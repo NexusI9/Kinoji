@@ -1,13 +1,14 @@
 import { container } from '../lib/variants.js';
 import { motion } from 'framer-motion';
-import {useEffect} from 'react';
+import Head from 'next/head.js';
 
 const Contact = (props) => {
-  useEffect(() => {
-    document.title = 'KINO寺 - Contact';
-  },[]);
+
   return(
     <>
+    <Head>
+      <title>Contact Us</title>
+    </Head>
         <h1>Contact</h1>
     </>
 

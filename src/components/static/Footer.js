@@ -21,7 +21,7 @@ const Footer = () => {
       content:[
         { label:'Glossary', link:'/glossary' },
         { label:'Worldmap', link:'/worldmap' },
-        { label:'Tags and colours picker', link:'/tags' }
+       /* { label:'Tags and colours picker', link:'/tags' }*/
       ]
     },
     {

@@ -8,6 +8,7 @@ import { container } from '@/lib/variants.js';
 import { motion } from 'framer-motion';
 
 import noposter from '@/assets/noposter.jpg';
+import Head from 'next/head';
 
 function Director(){
 
@@ -34,6 +35,9 @@ function Director(){
 
 return(
   <div className='container'>
+    <Head>
+      <title>Kinoji Director{(director && director[0] && ': '+director[0].name) }</title>
+    </Head>
   {
     director.map( infos =>
       <Banner

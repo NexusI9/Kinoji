@@ -1,11 +1,8 @@
 //Movie Objects
 import  { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import useAPI from '../../lib/api';
 import {
   sortThumbnails,
   shuffle_array,
-  paramsToArray
 } from '../../lib/utilities.js';
 import { motion } from 'framer-motion';
 import { movie_container, mosaic } from '../../lib/variants';
@@ -14,33 +11,20 @@ import Thumbnail from './Thumbnail';
 
 const Mosaic = ({ movie, animate, random=false, limit }) => {
 
-  const router = useRouter();
-  let { colours } = router.query;
   const [ pics, setPics ] = useState([]);
 
   useEffect(() => {
 
-    colours = paramsToArray(colours);
-    let shot_list = [];
-
-    //fetch filtered or all pics
-    if(colours){
-      const {post} = useAPI();
-      shot_list = post({type:'getShotsWithColours',id:movie.id, colours:colours}).then( result => result.data.length > 0 ? result.data.map(shots => shots.shots) : movie.shots.split(';')  );
-    }else{
-      shot_list = new Promise( resolve => resolve( movie.shots.split(';') ) );
-    }
+    let shot_list = movie.shots.split(';');
 
     // sort them (name/year/random)
-    shot_list.then( result => {
-      if(!random){ setPics(sortThumbnails(result)); }
-      else{ setPics(shuffle_array(result)); }
-    });
+    if(!random){ setPics(sortThumbnails(shot_list)); }
+    else{ setPics(shuffle_array(shot_list)); }
 
     return () => shot_list = [];
     
 
-  }, [colours, random, movie]);
+  }, [random, movie]);
 
 
   return(

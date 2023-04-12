@@ -11,7 +11,13 @@ const MovieSettings = (props) => {
   
   
     const onSwitch = (e) => {
-      router.push(router.pathname, {mosaic: e ? 1 : 0});
+      router.push({
+            pathname: router.pathname, 
+            query: {
+            ...router.query, 
+            mosaic: e ? 1 : 0
+          }
+      });
       props.onChange({ type:"switch", value:e });
     }
   

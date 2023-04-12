@@ -1,14 +1,14 @@
 import { container } from '../lib/variants.js';
 import { motion } from 'framer-motion';
-import {useEffect} from 'react';
+import Head from 'next/head.js';
 
 const Contribute = (props) => {
-  useEffect(() => {
-    document.title = 'KINO寺 - Contribute';
-  },[]);
 
   return(
     <>
+        <Head>
+          <title>Contribute to KINOJI</title>
+        </Head>
         <h1>Contribute</h1>
     </>
 

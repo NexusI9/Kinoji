@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { TagBox, Counter } from '@/components/tags';
 import useAPI from '@/lib/api';
+import Head from 'next/head';
 
 function Tags(){
 
@@ -33,8 +34,6 @@ function Tags(){
 
 
   useEffect(() => {
-
-  	document.title = "KINO寺 - Tags";
 
     const setTotalResult = (colourchain, tagchain, tagresult, colourresult) => {
 
@@ -82,6 +81,9 @@ function Tags(){
 
   return  (
     <>
+      <Head>
+        <title>Search by tags</title>
+      </Head>
         <div id="tag_container" className="settings_container">
             <Counter results={ results ? results : {} } titles={ results.tags ? spliceTitle(results.tags,7) : []}/>
             <div id="tagbox_wrapper">

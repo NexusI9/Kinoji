@@ -18,7 +18,7 @@ const Header = ({ movie }) => {
             <section className='label'><DirectorLabel id={movie.director}/> <p>&ensp;(Director)</p></section>
           */}
   
-          <Link href={`/movies/${movie.id}`} id='quitFullView' className='squareButton close'><span></span></Link>
+          <div onClick={ () => router.back() } id='quitFullView' className='squareButton close'><span></span></div>
       </section>)
   }
 

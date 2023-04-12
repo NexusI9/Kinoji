@@ -5,6 +5,7 @@ import useAPI from '@/lib/api';
 import { Countries, Timeline, SideList } from '@/components/worldmap';
 import { Earth } from '@/components/earth';
 import { AnimatePresence } from 'framer-motion';
+import Head from 'next/head';
 
 
 function Worldmap(){
@@ -24,7 +25,6 @@ function Worldmap(){
 			onFlagClick: (val) => setCountry(val)
 		});
 
-		document.title = "KINO寺 - Worldmap";
 		const {post} = useAPI();
 
 		const ListItem = ({value}) => ( 
@@ -89,21 +89,24 @@ function Worldmap(){
 
 return(
     <div id="date_container" className="settings_container" data-country={country && country.name || 'world'}>
-					<div id="Earth"></div>
-					{country?.history && <Timeline country={ country } width={300}/> }
-					<div id="timeline_settings">
-						{ <DropDown 
-							list={dropdown} 
-							id='country_select' 
-							name='country' 
-							onChange={ onDropdownChange } 
-							filter={ e => e.dropdown.item }
-							selected={ country?.dropdown }
-						/>	}
-						<AnimatePresence>
-							{country && country.history && <SideList country={country} /> }
-						</AnimatePresence>
-					</div>
+		<Head>
+			<title>Movies and history Worldmap</title>
+		</Head>
+		<div id="Earth"></div>
+		{country?.history && <Timeline country={ country } width={300}/> }
+		<div id="timeline_settings">
+			{ <DropDown 
+				list={dropdown} 
+				id='country_select' 
+				name='country' 
+				onChange={ onDropdownChange } 
+				filter={ e => e.dropdown.item }
+				selected={ country?.dropdown }
+			/>	}
+			<AnimatePresence>
+				{country && country.history && <SideList country={country} /> }
+			</AnimatePresence>
+		</div>
   </div>
 );
 

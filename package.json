@@ -19,7 +19,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "server": "mysql.server start && sudo apachectl start && next start",
+    "server": "mysql.server start && sudo apachectl start && next dev",
     "start": "next start",
     "build": "next build",
     "dev": "next dev"

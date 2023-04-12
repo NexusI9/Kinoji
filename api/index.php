@@ -154,7 +154,8 @@ switch($body['type']){
 
   case 'getMoviesFromTags':
 
-    $tags =  to_json($body['tags'], "tags");
+    //print_r( json_decode( $body['tags'] ) );
+    $tags =  $body['tags'];
 
     $query = $connection->buildQuery( array(
       "statement" => function($c){ return "SELECT * FROM movies WHERE {$c}"; },
@@ -208,16 +209,15 @@ switch($body['type']){
     $colours = add_percent($body['colours']);
 
     $query = $connection->buildQuery( array(
-      "statement" => function($c){ return "SELECT DISTINCT movies.* , GROUP_CONCAT(DISTINCT aesthetics.shots SEPARATOR ';') as filtered_shots FROM movies INNER JOIN aesthetics WHERE movies.id = aesthetics.id AND ({$c}) GROUP BY movies.id"; },
+      "statement" => function($c){ return "SELECT DISTINCT movies.* , GROUP_CONCAT(DISTINCT aesthetics.shots SEPARATOR ';') as shots FROM movies INNER JOIN aesthetics WHERE movies.id = aesthetics.id AND ({$c}) GROUP BY movies.id"; },
       "arguments" => $colours,
       "condition" => "aesthetics.colours LIKE ?",
       "operator" => 'OR'
     ));
 
     $result = $connection->query($query,$colours);
-    $result["shots"] = $result["filtered_shots"];
-    unset($result["filtered_shots"]);
     echo json_encode($result);
+
   break;
 
   //--------SUGGESTION

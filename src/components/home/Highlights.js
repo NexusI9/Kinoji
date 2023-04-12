@@ -95,7 +95,7 @@ const Highlights = ({number=3, speed=5000}) => {
                                             >
                                             <Banner movie={movie} summary={false}/>
                                             <LabelBar hero={false} label='Preview' hyperlink={  <ArrowLabel label='see the shots' link={`/movies/${movie.id}`} /> }/>
-                                            <Mosaic movie={movie} random={true} limit={12} />
+                                            <Mosaic movie={movie} random={true} limit={index%2 ? 12 : 9} />
                                         </motion.div>
                                 ) 
                             }

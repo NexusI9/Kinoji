@@ -8,6 +8,8 @@ import { LabelBar } from '../header';
 import { MovieSettings } from '../inputs';
 import Poster from './Poster.js';
 import Bundle from './Bundle.js';
+import { AnimatePresence, motion } from 'framer-motion';
+import { movie_container } from '@/lib/variants';
 
 const Flow = ({ movies }) => {
 
@@ -105,10 +107,23 @@ const Flow = ({ movies }) => {
   },[movies, mosaic, sort])
 
 
+
   return(
     <>
-      <LabelBar hero={false} sticky={true} label= {<>Movies<span className='light'>&nbsp;({movies.length})</span> </>} hyperlink={ movies.length > 1 ? <MovieSettings onChange={onChange} mosaic={mosaic} defaultCheck={sort} /> : <></> } />
-      <div className='movie_wrapper'>{ content }</div>
+      <LabelBar hero={false} sticky={true} label= {<>Movies<span className='light'> ({movies.length})</span> </>} hyperlink={ movies.length > 1 ? <MovieSettings onChange={onChange} mosaic={mosaic} defaultCheck={sort} /> : <></> } />
+      <AnimatePresence mode='wait'>
+        <motion.div 
+          className='movie_wrapper' 
+          data-mode={ (movies.length === 1 || mosaic) ? 'default' : 'poster'}
+          key={'container-movie'+mosaic+sort}
+          variants={movie_container}
+          initial='initial'
+          animate='animate'
+          exit='exit'
+        >
+          { content }
+        </motion.div>
+      </AnimatePresence>
     </>
   )
 

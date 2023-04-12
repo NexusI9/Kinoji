@@ -5,6 +5,8 @@ import { getMovieYear,} from '../../lib/utilities.js';
 import { TagLabel, TMDBLink } from '../inputs';
 import { Spheros } from '../misc';
 
+import noposter from '@/assets/noposter.jpg';
+
 
 const Banner = ({ movie, summary=true, linked=true, spheros=false, tags=true}) =>{
 
@@ -13,7 +15,7 @@ const Banner = ({ movie, summary=true, linked=true, spheros=false, tags=true}) =
 
         <div className='movie_banner'>
           {spheros && <Spheros /> }
-          <img className='visual' alt={movie.title+' poster'} src={movie.poster || require('../../assets/noposter.jpg') }/>
+          <img className='visual' alt={movie.title+' poster'} src={movie.poster || noposter.src }/>
           <section>
             <div className='header'>
             { linked ?
