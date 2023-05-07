@@ -33,7 +33,7 @@ const BannerSearch = ({title}) => {
       <div id='banner_logo_search'>
         
           <img alt='kinojiLogo' src={kinojilogo.src} />
-          {title && <h3>{title}</h3> }
+          {title && <h1>{title}</h1> }
           <SearchBar />
           <div id='tools_search_bar'>
             { tools.map( ({link, ico, label}) => <Link key={link+'tools_search'} href={'/'+link} >{ico()}{label}</Link> )}
