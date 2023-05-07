@@ -36,9 +36,11 @@ const Glossary = () => {
           subcontent: <SubMovies id={item.id} />
 
         })
-    },
+    }
+  ];
 
-    {
+  /*
+      {
       category:'cinematographer',
       input:{ value:'cinematographer', label:'cinematographers' },
       list: {id:'cinematographer',query:'getAllDOP', value:'name', link: (item) => '/dop/'},
@@ -51,7 +53,7 @@ const Glossary = () => {
 
        })
     }
-  ];
+  */
 
   const dft = {
     header:'',
