@@ -56,7 +56,6 @@ return(
       initial='initial'
       animate='animate'
       exit='exit'
-      className='movie_wrapper'
       style={{marginTop:'5%'}}
       >
     <Flow movies={movies} />

@@ -62,21 +62,23 @@ const GlobalSearch = ({query}) => {
           { content.movies?.length && 
                 <div style={{display:'inline-block', width:'100%'}}>
                     <LabelBar label='Movies' hero={false}/>
-                    <div>{categoryMap.movies(content.movies)}</div>
+                    <div className='movie_wrapper'>{categoryMap.movies(content.movies)}</div>
                 </div> 
                 
             }
-          { (content.directors?.length || content.dops?.length) &&
+          { (content.directors.length || content.dops.length) &&
             <div id='searchPersonnalities'>
                 <LabelBar label={'Personnalities'} hero={false}/>
                 <div>{categoryMap.personnalities(content.directors,'Directors','director')}</div>
                 <div>{categoryMap.personnalities(content.dops,'Directors of photography','dop')}</div>
             </div>
           }
-          <div>
+          { (content.genres ||  content.colours) &&
+            <div>
             {  content.genres?.length  && <div><LabelBar label='Genres' hero={false} />{ categoryMap.genres(content.genres) }</div>  }
             {  content.colours?.length && <div><LabelBar label='Aesthetics' hero={false} />{ categoryMap.colours(content.colours) }</div> }
           </div>
+          }
         </>
       }
       </>
