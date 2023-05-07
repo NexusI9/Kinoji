@@ -10,8 +10,14 @@ const Rubrique = ({ genre, direction='vertical' }) => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() =>{
+
     const {post} = useAPI();
-    post({type:'getMoviesFromGenre', genre:genre.name, limit: "6"}).then(result => { return setMovies(result.data); });
+    post({type:'getMoviesFromGenre', genre:genre.name, limit: "6"})
+      .then(({data}) => { 
+        console.log(data);
+        return setMovies(data); 
+      });
+
   },[genre]);
 
   return(

@@ -80,7 +80,9 @@ class Connection{
   public function query($query,$opts = NULL){
     $statement = $this->pdo->prepare($query);
     if(isset($opts)){
-      foreach($opts as $key => $o){ $statement->bindParam($key+1,$o,PDO::PARAM_STR); }
+      foreach($opts as $key => $o){ 
+        $statement->bindParam($key+1,$o,PDO::PARAM_STR); 
+      }
     }
     $statement->execute();
     $results = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -120,14 +122,21 @@ class Connection{
   }
 
   public function getMoviesFromGenre($genre, $limit = NULL){
-        $tag = $this->query("SELECT tag FROM genres WHERE name = ?", [$genre]);
-        $tag = '%'.$tag[0]['tag'].'%';
+        $moviesId = $this->query("SELECT movies FROM genres WHERE name = ?", [$genre]);
+        $moviesId = $moviesId[0]['movies'];
+        $moviesId = explode(';', $moviesId);
+        $idQueue = implode(',', array_fill(0, count($moviesId), '?'));
 
+        $query = "SELECT * FROM movies WHERE id in ($idQueue)";
         if($limit){
-          return $this->query("SELECT * FROM movies WHERE genre LIKE ? LIMIT {$limit}", [$tag]);
-        }else{
-          return $this->query("SELECT * FROM movies WHERE genre LIKE ?", [$tag]);
+          $query = "SELECT * FROM movies WHERE id in ($idQueue) LIMIT $limit";
         }
+
+        $stm = $this->pdo->prepare($query);
+        foreach($moviesId as $key => $id){  $stm->bindValue($key+1,$id);  }
+        $stm->execute();
+        $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
   }
 
 }
