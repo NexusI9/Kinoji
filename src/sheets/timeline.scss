@@ -1,4 +1,4 @@
-@use "style.scss";
+@use "components/card";
 
 #Earth{
     position: fixed;
@@ -276,7 +276,7 @@
   
   .chrono_popup{
   
-    @include style.card();
+    @include card.card();
     background:var(--blue70);
     display: block;
 

@@ -1,0 +1,10 @@
+@use "round";
+
+@mixin card{
+    background: linear-gradient(341.13deg, rgb(79 135 177 / 16%) 0.43%, rgb(130 168 255 / 15%) 117.66%);
+    background: linear-gradient(341.13deg, #0f1520 0.43%, #262b38 117.66%);
+    @include round.round-border;
+    border: solid 1px var(--blue50);
+    box-shadow: rgb(0 0 0 / 60%) 0px 4px 4px;
+    color: var(--paper);
+  }
