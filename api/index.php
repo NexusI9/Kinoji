@@ -99,12 +99,14 @@ switch($body['type']){
   break;
 
   case 'getDirFromGenre':
-    $tag = add_percent(filter_to_key($connection->query("SELECT tag FROM genres WHERE name = ?", [ $body["genre"] ]), 'tag'));
-    $dirId = filter_to_key($connection->query("SELECT DISTINCT director FROM movies WHERE genre LIKE ?", $tag),'director');
-    $directors = array();
-    foreach ($dirId as $key => $value) {
-      $directors[$key] = $connection->query("SELECT * FROM directors WHERE id = ?", [ $dirId[$key] ])[0];
+
+    $moviesFromGenre = $connection->getMoviesFromGenre($body["genre"]);
+    $directors = filter_to_key($moviesFromGenre, 'director');
+
+    foreach ($directors as $key => $id) {
+      $directors[$key] = $connection->query("SELECT * FROM directors WHERE id = ?", [ $directors[$key] ])[0];
     }
+    
     echo json_encode($directors);
   break;
 
