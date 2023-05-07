@@ -13,10 +13,7 @@ const Rubrique = ({ genre, direction='vertical' }) => {
 
     const {post} = useAPI();
     post({type:'getMoviesFromGenre', genre:genre.name, limit: "6"})
-      .then(({data}) => { 
-        console.log(data);
-        return setMovies(data); 
-      });
+      .then(({data}) => setMovies(data) );
 
   },[genre]);
 

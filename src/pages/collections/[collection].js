@@ -26,7 +26,7 @@ export default function Collections(){
       const {post} = useAPI();
       post({type:'getGenre', genre:collection}).then( ({data}) =>  setInfos(data) );
       post({type:'getMoviesFromGenre', genre:collection, limit:null}).then( ({data}) => setMovies(data) );
-      post({type:'getDirFromGenre', genre:collection}).then( ({data}) =>  { console.log(data); setDirectors(data) } );
+      post({type:'getDirFromGenre', genre:collection}).then( ({data}) =>  setDirectors(data) );
     }
 
   
