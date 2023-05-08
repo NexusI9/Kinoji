@@ -130,6 +130,11 @@
     margin-top: 90px;
   }
 
+  .movie_wrapper{
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
 
   .movie_thumbnails{
     grid-template-columns: repeat(2, 1fr);

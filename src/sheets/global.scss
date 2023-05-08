@@ -645,7 +645,7 @@ a{
 .movie_wrapper{
   &:not([data-mode='default']){
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(150px, max-content));
     gap: 20px;
   }
 }
@@ -1878,6 +1878,7 @@ a{
   transition: transform 0.2s ease;
   justify-content: space-between;
   z-index: 10;
+  min-height: 60px;
 
   a{
     font-weight: 500;
@@ -2193,7 +2194,7 @@ a{
 
   &.sticky{
     position: sticky;
-    top: 6%;
+    top: 60px;
     z-index: 2;
     background: #07070b;
   }
