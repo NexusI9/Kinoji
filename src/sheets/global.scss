@@ -610,7 +610,6 @@ a{
   transition: opacity, 0.3s ease-out;
   position: relative;
   overflow: hidden;
-  margin-bottom: 2.5%;
   cursor: default;
   display: flex;
   justify-content: center;
@@ -2319,7 +2318,11 @@ a{
     height: 100%;
   }
   .arrowlabel{ float: right; margin-top: 3%; align-self: flex-end;}
-  .shelf{ display: flex; flex-shrink: 0;}
+  .shelf{ 
+    display: flex; 
+    flex-shrink: 0;
+    background: #12161f;
+  }
   p{ margin: 0; }
 
 
@@ -2362,7 +2365,7 @@ a{
   span{ margin: 0; }
 
   .header{
-    margin-top:6px;
+    margin-top:15px;
     overflow: hidden;
     width: 100%;
     display: flex;
@@ -2557,12 +2560,16 @@ a{
     height: 100%;
     box-sizing: border-box;
     display:grid;
-    margin-top: 10px;
+    margin-top: 20px;
     grid-template-columns: 1fr auto;
     border-left: none;
     border-right: none;
     border-top: none;
     padding-left: 1%;
+
+    .infotag{
+      margin-left: 10px;
+    }
 
     .movie_banner{
       grid-template-columns: 60px auto;
@@ -2784,11 +2791,12 @@ a{
   font-weight: 400;
   letter-spacing: 1.1px;
   color: var(--blue30);
-  border-radius: 4px;
-  border: solid 1px var(--blue30);
+  border-radius: 10em;
+  border: solid 0.5px var(--blue30);
   width: fit-content;
-  padding: 3px 8px;
+  padding: 3px 10px;
   text-transform: lowercase;
+  &, *{ cursor: default; }
 }
 
 .bannerFilter{
