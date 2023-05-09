@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { getMovieYear } from '../../lib/utilities';
 import useAPI from '../../lib/api';
 import { InfoTag } from '../header';
+import ArrowLabel from './ArrowLabel';
 
 
 const SearchBar = ({ limit=5 }) => {
@@ -30,6 +31,7 @@ const SearchBar = ({ limit=5 }) => {
               <li className='suggest suggest_poster'><img src={obj.poster} />
                 <div>
                   <p>{obj.title} ({getMovieYear(obj)})</p>
+                  <InfoTag>movie</InfoTag>
                 </div>
               </li>
             </Link>,
@@ -81,7 +83,7 @@ const SearchBar = ({ limit=5 }) => {
       const listing = [];
   
       Object.keys(sug).forEach( key => {
-        if(Array.isArray(sug[key])){
+        if(Array.isArray(sug[key]) && key !== 'dops'){
           sug[key].map( item => {
             if(count <= limit){
               listing.push(listMap[key](item))
@@ -92,7 +94,9 @@ const SearchBar = ({ limit=5 }) => {
   
       });
   
-      listing.push(<Link key='searchtotal' href={'/search?query='+query}><small className='underline link'>{sug.total} total items found</small></Link>);
+      listing.push(
+        <ArrowLabel key='searchtotal' link={'/search?query='+query} ><small>{sug.total} total items found</small></ArrowLabel>
+        );
       return listing;
     };
   
@@ -122,9 +126,7 @@ const SearchBar = ({ limit=5 }) => {
         <span className="ico search"></span>
         <input className="field" id="search_input" autoComplete="off" placeholder="Type a movie, director, or a subject" type="text" onChange={onChange}/>
         {
-          suggest && suggest.length > 0 ? <ul className='suggest_list'>{ suggest.map(item => item) }</ul>
-          :
-          <></>
+          suggest && suggest.length > 0 && <ul className='suggest_list'>{ suggest.map(item => item) }</ul>
         }
       </section>
     );

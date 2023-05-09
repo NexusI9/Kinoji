@@ -2198,7 +2198,7 @@ a{
 
   &.sticky{
     position: sticky;
-    top: 60px;
+    top: 59px;
     z-index: 2;
     background: #07070b;
   }
@@ -2493,11 +2493,9 @@ a{
        }
      }
 
-    small{
-
-       &:last-of-type{
-         float: right;
-       }
+    & > .arrowlabel{
+      margin-left: auto;
+      padding-bottom: 10px;
     }
 
     a:last-of-type{
