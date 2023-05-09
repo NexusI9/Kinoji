@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { getMovieYear } from '../../lib/utilities';
 import useAPI from '../../lib/api';
+import { InfoTag } from '../header';
 
 
 const SearchBar = ({ limit=5 }) => {
@@ -39,7 +40,7 @@ const SearchBar = ({ limit=5 }) => {
                 <img src={obj.poster || require('../../assets/noposter.jpg')} />
                 <div>
                   <p>{obj.name}</p>
-                  <small className='discrete'>(Director)</small>
+                  <InfoTag>director</InfoTag>
                 </div>
               </li>
             </Link>,
@@ -49,7 +50,7 @@ const SearchBar = ({ limit=5 }) => {
               <li className='suggest'>
                 <div>
                   <p>{obj.dop}</p>
-                  <small className='discrete'>(Director of photography)</small>
+                  <InfoTag>director of photography</InfoTag>
                 </div>
               </li>
             </Link>,
@@ -58,7 +59,7 @@ const SearchBar = ({ limit=5 }) => {
             <Link key={'suggestgenre'+obj.name} href={'/collections/'+obj.name} onClick={onClick}>
               <li className='suggest'>
                 <div> {obj.name} 
-                <small>(list)</small>
+                <InfoTag>collection</InfoTag>
                 </div>
               </li>
             </Link>,
@@ -71,7 +72,7 @@ const SearchBar = ({ limit=5 }) => {
                 </div>
                 <div>
                   <p>{obj.family}</p>
-                  <p><small>(look for shots with {obj.family} hue)</small></p>
+                  <InfoTag>shots with {obj.family} hue</InfoTag>
                 </div>
               </li>
             </Link>

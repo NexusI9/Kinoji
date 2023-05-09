@@ -1,5 +1,6 @@
 import { Spheros } from '../misc';
 import ExpandableText from './ExpandableText';
+import { InfoTag } from '../header';
 
 const Banner = ({ hero=true, visual, header, summary, sources, spheros=false, category}) => {
 
@@ -10,7 +11,7 @@ const Banner = ({ hero=true, visual, header, summary, sources, spheros=false, ca
           <div>
           <div className='title'>
           {hero ? <h1>{header}</h1> : <h3>{header}</h3>}
-          {category && <p><small>{category}</small></p> }
+          {category &&  <InfoTag>{category}</InfoTag> }
           </div>
           <br></br>
           <ExpandableText paragraph={summary} height={200}/>

@@ -6,6 +6,7 @@ import { TagLabel, TMDBLink } from '../inputs';
 import { Spheros } from '../misc';
 
 import noposter from '@/assets/noposter.jpg';
+import { InfoTag } from '../header';
 
 
 const Banner = ({ movie, summary=true, linked=true, spheros=false, tags=true}) =>{
@@ -27,7 +28,7 @@ const Banner = ({ movie, summary=true, linked=true, spheros=false, tags=true}) =
             <TMDBLink link={'https://www.themoviedb.org/movie/'+movie.id} />
             </div>
               <DirectorLabel id={movie.director} />
-               <p>&nbsp; (Director)</p>
+              <InfoTag>director</InfoTag>
             <br></br>
           {summary ? <p className='summary'>{movie.summary}</p> : <></> }
           { tags && movie.tag ? <div className='tagdiv'>{movie.tag.split(';').map(tag => <TagLabel key={'taglabel'+tag+Math.random()} label={tag} discrete={true} /> ) }</div>: <></> }
