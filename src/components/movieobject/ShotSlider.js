@@ -93,15 +93,20 @@ const ShotSlider = ({number=6, nav=false}) => {
                                     </svg>}
 
                                     <motion.div 
-                                        className="shotslider-info"
+                                        className="shotslider-navigation-info"
                                         variants={variants.content}
                                         key={currentShot.path+'info'}
                                         initial='initial'
                                         animate='animate'
                                         exit='exit'
                                     >
-                                            <h4><Link href={`/movies/${currentShot.movie.id}`}>{ currentShot.movie.title }<span className="light"> ({currentShot.movie.date?.split('-')[0]})</span></Link> </h4>
-                                            <div><DirectorLabel id={currentShot.movie.director} popup={false} /> <InfoTag>director</InfoTag> </div>
+                                            <img src={currentShot.movie.poster} alt='movie poster' />
+                                            <div>
+                                                <h4><Link href={`/movies/${currentShot.movie.id}`}>{ currentShot.movie.title }<span className="light"> ({currentShot.movie.date?.split('-')[0]})</span></Link> </h4>
+                                                <section>
+                                                    <DirectorLabel id={currentShot.movie.director} popup={false} /> <InfoTag>director</InfoTag> 
+                                                </section>
+                                            </div>
                                     </motion.div>
 
                                     {nav && <svg onClick={ () => paginate('next') }  width="7" height="11" viewBox="0 0 7 11" xmlns="http://www.w3.org/2000/svg">
