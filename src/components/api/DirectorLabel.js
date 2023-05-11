@@ -46,7 +46,7 @@ const DirectorLabel = ({id, popup=true}) => {
     return (
       <div style={{display:'inline-block'}}  onMouseEnter={ onMouseEnter } onMouseLeave={ onMouseLeave } >
         <Link href={/director/+id} className='underline link' replace>{ dir ? dir.name : ''}</Link>
-        { pop ? <Popup content={pop.content}  event={pop.event} margin={20} /> : <></> }
+        { pop && <Popup content={pop.content}  event={pop.event} margin={20} /> }
       </div>
   );
 }

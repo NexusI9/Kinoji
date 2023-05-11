@@ -27,7 +27,7 @@ const Rubrique = ({ genre, direction='vertical' }) => {
           <section className='header'><h4>{genre.name}</h4></section>
           <p>{firstSentenceOf(genre.summary)}</p>
         </section>
-          <ArrowLabel link={`/collections/${genre.name}`} label='more' />
+          <ArrowLabel link={`/collections/${genre.name}`} label='see the collection' />
       </div>
     </div>
   );

@@ -21,13 +21,20 @@ $container_margin:3% 0;
  --blue70: #1f242d;
  --blue50: #3c4658;
  --blue30: #66799d;
+
  --gradient-blue:#264370;
  --red:#e03434;
  --lightblue:#4989ff;
  --paper:#DBE4F2;
  --settings_back:#ddd;
- --settingsDark: #717171;
+ --settingsDark: #606572;
  --settingsDark: #4d505a;
+
+ --header1: 64px; 
+ --header2: 46px;
+ --header3: 32px;
+ --header4: 22px;
+
 }
 
 
@@ -317,14 +324,15 @@ a{
     border: solid 1px var(--blue50);
     border-radius: 3px;
     padding: 10px 25px;
-    font-weight: 600;
+    font-weight: 400;
+    color: var(--blue30);
 
     &.primary{
       @include card.card();
     }
 
     &.secondary{
-      transition: background 0.2s ease-out;
+      transition: background 0.3s ease-out;
       background: transparent;
       @media(hover:hover){
         &:hover{ 
@@ -358,7 +366,6 @@ a{
 }
 
 .link{
-  font-weight: bold;
   transition: color 0.2s ease;
   cursor: pointer;
 
@@ -724,16 +731,18 @@ a{
           width: 100%;
           margin: 0 0 10px 0;
           padding-bottom: 10px;
-      
-          h2{
-            font-weight: 500;
-            color: var(--blue30);
-            text-transform: lowercase;
-          }
+
+
         }
+
+
       
         .movie_banner{
           grid-template-columns: 140px auto;
+
+          h3{
+            font-size: var(--header4);
+          }
         }
       
         .header .ico{ display: none; }
@@ -833,6 +842,11 @@ a{
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        &>div{
+          display: flex;
+          flex-direction: row;
+          gap: 10px;
+        }
       }
       svg{ 
         cursor: pointer;
@@ -2790,9 +2804,9 @@ a{
 .infotag{
   font-weight: 400;
   letter-spacing: 1.1px;
-  color: var(--blue30);
+  color: var(--blue50);
   border-radius: 10em;
-  border: solid 0.5px var(--blue30);
+  border: solid 0.5px var(--blue50);
   width: fit-content;
   padding: 3px 10px;
   text-transform: lowercase;

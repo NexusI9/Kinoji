@@ -4,6 +4,7 @@ import { ArrowLabel } from "../inputs";
 import { DirectorLabel } from "../api";
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from "next/link";
+import { InfoTag } from "../header";
 
 const variants = {
     content:{
@@ -13,7 +14,7 @@ const variants = {
     }
 }
 
-const ShotSlider = ({number=6}) => {
+const ShotSlider = ({number=6, nav=false}) => {
 
     const [currentShot, setShot] = useState();
     const shots = useRef();
@@ -71,7 +72,7 @@ const ShotSlider = ({number=6}) => {
             <div id='shotSlider'>
             {
                 currentShot && <>
-                    <AnimatePresence mode='wait'>
+      
                         <motion.div
                             key={currentShot.path}
                             variants={variants.content}
@@ -84,12 +85,12 @@ const ShotSlider = ({number=6}) => {
                             <span></span>
                             <img src={currentShot.path} />
                         </motion.div>
-                    </AnimatePresence>
                     <section>
                             <div className="shotslider-navigation">
-                                    <svg onClick={ () => paginate('prev') } width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
+                                    
+                                    {nav && <svg onClick={ () => paginate('prev') } width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M10.3 4.27537L6.80001 7.77537L10.3 11.2754L9.60001 12.6754L4.70001 7.77537L9.60001 2.87537L10.3 4.27537Z" />
-                                    </svg>
+                                    </svg>}
 
                                     <motion.div 
                                         className="shotslider-info"
@@ -100,12 +101,12 @@ const ShotSlider = ({number=6}) => {
                                         exit='exit'
                                     >
                                             <h4><Link href={`/movies/${currentShot.movie.id}`}>{ currentShot.movie.title }<span className="light"> ({currentShot.movie.date?.split('-')[0]})</span></Link> </h4>
-                                            <div><DirectorLabel id={currentShot.movie.director} popup={false} /> (director) </div>
+                                            <div><DirectorLabel id={currentShot.movie.director} popup={false} /> <InfoTag>director</InfoTag> </div>
                                     </motion.div>
 
-                                    <svg onClick={ () => paginate('next') }  width="7" height="11" viewBox="0 0 7 11" xmlns="http://www.w3.org/2000/svg">
+                                    {nav && <svg onClick={ () => paginate('next') }  width="7" height="11" viewBox="0 0 7 11" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M0.499974 9.27541L3.99998 5.77542L0.499975 2.27542L1.19998 0.875416L6.09998 5.77542L1.19997 10.6754L0.499974 9.27541Z" />
-                                    </svg>
+                                    </svg> }
 
                             </div>
                     </section>
