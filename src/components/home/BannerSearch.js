@@ -2,7 +2,7 @@ import kinojilogo from '../../assets/logo.svg';
 import Link from 'next/link';
 import { SearchBar } from '../inputs';
 
-const BannerSearch = ({title}) => {
+const BannerSearch = ({title, toolbar = false}) => {
     const tools = [
       {
         label:'glossary',
@@ -36,7 +36,7 @@ const BannerSearch = ({title}) => {
           {title && <h1>{title}</h1> }
           <SearchBar />
           <div id='tools_search_bar'>
-            { tools.map( ({link, ico, label}) => <Link key={link+'tools_search'} href={'/'+link} >{ico()}{label}</Link> )}
+            { toolbar && tools.map( ({link, ico, label}) => <Link key={link+'tools_search'} href={'/'+link} >{ico()}{label}</Link> )}
           </div>
       </div>
     );

@@ -1212,17 +1212,18 @@ a{
 #banner_logo_search{
 
   h1{
-    font-size: 32px;
+    font-size: var(--header3);
+    line-height: 0;
   }
   .search_bar{
-    min-width: 35vw;
+    min-width: 30vw;
     height: 3vh;
     margin-top: 2%;
-    padding: 15px 20px;
+    padding: 10px 20px;
     display: flex;
     flex-direction: row;
     border-radius: 10em;
-    font-size: 2em;
+    font-size: 3em;
   }
 
   #tools_search_bar{
@@ -2473,9 +2474,10 @@ a{
   flex-direction: row;
   align-items: center;
   justify-self: end;
-  padding: 8px 10px;
+  padding: 10px 15px;
   gap: 10px;
   @include card.card;
+  border-radius: 10em;
   background: var(--blue80);
   box-shadow: none;
 
@@ -2594,9 +2596,7 @@ a{
     border-top: none;
     padding-left: 1%;
 
-    .infotag{
-      margin-left: 10px;
-    }
+
 
     .movie_banner{
       grid-template-columns: 60px auto;

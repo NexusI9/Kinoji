@@ -26,7 +26,6 @@ export default function App({ Component, pageProps }) {
     return (
         <>
             <Head>
-                <Script async src="https://www.googletagmanager.com/gtag/js?id=G-DF5SRDEKG0" />
                 <meta charSet="utf-8" />
                 <link rel="icon" href="/favicon.ico" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -43,6 +42,8 @@ export default function App({ Component, pageProps }) {
                 <meta property="og:type" content="website"/>
                 <link rel="manifest" href="/manifest.json" />
             </Head>
+            <Script async src="https://www.googletagmanager.com/gtag/js?id=G-DF5SRDEKG0" />
+
             <Provider store={store}>
                 <TopBar/>
                 <Component {...pageProps} />
