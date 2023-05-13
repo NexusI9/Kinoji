@@ -2036,7 +2036,8 @@ a{
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    display: inline-block;
+    gap: 5px;
+    padding: 0px 15px;
 
     &:focus{ background: rgb(210, 92, 92); }
     &:hover{ background: var(--blue50); }
@@ -2054,7 +2055,6 @@ a{
     white-space: nowrap;
     margin: 0;
     box-sizing: border-box;
-    margin: 0 15px;
     cursor: pointer;
     padding: 6px 0;
     position: relative;
@@ -2817,9 +2817,9 @@ a{
 .infotag{
   font-weight: 400;
   letter-spacing: 1.1px;
-  color: var(--blue50);
+  color: var(--blue30);
   border-radius: 10em;
-  border: solid 0.5px var(--blue50);
+  border: solid 0.5px var(--blue30);
   width: fit-content;
   padding: 3px 10px;
   text-transform: lowercase;

@@ -11,7 +11,7 @@ const MicroFilters = ({ id, label, sort, name, onChange=(e)=>0, defaultCheck="fa
           defaultChecked={defaultCheck} 
         />
         <label htmlFor={"micro_"+id+"_input"} >
-          { ico && <span className='ico'></span> }
+          { ico && ico }
           <p className='detail'>{label}</p>
         </label>
        </section>
