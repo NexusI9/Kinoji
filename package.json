@@ -22,7 +22,8 @@
     "server": "mysql.server start && sudo apachectl start && next dev",
     "start": "next start",
     "build": "next build",
-    "dev": "next dev"
+    "dev": "next dev",
+    "dump": "cd /Users/elkhantour/Desktop && mysqldump -u root -p elkha997290 > kinoji.sql" 
   },
   "eslintConfig": {
     "extends": [
