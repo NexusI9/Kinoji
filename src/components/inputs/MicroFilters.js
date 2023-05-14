@@ -7,8 +7,8 @@ const MicroFilters = ({ id, label, sort, name, onChange=(e)=>0, defaultCheck="fa
           ata-sort={id} 
           type={type} 
           name={name} 
-          onChange={ () => onChange(label) }  
-          defaultChecked={ defaultCheck.toString() } 
+          onChange={ () => { onChange(label) } }  
+          defaultChecked={ defaultCheck} 
         />
         <label htmlFor={"micro_"+id+"_input"} >
           { ico && ico }

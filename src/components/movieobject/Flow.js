@@ -1,5 +1,5 @@
 //Movie Objects
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 
 import { LabelBar } from '../header';
@@ -10,11 +10,19 @@ import { sortBy, generateContent } from './Flow.helper';
 
 const Flow = ({ movies }) => {
 
-
+  
   const router = useRouter();
   const mosaicParam = router.query.mosaic;
+  //movie list
+  const [ movieList, setMovieList] = useState(movies);
+  const [ mosaic, setMosaic ] = useState( mosaicParam == 1 );      //boolean
+  const [ sort, setSort ] = useState('name');         //string
+  const [ content, setContent ] = useState();         //react symbols
+  const [load, setLoad] = useState(false); 
+  
   //events
   const onChange = (e) => {
+
     switch(e.type){
       case 'switch':
         setMosaic(e.value);
@@ -29,52 +37,48 @@ const Flow = ({ movies }) => {
   }
 
 
-  //movie list
-  const [ mosaic, setMosaic ] = useState( mosaicParam == 1 );      //boolean
-  const [ sort, setSort ] = useState('name');         //string
-  const [ content, setContent ] = useState();         //react symbols
-  const [load, setLoad] = useState(false); 
 
 
   const onScroll = () => {
-    console.log('scroll');
     if ( ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight-1) ) {
       setLoad(true);
     }
   } 
 
+  useEffect( () => {
+    setMovieList(movies);
+    if(movies.length){  setLoad(true);  } //init first load  
+  }, [movies] );
+  
+  useEffect( () => {  
+    setMovieList( sortBy(sort, movieList) ); 
+    setLoad(true);
+  },[sort]);
 
   useEffect(() => {
-
-    movies = sortBy(sort, movies); //sort all movies (by name or year release)
-    if(movies.length){  setLoad(true);  } //init first load 
-
-    console.log({mosaic, load});
-    if(!mosaic){ window.removeEventListener('scroll', onScroll); }
-    else{ window.addEventListener('scroll', onScroll); }
-
+    if(!mosaic){  window.removeEventListener('scroll', onScroll);  }
+    else{  window.addEventListener('scroll', onScroll);  }
+    setLoad(true);
     return () => window.removeEventListener('scroll', onScroll);
-
-  },[movies, mosaic, sort]);
+  },[mosaic]);
 
 
   useEffect(() => {
 
     if(load){
-
       const newContent = generateContent({
-        movie_list: movies,
+        movie_list: movieList,
         is_mosaic: mosaic,
       });
      
      if(newContent){ setContent(newContent); }
-
+     else{ setLoad(false); }
     }
 
 
   }, [load]);
 
-  useEffect(()=>{ setLoad(false)  },[content]);
+  useEffect(()=>{ setLoad(false); },[content]);
 
 
 
