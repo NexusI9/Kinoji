@@ -102,11 +102,14 @@ switch($body['type']){
 
     $moviesFromGenre = $connection->getMoviesFromGenre($body["genre"]);
     $directors = filter_to_key($moviesFromGenre, 'director');
+    $directors = array_unique($directors);
 
     foreach ($directors as $key => $id) {
-      $directors[$key] = $connection->query("SELECT * FROM directors WHERE id = ?", [ $directors[$key] ])[0];
+      $directors[$key] = $connection->query("SELECT * FROM directors WHERE id = ?", [$id])[0];
     }
-    
+
+    $directors = array_values($directors);
+
     echo json_encode($directors);
   break;
 

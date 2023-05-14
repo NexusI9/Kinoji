@@ -49,7 +49,7 @@ const Flow = ({ movies }) => {
     movies = sortBy(sort, movies); //sort all movies (by name or year release)
     if(movies.length){  setLoad(true);  } //init first load 
 
-    console.log({mosaic});
+    console.log({mosaic, load});
     if(!mosaic){ window.removeEventListener('scroll', onScroll); }
     else{ window.addEventListener('scroll', onScroll); }
 
@@ -64,8 +64,7 @@ const Flow = ({ movies }) => {
 
       const newContent = generateContent({
         movie_list: movies,
-        is_mosaic: mosaic, 
-        onComplete: () => setLoad(false) 
+        is_mosaic: mosaic,
       });
      
      if(newContent){ setContent(newContent); }
@@ -74,6 +73,8 @@ const Flow = ({ movies }) => {
 
 
   }, [load]);
+
+  useEffect(()=>{ setLoad(false)  },[content]);
 
 
 

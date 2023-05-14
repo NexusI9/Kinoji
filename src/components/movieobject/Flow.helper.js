@@ -56,7 +56,6 @@ export const generateContent = ({movie_list, is_mosaic, onComplete=()=>0}) => {
         } 
 
     else{ //flow mode
-        console.log('FLOW mode');
         if( movie_list.length === MASONRY_ARRAY.length){
             onComplete();
             return null;

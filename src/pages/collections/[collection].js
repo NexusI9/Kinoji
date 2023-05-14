@@ -52,7 +52,7 @@ export default function Collections(){
             <>
               <LabelBar label={'Directors'} hero={false} />
                 <div id='director_cardlist'>
-                {
+                { 
                   directors.map( dir => <Card key={'dircard_genre_'+dir.id} label={dir.name} subtext={getDirectorDate(dir) ? '('+getDirectorDate(dir)+')' : ''} visual={<img src={dir.poster || noposter.src } />} link={'/director/'+dir.id} /> )
                 }
                 </div>
