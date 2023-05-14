@@ -53,7 +53,7 @@ const Flow = ({ movies }) => {
   useEffect( () => {  
     setMovieList( sortBy(sort, movieList) ); 
     setLoad(true);
-  },[sort]);
+  },[sort, mosaic]);
 
   useEffect(() => {
     if(!mosaic){  window.removeEventListener('scroll', onScroll);  }
