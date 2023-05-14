@@ -49,7 +49,7 @@ const MovieSettings = (props) => {
                   label={name} 
                   name='filter'
                   onChange={ (e) => props.onChange({type:"radio", value:e }) } 
-                  defaultCheck={props.defaultCheck === name}
+                  defaultCheck={ props.defaultCheck === name }
                   ico={ico}
               /> ) }
           </div>

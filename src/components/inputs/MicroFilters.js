@@ -3,12 +3,12 @@ const MicroFilters = ({ id, label, sort, name, onChange=(e)=>0, defaultCheck="fa
     return(
        <section className='microFilter' id={"micro_"+id}>
         <input 
-          id={"micro_"+id+"_input"} d
+          id={"micro_"+id+"_input"} 
           ata-sort={id} 
           type={type} 
           name={name} 
           onChange={ () => onChange(label) }  
-          defaultChecked={defaultCheck} 
+          defaultChecked={ defaultCheck.toString() } 
         />
         <label htmlFor={"micro_"+id+"_input"} >
           { ico && ico }
