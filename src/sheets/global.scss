@@ -16,6 +16,7 @@ $container_margin:3% 0;
 
 
 :root{
+ --blue95: #12161f;
  --blue90: #131319;
  --blue80: #1B222A;
  --blue70: #1f242d;
@@ -502,7 +503,10 @@ a{
   &.masonry{
     padding: 15px;
     .summary{ width: 100%; }
-    .movie_thumbnails{ grid-template-columns: repeat(4, 1fr); }
+    .movie_thumbnails{ 
+      grid-template-columns: repeat(4, 1fr); 
+      gap: 10px;
+    }
     .header .ico{ display: none; }
   }
 
@@ -657,6 +661,15 @@ a{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, max-content));
     gap: 20px;
+  }
+
+  &_loader{
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 10em;
+    animation: rotate 1s linear infinite;
+    margin: auto;
   }
 }
 
@@ -929,11 +942,23 @@ a{
 }
 
 .thumb{
-  margin: 2%;
   box-sizing: border-box;
   position: relative;
-  float: left;
-  display: inline-block;
+  display: flex;
+
+
+  &.unloaded{
+    background: linear-gradient(45deg, var(--blue95), var(--blue90), var(--blue95));
+    background-position-x: 0%;
+    width: 100%;
+    height: 100%;
+    animation: loadbkg 3s linear infinite;
+
+    @keyframes loadbkg {
+      to{background-position-x: 100%;}
+    }
+  }
+
   .overlay{
     position: absolute;
     top: 0;
@@ -2343,7 +2368,7 @@ a{
   .shelf{ 
     display: flex; 
     flex-shrink: 0;
-    background: #12161f;
+    background: var(--blue95);
   }
   p{ margin: 0; }
 

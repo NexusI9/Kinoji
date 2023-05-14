@@ -17,7 +17,7 @@ const MovieSettings = (props) => {
             ...router.query, 
             mosaic: e ? 1 : 0
           }
-      });
+      },undefined,{scroll:false});
       props.onChange({ type:"switch", value:e });
     }
   

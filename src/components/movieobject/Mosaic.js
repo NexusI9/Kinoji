@@ -1,5 +1,5 @@
 //Movie Objects
-import  { useState, useEffect } from 'react';
+import  { useState, useEffect, useRef } from 'react';
 import {
   sortThumbnails,
   shuffle_array,
@@ -9,9 +9,11 @@ import { movie_container, mosaic } from '../../lib/variants';
 import Thumbnail from './Thumbnail';
 
 
-const Mosaic = ({ movie, animate, random=false, limit }) => {
+const Mosaic = ({ movie, animate, random=false, limit, onThumbsLoaded=()=>0 }) => {
 
   const [ pics, setPics ] = useState([]);
+  const loadedPics = useRef(0);
+
 
   useEffect(() => {
 
@@ -25,6 +27,10 @@ const Mosaic = ({ movie, animate, random=false, limit }) => {
     
 
   }, [random, movie]);
+
+  useEffect(() => {
+    if(pics?.length && loadedPics.current === pics.length){  onThumbsLoaded(); }
+  }, [loadedPics.current, pics]);
 
 
   return(
@@ -45,7 +51,11 @@ const Mosaic = ({ movie, animate, random=false, limit }) => {
                   key={pic}
                   variants={mosaic}
                 >
-                  <Thumbnail movie={movie} shot={pic} />
+                  <Thumbnail 
+                    movie={movie} 
+                    shot={pic} 
+                    onLoad={ () => loadedPics.current++ }
+                  />
                 </motion.div> );
               }
             )
