@@ -171,11 +171,6 @@ class UpdateDatabase:
     def fastScan(self):
         return
 
-    def commitJSON(self, data):
-        with open(dtbFile,'w') as d:
-            json.dump(data,d,indent=3)
-            d.close()
-
     def commitSQL(self, tb, obj):
         print("[...] Committing to Database")
         self.connector.update(table=tb,data=obj)
