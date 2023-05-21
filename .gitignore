@@ -4,10 +4,9 @@
 /Webapp/node_modules
 /.pnp
 .pnp.js
-node_modules
 
 #next
-Webapp/.next
+/Webapp/.next
 .next
 
 # testing
@@ -15,7 +14,6 @@ Webapp/.next
 
 # production
 /Webapp/build
-build
 
 #assets
 /Webapp/public/assets/
