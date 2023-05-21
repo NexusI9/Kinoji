@@ -1,0 +1,15 @@
+{
+  "API_KEY":"b72d20f7e91e3a0dae1429b348cab389",
+
+  "MOVIE_PATH":"/Users/elkhantour/Documents/[dev]Python/KINOSYNC/data/database.json",
+  "DIRECTOR_PATH":"/Users/elkhantour/Documents/[dev]Python/KINOSYNC/data/directors.json",
+
+  "SHOTS_PATH":"/Users/elkhantour/Sites/Kinoji/public/assets/movies/",
+  "COLOR_PATH":"/Users/elkhantour/Documents/[dev]Python/KINOSYNC/data/webcolors.json",
+  "MODEL_PATH":"/Users/elkhantour/Documents/[dev]Python/KINOSYNC/models/DenseNet-BC-121-32.h5",
+
+  "HOSTNAME" : "localhost",
+  "USERNAME":"root",
+  "PASSWORD":"tW4_DFA7$8ax2pX",
+  "DTBNAME":"elkha997290"
+}

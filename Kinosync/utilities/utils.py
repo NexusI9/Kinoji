@@ -9,7 +9,7 @@ class Utils:
 
     def GET_CONFIG(var):
         temp = None;
-        with open('../../config.json', 'r') as config:
+        with open('./config.json', 'r') as config:
             data = json.load(config)
             temp = data[var]
             config.close()
