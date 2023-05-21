@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="26cfb527-a650-4465-9cb9-6610867adbde" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../src/components/movieobject/Flow.helper.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/components/movieobject/Flow.helper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/components/movieobject/Flow.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/components/movieobject/Flow.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="20rnVBbrL3niyc0Y7oBbPhu16KC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="database.data.extractors.current.id" value="SQL Inserts" />
+    <property name="grid.search.filter.rows" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/utilities" />
+      <recent name="$PROJECT_DIR$/sideprocess" />
+      <recent name="$PROJECT_DIR$/processes" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="PythonConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.KINOSYNC">
+    <configuration name="console.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$APPLICATION_CONFIG_DIR$/consoles/db/044002bd-ef04-445f-8259-688c01163615/console.sql" />
+      <script-mode>FILE</script-mode>
+      <method v="2" />
+    </configuration>
+    <configuration name="KINOSYNC" type="PythonConfigurationType" factoryName="Python">
+      <module name="KINOSYNC" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$USER_HOME$/.local/share/virtualenvs/KINOSYNC-k-mNGTuG/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="moduledtb (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="KINOSYNC" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/sideprocess" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/sideprocess/moduledtb.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="moduledtb" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="KINOSYNC" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/processes/moduledtb.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="setShots" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="KINOSYNC" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/processes/setShots.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Database Script.console.sql" />
+      <item itemvalue="Python.KINOSYNC" />
+      <item itemvalue="Python.setShots" />
+      <item itemvalue="Python.moduledtb" />
+      <item itemvalue="Python.moduledtb (1)" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.moduledtb (1)" />
+        <item itemvalue="Database Script.console.sql" />
+        <item itemvalue="Python.moduledtb" />
+        <item itemvalue="Python.setShots" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="26cfb527-a650-4465-9cb9-6610867adbde" name="Default Changelist" comment="" />
+      <created>1636811594505</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1636811594505</updated>
+      <workItem from="1636811602122" duration="205000" />
+      <workItem from="1636811860820" duration="616000" />
+      <workItem from="1636812518653" duration="1040000" />
+      <workItem from="1636813574451" duration="17999000" />
+      <workItem from="1636838874756" duration="1181000" />
+      <workItem from="1636875999847" duration="339000" />
+      <workItem from="1636878109989" duration="1303000" />
+      <workItem from="1636897118433" duration="8852000" />
+      <workItem from="1636961818485" duration="9180000" />
+      <workItem from="1636985541789" duration="7153000" />
+      <workItem from="1637324807981" duration="292000" />
+      <workItem from="1637393526356" duration="3401000" />
+      <workItem from="1637399561150" duration="2007000" />
+      <workItem from="1637410083943" duration="3593000" />
+      <workItem from="1637433203355" duration="594000" />
+      <workItem from="1637483896329" duration="4514000" />
+      <workItem from="1637491107158" duration="6553000" />
+      <workItem from="1637570333821" duration="1505000" />
+      <workItem from="1637591068430" duration="5665000" />
+      <workItem from="1637650716068" duration="1057000" />
+      <workItem from="1637683272118" duration="1526000" />
+      <workItem from="1637738058835" duration="810000" />
+      <workItem from="1637739647809" duration="301000" />
+      <workItem from="1637745466664" duration="1404000" />
+      <workItem from="1637775178494" duration="2711000" />
+      <workItem from="1637824241279" duration="3507000" />
+      <workItem from="1637910859227" duration="331000" />
+      <workItem from="1638039868242" duration="1784000" />
+      <workItem from="1638114160178" duration="644000" />
+      <workItem from="1638173506384" duration="227000" />
+      <workItem from="1638173792530" duration="5000" />
+      <workItem from="1638174650124" duration="7749000" />
+      <workItem from="1638197730654" duration="2854000" />
+      <workItem from="1638615956599" duration="515000" />
+      <workItem from="1638779390413" duration="175000" />
+      <workItem from="1638864468725" duration="419000" />
+      <workItem from="1638948486416" duration="1971000" />
+      <workItem from="1638963696806" duration="625000" />
+      <workItem from="1638969890264" duration="1876000" />
+      <workItem from="1639035845578" duration="445000" />
+      <workItem from="1639123708352" duration="342000" />
+      <workItem from="1639211112966" duration="971000" />
+      <workItem from="1639212133345" duration="1253000" />
+      <workItem from="1639215280720" duration="768000" />
+      <workItem from="1640173210813" duration="706000" />
+      <workItem from="1641758035578" duration="767000" />
+      <workItem from="1641759326501" duration="212000" />
+      <workItem from="1641759570776" duration="125000" />
+      <workItem from="1641918594258" duration="745000" />
+      <workItem from="1642237197217" duration="328000" />
+      <workItem from="1642844093453" duration="39000" />
+      <workItem from="1642853118722" duration="35000" />
+      <workItem from="1643023736077" duration="451000" />
+      <workItem from="1643102860378" duration="403000" />
+      <workItem from="1643197555326" duration="415000" />
+      <workItem from="1643209073870" duration="625000" />
+      <workItem from="1643553603665" duration="1842000" />
+      <workItem from="1643557763476" duration="190000" />
+      <workItem from="1643818724086" duration="464000" />
+      <workItem from="1643837033467" duration="1197000" />
+      <workItem from="1643872311721" duration="1285000" />
+      <workItem from="1643881597856" duration="2417000" />
+      <workItem from="1643905030380" duration="898000" />
+      <workItem from="1644051110607" duration="225000" />
+      <workItem from="1644151602369" duration="817000" />
+      <workItem from="1644165910996" duration="1241000" />
+      <workItem from="1644505832131" duration="317000" />
+      <workItem from="1644662627326" duration="319000" />
+      <workItem from="1644955004920" duration="856000" />
+      <workItem from="1645002705246" duration="2765000" />
+      <workItem from="1645186262181" duration="115000" />
+      <workItem from="1645348263464" duration="1513000" />
+      <workItem from="1645361735020" duration="691000" />
+      <workItem from="1645464655636" duration="394000" />
+      <workItem from="1645515309707" duration="230000" />
+      <workItem from="1645530239630" duration="3618000" />
+      <workItem from="1645600114145" duration="226000" />
+      <workItem from="1645697964125" duration="4770000" />
+      <workItem from="1645795898100" duration="1460000" />
+      <workItem from="1645799573310" duration="334000" />
+      <workItem from="1656281442293" duration="1054000" />
+      <workItem from="1656705341110" duration="108000" />
+      <workItem from="1657105849611" duration="636000" />
+      <workItem from="1657725173347" duration="9000" />
+      <workItem from="1658195487957" duration="70000" />
+      <workItem from="1658687149502" duration="2735000" />
+      <workItem from="1659189277585" duration="681000" />
+      <workItem from="1659288760232" duration="57000" />
+      <workItem from="1659909094471" duration="134000" />
+      <workItem from="1661086824894" duration="124000" />
+      <workItem from="1661902371116" duration="72000" />
+      <workItem from="1665955959916" duration="2987000" />
+      <workItem from="1665961477472" duration="786000" />
+      <workItem from="1666454077019" duration="278000" />
+      <workItem from="1667001956128" duration="944000" />
+      <workItem from="1667172433155" duration="1789000" />
+      <workItem from="1667658523671" duration="480000" />
+      <workItem from="1667672551928" duration="1293000" />
+      <workItem from="1669517650383" duration="1152000" />
+      <workItem from="1670769134064" duration="695000" />
+      <workItem from="1670800802460" duration="461000" />
+      <workItem from="1670936752691" duration="376000" />
+      <workItem from="1670937244639" duration="701000" />
+      <workItem from="1671374455050" duration="275000" />
+      <workItem from="1671380287618" duration="616000" />
+      <workItem from="1671394212691" duration="121000" />
+      <workItem from="1677090939194" duration="203000" />
+      <workItem from="1679781018555" duration="684000" />
+      <workItem from="1683491289131" duration="1085000" />
+      <workItem from="1683493468162" duration="2014000" />
+      <workItem from="1683496173379" duration="4728000" />
+      <workItem from="1683583583356" duration="237000" />
+      <workItem from="1683583880099" duration="2812000" />
+      <workItem from="1684630643533" duration="433000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="320" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1677090964891">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="320" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1677090964891" />
+    <state x="508" y="228" key="FileChooserDialogImpl" timestamp="1684630966967">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="508" y="228" key="FileChooserDialogImpl/0.0.1440.900@0.0.1440.900" timestamp="1684630966967" />
+    <state width="468" height="223" key="GridCell.Tab.0.bottom" timestamp="1683586699722">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="468" height="223" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1683586699722" />
+    <state width="468" height="288" key="GridCell.Tab.0.bottom/46.-695.1280.695/0.0.1440.900@0.0.1440.900" timestamp="1683499388116" />
+    <state width="468" height="223" key="GridCell.Tab.0.center" timestamp="1683586699721">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="468" height="223" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1683586699721" />
+    <state width="468" height="288" key="GridCell.Tab.0.center/46.-695.1280.695/0.0.1440.900@0.0.1440.900" timestamp="1683499388115" />
+    <state width="468" height="223" key="GridCell.Tab.0.left" timestamp="1683586699721">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="468" height="223" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1683586699721" />
+    <state width="468" height="288" key="GridCell.Tab.0.left/46.-695.1280.695/0.0.1440.900@0.0.1440.900" timestamp="1683499388115" />
+    <state width="468" height="223" key="GridCell.Tab.0.right" timestamp="1683586699722">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="468" height="223" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1683586699722" />
+    <state width="468" height="288" key="GridCell.Tab.0.right/46.-695.1280.695/0.0.1440.900@0.0.1440.900" timestamp="1683499388116" />
+    <state x="229" y="86" key="SettingsEditor" timestamp="1684631072454">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="229" y="86" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1684631072454" />
+    <state x="626" y="337" key="com.intellij.database.actions.DdlActions$CreateObject$1" timestamp="1677091039229">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="626" y="337" key="com.intellij.database.actions.DdlActions$CreateObject$1/0.0.1440.900@0.0.1440.900" timestamp="1677091039229" />
+    <state x="565" y="275" width="619" height="472" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1683584436499">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="565" y="275" width="619" height="472" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1440.900@0.0.1440.900" timestamp="1683584436499" />
+    <state x="565" y="275" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/46.-695.1280.695/0.0.1440.900@0.0.1440.900" timestamp="1683498895698" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/process/setShotsHuesSubjects.py</url>
+          <line>3</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/process/setShotsHuesSubjects.py</url>
+          <line>4</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/KINOSYNC$classifier.coverage" NAME="classifier Coverage Results" MODIFIED="1636963791563" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/KINOSYNC$setShots.coverage" NAME="setShots Coverage Results" MODIFIED="1645003817991" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/KINOSYNC$wiper.coverage" NAME="wiper Coverage Results" MODIFIED="1637001489917" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/KINOSYNC$KINOSYNC.coverage" NAME="KINOSYNC Coverage Results" MODIFIED="1683586546040" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/KINOSYNC$connector.coverage" NAME="connector Coverage Results" MODIFIED="1683496404901" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utilities" />
+    <SUITE FILE_PATH="coverage/KINOSYNC$filldtb.coverage" NAME="filldtb Coverage Results" MODIFIED="1636964436320" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/KINOSYNC$moduledtb.coverage" NAME="moduledtb Coverage Results" MODIFIED="1665958485875" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/KINOSYNC$moduledtb__1_.coverage" NAME="moduledtb (1) Coverage Results" MODIFIED="1683498821964" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sideprocess" />
+  </component>
+</project>

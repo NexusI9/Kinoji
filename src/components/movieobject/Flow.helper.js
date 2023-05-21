@@ -5,8 +5,8 @@ import Bundle from './Bundle.js';
 
 //elements
 const poster = (mvl) => mvl.map( movie => <Poster key={'poster_'+movie.id} movie={movie} />);
-const mosa = (mvl) => mvl.map( (movie,index) => <Bundle key={'bundle'+movie.id+index} movie={movie} masonry={ mvl.length > 1 }/>);
-const mason = (ar) => ar.map(item => <XBlock key={'xblock'+item.key}>{item}</XBlock>);
+const mosa = (mvl) => mvl.map( (movie,index) => <Bundle key={`bundle_${movie.title}_${movie.id}_${index}`} movie={movie} masonry={ mvl.length > 1 }/>);
+const mason = (ar) => ar.map(item => <XBlock key={'xblock'+item.key} ref={e => e} >{item}</XBlock>);
 
 //infinit scroll
 let cursor = 0;
@@ -40,7 +40,7 @@ export const sortBy = (filter, mvl) => {
     }
 }
   
-export const generateContent = ({movie_list, is_mosaic}) => {
+export const generateContent = ({movie_list, is_mosaic, updateRef}) => {
 
     if (movie_list.length === 1){ return( <>{mosa(movie_list)}</> ); } //solo movie
     if( movie_list.length === MASONRY_ARRAY.length && is_mosaic ){ return null; } //end flow
@@ -56,7 +56,14 @@ export const generateContent = ({movie_list, is_mosaic}) => {
         MASONRY_ARRAY.push(...split(movie_list));
         
         return (
-        <XMasonry key='xmasonry-movies' maxColumns={2} center={false} responsive={false} targetBlockWidth={window.innerWidth/2} >
+        <XMasonry 
+            key='xmasonry-movies' 
+            ref={ e => updateRef(e) } 
+            maxColumns={2} 
+            center={false} 
+            responsive={false} 
+            targetBlockWidth={window.innerWidth/2} 
+        >
             { mason(mosa(MASONRY_ARRAY)) }
         </XMasonry>
         );

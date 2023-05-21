@@ -23,7 +23,8 @@
     "start": "next start",
     "build": "next build",
     "dev": "next dev",
-    "dump": "cd /Users/elkhantour/Desktop && mysqldump -u root -p elkha997290 > kinoji.sql" 
+    "sync": "pipenv run python3.7 ./Kinosync/main.py",
+    "dump": "cd /Users/elkhantour/Desktop && mysqldump -u root -p elkha997290 > kinoji.sql"
   },
   "eslintConfig": {
     "extends": [

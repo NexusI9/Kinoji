@@ -14,6 +14,8 @@ const Flow = ({ movies }) => {
   const router = useRouter();
   const mosaicParam = router.query.mosaic;
   //movie list
+
+  const lastBlocks = useRef();
   const [ movieList, setMovieList] = useState(movies);
   const [ mosaic, setMosaic ] = useState( mosaicParam == 1 );      //boolean
   const [ sort, setSort ] = useState('name');         //string
@@ -40,8 +42,34 @@ const Flow = ({ movies }) => {
 
 
   const onScroll = () => {
-    if ( ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight-1) ) {
-      setLoad(true);
+    let bl = lastBlocks.current;
+    const { pageYOffset, innerHeight } = window;
+
+    if(bl.length){
+      
+      bl = bl.map( node => node.getBoundingClientRect());
+      const last = bl[bl.length-1];
+      const sec = bl[bl.length-2];
+
+      const lastLength = last.height + last.top;
+      const secLength = sec.height + sec.top;
+
+      console.log({
+        last:last,
+        sec:sec,
+        distance: lastLength - secLength 
+      });
+
+      if( Math.abs(lastLength - secLength) > innerHeight/2 ){
+        const bigger =  lastLength > secLength ? lastLength : secLength;
+        if( pageYOffset > bigger.length){
+          console.log('load');
+          //return setLoad(true);
+        }
+      }
+
+    }else if ( ((innerHeight + pageYOffset) >= document.body.offsetHeight-1) ) {
+      return setLoad(true);
     }
   } 
 
@@ -58,7 +86,6 @@ const Flow = ({ movies }) => {
   useEffect(() => {
     if(!mosaic){  window.removeEventListener('scroll', onScroll);  }
     else{  window.addEventListener('scroll', onScroll);  }
-    setLoad(true);
     return () => window.removeEventListener('scroll', onScroll);
   },[mosaic]);
 
@@ -69,6 +96,7 @@ const Flow = ({ movies }) => {
       const newContent = generateContent({
         movie_list: movieList,
         is_mosaic: mosaic,
+        updateRef: (ref) => ref ? lastBlocks.current = [...ref.container.childNodes] : 0
       });
      
      if(newContent){ setContent(newContent); }
