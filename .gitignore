@@ -29,6 +29,6 @@ yarn-debug.log*
 yarn-error.log*
 
 #kinosync
-Kinosync/__pycache__
+__pycache__
 Kinosync/models
 .idea
