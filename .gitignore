@@ -4,15 +4,18 @@
 /Webapp/node_modules
 /.pnp
 .pnp.js
+node_modules
 
 #next
 Webapp/.next
+.next
 
 # testing
 /coverage
 
 # production
 /Webapp/build
+build
 
 #assets
 /Webapp/public/assets/
