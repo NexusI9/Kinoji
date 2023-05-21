@@ -1,6 +1,7 @@
 #UTILS
 
 import json
+import os
 
 class Utils:
 
@@ -9,7 +10,7 @@ class Utils:
 
     def GET_CONFIG(var):
         temp = None;
-        with open('./config.json', 'r') as config:
+        with open('/Users/elkhantour/Sites/Kinoji/Kinosync/config.json', 'r') as config:
             data = json.load(config)
             temp = data[var]
             config.close()
