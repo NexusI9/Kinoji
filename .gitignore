@@ -5,6 +5,8 @@
 /.pnp
 .pnp.js
 
+/Movies
+
 #next
 /Webapp/.next
 .next
