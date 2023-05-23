@@ -1,15 +1,14 @@
 {
   "API_KEY":"b72d20f7e91e3a0dae1429b348cab389",
 
-  "MOVIE_PATH":"/Users/elkhantour/Sites/Kinoji/Kinosync/data/database.json",
-  "DIRECTOR_PATH":"/Users/elkhantour/Sites/Kinoji/Kinosync/data/directors.json",
+  "SRC_PATH":"/Users/elkhantour/Sites/Kinoji/Movies/",
+  "DEST_PATH":"/Users/elkhantour/Sites/Kinoji/Webapp/public/assets/movies/",
 
-  "SHOTS_PATH":"/Users/elkhantour/Sites/Kinoji/Webapp/public/assets/movies/",
   "COLOR_PATH":"/Users/elkhantour/Sites/Kinoji/Kinosync/data/webcolors.json",
   "MODEL_PATH":"/Users/elkhantour/Sites/Kinoji/Kinosync/models/DenseNet-BC-121-32.h5",
 
   "HOSTNAME" : "localhost",
-  "USERNAME":"root",
-  "PASSWORD":"tW4_DFA7$8ax2pX",
-  "DTBNAME":"elkha997290"
+  "USERNAME": "root",
+  "PASSWORD": "tW4_DFA7$8ax2pX",
+  "DTBNAME": "elkha997290"
 }

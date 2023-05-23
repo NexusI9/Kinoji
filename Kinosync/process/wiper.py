@@ -8,7 +8,7 @@ HOSTNAME = Utils.GET_CONFIG("HOSTNAME")
 PASSWORD = Utils.GET_CONFIG("PASSWORD")
 DTBNAME = Utils.GET_CONFIG("DTBNAME")
 
-shots_path = Utils.GET_CONFIG("SHOTS_PATH")
+shots_path = Utils.GET_CONFIG("DEST_PATH")
 
 class Wiper:
 

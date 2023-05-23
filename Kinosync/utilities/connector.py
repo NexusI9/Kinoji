@@ -4,6 +4,7 @@ import mysql.connector
 from mysql.connector import Error
 import json
 
+
 class Connector:
 
     def __init__(self, HOSTNAME, USERNAME, PASSWORD, DTBNAME):

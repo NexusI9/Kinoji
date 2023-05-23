@@ -18,6 +18,7 @@ matplotlib = "==3.3.2"
 opencv-python = "==4.4.0.44"
 keras-resnet = "*"
 imageai = "*"
+pillow = "*"
 
 [dev-packages]
 

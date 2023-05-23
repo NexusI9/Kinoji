@@ -4,7 +4,7 @@ from utilities.utils import Utils
 from utilities.connector import Connector
 
 
-root = Utils.GET_CONFIG("SHOTS_PATH")
+DEST_PATH = Utils.GET_CONFIG("DEST_PATH")
 USERNAME = Utils.GET_CONFIG("USERNAME")
 HOSTNAME = Utils.GET_CONFIG("HOSTNAME")
 PASSWORD = Utils.GET_CONFIG("PASSWORD")
@@ -27,7 +27,7 @@ def setCreationDate(path, moviename):
 
 #add shots to movies shot column
 def fetchPictures(path, moviename):
-    shots = [ f.replace('.png','') for f in os.listdir(path) if f != 'thumbnails' and f != '.' and f != '..' and f != '.DS_Store']
+    shots = [ f.replace('.webp','') for f in os.listdir(path) if f != 'thumbnails' and f != '.' and f != '..' and f != '.DS_Store']
     shots.sort()
 
     json = {
@@ -71,11 +71,11 @@ def collectIDToGenre(path, moviename):
     return ''
 
 
-if (os.path.isdir(root)):
-    for directory in os.listdir(root):
-        fullpath = root+directory
+if (os.path.isdir(DEST_PATH)):
+    for directory in os.listdir(DEST_PATH):
+        fullpath = os.path.join(DEST_PATH, directory)
         if(os.path.isdir(fullpath)):
-            print( collectIDToGenre(fullpath, directory) )
+            fetchPictures(fullpath , directory)
             print('\n\n')
 else:
     print('no root')

@@ -9,21 +9,23 @@ Add aeshetics tags
 from PIL import Image
 import os
 import re
+import shutil
 from utilities.utils import Utils
 from datetime import datetime
 from process.fetchOnlineData import UpdateDatabase as Update
 from utilities.connector import Connector
 
 
-path = Utils.GET_CONFIG("SHOTS_PATH")
-dtb_path = Utils.GET_CONFIG("MOVIE_PATH")
-movies = []
-thumb = []
+SRC_PATH = Utils.GET_CONFIG("SRC_PATH")
+DEST_PATH = Utils.GET_CONFIG("DEST_PATH")
 
 USERNAME = Utils.GET_CONFIG("USERNAME")
 HOSTNAME = Utils.GET_CONFIG("HOSTNAME")
 PASSWORD = Utils.GET_CONFIG("PASSWORD")
 DTBNAME = Utils.GET_CONFIG("DTBNAME")
+
+movies = []
+thumb = []
 
 class Fetcher:
 
@@ -40,7 +42,7 @@ class Fetcher:
 
     def fetchPictures(self, path):
 
-        shots = [f.replace('.png', '') for f in os.listdir(path) if
+        shots = [f.replace('.webp', '') for f in os.listdir(path) if
                  f != 'thumbnails' and f != '.' and f != '..' and f != '.DS_Store']
         shots.sort()
         return ';'.join(shots)
@@ -121,8 +123,8 @@ class Fetcher:
             "folder": folder,
             "id": movie_id,
             "tag": movie_tag.lower().replace(' ',';'),
-            "shots": self.fetchPictures(os.path.join(path,folder)),
-            "added": datetime.fromtimestamp(os.stat(path+folder).st_birthtime).strftime('%Y-%m-%d %H:%M:%S')
+            "shots": self.fetchPictures(os.path.join(DEST_PATH,folder)),
+            "added": datetime.fromtimestamp(os.stat(DEST_PATH+folder).st_birthtime).strftime('%Y-%m-%d %H:%M:%S')
 
         })
 
@@ -130,57 +132,81 @@ class Fetcher:
         self.commitSQL(JSON)
         print("\n> DONE !")
 
-    def setThumbnails(self,folder):
-        print("------------------------------------------------")
-        print("-------------- Resizing thumbnails -------------")
-        print("------------------------------------------------")
+    def setShots(self,movie,sortBy='name'):
         print(" ")
-        print(folder)
-        thumbPath = os.path.join(path,folder,"thumbnails")
-        fullPath =  os.path.join(path,folder)
+
+        def get_creation_time(file):
+            file = os.path.join(SRC_PATH,movie,file)
+            return os.stat(file).st_birthtime
+        
+        #retrieve only valid fildes
         srt_array = []
-        for f in os.listdir(fullPath):
+        for f in os.listdir(os.path.join(SRC_PATH,movie)):
             if(f.endswith('png') or f.endswith('jpg') or f.endswith('jpeg')):
                 srt_array.append(f)
-        sorted_array = sorted(srt_array)
 
+        if(sortBy == 'name'): #sort array of file by name (_0,_1,_2)
+            sorted_array = sorted(srt_array)
+        elif(sortBy == 'date'): #sort array of file by creation date
+            sorted_array = sorted(srt_array, key=get_creation_time)
+
+
+
+        #populate destination
         i = 0
-        for pics in sorted_array:
+        for pic in sorted_array:
             #rename large shots
-            newName = ''.join((folder,"_",str(i),".png")).replace(' ','_')
-            os.rename(os.path.join(fullPath,pics), os.path.join(fullPath,newName))
-            print("[...] processing : " + newName)
-            #resize
-            combine = os.path.join(fullPath,newName)
-            if(os.path.exists(combine)):
-                img = Image.open(combine)
-                img.thumbnail((350, 350))
-                newpics = newName.replace(".png", "")
-                img.save(os.path.join(thumbPath,newpics) + ".jpg", "JPEG")
-            else:
-                print("couldn't find : %s" % (combine))
+            sanitizedMovie = re.sub("[^A-Za-z0-9 \-]",'', movie)
+            newName = ''.join((sanitizedMovie,"_",str(i),".png"))
+            newName = newName.replace(' ','_')
 
+            oldFile = os.path.join(SRC_PATH,movie,pic)
+            newFile = os.path.join(SRC_PATH,movie,newName)
+            stat = os.stat(oldFile)
+
+            os.rename(os.path.join(SRC_PATH,movie,pic), os.path.join(SRC_PATH,movie,newName))
+            os.utime(newFile, (stat.st_atime, stat.st_mtime)) #keep meta-data
+            
+            
+            #move shot to destination directory
+            shutil.copy2(os.path.join(SRC_PATH,movie,newName), os.path.join(DEST_PATH,movie,newName))
+            
+            #convert to webp
+            print('...Processing: ' + newName)
+
+            large = Image.open( os.path.join(DEST_PATH,movie,newName) )            
+            thumb = Image.open( os.path.join(DEST_PATH,movie,newName) )
+
+            #resize thumbnail
+            thumb.thumbnail((235, 235))
+
+            #convert to webp
+            webName = newName.replace(".png", "") + ".webp"
+            thumb.save(os.path.join(DEST_PATH,movie,"thumbnails", webName), "WEBP")
+            large.save(os.path.join(DEST_PATH,movie,webName), "WEBP")
+
+            os.remove( os.path.join(DEST_PATH,movie,newName) )
+            
             i += 1
 
-        print(" ")
-        print(" ")
-        print(" ")
-        print("> DONE !")
+        print("> DONE !\n\n")
 
-    def createThumbFolder(self,folder):
-        print("[...] Creating thumbnail directory : " + folder)
-        os.mkdir(os.path.join(path,folder,'thumbnails'))
 
-        print(" ")
-        print("> DONE !")
+    def createThumbFolder(self, movie):
+        print("[...] Creating thumbnail directory")
+        os.mkdir(os.path.join(DEST_PATH,movie,'thumbnails'))
+
+    def createMovieFolder(self, movie):
+        print("[...] Creating Movie directory")
+        os.mkdir(os.path.join(DEST_PATH,movie))    
 
 
     def start(self):
         #fetch both directories (full and thumb)
         movies = []
 
-        for movieDirectory in os.listdir(path):
-            if( movieDirectory.startswith('.') == False and os.path.isdir( os.path.join(path,movieDirectory,'thumbnails') ) == False ):
+        for movieDirectory in os.listdir(SRC_PATH):
+            if( movieDirectory.startswith('.') == False and os.path.isdir( os.path.join(DEST_PATH,movieDirectory) ) == False ):
                 movies.append(movieDirectory)
 
 
@@ -190,19 +216,26 @@ class Fetcher:
             print("------------------------------------------------")
             print(" ")
             for nm in movies:
-                print("             —"+nm)
+                print("             + "+nm)
 
+            
+            add = input('\nDo you wish to add those movies? (y/n)')
+            if( add == 'y'):
+                print(" ")
+                print("------------------------------------------------")
+                print("------- Copying directories to thumbnails ------")
+                print("------------------------------------------------")
+                print(" ")
 
+                m = 1;
+                for nm in movies:
+                    print("[%d/%d] %s\n" % (m, len(movies), nm) )
 
-            print(" ")
-            print("------------------------------------------------")
-            print("------- Copying directories to thumbnails ------")
-            print("------------------------------------------------")
-            print(" ")
-            for nm in movies:
-                self.createThumbFolder(nm)
-                self.setThumbnails(nm)
-                self.setManualInfo(nm)
+                    self.createMovieFolder(nm)
+                    self.createThumbFolder(nm)
+                    self.setShots(nm)
+                    #self.setManualInfo(nm)
+                    m += 1
 
         else:
             print("------ No New movies detected ------\n\n")

@@ -1,7 +1,6 @@
 #UTILS
 
 import json
-import os
 
 class Utils:
 
