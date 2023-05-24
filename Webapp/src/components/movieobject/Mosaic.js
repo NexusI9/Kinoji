@@ -1,9 +1,6 @@
 //Movie Objects
 import  { useState, useEffect, useRef } from 'react';
-import {
-  sortThumbnails,
-  shuffle_array,
-} from '../../lib/utilities.js';
+import { shuffle_array } from '../../lib/utilities.js';
 import { motion } from 'framer-motion';
 import { movie_container, mosaic } from '../../lib/variants';
 import Thumbnail from './Thumbnail';
@@ -20,7 +17,7 @@ const Mosaic = ({ movie, animate, random=false, limit, onThumbsLoaded=()=>0 }) =
     let shot_list = movie.shots.split(';');
 
     // sort them (name/year/random)
-    if(!random){ setPics(sortThumbnails(shot_list)); }
+    if(!random){ setPics(shot_list); }
     else{ setPics(shuffle_array(shot_list)); }
 
     return () => shot_list = [];

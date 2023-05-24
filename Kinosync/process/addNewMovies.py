@@ -40,12 +40,16 @@ class Fetcher:
             self.connector.update(table='movies', data=movies);
         print("> Done !")
 
+    def get_index(file):
+        return int(re.findall(r'\d+', file)[-1])
+    
     def fetchPictures(self, path):
 
         shots = [f.replace('.webp', '') for f in os.listdir(path) if
                  f != 'thumbnails' and f != '.' and f != '..' and f != '.DS_Store']
-        shots.sort()
-        return ';'.join(shots)
+
+        sorted_shots = sorted(shots, key=self.get_index)
+        return ';'.join(sorted_shots)
 
     def addMovieIdToGenre(self, genre_id, movie_id):
         #Update Genres Id column with current processed movie
@@ -132,7 +136,7 @@ class Fetcher:
         self.commitSQL(JSON)
         print("\n> DONE !")
 
-    def setShots(self,movie,sortBy='name'):
+    def setShots(self,movie,sortBy=None):
         print(" ")
 
         def get_creation_time(file):
@@ -145,51 +149,67 @@ class Fetcher:
             if(f.endswith('png') or f.endswith('jpg') or f.endswith('jpeg')):
                 srt_array.append(f)
 
-        if(sortBy == 'name'): #sort array of file by name (_0,_1,_2)
-            sorted_array = sorted(srt_array)
-        elif(sortBy == 'date'): #sort array of file by creation date
-            sorted_array = sorted(srt_array, key=get_creation_time)
+        if(sortBy != None): #Manual sort
+            if(sortBy == 'name'): #sort array of file by name (_0,_1,_2)
+                sorted_array = sorted(srt_array)
+            elif(sortBy == 'date'): #sort array of file by creation date
+                sorted_array = sorted(srt_array, key=get_creation_time)
+            elif(sortBy == 'index'):
+                sorted_array = sorted(srt_array, key=self.get_index)
+        else: #Auto sort
+            if( "vlcsnap" in srt_array[0] ):
+                sorted_array = sorted(srt_array) #not treated
+            else:
+                sorted_array = sorted(srt_array, key=self.get_index) #already treated
 
+        for f in range(len(sorted_array)):
+            print('%d - %s' % (f, sorted_array[f] ))
 
+        checkOrder = input('Is the order correct ? (y/n)')
 
-        #populate destination
-        i = 0
-        for pic in sorted_array:
-            #rename large shots
-            sanitizedMovie = re.sub("[^A-Za-z0-9 \-]",'', movie)
-            newName = ''.join((sanitizedMovie,"_",str(i),".png"))
-            newName = newName.replace(' ','_')
+        if( checkOrder == 'y' or checkOrder == ''):
+            self.createMovieFolder(movie)
+            self.createThumbFolder(movie)
+            #populate destination
+            i = 0
+            for pic in sorted_array:
+                sanitizedMovie = re.sub("[^A-Za-z0-9 \-]",'', movie)
+                newName = ''.join((sanitizedMovie,"_",str(i),".png"))
+                newName = newName.replace(' ','_')
 
-            oldFile = os.path.join(SRC_PATH,movie,pic)
-            newFile = os.path.join(SRC_PATH,movie,newName)
-            stat = os.stat(oldFile)
+                oldFile = os.path.join(SRC_PATH,movie,pic)
+                newFile = os.path.join(SRC_PATH,movie,newName)
+                stat = os.stat(oldFile)
 
-            os.rename(os.path.join(SRC_PATH,movie,pic), os.path.join(SRC_PATH,movie,newName))
-            os.utime(newFile, (stat.st_atime, stat.st_mtime)) #keep meta-data
-            
-            
-            #move shot to destination directory
-            shutil.copy2(os.path.join(SRC_PATH,movie,newName), os.path.join(DEST_PATH,movie,newName))
-            
-            #convert to webp
-            print('...Processing: ' + newName)
+                os.rename(os.path.join(SRC_PATH,movie,pic), os.path.join(SRC_PATH,movie,newName))
+                os.utime(newFile, (stat.st_atime, stat.st_mtime)) #keep meta-data
+                
+                #move shot to destination directory
+                shutil.copy2(os.path.join(SRC_PATH,movie,newName), os.path.join(DEST_PATH,movie,newName))
+                
+                #convert to webp
+                print('...Processing: ' + newName)
 
-            large = Image.open( os.path.join(DEST_PATH,movie,newName) )            
-            thumb = Image.open( os.path.join(DEST_PATH,movie,newName) )
+                large = Image.open( os.path.join(DEST_PATH,movie,newName) )            
+                thumb = Image.open( os.path.join(DEST_PATH,movie,newName) )
 
-            #resize thumbnail
-            thumb.thumbnail((235, 235))
+                #resize thumbnail
+                thumb.thumbnail((235, 235))
 
-            #convert to webp
-            webName = newName.replace(".png", "") + ".webp"
-            thumb.save(os.path.join(DEST_PATH,movie,"thumbnails", webName), "WEBP")
-            large.save(os.path.join(DEST_PATH,movie,webName), "WEBP")
+                #convert to webp
+                webName = newName.replace(".png", "") + ".webp"
+                thumb.save(os.path.join(DEST_PATH,movie,"thumbnails", webName), "WEBP")
+                large.save(os.path.join(DEST_PATH,movie,webName), "WEBP")
 
-            os.remove( os.path.join(DEST_PATH,movie,newName) )
-            
-            i += 1
+                os.remove( os.path.join(DEST_PATH,movie,newName) )
 
-        print("> DONE !\n\n")
+                i += 1
+
+            print("> DONE !\n\n")
+            return True
+        else:
+            print("Next movie...")
+            return False
 
 
     def createThumbFolder(self, movie):
@@ -220,7 +240,7 @@ class Fetcher:
 
             
             add = input('\nDo you wish to add those movies? (y/n)')
-            if( add == 'y'):
+            if( add == 'y' or add == ''):
                 print(" ")
                 print("------------------------------------------------")
                 print("------- Copying directories to thumbnails ------")
@@ -230,9 +250,6 @@ class Fetcher:
                 m = 1;
                 for nm in movies:
                     print("[%d/%d] %s\n" % (m, len(movies), nm) )
-
-                    self.createMovieFolder(nm)
-                    self.createThumbFolder(nm)
                     self.setShots(nm)
                     #self.setManualInfo(nm)
                     m += 1

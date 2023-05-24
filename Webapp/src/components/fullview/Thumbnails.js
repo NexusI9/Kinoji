@@ -5,7 +5,6 @@ import { sortThumbnails } from '../../lib/utilities';
 const Thumbnails = ({movie}) => {
 
     let shots = movie.shots.split(';');
-    shots = sortThumbnails(shots);
 
     return(
       <section id="thumbFrame">

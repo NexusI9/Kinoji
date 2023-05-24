@@ -2,6 +2,7 @@ import os
 from datetime import datetime
 from utilities.utils import Utils
 from utilities.connector import Connector
+import re
 
 
 DEST_PATH = Utils.GET_CONFIG("DEST_PATH")
@@ -30,9 +31,14 @@ def fetchPictures(path, moviename):
     shots = [ f.replace('.webp','') for f in os.listdir(path) if f != 'thumbnails' and f != '.' and f != '..' and f != '.DS_Store']
     shots.sort()
 
+    def get_index(file):
+        return int(re.findall(r'\d+', file)[-1])
+    
+    sorted_shots = sorted(shots, key=get_index)
+    
     json = {
         'folder':moviename,
-        'shots':';'.join(shots)
+        'shots':';'.join(sorted_shots)
     }
 
     #print(json)

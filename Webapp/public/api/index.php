@@ -50,7 +50,7 @@ switch($body['type']){
       $chosenShot = $shotArray[$key][ array_rand( $shotArray[$key] ) ];
 
       $result[$key] = array(
-        "path" => "/assets/movies/{$randMovies[$key]["folder"]}/{$chosenShot}.png",
+        "path" => "/assets/movies/{$randMovies[$key]["folder"]}/{$chosenShot}.webp",
         "name" => $chosenShot,
         "movie" => $randMovies[$key]
       );

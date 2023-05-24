@@ -45,7 +45,7 @@ export default function FullView(){
                       exit='exit'
                       alt='full frame'
                       id="main_frame"
-                      src={"/assets/movies/"+mv.folder+"/"+shot+".png"}
+                      src={"/assets/movies/"+mv.folder+"/"+shot+".webp"}
                   />
                 </AnimatePresence>
             </section>
