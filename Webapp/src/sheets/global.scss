@@ -947,7 +947,7 @@ a{
   box-sizing: border-box;
   position: relative;
   display: flex;
-
+  max-width: 234px;
 
   &.unloaded{
     background: linear-gradient(45deg, var(--blue95), var(--blue90), var(--blue95));
@@ -2636,7 +2636,6 @@ a{
     }
 
     h2{margin: 0;}
-    p{ margin: 0;}
     small{ display: block; }
     .subtext{
       display:flex;
