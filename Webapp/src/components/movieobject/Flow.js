@@ -44,42 +44,50 @@ const Flow = ({ movies }) => {
   const onScroll = () => {
     let bl = lastBlocks.current;
     const { pageYOffset, innerHeight } = window;
-
+    
     if(bl.length){
-      
-      bl = bl.map( node => node.getBoundingClientRect());
+
+      if(!Array.isArray(bl)){ bl=[...bl]; }
+
+      bl = bl.map( node => ({ 
+        top:node.style.top,
+        height: node.getBoundingClientRect().height
+      }));
       const last = bl[bl.length-1];
       const sec = bl[bl.length-2];
 
       const lastLength = last.height + last.top;
       const secLength = sec.height + sec.top;
 
-      console.log({
+      /*console.log({
         last:last,
         sec:sec,
         distance: lastLength - secLength 
-      });
+      });*/
+      console.log({pos: (innerHeight + pageYOffset), touchpoint: document.body.offsetHeight-1 })
 
-      if( Math.abs(lastLength - secLength) > innerHeight/2 ){
+      if( Math.abs(lastLength - secLength) > innerHeight/2 ){ 
+        console.log({lastLength, secLength});
         const bigger =  lastLength > secLength ? lastLength : secLength;
         if( pageYOffset > bigger.length){
-          console.log('load');
+          console.log('load mid');
           //return setLoad(true);
         }
+      }else if ( ((innerHeight + pageYOffset) >= document.body.offsetHeight-1) ) { //classical scheme
+          console.log('load end');
+          return setLoad(true);
       }
-
-    }else if ( ((innerHeight + pageYOffset) >= document.body.offsetHeight-1) ) {
-      return setLoad(true);
     }
   } 
 
+
   useEffect( () => {
     setMovieList(movies);
-    if(movies.length){  setLoad(true);  } //init first load  
+    if(movies.length){ setLoad(true);  } //init first load  
   }, [movies] );
   
   useEffect( () => {  
-    setMovieList( sortBy(sort, movieList) ); 
+    setMovieList( [...sortBy(sort, movieList)] ); 
     setLoad(true);
   },[sort, mosaic]);
 
@@ -93,20 +101,23 @@ const Flow = ({ movies }) => {
   useEffect(() => {
 
     if(load){
+      //console.log(movieList[0]);
       const newContent = generateContent({
         movie_list: movieList,
         is_mosaic: mosaic,
-        updateRef: (ref) => ref ? lastBlocks.current = [...ref.container.childNodes] : 0
+        updateRef: (ref) => ref ? lastBlocks.current = ref.container.childNodes : 0
       });
-     
-     if(newContent){ setContent(newContent); }
-     else{ setLoad(false); }
+
+     if(newContent){ 
+      setContent({...newContent}); 
+      setLoad(false);
+    }else{ setLoad(false); }
     }
 
 
   }, [load]);
 
-  useEffect(()=>{ setLoad(false); },[content]);
+  //useEffect(()=>{ setLoad(false); },[content]);
 
 
 
@@ -122,7 +133,7 @@ const Flow = ({ movies }) => {
         <motion.div 
           className='movie_wrapper' 
           data-mode={ (movies.length === 1 || mosaic) ? 'default' : 'poster'}
-          key={'container-movie'+mosaic+sort}
+          key={'container-movie'+sort+mosaic}
           variants={movie_container}
           initial='initial'
           animate='animate'

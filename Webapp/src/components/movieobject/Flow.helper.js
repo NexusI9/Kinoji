@@ -42,19 +42,18 @@ export const sortBy = (filter, mvl) => {
   
 export const generateContent = ({movie_list, is_mosaic, updateRef}) => {
 
-    if (movie_list.length === 1){ return( <>{mosa(movie_list)}</> ); } //solo movie
-    if( movie_list.length === MASONRY_ARRAY.length && is_mosaic ){ return null; } //end flow
-    
-    if ( !is_mosaic ){   // poster mode
-         cursor = 0;
-         MASONRY_ARRAY.length = 0;
-         return ( <>{ poster(movie_list) }</> ); 
-    } 
+    ////------SPECIAL EVENTS-------
+    if(movie_list.length === MASONRY_ARRAY.length && is_mosaic ){ console.log('end'); return null; } //end flow
+    if( !is_mosaic || (movie_list[0]?.id !== MASONRY_ARRAY[0]?.id) ){  //reset if poster mode or sort changed (by checking first index) 
+        cursor = 0;
+        MASONRY_ARRAY.length = 0; 
+    }
 
+    //------DISPLAY MODES-------
+    if (movie_list.length === 1){ return( <>{mosa(movie_list)}</> ); } //solo movie
+    else if ( !is_mosaic ){  return ( <>{ poster(movie_list) }</> ); } // poster mode
     else{ //flow mode
-        
         MASONRY_ARRAY.push(...split(movie_list));
-        
         return (
         <XMasonry 
             key='xmasonry-movies' 
@@ -68,7 +67,6 @@ export const generateContent = ({movie_list, is_mosaic, updateRef}) => {
         </XMasonry>
         );
  
-
     }// masonry mode
 }
 
