@@ -45,33 +45,38 @@ const Flow = ({ movies }) => {
     let bl = lastBlocks.current;
     const { pageYOffset, innerHeight } = window;
     
-    if(bl.length){
+    if(bl.length && !load){
 
       if(!Array.isArray(bl)){ bl=[...bl]; }
-
+      
+      bl = bl.slice(-2);
       bl = bl.map( node => ({ 
-        top:node.style.top,
-        height: node.getBoundingClientRect().height
+        top: parseInt(node.style.top),
+        height: node.getBoundingClientRect().height,
+        bottom: node.getBoundingClientRect().bottom
       }));
-      const last = bl[bl.length-1];
-      const sec = bl[bl.length-2];
+      const last = bl[0];
+      const sec = bl[1];
 
       const lastLength = last.height + last.top;
       const secLength = sec.height + sec.top;
-
-      /*console.log({
-        last:last,
-        sec:sec,
-        distance: lastLength - secLength 
-      });*/
-      console.log({pos: (innerHeight + pageYOffset), touchpoint: document.body.offsetHeight-1 })
-
+ 
       if( Math.abs(lastLength - secLength) > innerHeight/2 ){ 
-        console.log({lastLength, secLength});
-        const bigger =  lastLength > secLength ? lastLength : secLength;
-        if( pageYOffset > bigger.length){
+        
+        console.log({
+          last,
+          sec, 
+          threshold:innerHeight/2, 
+          difference: Math.abs(lastLength-secLength),
+          pageYOffset
+        });
+
+        if( 
+            (sec.bottom < 100 && last.bottom > window.innerHeight/2) || 
+            (last.bottom < 100 && sec.bottom > window.innerHeight/2) 
+          ){
           console.log('load mid');
-          //return setLoad(true);
+          return setLoad(true);
         }
       }else if ( ((innerHeight + pageYOffset) >= document.body.offsetHeight-1) ) { //classical scheme
           console.log('load end');
