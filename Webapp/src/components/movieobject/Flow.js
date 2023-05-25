@@ -66,10 +66,8 @@ const Flow = ({ movies }) => {
           ( (sec.bottom < 100 && last.bottom > window.innerHeight/2) || 
           (last.bottom < 100 && sec.bottom > window.innerHeight/2) )
       ){ 
-          console.log('load mid');
           return setLoad(true);
       }else if ( ((innerHeight + pageYOffset) >= document.body.offsetHeight-1) ) { //classical scheme
-          console.log('load end');
           return setLoad(true);
       }
     }
