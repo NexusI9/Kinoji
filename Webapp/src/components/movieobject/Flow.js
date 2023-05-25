@@ -58,13 +58,10 @@ const Flow = ({ movies }) => {
 
       const last = bl[0];
       const sec = bl[1];
-
-      const lastLength = last.height + last.top;
-      const secLength = sec.height + sec.top;
- 
-      if( (Math.abs(lastLength - secLength) > innerHeight/2) &&
-          ( (sec.bottom < 100 && last.bottom > window.innerHeight/2) || 
-          (last.bottom < 100 && sec.bottom > window.innerHeight/2) )
+      const threshold = 230;
+      if( 
+          (sec.bottom < threshold && last.bottom > window.innerHeight/2) || 
+          (last.bottom < threshold && sec.bottom > window.innerHeight/2)
       ){ 
           return setLoad(true);
       }else if ( ((innerHeight + pageYOffset) >= document.body.offsetHeight-1) ) { //classical scheme
