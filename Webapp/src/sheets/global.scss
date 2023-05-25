@@ -2368,7 +2368,7 @@ a{
     justify-content: space-between;
     height: 100%;
   }
-  .arrowlabel{ float: right; margin-top: 3%; align-self: flex-end;}
+
   .shelf{ 
     display: flex; 
     flex-shrink: 0;
@@ -2426,8 +2426,11 @@ a{
     box-sizing: border-box;
     position: relative;
     align-items: center;
+    margin-bottom: 15px;
+    border-bottom: solid 1px var(--blue50);
+    padding-bottom: 6px;
 
-    h4{ margin: 0; margin-bottom: 10px; }
+    h4{ margin: 0;}
   }
 
 }
