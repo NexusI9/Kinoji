@@ -48,36 +48,26 @@ const Flow = ({ movies }) => {
     if(bl.length && !load){
 
       if(!Array.isArray(bl)){ bl=[...bl]; }
-      
+
       bl = bl.slice(-2);
       bl = bl.map( node => ({ 
         top: parseInt(node.style.top),
         height: node.getBoundingClientRect().height,
         bottom: node.getBoundingClientRect().bottom
       }));
+
       const last = bl[0];
       const sec = bl[1];
 
       const lastLength = last.height + last.top;
       const secLength = sec.height + sec.top;
  
-      if( Math.abs(lastLength - secLength) > innerHeight/2 ){ 
-        
-        console.log({
-          last,
-          sec, 
-          threshold:innerHeight/2, 
-          difference: Math.abs(lastLength-secLength),
-          pageYOffset
-        });
-
-        if( 
-            (sec.bottom < 100 && last.bottom > window.innerHeight/2) || 
-            (last.bottom < 100 && sec.bottom > window.innerHeight/2) 
-          ){
+      if( (Math.abs(lastLength - secLength) > innerHeight/2) &&
+          ( (sec.bottom < 100 && last.bottom > window.innerHeight/2) || 
+          (last.bottom < 100 && sec.bottom > window.innerHeight/2) )
+      ){ 
           console.log('load mid');
           return setLoad(true);
-        }
       }else if ( ((innerHeight + pageYOffset) >= document.body.offsetHeight-1) ) { //classical scheme
           console.log('load end');
           return setLoad(true);
