@@ -2374,7 +2374,6 @@ a{
     flex-shrink: 0;
     background: var(--blue95);
   }
-  p{ margin: 0; }
 
 
   .movie_poster{
@@ -2414,6 +2413,10 @@ a{
   }
 
   span{ margin: 0; }
+  p{ 
+    margin: 0;
+    color: var(--blue30); 
+  }
 
   .header{
     margin-top:15px;
