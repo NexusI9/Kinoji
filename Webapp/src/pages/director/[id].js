@@ -13,21 +13,16 @@ import Head from 'next/head';
 function Director(props){
 
   const router = useRouter();
-  const { id } = props || router.query;
+  const { id } = router.query;
   const [ director, setDirector ] = useState([]);
   const [ movies, setMovies ] = useState([]);
 
   useEffect(() => {
 
     if(id){
-
       const { post } = useAPI(); 
-      post({type:'getDirector', id:id}).then( result => {
-        setDirector(result.data);
-        document.title = 'KINO寺 - Director: '+ (result.data[0].name || '');
-      });
+      post({type:'getDirector', id:id}).then( result => setDirector(result.data) );
       post({type:'getMoviesFromDir', id:id}).then( result => setMovies(result.data) );
-
     }
 
   }, [id]);
@@ -36,10 +31,10 @@ function Director(props){
 return(
   <div className='container'>
     <Head>
-      <title>Kinoji Director{(director && director[0] && ': '+director[0].name) }</title>
+      <title>{ (props.director || director)[0].name  } on Kinoji</title>
     </Head>
   {
-    director.map( infos =>
+    (props.director || director).map( infos =>
       <Banner
         key={'director_banner_'+infos.id}
         visual={<img alt={'poster_banner_'+infos.name} src={infos.poster || noposter } /> }
@@ -57,8 +52,8 @@ return(
       animate='animate'
       exit='exit'
       style={{marginTop:'5%'}}
-      >
-    <Flow movies={movies} />
+    >
+    <Flow movies={ (props.movies || movies) } />
     </motion.div>
   </div>
   );
@@ -70,6 +65,7 @@ export default Director;
 // Generates `/movies/1` and `/movies/2`
 export async function getStaticPaths() {
   const directors = await useAPI().fetch('getAllDirectors');
+  
   return {
     paths: directors.map( ({id}) => ({ params: { id: id.toString() } }) ),
     fallback: false, // can also be true or 'blocking'
@@ -77,10 +73,13 @@ export async function getStaticPaths() {
 }
 // `getStaticPaths` requires using `getStaticProps`
 export async function getStaticProps({params}) {
-  const directors = await useAPI().fetch('getAllDirectors');
-  const dirID = directors.find(d => d.id.toString() == d.id.toString());
+  const director = await useAPI().fetch({type:'getDirectorFromId', id:params.id});
+  const dirMovies = await useAPI().fetch({type:'getMoviesFromDir', id:params.id});
 
   return {
-    props: {id:dirID} // Passed to the page component as props
+    props: {
+      director:[director],
+      movies:dirMovies
+    } // Passed to the page component as props
   }
 }

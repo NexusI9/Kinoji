@@ -106,21 +106,6 @@ class Connection{
     return $results[0]["id"];
   }
 
-  public function getMoviesOfGenre($genre){
-    $tag = $this->pdo->prepare("SELECT tag from genres WHERE name = ?");
-    $tag->bindParam(1,$genre, PDO::PARAM_STR);
-    $tag->execute();
-    $tag = $tag->fetchAll();
-    $tag = '%'.$tag[0]["tag"].'%';
-
-    $stmt = $this->pdo->prepare("SELECT * FROM movies WHERE genre LIKE ?");
-    $stmt->bindParam(1,$tag,PDO::PARAM_STR);
-    $stmt->execute();
-    $result = $stmt->fetchAll();
-
-    return $result;
-  }
-
   public function getMoviesFromGenre($genre, $limit = NULL){
         $moviesId = $this->query("SELECT movies FROM genres WHERE name = ?", [$genre]);
         $moviesId = $moviesId[0]['movies'];

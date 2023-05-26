@@ -11,7 +11,7 @@ import noposter from '@/assets/noposter.jpg';
 import Head from 'next/head';
 
 
-export default function Collections(){
+export default function Collections(props){
 
   const router = useRouter()
   const { collection } = router.query;
@@ -43,25 +43,52 @@ export default function Collections(){
       className='container'
     >
       <Head>
-        <title>KINO寺 Collection { collection && ": "+collection }</title>
+        <title>{(props.name || collection)} on Kinoji</title>
       </Head>
       {collection &&
         <>
-          { movies && infos && infos.map( info => <Banner visual={<Pile movies={movies} />} category='collection' key={'banner_'+info.tag} header={info.name} summary={info.summary} source={info.source} spheros={true}/>) }
-          { directors &&
+          { (props.movies || movies) && (props.collection || infos).map( info => <Banner visual={<Pile movies={movies} />} category='collection' key={'banner_'+info.tag} header={info.name} summary={info.summary} source={info.source} spheros={true}/>) }
+          { (props.directors || directors) &&
             <>
               <LabelBar label={'Directors'} hero={false} />
                 <div id='director_cardlist'>
                 { 
-                  directors.map( dir => <Card key={'dircard_genre_'+dir.id} label={dir.name} subtext={getDirectorDate(dir) ? '('+getDirectorDate(dir)+')' : ''} visual={<img src={dir.poster || noposter.src } />} link={'/director/'+dir.id} /> )
+                  (props.directors || directors).map( dir => <Card key={'dircard_genre_'+dir.id} label={dir.name} subtext={getDirectorDate(dir) ? '('+getDirectorDate(dir)+')' : ''} visual={<img src={dir.poster || noposter.src } />} link={'/director/'+dir.id} /> )
                 }
                 </div>
             </>
           }
-          {movies && <Flow movies={movies}/> }
+          {movies && <Flow movies={ (props.movies || movies) }/> }
         </>
       }
     </motion.div> );
 }
 
 
+// Generates `/movies/1` and `/movies/2`
+export async function getStaticPaths() {
+  const collections = await useAPI().fetch({type:'getGenre', genre:''}); 
+
+  return {
+    paths: collections.map( ({name}) => ({ params: { collection: name.toString() } }) ),
+    fallback: false, // can also be true or 'blocking'
+  }
+}
+// `getStaticPaths` requires using `getStaticProps`
+export async function getStaticProps({params}) {
+
+  const collection = await useAPI().fetch({type:'getGenre', genre: params.collection});
+  const directors =  await useAPI().fetch({type: 'getMoviesFromGenre', genre: params.collection, limit:null});
+  const movies =  await useAPI().fetch({type: 'getDirFromGenre', genre: params.collection});
+  const { name } = collection[0];
+
+
+  return {
+    props: {
+      collection: collection,
+      name: name,
+      directors: directors,
+      movies: movies
+    } // Passed to the page component as props
+  }
+}

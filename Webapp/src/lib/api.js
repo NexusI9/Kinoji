@@ -14,7 +14,7 @@ const useAPI = () => {
       fetch: (param) => fetch(LOCAL_URL, {
         method:'POST',
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({type:param})
+        body: typeof param === "string" ? JSON.stringify({type:param}) : JSON.stringify(param)
       }).then( data => data.json()).then( data => data)
     });
 }

@@ -29,7 +29,7 @@ function Movie(props){
   return(
     <AnimatePresence mode='wait'>
       <Head>
-        <title>{ (movie && movie[0] && movie[0].title) || 'movie' } on Kinoji</title>
+        <title>{ (props.movie || movie)[0].title } on Kinoji</title>
       </Head>
       <motion.div
         variants={container}
@@ -40,17 +40,18 @@ function Movie(props){
         className='container'
         key={'container_movie_'+id}
         >
-          { movie &&  <div>
+
+          <div>
             {
-            movie.map( item => 
+            ( props.movie || movie ).map( item => 
                 <Bundle 
                   key={'movieposter_'+item.id} 
                   movie={item} 
                   summary={true} 
                   linked={false} 
                   spheros={true}/>
-                  )}
-            </div> }
+              )}
+          </div>
       </motion.div>
     </AnimatePresence>
   );
@@ -72,9 +73,9 @@ export async function getStaticPaths() {
 // `getStaticPaths` requires using `getStaticProps`
 export async function getStaticProps({params}) {
   const movies = await useAPI().fetch('getAllMovies');
-  const movieID = movies.find(mv => mv.id.toString() == params.id.toString());
-
+  const movie = movies.filter(mv => mv.id.toString() == params.id.toString());
+  
   return {
-    props: {id:movieID} // Passed to the page component as props
+    props: {movie:movie} // Passed to the page component as props
   }
 }
