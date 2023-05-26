@@ -117,7 +117,7 @@ const Flow = ({ movies }) => {
       <LabelBar 
         hero={false} 
         sticky={true} 
-        label= {<>Movies<span className='light'> ({movies.length})</span> </>} 
+        label= {<>Movies<span className='amount'>{movies.length}</span> </>} 
         hyperlink={ movies.length > 1 && <MovieSettings onChange={onChange} mosaic={mosaic} defaultCheck={sort} /> } />
       <AnimatePresence mode='wait'>
         <motion.div 
