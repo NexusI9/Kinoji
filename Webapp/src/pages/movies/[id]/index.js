@@ -9,10 +9,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Head from 'next/head';
 
 
-function Movie(){
+function Movie(props){
  
   const router = useRouter();
-  const {id} = router.query;
+  const {id} = props || router.query;
 
   const [movie, setMovie] = useState();
 
@@ -61,4 +61,20 @@ function Movie(){
 export default Movie;
 
 
+// Generates `/movies/1` and `/movies/2`
+export async function getStaticPaths() {
+  const movies = await useAPI().fetch('getAllMovies');
+  return {
+    paths: movies.map( ({id}) => ({ params: { id: id.toString() } }) ),
+    fallback: false, // can also be true or 'blocking'
+  }
+}
+// `getStaticPaths` requires using `getStaticProps`
+export async function getStaticProps({params}) {
+  const movies = await useAPI().fetch('getAllMovies');
+  const movieID = movies.find(mv => mv.id.toString() == params.id.toString());
 
+  return {
+    props: {id:movieID} // Passed to the page component as props
+  }
+}

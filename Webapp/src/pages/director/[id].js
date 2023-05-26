@@ -10,10 +10,10 @@ import { motion } from 'framer-motion';
 import noposter from '@/assets/noposter.jpg';
 import Head from 'next/head';
 
-function Director(){
+function Director(props){
 
   const router = useRouter();
-  const { id } = router.query;
+  const { id } = props || router.query;
   const [ director, setDirector ] = useState([]);
   const [ movies, setMovies ] = useState([]);
 
@@ -65,3 +65,22 @@ return(
 }
 
 export default Director;
+
+
+// Generates `/movies/1` and `/movies/2`
+export async function getStaticPaths() {
+  const directors = await useAPI().fetch('getAllDirectors');
+  return {
+    paths: directors.map( ({id}) => ({ params: { id: id.toString() } }) ),
+    fallback: false, // can also be true or 'blocking'
+  }
+}
+// `getStaticPaths` requires using `getStaticProps`
+export async function getStaticProps({params}) {
+  const directors = await useAPI().fetch('getAllDirectors');
+  const dirID = directors.find(d => d.id.toString() == d.id.toString());
+
+  return {
+    props: {id:dirID} // Passed to the page component as props
+  }
+}
