@@ -11,7 +11,9 @@ const LatestMovies = ({ number }) => {
 
     useEffect(() => {
       const {post} = useAPI();
+      
       post({type:'getLatestMovies', limit: number} ).then( res => setMovies(res.data) );
+
     },[number]);
   
   
