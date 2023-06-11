@@ -78,8 +78,8 @@ export async function getStaticPaths() {
 export async function getStaticProps({params}) {
 
   const collection = await useAPI().fetch({type:'getGenre', genre: params.collection});
-  const directors =  await useAPI().fetch({type: 'getMoviesFromGenre', genre: params.collection, limit:null});
-  const movies =  await useAPI().fetch({type: 'getDirFromGenre', genre: params.collection});
+  const movies =  await useAPI().fetch({type: 'getMoviesFromGenre', genre: params.collection, limit:null});
+  const directors =  await useAPI().fetch({type: 'getDirFromGenre', genre: params.collection});
   const { name } = collection[0];
 
 

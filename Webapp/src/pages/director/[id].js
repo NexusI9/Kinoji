@@ -34,8 +34,7 @@ return(
       <title>{ (props.director || director)[0].name  } on Kinoji</title>
     </Head>
   {
-    (props.director || director).map( infos =>
-      <Banner
+    (props.director || director).map( infos => <Banner
         key={'director_banner_'+infos.id}
         visual={<img alt={'poster_banner_'+infos.name} src={infos.poster || noposter } /> }
         category={'director'}
@@ -43,8 +42,7 @@ return(
         summary={infos.summary}
         sources={infos.source}
         spheros={true}
-      />
-    )
+      />)
   }
     <motion.div
       variants={container}
@@ -78,7 +76,7 @@ export async function getStaticProps({params}) {
 
   return {
     props: {
-      director:[director],
+      director:director,
       movies:dirMovies
     } // Passed to the page component as props
   }
