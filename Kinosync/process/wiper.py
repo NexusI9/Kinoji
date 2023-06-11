@@ -1,5 +1,5 @@
-from utilities.connector import Connector
-from utilities.utils import Utils
+from lib.connector import Connector
+from lib.utils import Utils
 import os
 import shutil
 

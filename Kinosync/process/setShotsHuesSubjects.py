@@ -3,12 +3,12 @@
 
 import os
 import json
-from utilities.utils import Utils
+from lib.utils import Utils
 from imageai.Classification import ImageClassification
 from colorthief import ColorThief
 import ssl
 import webcolors
-from utilities.connector import Connector
+from lib.connector import Connector
 
 ssl._create_default_https_context = ssl._create_unverified_context
 model_path = Utils.GET_CONFIG("MODEL_PATH")

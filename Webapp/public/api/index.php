@@ -87,15 +87,15 @@ switch($body['type']){
   break;
 
   case 'getDirectorFromId':
-    echo json_encode( $connection->query("SELECT * FROM personalities WHERE id = ? AND job='director'", [ $body['id'] ]) );
+    echo json_encode( $connection->query("SELECT * FROM peoples WHERE id = ? AND job='director'", [ $body['id'] ]) );
   break;
 
   case 'getDirector':
-    echo json_encode( $connection->query("SELECT * FROM personalities WHERE id = ? AND job='director'",[ $body['id'] ] ) );
+    echo json_encode( $connection->query("SELECT * FROM peoples WHERE id = ? AND job='director'",[ $body['id'] ] ) );
   break;
 
   case 'getAllDirectors':
-    echo json_encode( $connection->query("SELECT * FROM personalities WHERE job='director'") );
+    echo json_encode( $connection->query("SELECT * FROM peoples WHERE job='director'") );
   break;
 
   case 'getDirFromGenre':
@@ -105,7 +105,7 @@ switch($body['type']){
     $directors = array_unique($directors);
 
     foreach ($directors as $key => $id) {
-      $directors[$key] = $connection->query("SELECT * FROM personalities WHERE id = ? AND job='director'", [$id])[0];
+      $directors[$key] = $connection->query("SELECT * FROM peoples WHERE id = ? AND job='director'", [$id])[0];
     }
 
     $directors = array_values($directors);
@@ -238,7 +238,7 @@ switch($body['type']){
     $arResult = array(
         "movies" => $connection->query("SELECT * FROM movies WHERE title LIKE ?",[$query]),
         "dops" => $connection->query("SELECT * FROM movies WHERE dop LIKE ?",[$query]),
-        "directors" => $connection->query("SELECT * FROM personalities WHERE name LIKE ? AND job='director' ",[$query]),
+        "directors" => $connection->query("SELECT * FROM peoples WHERE name LIKE ? AND job='director' ",[$query]),
         "genres" => $connection->query("SELECT * FROM genres WHERE name LIKE ?",[$query]),
         "colours" => $connection->query("SELECT DISTINCT family FROM colors WHERE family LIKE ?",[$query]),
     );

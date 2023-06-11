@@ -10,10 +10,10 @@ from PIL import Image
 import os
 import re
 import shutil
-from utilities.utils import Utils
+from lib.utils import Utils
 from datetime import datetime
 from process.fetchOnlineData import UpdateDatabase as Update
-from utilities.connector import Connector
+from lib.connector import Connector
 
 
 SRC_PATH = Utils.GET_CONFIG("SRC_PATH")

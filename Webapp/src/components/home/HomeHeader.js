@@ -26,7 +26,7 @@ const HomeHeader = () => {
         <div id='vimeoContainer'>
           <iframe src={'https://player.vimeo.com/video/'+randVal+'?h=583d0b23c9&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&autoplay=1&loop=1&title=0&byline=0&portrait=1&muted=1&autopause=0&controls=0'} frameBorder='0' allow='autoplay; fullscreen; picture-in-picture' style={{width:'100%', height:'130vw'}} title='Short reel UI'></iframe>
         </div>
-        <BannerSearch title='Your Asia Cinema visual library'/>
+        <BannerSearch title='Your Asian Cinema visual library'/>
         </div>
       </div>
   

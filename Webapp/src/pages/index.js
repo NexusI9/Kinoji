@@ -12,7 +12,7 @@ export default function Home(props){
 
   return(<>
         <Head>
-          <title>KINOJI: The portal to author and asia cinema</title>
+          <title>KINOJI: Your Asian Cinema visual library</title>
         </Head>
         <motion.main
             variants={container}

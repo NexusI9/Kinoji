@@ -1,10 +1,12 @@
 import useAPI from '@/lib/api';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Popup, Separator } from '../misc';
 import { Banner } from '../header';
 import { Poster } from '../movieobject';
 import { firstSentenceOf } from '@/lib/utilities';
 import Link from 'next/link';
+
+import noposter from '@/assets/noposter.jpg';
 
 const DirectorLabel = ({id, popup=true}) => {
 
@@ -26,7 +28,7 @@ const DirectorLabel = ({id, popup=true}) => {
           setPop({
             content:
               <div>
-                {dir.map( ({poster, name, summary}) => <Banner hero={false} visual={<img src={poster || require('../../assets/noposter.jpg')} />} header={name} summary={firstSentenceOf(summary)} spheros={false} /> )}
+                {dir.map( ({poster, name, summary}) => <React.Fragment key={`directorlabelpopup${name}`}><Banner hero={false} visual={<img src={poster || noposter} />} header={name} summary={firstSentenceOf(summary)} spheros={false} /></React.Fragment> )}
                 <Separator />
                 <h4>Movies { movies ? '('+movies.length+')' : ''}</h4>
                 {movies.map(movie => <Poster key={'poster'+movie.id} movie={movie} size='small' />)}
