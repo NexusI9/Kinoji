@@ -183,8 +183,9 @@ class UpdateDatabase:
         brute_scan = input('Do you wish to update all entries ? (y/n) \n')
         query = """SELECT * FROM movies WHERE title IS NULL"""
 
-        if(brute_scan == ('y' or 'yes')):
+        if(brute_scan == ('y' or 'yes' or '')):
             query = """SELECT * FROM movies"""
+        
         JSON_MOVIES = self.connector.getJSON(query)
 
         for mv in JSON_MOVIES:

@@ -251,7 +251,7 @@ class Fetcher:
                 for nm in movies:
                     print("[%d/%d] %s\n" % (m, len(movies), nm) )
                     self.setShots(nm)
-                    #self.setManualInfo(nm)
+                    self.setManualInfo(nm)
                     m += 1
 
         else:

@@ -76,12 +76,42 @@ def collectIDToGenre(path, moviename):
 
     return ''
 
+def pushNewMovies(path, moviename):
+    shots = [ f.replace('.webp','') for f in os.listdir(path) if f != 'thumbnails' and f != '.' and f != '..' and f != '.DS_Store']
+    shots.sort()
+
+    movie_id = re.findall("(\d+)[^-]*$", moviename)[0];
+
+    def get_index(file):
+        return int(re.findall(r'\d+', file)[-1])
+    
+    def get_id(obj):
+        return obj['id'];
+
+    sorted_shots = sorted(shots, key=get_index)
+    idList = list(map(get_id, connector.getJSON("""SELECT id FROM movies""")))
+    exists = False;
+
+    for id in idList:
+        if(int(id) == int(movie_id)):
+            exists = True
+
+    if(not exists):
+        json = {
+            'folder':moviename,
+            'id': movie_id,
+            'shots':';'.join(sorted_shots),
+            'added': datetime.fromtimestamp(os.stat(DEST_PATH+moviename).st_birthtime).strftime('%Y-%m-%d %H:%M:%S')
+        }
+
+        print(json)
+        connector.update(table='movies', data=json);
 
 if (os.path.isdir(DEST_PATH)):
     for directory in os.listdir(DEST_PATH):
         fullpath = os.path.join(DEST_PATH, directory)
         if(os.path.isdir(fullpath)):
-            fetchPictures(fullpath , directory)
+            pushNewMovies(fullpath, directory)
             print('\n\n')
 else:
     print('no root')
