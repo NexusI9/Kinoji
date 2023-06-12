@@ -26,7 +26,10 @@ export default function Collections(props){
       const {post} = useAPI();
       post({type:'getGenre', genre:collection}).then( ({data}) =>  setInfos(data) );
       post({type:'getMoviesFromGenre', genre:collection, limit:null}).then( ({data}) => setMovies(data) );
-      post({type:'getDirFromGenre', genre:collection}).then( ({data}) =>  setDirectors(data) );
+      post({type:'getDirFromGenre', genre:collection}).then( ({data}) =>  { 
+        console.log({data});
+        setDirectors(data) 
+      });
     }
 
   
@@ -45,6 +48,7 @@ export default function Collections(props){
       <Head>
         <title>{(props.name || collection)} on Kinoji</title>
       </Head>
+
       {collection &&
         <>
           { (props.movies || movies) && (props.collection || infos).map( info => <Banner visual={<Pile movies={movies} />} category='collection' key={'banner_'+info.tag} header={info.name} summary={info.summary} source={info.source} spheros={true}/>) }
@@ -65,7 +69,8 @@ export default function Collections(props){
 }
 
 
-// Generates `/movies/1` and `/movies/2`
+
+//Generates `/movies/1` and `/movies/2`
 export async function getStaticPaths() {
   const collections = await useAPI().fetch({type:'getGenre', genre:''}); 
 
@@ -80,8 +85,8 @@ export async function getStaticProps({params}) {
   const collection = await useAPI().fetch({type:'getGenre', genre: params.collection});
   const movies =  await useAPI().fetch({type: 'getMoviesFromGenre', genre: params.collection, limit:null});
   const directors =  await useAPI().fetch({type: 'getDirFromGenre', genre: params.collection});
-  const { name } = collection[0];
 
+  const { name } = collection[0];
 
   return {
     props: {

@@ -101,16 +101,20 @@ switch($body['type']){
   case 'getDirFromGenre':
 
     $moviesFromGenre = $connection->getMoviesFromGenre($body["genre"]);
+    
     $directors = filter_to_key($moviesFromGenre, 'director');
     $directors = array_unique($directors);
-
+    
     foreach ($directors as $key => $id) {
-      $directors[$key] = $connection->query("SELECT * FROM peoples WHERE id = ? AND job='director'", [$id])[0];
+      $directors[$key] = $connection->query("SELECT * FROM peoples WHERE id = ? AND job='director'", [$id]);
+      if(!count($directors[$key])){ unset( $directors[$key] ); }
+      else{ $directors[$key] = $directors[$key][0]; }
     }
-
+    
     $directors = array_values($directors);
 
     echo json_encode($directors);
+    
   break;
 
   //--------HISTORY

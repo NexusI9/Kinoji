@@ -1,6 +1,7 @@
 from tmdbv3api import Movie, Person
 import wikipedia as wiki
 
+
 class PERSON:
 
     def __init__(self, movieId, job):

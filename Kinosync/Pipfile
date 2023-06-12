@@ -19,6 +19,8 @@ opencv-python = "==4.4.0.44"
 keras-resnet = "*"
 imageai = "*"
 pillow = "*"
+perplexity-api = {editable = true, git = "https://gitlab.com/robowaifudev/perplexity-api"}
+openai = "*"
 
 [dev-packages]
 
