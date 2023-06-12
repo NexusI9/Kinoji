@@ -8,9 +8,8 @@ import Thumbnail from './Thumbnail';
 
 const Mosaic = ({ movie, animate, random=false, limit, onThumbsLoaded=()=>0 }) => {
 
-  const [ pics, setPics ] = useState([]);
+  const [ pics, setPics ] = useState(movie.shots.split(';'));
   const loadedPics = useRef(0);
-
 
   useEffect(() => {
 
@@ -25,9 +24,9 @@ const Mosaic = ({ movie, animate, random=false, limit, onThumbsLoaded=()=>0 }) =
 
   }, [random, movie]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     if(pics?.length && loadedPics.current === pics.length){  onThumbsLoaded(); }
-  }, [loadedPics.current, pics]);
+  }, [loadedPics.current, pics]);*/
 
 
   return(
@@ -41,7 +40,7 @@ const Mosaic = ({ movie, animate, random=false, limit, onThumbsLoaded=()=>0 }) =
         exit='exit'
         >
           {
-            pics.length > 0 && pics.map( (pic,i) => {
+            pics.length && pics.map( (pic,i) => {
               if(limit && i >= limit){ return; }
               return (
                 <motion.div

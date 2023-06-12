@@ -12,34 +12,18 @@ import Head from 'next/head';
 
 function Director(props){
 
-  const router = useRouter();
-  const { id } = router.query;
-  const [ director, setDirector ] = useState([]);
-  const [ movies, setMovies ] = useState([]);
-
-  useEffect(() => {
-
-    if(id){
-      const { post } = useAPI(); 
-      post({type:'getDirector', id:id}).then( result => setDirector(result.data) );
-      post({type:'getMoviesFromDir', id:id}).then( result => setMovies(result.data) );
-    }
-
-  }, [id]);
-
-
 return(
   <div className='container'>
     <Head>
-      <title>{ (props.director || director)[0].name  } on Kinoji</title>
+      <title>{ props.director[0].name } on Kinoji</title>
     </Head>
   {
-    (props.director || director).map( infos => <Banner
+    props.director.map( infos => <Banner
         key={'director_banner_'+infos.id}
         visual={<img alt={'poster_banner_'+infos.name} src={infos.poster || noposter } /> }
         category={'director'}
         header={infos.name}
-        summary={infos.summary}
+        summary={infos.summary || ''}
         sources={infos.source}
         spheros={true}
       />)
@@ -51,7 +35,7 @@ return(
       exit='exit'
       style={{marginTop:'5%'}}
     >
-    <Flow movies={ (props.movies || movies) } />
+    <Flow movies={ props.movies } />
     </motion.div>
   </div>
   );
@@ -73,7 +57,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({params}) {
   const director = await useAPI().fetch({type:'getDirectorFromId', id:params.id});
   const dirMovies = await useAPI().fetch({type:'getMoviesFromDir', id:params.id});
-
+  console.log(director);
   return {
     props: {
       director:director,

@@ -40,7 +40,7 @@ export const sortBy = (filter, mvl) => {
     }
 }
   
-export const generateContent = ({movie_list, is_mosaic, updateRef}) => {
+export const generateContent = ({movie_list, is_mosaic, updateRef=()=>0}) => {
 
     ////------SPECIAL EVENTS-------
     if(movie_list.length === MASONRY_ARRAY.length && is_mosaic ){ console.log('end'); return null; } //end flow

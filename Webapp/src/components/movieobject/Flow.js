@@ -19,7 +19,7 @@ const Flow = ({ movies }) => {
   const [ movieList, setMovieList] = useState(movies);
   const [ mosaic, setMosaic ] = useState( mosaicParam == 1 );      //boolean
   const [ sort, setSort ] = useState('name');         //string
-  const [ content, setContent ] = useState();         //react symbols
+  const [ content, setContent ] = useState( generateContent({ movie_list: movies, is_mosaic: false}) );         //react symbols
   const [load, setLoad] = useState(false); 
   
   //events
