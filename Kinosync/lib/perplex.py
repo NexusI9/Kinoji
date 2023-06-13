@@ -1,8 +1,12 @@
 from perplexity_api import PerplexityAPI, TimeoutException
+import openai
 import re
 import base64
 import time
 ppl = PerplexityAPI()
+
+openai.api_key = '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'
+
 
 BIOGRAPHY_PROMPT = """
     Write BEGIN and do a line break.
@@ -65,4 +69,18 @@ def perplex(name, job):
             print(sources)
 
 
-perplex('Wong Kar-Wai','director')
+def openAI(name, job):
+    newPrompt  = BIOGRAPHY_PROMPT.replace('{job}',job).replace('{name}',name)
+    response = openai.Completion.create(
+      engine="davinci-instruct-beta-v3",
+      prompt=newPrompt,
+      temperature=0.7,
+      max_tokens=100,
+      top_p=1,
+      frequency_penalty=0,
+      presence_penalty=0
+    )
+
+    return response['choices'][0]['text']
+
+print( openAI('Wong Kar-Wai', 'director') )

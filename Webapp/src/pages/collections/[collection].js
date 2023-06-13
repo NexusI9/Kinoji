@@ -18,22 +18,22 @@ export default function Collections(props){
   const [ infos, setInfos ] = useState([]);
   const [ movies, setMovies ] = useState([]);
   const [ directors, setDirectors ] = useState([]);
+ 
+  console.log(props.peoples);
 
-
-  useEffect( () => {
+  /*seEffect( () => {
 
     if(collection){
       const {post} = useAPI();
       post({type:'getGenre', genre:collection}).then( ({data}) =>  setInfos(data) );
       post({type:'getMoviesFromGenre', genre:collection, limit:null}).then( ({data}) => setMovies(data) );
       post({type:'getDirFromGenre', genre:collection}).then( ({data}) =>  { 
-        console.log({data});
         setDirectors(data) 
       });
     }
 
   
-  },[collection]);
+  },[collection]);*/
 
 
   return( 
@@ -84,7 +84,7 @@ export async function getStaticProps({params}) {
 
   const collection = await useAPI().fetch({type:'getGenre', genre: params.collection});
   const movies =  await useAPI().fetch({type: 'getMoviesFromGenre', genre: params.collection, limit:null});
-  const directors =  await useAPI().fetch({type: 'getDirFromGenre', genre: params.collection});
+  const peoples =  await useAPI().fetch({type: 'getPeoplesFromGenre', genre: params.collection});
 
   const { name } = collection[0];
 
@@ -92,7 +92,7 @@ export async function getStaticProps({params}) {
     props: {
       collection: collection,
       name: name,
-      directors: directors,
+      peoples: peoples,
       movies: movies
     } // Passed to the page component as props
   }

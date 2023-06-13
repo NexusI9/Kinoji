@@ -2,9 +2,12 @@
 
 include './connection.php';
 
-function filter_to_key($ar, $skey){
+function filter_to_key($ar, $skey, $unique=False){
   $tempar = array();
   foreach ($ar as $key => $value){ $tempar[$key] = $value[$skey]; }
+
+  $tempar = array_filter($tempar);
+  if($unique){ $tempar = array_unique($tempar); }
   return $tempar;
 }
 function add_percent($ar){
@@ -114,6 +117,35 @@ switch($body['type']){
     $directors = array_values($directors);
 
     echo json_encode($directors);
+    
+  break;
+
+
+  case 'getPeoplesFromGenre':
+
+    $moviesFromGenre = $connection->getMoviesFromGenre($body["genre"]);
+    $jobs = filter_to_key($connection->query("SELECT DISTINCT job FROM peoples"), 'job');
+    $peoples = array();
+
+    foreach ($jobs as $job) {
+      $peoples[$job] = filter_to_key($moviesFromGenre, $job, True);
+
+      foreach($peoples[$job] as $key => $peopleId){
+        $peoples[$job][$key] = $peopleId;
+      }
+
+      //$connection->query("SELECT * FROM peoples WHERE id = ?", [$peopleId])
+    }
+
+
+    echo json_encode($peoples);
+
+
+    /*
+    $directors = array_values($directors);
+
+    echo json_encode($directors);
+    */
     
   break;
 

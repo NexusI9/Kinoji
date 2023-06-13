@@ -33,6 +33,9 @@ class UpdateDatabase:
         return
 
     def commitSQL(self, tb, obj):
+        if(not obj or obj == None):
+            return
+        
         print("[...] Committing to Database")
         self.connector.update(table=tb,data=obj)
         print("> DONE !")
