@@ -51,7 +51,7 @@ export default function Collections(props){
 
       {collection &&
         <>
-          { (props.movies || movies) && (props.collection || infos).map( info => <Banner visual={<Pile movies={movies} />} category='collection' key={'banner_'+info.tag} header={info.name} summary={info.summary} source={info.source} spheros={true}/>) }
+          { props.movies && props.collection.map( info => <Banner visual={<Pile movies={ props.movies } />} category='collection' key={'banner_'+info.tag} header={info.name} summary={info.summary} source={info.source} spheros={true}/>) }
           { (props.directors || directors) &&
             <>
               <LabelBar label={'Directors'} hero={false} />
