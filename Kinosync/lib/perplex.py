@@ -5,7 +5,6 @@ import base64
 import time
 ppl = PerplexityAPI()
 
-openai.api_key = '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'
 
 
 BIOGRAPHY_PROMPT = """
