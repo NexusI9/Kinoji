@@ -130,11 +130,14 @@ switch($body['type']){
     foreach ($jobs as $job) {
       $peoples[$job] = filter_to_key($moviesFromGenre, $job, True);
 
+      
       foreach($peoples[$job] as $key => $peopleId){
-        $peoples[$job][$key] = $peopleId;
+        $peoples[$job][$key] = $connection->query("SELECT * FROM peoples WHERE id = ?", [$peopleId]);
+        if(isset($peoples[$job][$key][0])){ $peoples[$job][$key] = $peoples[$job][$key][0]; }
       }
 
-      //$connection->query("SELECT * FROM peoples WHERE id = ?", [$peopleId])
+      $peoples[$job] = array_values(array_filter($peoples[$job]));
+
     }
 
 
