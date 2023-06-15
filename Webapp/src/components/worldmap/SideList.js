@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { hasHistory, setEventDate } from '../../lib/utilities';
 import { motion } from 'framer-motion';
 
-const SideList = ({ country }) => {
+export default ({ country }) => {
 
 
 	const ListElement = ( {element, category} ) => {
@@ -69,5 +69,3 @@ const SideList = ({ country }) => {
 	);
 
 }
-
-export default SideList;

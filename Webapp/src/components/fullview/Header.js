@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Banner } from '..//movieobject';
 
-const Header = ({ movie }) => {
+export default ({ movie }) => {
 
     const router = useRouter();
   
@@ -21,5 +21,3 @@ const Header = ({ movie }) => {
           <div onClick={ () => router.back() } id='quitFullView' className='squareButton close'><span></span></div>
       </section>)
   }
-
-  export default Header;

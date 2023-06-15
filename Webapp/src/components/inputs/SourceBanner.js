@@ -1,4 +1,4 @@
-const SourceBanner = ({ sources }) => {
+export default ({ sources }) => {
 
     sources = sources.split(';');
   
@@ -22,5 +22,3 @@ const SourceBanner = ({ sources }) => {
       </div>
     );
   }
-
-  export default SourceBanner;

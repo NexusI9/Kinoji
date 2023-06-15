@@ -8,7 +8,7 @@ import ResultText from './ResultText';
 import noposter from '@/assets/noposter.jpg';
 import SearchFilter from './SearchFilter';
 
-const GlobalSearch = ({query}) => {
+export default ({query}) => {
 
     const [ content, setContent ] = useState();
     const rawContent = useRef();
@@ -85,5 +85,3 @@ const GlobalSearch = ({query}) => {
     );
   }
   
-
-  export default GlobalSearch;

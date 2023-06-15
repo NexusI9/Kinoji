@@ -5,7 +5,7 @@ import { Poster } from '../movieobject';
 import { LabelBar } from '../header';
 import useAPI from '../../lib/api';
 
-const LatestMovies = ({ number }) => {
+export default ({ number }) => {
 
     const [ movies, setMovies ] = useState([]);
 
@@ -31,5 +31,3 @@ const LatestMovies = ({ number }) => {
     );
   
   }
-
-  export default LatestMovies;

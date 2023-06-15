@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { ReadMore } from '../inputs';
 import { motion } from 'framer-motion';
 
-const ExpandableText = ({paragraph, height=200}) => {
+export default ({paragraph, height=200}) => {
 
     const ref = useRef(null);
     const [ hidden, setHidden ] = useState(false);
@@ -35,5 +35,3 @@ const ExpandableText = ({paragraph, height=200}) => {
     );
   
   }
-
-  export default ExpandableText;

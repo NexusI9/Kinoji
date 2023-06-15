@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 import noposter from '@/assets/noposter.jpg';
 
-const DirectorLabel = ({id, popup=true}) => {
+export default ({id, popup=true}) => {
 
     const [ dir, setDir ] = useState([]);
     const [ hover, setHover ] = useState(false);
@@ -52,6 +52,3 @@ const DirectorLabel = ({id, popup=true}) => {
       </div>
   );
 }
-
-
-export default DirectorLabel;

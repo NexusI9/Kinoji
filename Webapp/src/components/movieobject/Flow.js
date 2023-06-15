@@ -91,7 +91,7 @@ const Flow = ({ movies }) => {
   useEffect(() => {
 
     if(load){
-      //console.log(movieList[0]);
+
       const newContent = generateContent({
         movie_list: movieList,
         is_mosaic: mosaic,
@@ -102,13 +102,7 @@ const Flow = ({ movies }) => {
      setLoad(false);
     }
 
-
   }, [load]);
-
-  //useEffect(()=>{ setLoad(false); },[content]);
-
-
-
 
   return(
     <>

@@ -1,7 +1,7 @@
 
 import BannerSearch from "./BannerSearch";
 
-const HomeHeader = () => {
+export default () => {
 
     const list = [
         "539307929",
@@ -33,5 +33,3 @@ const HomeHeader = () => {
     );
   
   }
-
-  export default HomeHeader;

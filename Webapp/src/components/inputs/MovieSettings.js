@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Switcher from './Switcher';
 import MicroFilters from './MicroFilters';
 
-const MovieSettings = ({onChange, defaultCheck}) => {
+export default ({onChange, defaultCheck}) => {
 
     const [mosaic, setMosaic] = useState(false);
     const router = useRouter();
@@ -63,5 +63,3 @@ const MovieSettings = ({onChange, defaultCheck}) => {
       </div>
     );
   }
-
-  export default MovieSettings;

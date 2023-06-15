@@ -1,7 +1,7 @@
 import Button from './Button';
 import { useState } from 'react';
 
-const ReadMore = (props) => {
+export default (props) => {
 
     const [ state, setState ] = useState(false);
   
@@ -19,6 +19,4 @@ const ReadMore = (props) => {
   
     );
   }
-
-  export default ReadMore;
   

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { move } from '../../lib/utilities';
 
 
-const DropDown = ({ list, onChange=(_)=>0, name, id, filter, selected }) => {
+export default ({ list, onChange=(_)=>0, name, id, filter, selected }) => {
 
     const [expand, setExpand] = useState(false);
     const [organized, setOrganized ] = useState(list);
@@ -48,5 +48,3 @@ const DropDown = ({ list, onChange=(_)=>0, name, id, filter, selected }) => {
     );
   
   }
-
-  export default DropDown;

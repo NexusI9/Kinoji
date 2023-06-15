@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Tag } from '../inputs';
 import { LabelBar } from '../header';
 
-const TagBox = (props) => {
+export default (props) => {
 
     const { header, tags, type } = props;
     const [ tagChain, setTagChain ] = useState([]);
@@ -24,5 +24,3 @@ const TagBox = (props) => {
       </div>
     );
   }
-
-  export default TagBox;

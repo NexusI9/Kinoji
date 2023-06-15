@@ -1,4 +1,4 @@
-const Options = ({ id, label, icon }) => (
+export default ({ id, label, icon }) => (
     <span className='label'>
         { !icon ? <span className={'ico '+id}></span> : icon }
         {label && <p>
@@ -7,5 +7,3 @@ const Options = ({ id, label, icon }) => (
         }
     </span>
 );
-
-export default Options;

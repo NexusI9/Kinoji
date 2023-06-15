@@ -1,6 +1,6 @@
 import Options from "./Options";
 
-const Switcher = (props) => {
+export default (props) => {
 
     return (
       <section id='displaySwitch'>
@@ -14,6 +14,4 @@ const Switcher = (props) => {
     );
   
   }
-
-  export default Switcher;
   

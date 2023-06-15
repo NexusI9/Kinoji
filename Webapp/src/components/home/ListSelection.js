@@ -6,7 +6,7 @@ import { LabelBar } from '../header';
 import useAPI from '../../lib/api';
 import { shuffle_array } from '../../lib/utilities';
 
-const ListSelection = () => {
+export default () => {
 
     const [ genres, setGenres ] = useState([]);
     useEffect( () => {
@@ -27,5 +27,3 @@ const ListSelection = () => {
       </div>
     );
   }
-
-  export default ListSelection;

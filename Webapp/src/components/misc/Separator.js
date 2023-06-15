@@ -1,5 +1,3 @@
-const Separator = () => (
+export default () => (
   <span className='separator'></span>
-)
-
-export default Separator;
+);

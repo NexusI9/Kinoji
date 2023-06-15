@@ -8,7 +8,7 @@ import { ObjectToEvent, group, minMax } from './Timeline.helper';
 
 
 //CORE
-const Timeline = ({ country, width }) => {
+export default ({ country, width }) => {
 
   const margin = 200;
 
@@ -122,4 +122,3 @@ const Timeline = ({ country, width }) => {
   );
 }
 
-export default Timeline;

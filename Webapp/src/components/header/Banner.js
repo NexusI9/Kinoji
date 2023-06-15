@@ -2,7 +2,7 @@ import { Spheros } from '../misc';
 import ExpandableText from './ExpandableText';
 import { InfoTag } from '../header';
 
-const Banner = ({ hero=true, visual, header, summary, sources, spheros=false, category}) => {
+export default ({ hero=true, visual, header, summary, sources, spheros=false, category}) => {
 
     return(
       <div className='bannerFilter'>
@@ -21,5 +21,3 @@ const Banner = ({ hero=true, visual, header, summary, sources, spheros=false, ca
     );
   
   }
-
-  export default Banner;

@@ -1,7 +1,7 @@
 import { randomInt } from '../../lib/utilities';
 
 
-const Spheros = ({ number }) =>{
+export default ({ number }) =>{
 
   const settings = {
     maxRadius: 30,
@@ -37,5 +37,3 @@ const Spheros = ({ number }) =>{
   )
 
 }
-
-export default Spheros;

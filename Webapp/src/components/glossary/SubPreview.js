@@ -2,7 +2,7 @@ import {  Mosaic } from '../movieobject';
 import { ArrowLabel } from '../inputs';
 import { LabelBar } from '../header';
 
-const SubPreview = ({movie}) => (
+export default ({movie}) => (
     <>
       <LabelBar label='Preview' hero={false} hyperlink={  <ArrowLabel label='see the shots' link={`/movie/${movie.id}`} /> }/>
       <div>
@@ -12,5 +12,3 @@ const SubPreview = ({movie}) => (
       </div>
     </>
   )
-
-  export default SubPreview;

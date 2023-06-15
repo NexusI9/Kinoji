@@ -5,7 +5,7 @@ import { SoloContent, GroupContent } from './Event.children';
 import { AnimatePresence, motion } from 'framer-motion';
 
 
-const Event = ({ object, type, date, minmax, width, id}) => {
+export default ({ object, type, date, minmax, width, id}) => {
 
 
     const [ opacity, setOpacity ] = useState(0);
@@ -97,6 +97,3 @@ const Event = ({ object, type, date, minmax, width, id}) => {
     );
   
   }
-  
-
-  export default Event;

@@ -5,7 +5,7 @@ import useAPI from '@/lib/api';
 import { paramsToArray } from '@/lib/utilities';
 import ResultText from './ResultText';
 
-const TagSearch = ({tags, colours, subjects}) => {
+export default ({tags, colours, subjects}) => {
 
     const [ movies, setMovies ] = useState([]);
   
@@ -66,5 +66,3 @@ const TagSearch = ({tags, colours, subjects}) => {
       </>
     );
   }
-
-  export default TagSearch;

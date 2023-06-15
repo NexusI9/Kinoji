@@ -1,4 +1,4 @@
-const Tag = (props) => {
+export default (props) => {
 
     const {value} = props;
   
@@ -10,6 +10,4 @@ const Tag = (props) => {
     );
   
   }
-
-  export default Tag;
   

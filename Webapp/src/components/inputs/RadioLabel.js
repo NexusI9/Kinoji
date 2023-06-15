@@ -1,5 +1,5 @@
 //Inputs
-const RadioLabel = ({ id, labels, onClick}) => {
+export default ({ id, labels, onClick}) => {
 
 
     return(
@@ -18,5 +18,3 @@ const RadioLabel = ({ id, labels, onClick}) => {
     );
   }
   
-
-  export default RadioLabel;

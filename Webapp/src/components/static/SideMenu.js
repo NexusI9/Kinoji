@@ -4,7 +4,7 @@ import { Options } from '../inputs';
 import { useState, useEffect } from 'react';
 import * as Routing from '../../lib/routing';
 
-const SideMenu = () => {
+export default () => {
 
     const sideMenu = [
       {
@@ -52,5 +52,3 @@ const SideMenu = () => {
           </div>
     );
 }
-
-export default SideMenu;

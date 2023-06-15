@@ -2,7 +2,7 @@ import { Thumbnail } from '../movieobject';
 import { sortThumbnails } from '../../lib/utilities';
 
 
-const Thumbnails = ({movie}) => {
+export default ({movie}) => {
 
     let shots = movie.shots.split(';');
 
@@ -14,5 +14,3 @@ const Thumbnails = ({movie}) => {
     );
 
 }
-
-export default Thumbnails;

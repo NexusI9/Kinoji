@@ -1,8 +1,6 @@
-const Close = () => (
+export default () => (
     <span className='close'>
         <span></span>
         <span></span>
     </span>
 );
-
-export default Close;

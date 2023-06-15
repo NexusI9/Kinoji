@@ -1,4 +1,4 @@
-const AboutKinoji = () => {
+export default () => {
 
     return(
       <div id='aboutKinoji' className='container'>
@@ -21,5 +21,3 @@ const AboutKinoji = () => {
       </div>
     );
   }
-
-  export default AboutKinoji;

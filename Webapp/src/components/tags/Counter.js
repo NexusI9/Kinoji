@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { container } from '../../lib/variants';
 import qs from 'query-string';
 
-const Counter = ({results, titles}) => {
+export default ({results, titles}) => {
 
     const [ count, setCount ] = useState(0);
   
@@ -74,5 +74,3 @@ const Counter = ({results, titles}) => {
       </div>
     );
   }
-
-  export default Counter;

@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { container } from '../../lib/variants';
 import { gather } from './List.helper';
 
-const List = ({ id, query, value, link ,onEnter }) => {
+export default ({ id, query, value, link ,onEnter }) => {
 
     const [ list, setList ] = useState([]);
   
@@ -43,6 +43,3 @@ const List = ({ id, query, value, link ,onEnter }) => {
     );
   
   }
-
-  
-  export default List;

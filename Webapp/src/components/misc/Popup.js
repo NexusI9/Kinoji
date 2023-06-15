@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 
 
-const Popup = ({content, event, type='top', margin=0}) => {
+export default ({content, event, type='top', margin=0}) => {
 
   const x = event.target.offsetLeft + 40;
   const y = event.target.offsetTop + 2 * event.target.offsetHeight;
@@ -21,5 +21,3 @@ const Popup = ({content, event, type='top', margin=0}) => {
 
 
 };
-
-export default Popup;

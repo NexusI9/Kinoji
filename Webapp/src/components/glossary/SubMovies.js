@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Poster } from '../movieobject';
 import useAPI from '../../lib/api';
 
-const SubMovies = ({id}) => {
+export default ({id}) => {
 
     const [ movies, setMovies ] = useState();
     useEffect( () => {
@@ -23,5 +23,3 @@ const SubMovies = ({id}) => {
       </>
     );
   }
-
-  export default SubMovies;

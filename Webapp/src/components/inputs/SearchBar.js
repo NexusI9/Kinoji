@@ -7,7 +7,7 @@ import { InfoTag } from '../header';
 import ArrowLabel from './ArrowLabel';
 
 
-const SearchBar = ({ limit=5 }) => {
+export default ({ limit=5 }) => {
 
     const [ suggest, setSuggest ] = useState();
     const [ value, setValue ] = useState();
@@ -131,5 +131,3 @@ const SearchBar = ({ limit=5 }) => {
       </section>
     );
   }
-
-  export default SearchBar;

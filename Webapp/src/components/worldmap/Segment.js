@@ -1,6 +1,6 @@
 import { dateToPosition } from './Timeline.helper';
 
-const Segment = ({ object, width, minmax }) => (
+export default ({ object, width, minmax }) => (
     <div className='chrono_segments' style={{ left:dateToPosition(minmax, object.begin, width)+'px' }}>
       <span className='chrono_pillar'><p>{object.begin}</p></span>
       <section>
@@ -16,5 +16,3 @@ const Segment = ({ object, width, minmax }) => (
       </span>
     </div>
   );
-
-  export default Segment;

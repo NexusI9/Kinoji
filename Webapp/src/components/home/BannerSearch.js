@@ -2,7 +2,7 @@ import kinojilogo from '../../assets/logo.svg';
 import Link from 'next/link';
 import { SearchBar } from '../inputs';
 
-const BannerSearch = ({title, toolbar = false}) => {
+export default ({title, toolbar = false}) => {
     const tools = [
       {
         label:'glossary',
@@ -41,5 +41,3 @@ const BannerSearch = ({title, toolbar = false}) => {
       </div>
     );
   }
-
-  export default BannerSearch;

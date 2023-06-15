@@ -1,4 +1,4 @@
-const Countries = [
+export default [
 	{
 		name: "taiwan",
 		geo: {
@@ -150,5 +150,3 @@ const Countries = [
 		}
 	}
 ];
-
-export default Countries;

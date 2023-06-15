@@ -1,4 +1,4 @@
-const MicroFilters = ({ id, label, sort, name, onChange=(e)=>0, defaultCheck="false", ico, type='radio'}) => {
+export default ({ id, label, sort, name, onChange=(e)=>0, defaultCheck="false", ico, type='radio'}) => {
 
     return(
        <section className='microFilter' id={"micro_"+id}>
@@ -17,5 +17,3 @@ const MicroFilters = ({ id, label, sort, name, onChange=(e)=>0, defaultCheck="fa
        </section>
     );
   }
-
-  export default MicroFilters;

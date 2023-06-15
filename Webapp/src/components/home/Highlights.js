@@ -18,7 +18,7 @@ const variants = {
     }
 }
 
-const Highlights = ({number=3, speed=5000}) => {
+export default ({number=3, speed=5000}) => {
 
     const [ movies, setMovies ] = useState();
     const [ active, setActive ] = useState(false);
@@ -106,5 +106,3 @@ const Highlights = ({number=3, speed=5000}) => {
         </div>
     );
   }
-
-  export default Highlights;

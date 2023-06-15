@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 
-const Card = ({ visual, label, subtext, summary, link}) => (
+export default ({ visual, label, subtext, summary, link}) => (
 
     <div className='dirPopup_box'>
       <Link href={link}>
@@ -15,5 +15,3 @@ const Card = ({ visual, label, subtext, summary, link}) => (
     </div>
 
 );
-
-export default Card;

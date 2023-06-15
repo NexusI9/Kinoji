@@ -1,7 +1,7 @@
 import { MicroFilters } from '@/components/inputs';
 import { useEffect, useState } from 'react';
 
-const SearchFilter = ({onChange=e=>0, items={} }) => {
+export default ({onChange=e=>0, items={} }) => {
     
     
     const [searchFilter, setFilter] = useState();
@@ -49,5 +49,3 @@ const SearchFilter = ({onChange=e=>0, items={} }) => {
     )
     
 }
-
-export default SearchFilter;

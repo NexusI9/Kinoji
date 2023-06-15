@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 
 
 
-const Preview = ({ content }) => {
+export default Preview = ({ content }) => {
 
     const { header, subheader, summary, img, subcontent } = content;
   
@@ -29,5 +29,3 @@ const Preview = ({ content }) => {
       </div>
     );
   }
-
-  export default Preview;

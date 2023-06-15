@@ -4,7 +4,7 @@ import useAPI from '../../lib/api';
 import { Popup } from '../misc';
 
 
-const TagLabel = ({label, discrete=false, popup=true}) => {
+export default ({label, discrete=false, popup=true}) => {
 
     const [ summary, setSummary ] = useState();
     const [pop, setPop] = useState();
@@ -47,5 +47,3 @@ const TagLabel = ({label, discrete=false, popup=true}) => {
       </>
       )
     }
-
-    export default TagLabel;

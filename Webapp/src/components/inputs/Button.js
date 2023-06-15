@@ -1,8 +1,6 @@
-const Button = ({label, icon, onClick}) => (
+export default ({label, icon, onClick}) => (
     <div className='button' data-icon={icon ? 1 : 0} onClick={onClick}>
     {icon ? icon : <></>}
     <small>{label}</small>
     </div>
-)
-
-export default Button;
+);

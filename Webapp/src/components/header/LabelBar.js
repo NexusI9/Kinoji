@@ -1,4 +1,4 @@
-export const LabelBar = ({label, ico , hyperlink, hero=true, underline=true, sticky=false}) => {
+export default ({label, ico , hyperlink, hero=true, underline=true, sticky=false}) => {
 
     ico = ico ? <span className={'ico bigico '+ ico}></span> : null;
     return(
@@ -9,5 +9,3 @@ export const LabelBar = ({label, ico , hyperlink, hero=true, underline=true, sti
     
     );
 }
-
-export default LabelBar;

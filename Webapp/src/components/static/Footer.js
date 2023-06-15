@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { container } from '../../lib/variants';
 
 
-const Footer = () => {
+export default () => {
 
   const footer = [
     {
@@ -59,5 +59,3 @@ const Footer = () => {
     </motion.footer>
   );
 }
-
-export default Footer;

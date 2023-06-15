@@ -8,7 +8,7 @@ import * as Routing from '../../lib/routing';
 import SideMenu from './SideMenu';
 
 
-const TopBar = () => {
+export default () => {
 
   const [ active, setActive ] = useState(true);
   const router = useRouter();
@@ -48,5 +48,3 @@ const TopBar = () => {
   );
 
 }
-
-export default TopBar;

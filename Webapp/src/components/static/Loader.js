@@ -1,4 +1,4 @@
-const Loader = () => (
+export default () => (
   <div id="loader">
 
     <div class='loader_band'>
@@ -29,5 +29,3 @@ const Loader = () => (
 
   </div>
 );
-
-export default Loader;
