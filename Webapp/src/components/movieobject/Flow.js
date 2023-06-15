@@ -19,7 +19,7 @@ const Flow = ({ movies }) => {
   const [ movieList, setMovieList] = useState(movies);
   const [ mosaic, setMosaic ] = useState( mosaicParam == 1 );      //boolean
   const [ sort, setSort ] = useState('name');         //string
-  const [ content, setContent ] = useState( generateContent({ movie_list: movies, is_mosaic: false}) );         //react symbols
+  const [ content, setContent ] = useState( () => generateContent({ movie_list: movies, is_mosaic: false}) );         //react symbols
   const [load, setLoad] = useState(false); 
   
   //events
@@ -98,10 +98,8 @@ const Flow = ({ movies }) => {
         updateRef: (ref) => ref ? lastBlocks.current = ref.container.childNodes : 0
       });
 
-     if(newContent){ 
-      setContent({...newContent}); 
-      setLoad(false);
-    }else{ setLoad(false); }
+     if(newContent){ setContent({...newContent}); }
+     setLoad(false);
     }
 
 

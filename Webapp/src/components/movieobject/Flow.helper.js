@@ -21,7 +21,6 @@ const split = (array) => {
 
  //utilities
 export const sortBy = (filter, mvl) => {
-    console.log(mvl)
     switch(filter){
 
         case 'year':

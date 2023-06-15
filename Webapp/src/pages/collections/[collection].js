@@ -13,13 +13,9 @@ import Head from 'next/head';
 
 export default function Collections(props){
 
-  const router = useRouter()
+  const router = useRouter();
   const { collection } = router.query;
-  const [ infos, setInfos ] = useState([]);
-  const [ movies, setMovies ] = useState([]);
-  const [ directors, setDirectors ] = useState([]);
- 
-  console.log(props.peoples);
+
 
   /*seEffect( () => {
 
@@ -46,23 +42,23 @@ export default function Collections(props){
       className='container'
     >
       <Head>
-        <title>{(props.name || collection)} on Kinoji</title>
+        <title>{props.name} on Kinoji</title>
       </Head>
 
-      {collection &&
+      {props.collection &&
         <>
           { props.movies && props.collection.map( info => <Banner visual={<Pile movies={ props.movies } />} category='collection' key={'banner_'+info.tag} header={info.name} summary={info.summary} source={info.source} spheros={true}/>) }
-          { (props.directors || directors) &&
+          { (props.directors) &&
             <>
               <LabelBar label={'Directors'} hero={false} />
                 <div id='director_cardlist'>
                 { 
-                  (props.directors || directors).map( dir => <Card key={'dircard_genre_'+dir.id} label={dir.name} subtext={getDirectorDate(dir) ? '('+getDirectorDate(dir)+')' : ''} visual={<img src={dir.poster || noposter.src } />} link={'/director/'+dir.id} /> )
+                  props.directors.map( dir => <Card key={'dircard_genre_'+dir.id} label={dir.name} subtext={getDirectorDate(dir) ? '('+getDirectorDate(dir)+')' : ''} visual={<img src={dir.poster || noposter.src } />} link={'/director/'+dir.id} /> )
                 }
                 </div>
             </>
           }
-          {movies && <Flow movies={ (props.movies || movies) }/> }
+          {props.movies && <Flow movies={ props.movies }/> }
         </>
       }
     </motion.div> );
