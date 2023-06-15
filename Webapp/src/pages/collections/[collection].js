@@ -1,7 +1,8 @@
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import { Banner, LabelBar } from '@/components/header';
-import { Pile, Flow } from '@/components/movieobject';
+import { Banner, LabelBar, TabBar } from '@/components/header';
+import { Pile, Flow } from '@/components/movie';
+import { Poster } from '@/components/people';
 import { Card } from '@/components/inputs';
 import useAPI from '@/lib/api';
 import { container } from '@/lib/variants.js';
@@ -11,25 +12,11 @@ import noposter from '@/assets/noposter.jpg';
 import Head from 'next/head';
 
 
+
 export default function Collections(props){
 
-  const router = useRouter();
-  const { collection } = router.query;
-
-
-  /*seEffect( () => {
-
-    if(collection){
-      const {post} = useAPI();
-      post({type:'getGenre', genre:collection}).then( ({data}) =>  setInfos(data) );
-      post({type:'getMoviesFromGenre', genre:collection, limit:null}).then( ({data}) => setMovies(data) );
-      post({type:'getDirFromGenre', genre:collection}).then( ({data}) =>  { 
-        setDirectors(data) 
-      });
-    }
-
-  
-  },[collection]);*/
+  const tabs = Object.keys(props.peoples).map( job => ({job:job, name: job === 'director' ? 'Directors' : job === 'dop' ? 'Directors of Photography' : job === 'artdir' ? 'Art Directors' : ''}) );
+  const [people, setPeople] = useState(Object.keys(props.peoples)[0]);
 
 
   return( 
@@ -48,12 +35,12 @@ export default function Collections(props){
       {props.collection &&
         <>
           { props.movies && props.collection.map( info => <Banner visual={<Pile movies={ props.movies } />} category='collection' key={'banner_'+info.tag} header={info.name} summary={info.summary} source={info.source} spheros={true}/>) }
-          { (props.directors) &&
+          { (props.peoples) &&
             <>
-              <LabelBar label={'Directors'} hero={false} />
-                <div id='director_cardlist'>
+              <TabBar tabs={tabs} onChange={ (t) => setPeople(t.job) } name='peoplescollection'/>
+                <div className='people-cardlist'>
                 { 
-                  props.directors.map( dir => <Card key={'dircard_genre_'+dir.id} label={dir.name} subtext={getDirectorDate(dir) ? '('+getDirectorDate(dir)+')' : ''} visual={<img src={dir.poster || noposter.src } />} link={'/director/'+dir.id} /> )
+                  props.peoples[people].map( ppl => <Poster key={'poster_genre_'+ppl.id} people={ppl} /> )
                 }
                 </div>
             </>

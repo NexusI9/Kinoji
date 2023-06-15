@@ -2,8 +2,8 @@
 import  { useState, useEffect, useRef } from 'react';
 import { shuffle_array } from '../../lib/utilities.js';
 import { motion } from 'framer-motion';
-import { movie_container, mosaic } from '../../lib/variants';
-import Thumbnail from './Thumbnail';
+import { movie_container, mosaic } from '../../lib/variants.js';
+import Thumbnail from './Thumbnail.js';
 
 
 const Mosaic = ({ movie, animate, random=false, limit, onThumbsLoaded=()=>0 }) => {

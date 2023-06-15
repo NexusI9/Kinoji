@@ -2,7 +2,7 @@ import useAPI from '@/lib/api';
 import React, { useState, useEffect } from 'react';
 import { Popup, Separator } from '../misc';
 import { Banner } from '../header';
-import { Poster } from '../movieobject';
+import { Poster } from '../movie';
 import { firstSentenceOf } from '@/lib/utilities';
 import Link from 'next/link';
 
