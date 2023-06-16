@@ -1,27 +1,24 @@
 import useAPI from '@/lib/api';
-import {useEffect, useState} from 'react';
-import { useRouter } from 'next/router';
 import { Banner } from '@/components/header';
 import { Flow } from '@/components/movie';
-
 import { container } from '@/lib/variants.js';
 import { motion } from 'framer-motion';
-
+import { jobFullName } from '@/lib/utilities';
 import noposter from '@/assets/noposter.jpg';
 import Head from 'next/head';
 
-function Director(props){
+function People(props){
 
 return(
   <div className='container'>
     <Head>
-      <title>{ props.director[0].name } on Kinoji</title>
+      <title>{ props.people[0].name } on Kinoji</title>
     </Head>
   {
-    props.director.map( infos => <Banner
+    props.people.map( infos => <Banner
         key={'director_banner_'+infos.id}
         visual={<img alt={'poster_banner_'+infos.name} src={infos.poster || noposter.src } /> }
-        category={'director'}
+        category={ jobFullName(infos.job) }
         header={infos.name}
         summary={infos.summary || ''}
         sources={infos.source}
@@ -41,27 +38,27 @@ return(
   );
 }
 
-export default Director;
+export default People;
 
 
 // Generates `/movies/1` and `/movies/2`
 export async function getStaticPaths() {
-  const directors = await useAPI().fetch('getAllDirectors');
+  const peoples = await useAPI().fetch('getAllPeoples');
   
   return {
-    paths: directors.map( ({id}) => ({ params: { id: id.toString() } }) ),
+    paths: peoples.map( ({id}) => ({ params: { id: id.toString() } }) ),
     fallback: false, // can also be true or 'blocking'
   }
 }
 // `getStaticPaths` requires using `getStaticProps`
 export async function getStaticProps({params}) {
-  const director = await useAPI().fetch({type:'getDirectorFromId', id:params.id});
-  const dirMovies = await useAPI().fetch({type:'getMoviesFromDir', id:params.id});
-  console.log(director);
+  const people = await useAPI().fetch({type:'getPeopleFromId', id:params.id});
+  const peopleMovie = await useAPI().fetch({type:'getMoviesFromPeople', id:params.id});
+  console.log(people);
   return {
     props: {
-      director:director,
-      movies:dirMovies
+      people:people,
+      movies:peopleMovie
     } // Passed to the page component as props
   }
 }

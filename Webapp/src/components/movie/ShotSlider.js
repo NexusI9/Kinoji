@@ -1,7 +1,7 @@
 import useAPI from "../../lib/api";
 import { useState, useEffect, useRef } from 'react';
 import { ArrowLabel } from "../inputs";
-import { DirectorLabel } from "../people";
+import { PeopleLabel } from "../people";
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from "next/link";
 import { InfoTag } from "../header";
@@ -104,7 +104,7 @@ const ShotSlider = ({number=6, nav=false}) => {
                                             <div>
                                                 <h4><Link href={`/movies/${currentShot.movie.id}`}>{ currentShot.movie.title }<span className="light"> ({currentShot.movie.date?.split('-')[0]})</span></Link> </h4>
                                                 <section>
-                                                    <DirectorLabel id={currentShot.movie.director} popup={false} /> <InfoTag>director</InfoTag> 
+                                                    <PeopleLabel id={currentShot.movie.director} popup={false} /> <InfoTag>director</InfoTag> 
                                                 </section>
                                             </div>
                                     </motion.div>

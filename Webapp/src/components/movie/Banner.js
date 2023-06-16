@@ -1,6 +1,6 @@
 //Movie Objects
 import Link from 'next/link';
-import { DirectorLabel } from '../people';
+import { PeopleLabel } from '../people';
 import { getMovieYear,} from '../../lib/utilities.js';
 import { TagLabel, TMDBLink } from '../inputs';
 import { Spheros } from '../misc';
@@ -27,7 +27,7 @@ const Banner = ({ movie, summary=true, linked=true, spheros=false, tags=true}) =
             }
             <TMDBLink link={'https://www.themoviedb.org/movie/'+movie.id} />
             </div>
-              <DirectorLabel id={movie.director} />
+              <PeopleLabel id={movie.director} />
               <InfoTag>director</InfoTag>
             <br></br>
           {summary && <p className='summary'>{movie.summary}</p> }

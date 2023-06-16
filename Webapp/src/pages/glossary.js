@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { RadioLabel} from '@/components/inputs';
-import { DirectorLabel } from '@/components/people';
+import { PeopleLabel } from '@/components/people';
 import { setDate, List, Preview, SubMovies, SubPreview } from '@/components/glossary';
 import Head from 'next/head';
 
@@ -15,7 +15,7 @@ const Glossary = () => {
       preview: (item) => ({
 
           header: <Link href={'/movies/'+item.id}>{item.title}</Link>,
-          subheader: <Link href={'/director/'+item.director} className='link underline'><DirectorLabel id={ item.director } /></Link>,
+          subheader: <Link href={'/director/'+item.director} className='link underline'><PeopleLabel id={ item.director } /></Link>,
           img: item.poster || require('../assets/noposter.jpg'),
           summary: item.summary,
           subcontent: <SubPreview movie={item}/>

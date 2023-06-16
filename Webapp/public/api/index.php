@@ -80,6 +80,25 @@ switch($body['type']){
     echo json_encode( $connection->getMoviesFromGenre($body["genre"], $body["limit"]) );
   break;
 
+
+  //--------PEOPLES
+
+
+  case 'getAllPeoples':
+    echo json_encode( $connection->query("SELECT * FROM peoples") );
+  break;
+
+  case 'getPeopleFromId':
+    echo json_encode( $connection->query("SELECT * FROM peoples WHERE id = ?", [ $body['id'] ]) );
+  break;
+
+  case 'getMoviesFromPeople':
+    $id = $body['id'];
+    echo json_encode( $connection->query("SELECT * from movies WHERE director = ? OR dop = ? OR artdir = ?", [$id, $id, $id]) );
+  break;
+
+
+
   //--------DIRECTORS
   case 'getMoviesFromDir':
     echo json_encode( $connection->query("SELECT * from movies WHERE director = ?", [$body['id']]) );
@@ -278,7 +297,7 @@ switch($body['type']){
         "movies" => $connection->query("SELECT * FROM movies WHERE title LIKE ?",[$query]),
         "dops" => $connection->query("SELECT * FROM peoples WHERE name LIKE ? AND job='dop'",[$query]),
         "directors" => $connection->query("SELECT * FROM peoples WHERE name LIKE ? AND job='director' ",[$query]),
-        "artdir" => $connection->query("SELECT * FROM peoples WHERE name LIKE ? AND job='artdir' ",[$query]),
+        "artdirs" => $connection->query("SELECT * FROM peoples WHERE name LIKE ? AND job='artdir' ",[$query]),
         "collections" => $connection->query("SELECT * FROM genres WHERE name LIKE ?",[$query]),
         "colours" => $connection->query("SELECT DISTINCT family FROM colors WHERE family LIKE ?",[$query]),
     );

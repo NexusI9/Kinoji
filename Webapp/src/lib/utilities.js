@@ -4,6 +4,10 @@ export function shuffle_array(ar){
       return ar.sort( () => Math.random() - 0.5);
   }
 
+export function jobFullName(job){
+  return job === 'dop' ? 'Director of Photography' : job === 'artdir' ? 'Art Director' : job;
+}
+
 export function randomInt(mn, mx) { // min and max included
     mn = parseInt(mn);
     mx = parseInt(mx);

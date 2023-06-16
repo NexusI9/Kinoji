@@ -1,6 +1,6 @@
 import { getMovieYear, setEventDate, truncate } from '../../lib/utilities';
 import { Poster } from '../movie';
-import { DirectorLabel } from '../people';
+import { PeopleLabel } from '../people';
 import Link from 'next/link';
 
 
@@ -20,7 +20,7 @@ export function ObjectToEvent(item){
         header:  <Link href={'/movies/'+item.id} className='link' replace>{item.title}<span className='light'> ({getMovieYear(item)})</span></Link>,
         begin: getMovieYear(item),
         end:null,
-        subtext: <span className='link underline'><DirectorLabel id={item.director} popup={false} /></span>,
+        subtext: <span className='link underline'><PeopleLabel id={item.director} popup={false} /></span>,
         summary: item.summary ? truncate(item.summary, 120) : '',
         poster: <Poster movie={item} size='small'/> || false,
         id:item.id,

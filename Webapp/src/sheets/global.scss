@@ -652,7 +652,7 @@ a{
 
 
   &.small{
-    width: calc(100vw/14);
+    width: 100px;
     height:auto;
     margin-right: 0;
   }
@@ -2280,6 +2280,11 @@ a{
     border-bottom: solid 0px var(--paper);
     position: relative;
 
+    &.inactive{
+      pointer-events: none;
+      color:var(--blue70);
+    }
+
     &::after{
       content:'';
       position: absolute;
@@ -2916,9 +2921,16 @@ a{
     .rubrique{ width: 100%; margin-bottom: 20px; }
   }
 
-  #searchPersonnalities{
+  #search-personnalities{
     display: flex;
     flex-direction: column;
+
+    .people-cardlist{
+      display: grid;
+      .people-poster{
+        max-width: 150px;
+      }
+    }
   }
 
   .tab-bar{

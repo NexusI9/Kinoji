@@ -20,10 +20,10 @@ export default ({id, popup=true}) => {
 
     useEffect(() => {
       const { post } = useAPI();
-      post({type:'getDirectorFromId', id:id}).then( ({data}) => setDir(data) );
+      post({type:'getPeopleFromId', id:id}).then( ({data}) => setDir(data) );
 
       if(hover && dir.length && popup){
-          post({type:'getMoviesFromDir', id:id}).then( result => {
+          post({type:'getMoviesFromPeople', id:id}).then( result => {
           const movies = result.data;
           setPop({
             content:
@@ -47,7 +47,7 @@ export default ({id, popup=true}) => {
 
     return (
       <div style={{display:'inline-block'}}  onMouseEnter={ onMouseEnter } onMouseLeave={ onMouseLeave } >
-        {dir.map( ({id, name}) => <Link key={`dir${id}`} href={/director/+id} className='link' replace>{name}</Link> ) }
+        {dir.map( ({id, name}) => <Link key={`dir${id}`} href={`/people/${id}`} className='link' replace>{name}</Link> ) }
         { pop && <Popup content={pop.content}  event={pop.event} margin={20} /> }
       </div>
   );
