@@ -1,6 +1,6 @@
 import { getMovieYear, setEventDate, truncate } from '../../lib/utilities';
 import { Poster } from '../movie';
-import { DirectorLabel } from '../api';
+import { DirectorLabel } from '../people';
 import Link from 'next/link';
 
 

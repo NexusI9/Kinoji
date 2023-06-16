@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Rubrique } from '@/components/movieobject';
+import { Rubrique } from '@/components/movie';
 import useAPI from '@/lib/api';
 import { container } from '@/lib/variants.js';
 import { motion } from 'framer-motion';

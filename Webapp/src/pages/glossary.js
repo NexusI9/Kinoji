@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { RadioLabel} from '@/components/inputs';
-import { DirectorLabel } from '@/components/api';
+import { DirectorLabel } from '@/components/people';
 import { setDate, List, Preview, SubMovies, SubPreview } from '@/components/glossary';
 import Head from 'next/head';
 

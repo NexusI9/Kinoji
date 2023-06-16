@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState }  from 'react';
 import { Cta } from '../inputs';
-import { Poster } from '../movieobject';
+import { Poster } from '../movie';
 import { LabelBar } from '../header';
 import useAPI from '../../lib/api';
 

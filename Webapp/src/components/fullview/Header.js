@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { Banner } from '..//movieobject';
+import { Banner } from '../movie';
 
 export default ({ movie }) => {
 

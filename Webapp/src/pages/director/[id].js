@@ -2,7 +2,7 @@ import useAPI from '@/lib/api';
 import {useEffect, useState} from 'react';
 import { useRouter } from 'next/router';
 import { Banner } from '@/components/header';
-import { Flow } from '@/components/movieobject';
+import { Flow } from '@/components/movie';
 
 import { container } from '@/lib/variants.js';
 import { motion } from 'framer-motion';
@@ -20,7 +20,7 @@ return(
   {
     props.director.map( infos => <Banner
         key={'director_banner_'+infos.id}
-        visual={<img alt={'poster_banner_'+infos.name} src={infos.poster || noposter } /> }
+        visual={<img alt={'poster_banner_'+infos.name} src={infos.poster || noposter.src } /> }
         category={'director'}
         header={infos.name}
         summary={infos.summary || ''}

@@ -1,5 +1,5 @@
 import { LabelBar } from '@/components/header';
-import { Poster, Rubrique} from '@/components/movieobject';
+import { Poster, Rubrique} from '@/components/movie';
 import { Card } from '@/components/inputs';
 import { useState, useEffect, useRef } from 'react';
 import useAPI from '@/lib/api';
@@ -62,7 +62,7 @@ export default ({query}) => {
           { content.movies?.length && 
                 <div style={{display:'inline-block', width:'100%'}}>
                     <LabelBar label='Movies' hero={false}/>
-                    <div className='movie_wrapper'>{categoryMap.movies(content.movies)}</div>
+                    <div className='movie-wrapper'>{categoryMap.movies(content.movies)}</div>
                 </div> 
                 
             }

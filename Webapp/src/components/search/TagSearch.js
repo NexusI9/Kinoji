@@ -1,4 +1,4 @@
-import { Flow } from '@/components/movieobject';
+import { Flow } from '@/components/movie';
 import { TagLabel, ColourLabel } from '@/components/inputs';
 import { useState, useEffect } from 'react';
 import useAPI from '@/lib/api';

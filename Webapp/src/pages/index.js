@@ -2,7 +2,7 @@
 import React, { useEffect }  from 'react';
 import { motion } from 'framer-motion';
 import { container } from '@/lib/variants.js';
-import { ShotSlider } from '@/components/movieobject';
+import { ShotSlider } from '@/components/movie';
 import { HomeHeader, LatestMovies, ListSelection, AboutKinoji, Highlights } from '@/components/home';
 import Head from 'next/head';
 

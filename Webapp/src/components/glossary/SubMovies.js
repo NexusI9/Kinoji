@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Poster } from '../movieobject';
+import { Poster } from '../movie';
 import useAPI from '../../lib/api';
 
 export default ({id}) => {

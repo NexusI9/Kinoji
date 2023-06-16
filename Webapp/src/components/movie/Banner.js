@@ -1,6 +1,6 @@
 //Movie Objects
 import Link from 'next/link';
-import { DirectorLabel } from '../api';
+import { DirectorLabel } from '../people';
 import { getMovieYear,} from '../../lib/utilities.js';
 import { TagLabel, TMDBLink } from '../inputs';
 import { Spheros } from '../misc';

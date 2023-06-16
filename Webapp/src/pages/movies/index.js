@@ -1,4 +1,4 @@
-import { Bundle, Flow } from '@/components/movieobject';
+import { Flow } from '@/components/movie';
 import { useEffect, useState } from 'react';
 import useAPI from '@/lib/api';
 import { container } from '@/lib/variants.js';

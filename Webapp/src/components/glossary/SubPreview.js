@@ -1,4 +1,4 @@
-import {  Mosaic } from '../movieobject';
+import {  Mosaic } from '../movie';
 import { ArrowLabel } from '../inputs';
 import { LabelBar } from '../header';
 

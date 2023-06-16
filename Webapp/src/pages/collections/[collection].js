@@ -1,25 +1,21 @@
-import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
-import { Banner, LabelBar, TabBar } from '@/components/header';
+import { useState } from 'react';
+import { Banner, TabBar } from '@/components/header';
 import { Pile, Flow } from '@/components/movie';
 import { Poster } from '@/components/people';
-import { Card } from '@/components/inputs';
 import useAPI from '@/lib/api';
 import { container } from '@/lib/variants.js';
-import { motion } from 'framer-motion';
-import { getDirectorDate } from '@/lib/utilities';
-import noposter from '@/assets/noposter.jpg';
+import { AnimatePresence, motion } from 'framer-motion';
 import Head from 'next/head';
 
 
 
-export default function Collections(props){
+export default function Collections(props) {
 
-  const tabs = Object.keys(props.peoples).map( job => ({job:job, name: job === 'director' ? 'Directors' : job === 'dop' ? 'Directors of Photography' : job === 'artdir' ? 'Art Directors' : ''}) );
+  const tabs = Object.keys(props.peoples).map(job => ({ job: job, name: job === 'director' ? 'Directors' : job === 'dop' ? 'Directors of Photography' : job === 'artdir' ? 'Art Directors' : '' }));
   const [people, setPeople] = useState(Object.keys(props.peoples)[0]);
 
 
-  return( 
+  return (
     <motion.div
       variants={container}
       initial='initial'
@@ -34,40 +30,42 @@ export default function Collections(props){
 
       {props.collection &&
         <>
-          { props.movies && props.collection.map( info => <Banner visual={<Pile movies={ props.movies } />} category='collection' key={'banner_'+info.tag} header={info.name} summary={info.summary} source={info.source} spheros={true}/>) }
-          { (props.peoples) &&
+          {props.movies && props.collection.map(info => <Banner visual={<Pile movies={props.movies} />} category='collection' key={'banner_' + info.tag} header={info.name} summary={info.summary} source={info.source} spheros={true} />)}
+          {(props.peoples) &&
             <>
-              <TabBar tabs={tabs} onChange={ (t) => setPeople(t.job) } name='peoplescollection'/>
-                <div className='people-cardlist'>
-                { 
-                  props.peoples[people].map( ppl => <Poster key={'poster_genre_'+ppl.id} people={ppl} /> )
-                }
-                </div>
+              <TabBar tabs={tabs} onChange={(t) => setPeople(t.job)} name='peoplescollection' />
+              <div className='people-cardlist default-grid' >
+                <AnimatePresence mode='wait'>
+                  {
+                    props.peoples[people].map( (ppl,id) => <Poster key={'poster_genre_' + ppl.id} people={ppl} delay={id/30} />)
+                  }
+                </AnimatePresence>
+              </div>
             </>
           }
-          {props.movies && <Flow movies={ props.movies }/> }
+          {props.movies && <Flow movies={props.movies} />}
         </>
       }
-    </motion.div> );
+    </motion.div>);
 }
 
 
 
 //Generates `/movies/1` and `/movies/2`
 export async function getStaticPaths() {
-  const collections = await useAPI().fetch({type:'getGenre', genre:''}); 
+  const collections = await useAPI().fetch({ type: 'getGenre', genre: '' });
 
   return {
-    paths: collections.map( ({name}) => ({ params: { collection: name.toString() } }) ),
+    paths: collections.map(({ name }) => ({ params: { collection: name.toString() } })),
     fallback: false, // can also be true or 'blocking'
   }
 }
 // `getStaticPaths` requires using `getStaticProps`
-export async function getStaticProps({params}) {
+export async function getStaticProps({ params }) {
 
-  const collection = await useAPI().fetch({type:'getGenre', genre: params.collection});
-  const movies =  await useAPI().fetch({type: 'getMoviesFromGenre', genre: params.collection, limit:null});
-  const peoples =  await useAPI().fetch({type: 'getPeoplesFromGenre', genre: params.collection});
+  const collection = await useAPI().fetch({ type: 'getGenre', genre: params.collection });
+  const movies = await useAPI().fetch({ type: 'getMoviesFromGenre', genre: params.collection, limit: null });
+  const peoples = await useAPI().fetch({ type: 'getPeoplesFromGenre', genre: params.collection });
 
   const { name } = collection[0];
 

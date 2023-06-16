@@ -1,4 +1,4 @@
-import { Thumbnail } from '../movieobject';
+import { Thumbnail } from '../movie';
 import { sortThumbnails } from '../../lib/utilities';
 
 

@@ -1,4 +1,4 @@
-import { Bundle, Flow } from '@/components/movieobject';
+import { Bundle } from '@/components/movie';
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react';
 

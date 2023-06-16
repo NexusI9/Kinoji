@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState }  from 'react';
 import { Cta } from '../inputs';
-import { Rubrique } from '../movieobject';
+import { Rubrique } from '../movie';
 import { LabelBar } from '../header';
 import useAPI from '../../lib/api';
 import { shuffle_array } from '../../lib/utilities';

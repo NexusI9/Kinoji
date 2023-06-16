@@ -86,7 +86,7 @@
       width: 100%;
     }
   }
-  .movie_poster{
+  .movie-poster{
       width: calc((100vw / 4.9));
       height: 30vw;
   }
@@ -130,7 +130,7 @@
     margin-top: 90px;
   }
 
-  .movie_wrapper{
+  .movie-wrapper{
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
   }
@@ -151,7 +151,7 @@
   }
 
 
-  .movie_poster{
+  .movie-poster{
       width: calc((100vw / 3.65));
       height: 40vw;
   }
