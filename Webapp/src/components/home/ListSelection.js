@@ -15,7 +15,7 @@ export default () => {
     }, []);
   
     return(
-      <div className='container'>
+      <section className='container'>
         <LabelBar 
           label='Collections' 
           hyperlink= { <Cta to='/collections' type='secondary'>See all collections</Cta> } 
@@ -24,6 +24,6 @@ export default () => {
         <div id='rubrique_container'>
           { shuffle_array(genres).slice(0,4).map( (genre,i) => <Rubrique key={'rubrique_'+i} genre={genre} /> ) }
         </div>
-      </div>
+      </section>
     );
   }

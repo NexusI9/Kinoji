@@ -18,16 +18,16 @@ export default ({ number }) => {
   
   
     return(
-      <div id='latest' className='container'>
+      <section id='latest' className='container'>
         <LabelBar 
           label='New on Kinoji' 
           hyperlink= { <Cta to='/movies' type='secondary'>See all movies</Cta> } 
           underline={false}
           />
-        <section>
+        <div>
           { movies.map( movie => <Poster key={'poster_'+movie.id} movie={movie}/> ) }
-        </section>
-      </div>
+        </div>
+      </section>
     );
   
   }

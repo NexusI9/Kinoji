@@ -5,7 +5,7 @@
 /* CSS Document */
 
 @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@100;400;600&family=Barlow:ital,wght@0,300;0,400;0,500;1,400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;800&display=swap');
 
 
 
@@ -165,7 +165,7 @@ body{
 
 h1,h2,h3,h4{
   font-family: 'Fira Sans', sans-serif;
-  font-weight: bold;
+  font-weight: 600;
   color:var(--paper);
   &.big{ font-size: 64px; }
 }
@@ -688,21 +688,64 @@ a{
   justify-content: center;
 }
 
+.amount-container{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  align-items: center;
+  max-width: 1920px;
+
+  h3{
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    color:var(--paper);
+    font-size: clamp(30px, 8vw, 170px);
+    font-style: italic;
+    font-weight: 800;
+    line-height: 0.7em;
+    transform: translateX(-0.5em);
+
+    &:not(:nth-of-type(2)){ margin-top: 200px; }
+    span{
+      font-weight: 600;
+      background: linear-gradient(180deg, #B11212 50%, #07070C 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      margin-left: 3em;
+      font-size: clamp(30px, 4vw, 170px);
+      font-style: normal;
+    }
+  }
+
+}
+
 .highlight_container{
 
-  &::before{
-    content: '';
+  &>svg{
     position: absolute;
-    display: block;
-    width: 100%;
-    height: 1px;
     left: 0;
     top: 0;
-    //background-image: linear-gradient(90deg, transparent, var(--blue50), transparent);
   }
+
+  &::before{
+    content:'';
+    width:100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    z-index: -1;
+    background-image: radial-gradient(circle at center, #264370 -60%, transparent 60%);
+  }
+
   &.container{ 
-    padding-top: 100px; 
-    @include footer-margin();
+    padding-top: 200px; 
+    margin-bottom: 500px;
+    
   }
 
   min-height: 100vh;
@@ -789,7 +832,7 @@ a{
   align-items: center;
   @include round.round-border;
 
-  &::before{
+  /*&::before{
     content:'';
     width:200%;
     height: 200%;
@@ -797,7 +840,7 @@ a{
     position: absolute;
     z-index: -1;
     background-image: radial-gradient(circle at center, #264370 -60%, transparent 60%);
-  }
+  }*/
 
   .shotslider{
 
@@ -2252,7 +2295,7 @@ a{
   position: relative;
   margin-bottom: 10%;
   margin-top: -3%;
-  & > section{
+  & > div:last-of-type{
     display: grid;
     grid-template-columns: repeat(7, auto);
     gap: 20px;

@@ -19,7 +19,7 @@ export default () => {
   
     return(
   
-      <div id='homeheader'>
+      <section id='homeheader'>
   
         <div id='videobanner'>
         <script src='https://player.vimeo.com/api/player.js'></script>
@@ -28,7 +28,7 @@ export default () => {
         </div>
         <BannerSearch title='Your Asian Cinema visual library'/>
         </div>
-      </div>
+      </section>
   
     );
   

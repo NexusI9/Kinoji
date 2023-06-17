@@ -26,6 +26,11 @@ $body = json_decode(file_get_contents('php://input'),true);
 
 switch($body['type']){
 
+  //---------EMAIL
+  case 'addLead':
+    echo json_encode( $connection->query("INSERT INTO leads (name, email) VALUES (?, ?)",  [ $body['email'],$body['name'] ] ) );
+  break;
+
   //--------MOVIES
   case 'getLatestMovies':
     echo json_encode( $connection->query("SELECT * FROM movies ORDER BY added DESC LIMIT ?",  [ $body['limit'] ] ) );
