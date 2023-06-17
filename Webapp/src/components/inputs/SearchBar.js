@@ -6,6 +6,7 @@ import useAPI from '../../lib/api';
 import { InfoTag } from '../header';
 import ArrowLabel from './ArrowLabel';
 
+import noposter from '@/assets/noposter.jpg';
 
 export default ({ limit = 5 }) => {
 
@@ -39,7 +40,7 @@ export default ({ limit = 5 }) => {
       directors: (obj) =>
         <Link key={'suggestdir' + obj.id} href={'/people/' + obj.id} onClick={onClick}>
           <li className='suggest suggest_poster'>
-            <img src={obj.poster || require('../../assets/noposter.jpg')} />
+            <img src={obj.poster || noposter.src} />
             <div>
               <p>{obj.name}</p>
               <InfoTag>director</InfoTag>

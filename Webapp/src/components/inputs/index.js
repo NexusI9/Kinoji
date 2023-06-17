@@ -17,3 +17,5 @@ export { default as Tag } from './Tag';
 export { default as TagLabel } from './TagLabel';
 export { default as TMDBLink } from './TMDBLink';
 export { default as Cta } from './Cta';
+export { default as Text } from './Text';
+export { default as Form } from './Form';
