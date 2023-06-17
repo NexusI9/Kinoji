@@ -2,8 +2,6 @@ import { Fragment } from "react";
 
 export default ({ tabs = [], onChange = _ => 0, name = ''}) => {
     
-    console.log(tabs);
-    
     return (<div className="tab-bar underline">
         {
             tabs.map((tab, i) => {
