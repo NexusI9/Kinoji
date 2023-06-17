@@ -40,7 +40,7 @@ export default ({ number = 3, speed = 5000 }) => {
         clearInterval(interval.current);
 
         const { post } = useAPI();
-        post({ type: 'getRandomMovies', limit: number * 2 }).then(result => {
+        post({ type: 'GET_RANDOM_MOVIES', limit: number * 2 }).then(result => {
             const { data } = result;
             const splitted = [];
             const chunkSize = 2;

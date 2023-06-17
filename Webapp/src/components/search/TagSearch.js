@@ -14,10 +14,10 @@ export default ({tags, colours, subjects}) => {
         const promiseArray = [];
         
         if(tags){
-          promiseArray.push( post({type:'getMoviesFromTags', tags:paramsToArray(tags)}).then( ({data}) => ({tags:data || []}) ) );
+          promiseArray.push( post({type:'GET_MOVIES_FROM_TAGS', tags:paramsToArray(tags)}).then( ({data}) => ({tags:data || []}) ) );
         }
         if(colours){
-          promiseArray.push(  post({type:'getMoviesFromColours', colours:paramsToArray(colours)}).then( ({data}) => ({colours:data || []}) ) );
+          promiseArray.push(  post({type:'GET_MOVIES_FROM_COLORS', colours:paramsToArray(colours)}).then( ({data}) => ({colours:data || []}) ) );
         }
 
         Promise.all(promiseArray).then( result => {

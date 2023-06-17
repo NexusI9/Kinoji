@@ -18,7 +18,7 @@ export default function FullView(){
 
     if(id && shot){
       const {post} = useAPI();
-      post({type:'getMovieFromId', id:id}).then(result => {
+      post({type:'GET_MOVIE_FROM_ID', id:id}).then(result => {
         setMovie(result.data);
       });
     }

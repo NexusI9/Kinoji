@@ -19,7 +19,7 @@
 
 #assets
 /Webapp/public/assets/
-/Webapp/public/api/connection.php
+/Webapp/public/api/lib/connection.php
 
 # misc
 .DS_Store

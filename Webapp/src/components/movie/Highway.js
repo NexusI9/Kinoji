@@ -8,7 +8,7 @@ const Highway = ({number}) => {
     const [ shots, setShots ] = useState();
   
     useEffect(() => {
-         FetchAPI.post({type:'getRandomShots', limit:number}).then( result => { return setShots(result.data) });
+         FetchAPI.post({type:'GET_RANDOM_SHOTS', limit:number}).then( result => { return setShots(result.data) });
     }, [number]);
   
     return(

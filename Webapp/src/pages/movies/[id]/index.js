@@ -21,7 +21,7 @@ function Movie(props){
       const {post} = useAPI();
 
       if(id){
-        post({type:'getMovieFromId',id:id}).then( res => setMovie(res.data) );
+        post({type:'GET_MOVIE_FROM_ID',id:id}).then( res => setMovie(res.data) );
       }
 
   }, [id]);
@@ -64,7 +64,7 @@ export default Movie;
 
 // Generates `/movies/1` and `/movies/2`
 export async function getStaticPaths() {
-  const movies = await useAPI().fetch('getAllMovies');
+  const movies = await useAPI().fetch('GET_ALL_MOVIES');
   return {
     paths: movies.map( ({id}) => ({ params: { id: id.toString() } }) ),
     fallback: false, // can also be true or 'blocking'
@@ -72,7 +72,7 @@ export async function getStaticPaths() {
 }
 // `getStaticPaths` requires using `getStaticProps`
 export async function getStaticProps({params}) {
-  const movies = await useAPI().fetch('getAllMovies');
+  const movies = await useAPI().fetch('GET_ALL_MOVIES');
   const movie = movies.filter(mv => mv.id.toString() == params.id.toString());
   
   return {

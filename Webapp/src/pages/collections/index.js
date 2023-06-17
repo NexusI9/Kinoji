@@ -13,7 +13,7 @@ export default function Collections(){
   useEffect( () => {
 
     const {post} = useAPI();
-    post({type:'getGenre',genre:''}).then( ({data}) =>  setGenres(data) );
+    post({type:'GET_COLLECTION',genre:''}).then( ({data}) =>  setGenres(data) );
 
   },[]);
 

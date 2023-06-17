@@ -11,7 +11,7 @@ export default () => {
     const [ genres, setGenres ] = useState([]);
     useEffect( () => {
       const api = useAPI();
-      api.post({type:'getGenre', genre:''}).then( result => setGenres(result.data));
+      api.post({type:'GET_COLLECTION', genre:''}).then( result => setGenres(result.data));
     }, []);
   
     return(

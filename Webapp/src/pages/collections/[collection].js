@@ -53,7 +53,7 @@ export default function Collections(props) {
 
 //Generates `/movies/1` and `/movies/2`
 export async function getStaticPaths() {
-  const collections = await useAPI().fetch({ type: 'getGenre', genre: '' });
+  const collections = await useAPI().fetch({ type: 'GET_COLLECTION', genre: '' });
 
   return {
     paths: collections.map(({ name }) => ({ params: { collection: name.toString() } })),
@@ -63,9 +63,9 @@ export async function getStaticPaths() {
 // `getStaticPaths` requires using `getStaticProps`
 export async function getStaticProps({ params }) {
 
-  const collection = await useAPI().fetch({ type: 'getGenre', genre: params.collection });
-  const movies = await useAPI().fetch({ type: 'getMoviesFromGenre', genre: params.collection, limit: null });
-  const peoples = await useAPI().fetch({ type: 'getPeoplesFromGenre', genre: params.collection });
+  const collection = await useAPI().fetch({ type: 'GET_COLLECTION', genre: params.collection });
+  const movies = await useAPI().fetch({ type: 'GET_MOVIES_FROM_COLLECTION', genre: params.collection, limit: null });
+  const peoples = await useAPI().fetch({ type: 'GET_PEOPLES_FROM_COLLECTION', genre: params.collection });
 
   const { name } = collection[0];
 

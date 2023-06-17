@@ -52,8 +52,8 @@ function Tags(){
 
     //set Tax Boxes
     const {post} = useAPI();
-    const colors = post({type:'getColors'}).then( result => result.data );
-    const tags = post({type:'getTags'}).then( result => result.data );
+    const colors = post({type:'GET_COLORS'}).then( result => result.data );
+    const tags = post({type:'GET_TAGS'}).then( result => result.data );
 
     Promise.all([colors, tags]).then( result => setTagBox([
       {header: 'Movies aesthetics', tags:result[1], type:'tag'},
@@ -61,8 +61,8 @@ function Tags(){
     ]));
 
 
-    const colourResults = colourChain.length > 0 ? FetchAPI.post({type:'getShotsWithColours', colours:colourChain, tags:tagChain}).then(result => result.data) : new Promise(resolve => resolve([]));
-    const tagResults = tagChain.length > 0 ? FetchAPI.post({type:'getMoviesFromTags', tags:tagChain}).then(result => result.data) : new Promise(resolve => resolve([]));
+    const colourResults = colourChain.length > 0 ? FetchAPI.post({type:'GET_SHOTS_WITH_COLORS', colours:colourChain, tags:tagChain}).then(result => result.data) : new Promise(resolve => resolve([]));
+    const tagResults = tagChain.length > 0 ? FetchAPI.post({type:'GET_MOVIES_FROM_TAGS', tags:tagChain}).then(result => result.data) : new Promise(resolve => resolve([]));
 
     Promise.all([tagResults, colourResults]).then( result => {
 

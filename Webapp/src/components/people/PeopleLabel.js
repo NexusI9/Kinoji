@@ -20,10 +20,10 @@ export default ({id, popup=true}) => {
 
     useEffect(() => {
       const { post } = useAPI();
-      post({type:'getPeopleFromId', id:id}).then( ({data}) => setDir(data) );
+      post({type:'GET_PEOPLE_FROM_ID', id:id}).then( ({data}) => setDir(data) );
 
       if(hover && dir.length && popup){
-          post({type:'getMoviesFromPeople', id:id}).then( result => {
+          post({type:'GET_MOVIES_FROM_PEOPLE', id:id}).then( result => {
           const movies = result.data;
           setPop({
             content:

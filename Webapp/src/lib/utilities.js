@@ -63,7 +63,7 @@ export function setEventDate(item){
 			return '';
 }
 
-export function getDirectorDate(dir){
+export function GET_DIRECTORDate(dir){
   if(!dir.deathday && dir.birthday){ return dir.birthday.split('-')[0]; }
   else if(dir.birthday && dir.deathday){ return  dir.birthday.split('-')[0]+'-'+dir.deathday.split('-')[0]; }
   return '';

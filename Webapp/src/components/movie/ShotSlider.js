@@ -42,7 +42,7 @@ const ShotSlider = ({number=6, nav=false}) => {
 
     useEffect(() => {
         const { post } = useAPI();
-        post({type:'getRandomShots', limit:number}).then( result => {
+        post({type:'GET_RANDOM_SHOTS', limit:number}).then( result => {
             shots.current = result.data;
             setShot( shots.current[index.current] ) 
         });

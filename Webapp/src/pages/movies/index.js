@@ -12,7 +12,7 @@ export default function Movies(){
   const [content, setContent] = useState();
   useEffect(() => {
       const {post} = useAPI();
-      post({type:'getAllMovies'}).then( res => {
+      post({type:'GET_ALL_MOVIES'}).then( res => {
         setContent(<Flow movies={res.data} />);
       });
 

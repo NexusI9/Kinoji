@@ -114,7 +114,7 @@ export default ({ limit = 5 }) => {
 
     if (query.length > 1) {
       const { post } = useAPI();
-      post({ type: 'getSuggestion', suggestion: query }).then(result => { console.log(result); return setSuggest(list(result.data, query)) });
+      post({ type: 'GET_SUGGESTION', suggestion: query }).then(result => { console.log(result); return setSuggest(list(result.data, query)) });
       window.addEventListener('click', onClick);
       setValue(query);
     } else {

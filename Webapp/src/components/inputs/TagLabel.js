@@ -15,7 +15,7 @@ export default ({label, discrete=false, popup=true}) => {
     
     useEffect(() => {
       const {post} =  useAPI();
-      post({type:'getTagSummary', tag:label}).then(result => setSummary(result.data.summary));
+      post({type:'GET_TAG_SUMMARY', tag:label}).then(result => setSummary(result.data.summary));
     
       if(summary && hover){
         setPop({

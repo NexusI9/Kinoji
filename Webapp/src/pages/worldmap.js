@@ -35,7 +35,7 @@ function Worldmap(){
 				);
 
 
-		post({type:'getAllHistory'}).then(result => {
+		post({type:'GET_ALL_HISTORY'}).then(result => {
 
 			//---fill up blob object (movies/events/segments)
 			const newCountries = result.data.map( histoCountry => {

@@ -29,7 +29,7 @@ export default ({ query }) => {
 
   useEffect(() => {
     const { post } = useAPI();
-    post({ type: 'getSuggestion', suggestion: query }).then(({ data }) => {
+    post({ type: 'GET_SUGGESTION', suggestion: query }).then(({ data }) => {
       rawContent.current = data;
       setResult(data);
     });

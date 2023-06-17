@@ -7,7 +7,7 @@ export default ({id}) => {
     const [ movies, setMovies ] = useState();
     useEffect( () => {
       const { post } = useAPI();
-      post({type:'getMoviesFromDir', id:id} ).then( result => { console.log(result.data); setMovies(result.data) })
+      post({type:'GET_MOVIES_FROM_DIR', id:id} ).then( result => { console.log(result.data); setMovies(result.data) })
     }, [id]);
   
     return(

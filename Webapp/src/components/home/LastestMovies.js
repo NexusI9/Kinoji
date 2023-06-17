@@ -12,7 +12,7 @@ export default ({ number }) => {
     useEffect(() => {
       const {post} = useAPI();
       
-      post({type:'getLatestMovies', limit: number} ).then( res => setMovies(res.data) );
+      post({type:'GET_LATEST_MOVIES', limit: number} ).then( res => setMovies(res.data) );
 
     },[number]);
   

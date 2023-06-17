@@ -11,7 +11,7 @@ const Glossary = () => {
     {
       category:'movie',
       input:{ value:'movie', label:'movies', checked:true },
-      list: { id:'title', query:'getAllMovies', value:'title', link: (item) => '/movies/'+item.id },
+      list: { id:'title', query:'GET_ALL_MOVIES', value:'title', link: (item) => '/movies/'+item.id },
       preview: (item) => ({
 
           header: <Link href={'/movies/'+item.id}>{item.title}</Link>,
@@ -26,7 +26,7 @@ const Glossary = () => {
     {
       category:'director',
       input: { value:'director', label:'directors' },
-      list: {id:'director', query:'getAllDirectors', value:'name', link: (item) => '/director/'+ item.id },
+      list: {id:'director', query:'GET_ALL_DIRECTORS', value:'name', link: (item) => '/director/'+ item.id },
       preview: (item) => ({
 
           header: <Link href={'/director/'+item.id} >{item.name}</Link>,

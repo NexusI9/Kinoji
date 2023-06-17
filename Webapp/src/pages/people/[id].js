@@ -43,7 +43,7 @@ export default People;
 
 // Generates `/movies/1` and `/movies/2`
 export async function getStaticPaths() {
-  const peoples = await useAPI().fetch('getAllPeoples');
+  const peoples = await useAPI().fetch('GET_ALL_PEOPLES');
   
   return {
     paths: peoples.map( ({id}) => ({ params: { id: id.toString() } }) ),
@@ -52,8 +52,8 @@ export async function getStaticPaths() {
 }
 // `getStaticPaths` requires using `getStaticProps`
 export async function getStaticProps({params}) {
-  const people = await useAPI().fetch({type:'getPeopleFromId', id:params.id});
-  const peopleMovie = await useAPI().fetch({type:'getMoviesFromPeople', id:params.id});
+  const people = await useAPI().fetch({type:'GET_PEOPLE_FROM_ID', id:params.id});
+  const peopleMovie = await useAPI().fetch({type:'GET_MOVIES_FROM_PEOPLE', id:params.id});
   console.log(people);
   return {
     props: {
