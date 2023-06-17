@@ -28,7 +28,11 @@ switch($body['type']){
 
   //---------EMAIL
   case 'addLead':
-    echo json_encode( $connection->query("INSERT INTO leads (name, email) VALUES (?, ?)",  [ $body['email'],$body['name'] ] ) );
+    $stm = $connection->pdo->prepare("INSERT INTO leads (create_time,name,email) VALUES (:crt,:name,:mail)");
+    $stm->bindParam(':crt',date("Y-m-d H:i:s"),PDO::PARAM_STR);
+    $stm->bindParam('name',$body['name'],PDO::PARAM_STR);
+    $stm->bindParam('mail',$body['email'],PDO::PARAM_STR);
+    $stm->execute();
   break;
 
   //--------MOVIES

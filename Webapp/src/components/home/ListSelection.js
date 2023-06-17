@@ -18,7 +18,7 @@ export default () => {
       <section className='container'>
         <LabelBar 
           label='Collections' 
-          hyperlink= { <Cta to='/collections' type='secondary'>See all collections</Cta> } 
+          hyperlink= { <Cta href='/collections' type='secondary'>See all collections</Cta> } 
           underline={false}
           />
         <div id='rubrique_container'>

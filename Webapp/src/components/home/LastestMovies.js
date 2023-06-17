@@ -21,7 +21,7 @@ export default ({ number }) => {
       <section id='latest' className='container'>
         <LabelBar 
           label='New on Kinoji' 
-          hyperlink= { <Cta to='/movies' type='secondary'>See all movies</Cta> } 
+          hyperlink= { <Cta href='/movies' type='secondary'>See all movies</Cta> } 
           underline={false}
           />
         <div>

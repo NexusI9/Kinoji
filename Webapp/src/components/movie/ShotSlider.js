@@ -67,8 +67,6 @@ const ShotSlider = ({number=6, nav=false}) => {
 
 
     return(
-        <div id='sliderSection' className="container">
-            <h2>Your daily shots</h2>
             <div id='shotSlider'>
             {
                 currentShot && <>
@@ -117,7 +115,6 @@ const ShotSlider = ({number=6, nav=false}) => {
                     </section>
                 </>
             }
-        </div>
         </div>
      );
 

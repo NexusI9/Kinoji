@@ -25,7 +25,7 @@ $container_margin:3% 0;
  --blue30: #66799d;
 
  --gradient-blue:#264370;
- --red:#e03434;
+ --red:#B81E1E;
  --lightblue:#4989ff;
  --paper:#DBE4F2;
  --settings_back:#ddd;
@@ -330,7 +330,9 @@ a{
     color: var(--blue30);
 
     &.primary{
-      @include card.card();
+      background-color: var(--red);
+      border: none;
+      color:var(--paper);
     }
 
     &.secondary{
@@ -715,6 +717,31 @@ a{
       margin-left: 3em;
       font-size: clamp(30px, 4vw, 170px);
       font-style: normal;
+    }
+  }
+
+}
+
+.newsletter-container{
+
+  &.container{
+    display: grid;
+    grid-template-columns: 70% auto;
+    gap: 40px;
+  }
+
+  .newsletter-form{
+    background-image: url('../assets/newsletter-bkg.svg');
+    background-size: cover;
+
+    text-align: center;
+    box-sizing: border-box;
+    border: solid 1px #3C4658;
+    @include round.round-border;
+    padding: 10px 40px;
+
+    h3, p{
+      margin: 10px 0;
     }
   }
 
@@ -1407,13 +1434,6 @@ a{
 
 }
 
-#sliderSection{
-  & > h2{
-    margin: auto;
-    text-align: center;
-    margin-bottom: 1em;
-  }
-}
 
 #alphaPreview{
   position: fixed;

@@ -1,9 +1,14 @@
 import { useRouter } from "next/router";
 
-export default ({type='primary', to, children}) => {
+export default ({type='primary', onClick, children, href}) => {
 
     const router = useRouter();
 
+    const handleOnClick = () => {
+        if(href){ router.push({pathname:href}); }
+        if(onClick){ onClick(); }
+    }
+
     return( 
-        <a onClick={ () => router.push({pathname:to}) } className={`cta ${type}`} >{children}</a>
+        <a onClick={handleOnClick} className={`cta ${type}`} >{children}</a>
     )};
