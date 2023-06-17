@@ -711,11 +711,7 @@ a{
     &:not(:nth-of-type(2)){ margin-top: 200px; }
     span{
       font-weight: 600;
-      background: linear-gradient(180deg, #B11212 50%, #07070C 80%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-fill-color: transparent;
+      color: var(--red);
       margin-left: 3em;
       font-size: clamp(30px, 4vw, 170px);
       font-style: normal;

@@ -40,9 +40,9 @@ export default () => {
 
         if (container.current && !display) { 
             window.addEventListener('scroll', onScroll); 
-            onScroll();
+            onScroll(); //first check
         }
-        if (display) { window.removeEventListener('scroll', onScroll); }
+        if(display){ window.removeEventListener('scroll', onScroll); }
 
 
         return () => window.removeEventListener('scroll', onScroll);
