@@ -1,8 +1,6 @@
 import { motion } from 'framer-motion';
 
-
-
-export default Preview = ({ content }) => {
+export default ({ content }) => {
 
     const { header, subheader, summary, img, subcontent } = content;
   

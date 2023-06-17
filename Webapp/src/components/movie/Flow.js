@@ -17,7 +17,7 @@ const Flow = ({ movies }) => {
 
   const lastBlocks = useRef();
   const [ movieList, setMovieList] = useState(movies);
-  const [ mosaic, setMosaic ] = useState( mosaicParam == 1 );      //boolean
+  const [ mosaic, setMosaic ] = useState( parseInt(mosaicParam) === 1 );      //boolean
   const [ sort, setSort ] = useState('name');         //string
   const [ content, setContent ] = useState( () => generateContent({ movie_list: movies, is_mosaic: false}) );         //react symbols
   const [load, setLoad] = useState(false); 
@@ -43,6 +43,8 @@ const Flow = ({ movies }) => {
 
   const onScroll = () => {
     let bl = lastBlocks.current;
+    if(!bl){ return; }
+    
     const { pageYOffset, innerHeight } = window;
     
     if(bl.length && !load){
@@ -109,7 +111,7 @@ const Flow = ({ movies }) => {
       <LabelBar 
         hero={false} 
         sticky={true} 
-        label= {<>Movie{movies.length > 1 && 's'}<span className='amount'>{movies.length}</span> </>} 
+        label= {<>Movie{movies.length > 1 && 's'}<span className='amount-pill'>{movies.length}</span></>} 
         hyperlink={ movies.length > 1 && <MovieSettings onChange={onChange} mosaic={mosaic} defaultCheck={sort} /> } />
       <AnimatePresence mode='wait'>
         <motion.div 

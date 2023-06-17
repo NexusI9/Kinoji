@@ -1,54 +1,67 @@
 import useAPI from '@/lib/api';
-import React, { useState, useEffect } from 'react';
-import { Popup, Separator } from '../misc';
-import { Banner } from '../header';
+import { Fragment, useState, useEffect } from 'react';
+import { Popup } from '../misc';
+
+import { Banner, InfoTag } from '../header';
 import { Poster } from '../movie';
-import { firstSentenceOf } from '@/lib/utilities';
+import { firstSentenceOf, jobFullName } from '@/lib/utilities';
 import Link from 'next/link';
 
 import noposter from '@/assets/noposter.jpg';
 
-export default ({id, popup=true}) => {
+export default ({ id, popup = true }) => {
 
-    const [ dir, setDir ] = useState([]);
-    const [ hover, setHover ] = useState(false);
-    const [ pop, setPop ] = useState();
+  const [dir, setDir] = useState([]);
+  const [hover, setHover] = useState(false);
+  const [pop, setPop] = useState();
 
-    const onMouseEnter = (e) =>  setHover(e);
-    const onMouseLeave = () => setHover();
+  const onMouseEnter = (e) => setHover(e);
+  const onMouseLeave = () => setHover();
 
 
-    useEffect(() => {
-      const { post } = useAPI();
-      post({type:'GET_PEOPLE_FROM_ID', id:id}).then( ({data}) => setDir(data) );
+  useEffect(() => {
+    const { post } = useAPI();
+    post({ type: 'GET_PEOPLE_FROM_ID', id: id }).then(({ data }) => setDir(data));
 
-      if(hover && dir.length && popup){
-          post({type:'GET_MOVIES_FROM_PEOPLE', id:id}).then( result => {
-          const movies = result.data;
-          setPop({
-            content:
-              <div>
-                {dir.map( ({poster, name, summary}) => <React.Fragment key={`directorlabelpopup${name}`}><Banner hero={false} visual={<img src={poster || noposter.src} />} header={name} summary={firstSentenceOf(summary)} spheros={false} /></React.Fragment> )}
-                <Separator />
-                <h4>Movies { movies ? '('+movies.length+')' : ''}</h4>
-                {movies.map(movie => <Poster key={'poster'+movie.id} movie={movie} size='small' />)}
-              </div>,
-            event:hover
-          });
-
+    if (hover && dir.length && popup) {
+      post({ type: 'GET_MOVIES_FROM_PEOPLE', id: id }).then(result => {
+        const movies = result.data;
+        setPop({
+          content:
+            <>
+              {dir.map(({ poster, name, summary }) =>
+                <Fragment key={`directorlabelpopup${name}`}>
+                  <Banner
+                    hero={false}
+                    visual={<img src={poster || noposter.src} />}
+                    header={name}
+                    summary={firstSentenceOf(summary)}
+                    spheros={false} />
+                </Fragment>
+              )}
+              <hr/>
+              <h4>Movies {movies?.length && <span className='amount-pill'>{movies.length}</span>}</h4>
+              <div className='default-grid'>
+                {movies.map(movie => <Poster key={'poster' + movie.id} movie={movie} size='small' />)}
+              </div>
+            </>,
+          event: hover
         });
-      }else{
-        setPop();
-      }
 
-      return () => setPop();
+      });
+    } else {
+      setPop();
+    }
 
-    },[id, hover]);
+    return () => setPop();
 
-    return (
-      <div style={{display:'inline-block'}}  onMouseEnter={ onMouseEnter } onMouseLeave={ onMouseLeave } >
-        {dir.map( ({id, name}) => <Link key={`dir${id}`} href={`/people/${id}`} className='link' replace>{name}</Link> ) }
-        { pop && <Popup content={pop.content}  event={pop.event} margin={20} /> }
-      </div>
+  }, [id, hover]);
+
+  return (
+    <div style={{ display: 'inline-block' }} >
+      {dir.map(({ id, name }) => <Link  onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} key={`dir${id}`} href={`/people/${id}`} className='link' replace>{name}</Link>)}
+      <InfoTag>{jobFullName(dir.map( ({job}) => job ))}</InfoTag>
+      {pop && <Popup content={pop.content} event={pop.event} margin={20} />}
+    </div>
   );
 }

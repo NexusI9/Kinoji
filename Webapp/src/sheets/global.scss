@@ -193,6 +193,10 @@ h4 {
   }
 }
 
+h4{
+  font-weight: 500;
+}
+
 
 h1 {
   font-size: 64px;
@@ -542,6 +546,7 @@ a {
 .link {
   transition: color 0.2s ease;
   cursor: pointer;
+  font-weight: 600;
 
   &:hover {
     color: var(--red) !important;
@@ -1322,6 +1327,7 @@ a {
   .content {
     min-width: 80px;
     min-height: 30px;
+    max-width: 380px;
     display: block;
     @include card.card;
     background: var(--blue80);
@@ -1332,12 +1338,32 @@ a {
     font-weight: normal;
   }
 
+  h4{
+    margin: 13px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color:var(--blue30);
+  }
+
+  hr{
+    border-color: var(--blue50);
+  }
+
   &.top .tip:last-of-type {
     visibility: hidden;
   }
 
   &.bottom .tip:first-of-type {
     visibility: hidden;
+  }
+
+  .default-grid{
+    grid-template-columns: repeat(4, 1fr);
+    gap:7px;
+    .movie-poster.small{
+      width: 100%;
+    }
   }
 
   .tip {
@@ -1368,15 +1394,18 @@ a {
     margin: 0;
     padding: 0;
     margin-bottom: 20px;
-
-    .summary {
+    
+    .title{
+      margin: 0;
+    }
+    .expandable{
       width: 100%;
+      p{
+        font-size: small;
+      }
     }
   }
 
-  .movie-poster.small {
-    margin-right: 10px;
-  }
 }
 
 .title {
@@ -2874,6 +2903,15 @@ a {
 
 }
 
+.amount-pill {
+  background-color: var(--blue50);
+  border-radius: 10em;
+  padding: 1px 10px;
+  font-size: small;
+  margin-left: 8px;
+  color:var(--paper);
+}
+
 
 .label-bar {
   display: flex;
@@ -2893,18 +2931,16 @@ a {
     background: #07070b;
   }
 
+  h4{
+    color:var(--blue30);
+  }
+
   h2,
   h4 {
     cursor: default;
   }
 
-  .amount {
-    background-color: var(--blue50);
-    border-radius: 10em;
-    padding: 2px 15px;
-    font-size: 1rem;
-    margin-left: 5px;
-  }
+  .label{gap: 0;}
 
 
 }

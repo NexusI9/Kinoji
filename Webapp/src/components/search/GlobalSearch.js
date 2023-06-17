@@ -2,13 +2,13 @@ import { LabelBar } from '@/components/header';
 import { Rubrique } from '@/components/movie';
 import { Poster as MoviePoster } from '@/components/movie';
 import { Poster as PeoplePoster } from '@/components/people';
-import { jobFullName } from '@/lib/utilities';
 import { Card } from '@/components/inputs';
 import { useState, useEffect, useRef } from 'react';
 import useAPI from '@/lib/api';
 import ResultText from './ResultText';
 import { TabBar } from '@/components/header';
 import { useRouter } from 'next/router';
+import { lengthOfCategory } from './GlobalSearch.helper';
 
 export default ({ query }) => {
 
@@ -23,30 +23,38 @@ export default ({ query }) => {
 
   const [content, setContent] = useState();
   const [result, setResult] = useState();
-  const [type, setType] = useState(router.query.type || Object.keys(CATEGORY_MAP)[0]);
+  const [type, setType] = useState();
   const rawContent = useRef();
 
 
   useEffect(() => {
     const { post } = useAPI();
+
+    setType();
+    setResult();
+
     post({ type: 'GET_SUGGESTION', suggestion: query }).then(({ data }) => {
       rawContent.current = data;
       setResult(data);
     });
   }, [query]);
 
+
   useEffect(() => {
+
 
     if (!result) { return; }
 
-    //update query url
-    router.push({
-      pathname:router.pathname,
-      query:{
-        ...router.query,
-        type:type
-      }
-    });
+    if (type) {
+      //update query url
+      router.push({
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          type: type
+        }
+      });
+    }
 
     //set content
     switch (type) {
@@ -62,9 +70,9 @@ export default ({ query }) => {
       case 'peoples':
         setContent(
           <div id='search-personnalities'>
-            { result.directors.length ? <div>{CATEGORY_MAP[type](result.directors, 'Directors')}</div> : <></>}
-            { result.dops.length ? <div>{CATEGORY_MAP[type](result.dops, 'Directors of photography')}</div> : <></>}
-            { result.artdirs.length ? <div>{CATEGORY_MAP[type](result.artdirs, 'Art Director')}</div> : <></>}
+            {result.directors.length ? <div>{CATEGORY_MAP[type](result.directors, 'Directors')}</div> : <></>}
+            {result.dops.length ? <div>{CATEGORY_MAP[type](result.dops, 'Directors of photography')}</div> : <></>}
+            {result.artdirs.length ? <div>{CATEGORY_MAP[type](result.artdirs, 'Art Director')}</div> : <></>}
           </div>
         );
         break;
@@ -77,8 +85,16 @@ export default ({ query }) => {
         setContent(<div>{CATEGORY_MAP[type](result[type])}</div>)
         break;
 
+      default:
+        let defaultType = CATEGORY_MAP[0];
+        for (let category of Object.keys(CATEGORY_MAP)) {
+          if (lengthOfCategory(result, category)) {
+            defaultType = category;
+            break;
+          }
+        }
 
-
+        setType(defaultType);
     }
 
   }, [type, result]);
@@ -88,16 +104,17 @@ export default ({ query }) => {
   return (
     <>
       {
-        content && result &&
+        (content && result && type) &&
         <>
           <ResultText query={<i className="paper">&ensp;"{query}"&ensp; </i>} total={content.total} />
           <LabelBar label='Search results' underline={false} />
           <TabBar tabs={
             Object.keys(CATEGORY_MAP).map(ctg => {
-              const active = (ctg !== 'peoples') ? result[ctg].length : [...result['dops'],...result['directors'], ...result['artdirs']].length; //combine peoples length
-              return({
-                name:ctg,
-                active:!!active
+              const active = lengthOfCategory(result, ctg);
+              return ({
+                name: ctg,
+                active: !!active,
+                defaultChecked: ctg === type
               });
             })
           }

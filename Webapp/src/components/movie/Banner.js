@@ -28,7 +28,6 @@ const Banner = ({ movie, summary=true, linked=true, spheros=false, tags=true}) =
             <TMDBLink link={'https://www.themoviedb.org/movie/'+movie.id} />
             </div>
               <PeopleLabel id={movie.director} />
-              <InfoTag>director</InfoTag>
             <br></br>
           {summary && <p className='summary'>{movie.summary}</p> }
           { tags && movie.tag && <div className='tagdiv'>{movie.tag.split(';').map( (tag,i) => <TagLabel key={'taglabel'+tag+i} label={tag} discrete={true} /> ) }</div> }

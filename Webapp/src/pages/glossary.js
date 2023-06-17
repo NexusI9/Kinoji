@@ -5,6 +5,8 @@ import { PeopleLabel } from '@/components/people';
 import { setDate, List, Preview, SubMovies, SubPreview } from '@/components/glossary';
 import Head from 'next/head';
 
+import noposter from '@/assets/noposter.jpg';
+
 const Glossary = () => {
 
   const content = [
@@ -16,7 +18,7 @@ const Glossary = () => {
 
           header: <Link href={'/movies/'+item.id}>{item.title}</Link>,
           subheader: <Link href={'/director/'+item.director} className='link underline'><PeopleLabel id={ item.director } /></Link>,
-          img: item.poster || require('../assets/noposter.jpg'),
+          img: item.poster || noposter.src,
           summary: item.summary,
           subcontent: <SubPreview movie={item}/>
 
