@@ -2,8 +2,8 @@
 
 from lib.tmdbapi import tmdb
 from lib.connector import Connector
-from webutils.person import Person
-from webutils.movie import Movie
+from webservices.api.person import Person
+from webservices.api.movie import Movie
 from lib.utils import config
 
 USERNAME = config("USERNAME")

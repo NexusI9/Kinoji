@@ -1,8 +1,6 @@
 from lib.tmdbapi import tmdb
 from tmdbv3api import Person
 
-
-
 class Tmdb:
 
     def __init__(self):

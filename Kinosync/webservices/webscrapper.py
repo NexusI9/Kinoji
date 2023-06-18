@@ -1,11 +1,13 @@
 
-from tmdbv3api import TMDb, Person
-from webutils.perplexity import Perplexity
-from webutils.asianwiki import AsianWiki
-from webutils.wikipedia import Wikipedia
-from webutils.tmdb import Tmdb
-from webutils.imdb import Imdb
-from webutils.mubi import Mubi
+#imporing Scrappers based fetcher
+from webservices.scrapper.perplexity import Perplexity
+from webservices.scrapper.asianwiki import AsianWiki
+from webservices.scrapper.imdb import Imdb
+from webservices.scrapper.mubi import Mubi
+#impporting Api based fetcher
+from webservices.api.wikipedia import Wikipedia
+from webservices.api.tmdb import Tmdb
+
 
 
 SOURCES = {

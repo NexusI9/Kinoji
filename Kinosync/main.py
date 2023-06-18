@@ -2,7 +2,7 @@ from process.updateDatabase import UpdateDatabase as Update
 from process.addMovies import Fetcher
 #from classifier import Classifier
 from process.wiper import Wiper
-from webutils.webscrapper import Webscrapper
+from webservices.webscrapper import Webscrapper
 
 
 
