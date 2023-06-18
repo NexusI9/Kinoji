@@ -11,9 +11,13 @@ class Wikipedia:
          return Wiki.page(name,auto_suggest=False).url
     
     def summary(self, person):
+        
         name = person['name']
         summary = Wiki.summary(name,auto_suggest=False)
-        name = person['name']
+
+        if(not name):
+            print('[TMDB > Summary] Couldn\'t statisfy all the keys from the subject. \n Required keys: name')
+            return None
 
         if(summary):
             print('[Wikipedia > Summary] Found content for %s' % (name))

@@ -1,7 +1,7 @@
 import re
 import base64
 import time
-from webservices.lib.prompts import BIOGRAPHY_PROMPT
+from modules.webservices.lib.prompts import BIOGRAPHY_PROMPT
 
 
 class Perplexity:
@@ -9,10 +9,14 @@ class Perplexity:
     def __init__(self):
         return None
 
-    def summarys(self, person):
+    def summary(self, person):
 
         name = person['name']
         job = person['job']
+
+        if(not name or not job):
+            print('[TMDB > Summary] Couldn\'t statisfy all the keys from the subject. \n Required keys: name | job')
+            return None
         
         print("\nSearching for %s..." % (name) )
         newPrompt  = BIOGRAPHY_PROMPT.replace('{job}',job).replace('{name}',name)

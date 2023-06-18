@@ -1,9 +1,10 @@
 #fetch data from Wikipedia and TMDB api to fill Database info
-
-from webservices.lib.tmdbapi import tmdb
 from lib.connector import Connector
-from webservices.api.person import Person
-from webservices.api.movie import Movie
+
+from modules.webservices.lib.tmdbapi import tmdb
+from modules.webservices.workers.person import Person
+from modules.webservices.workers.movie import Movie
+
 from lib.utils import config
 
 USERNAME = config("USERNAME")

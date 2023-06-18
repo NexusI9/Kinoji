@@ -1,4 +1,4 @@
-from webservices.lib.webdriver import Webdriver
+from modules.webservices.lib.webdriver import Webdriver
 
 
 class AsianWiki:
@@ -9,13 +9,17 @@ class AsianWiki:
     def url(self,name):
         return "https://asianwiki.com/%s" % (name.replace(' ','_'))
     
-    def poster(self, person):
+    def poster(self, subject):
 
         driver = Webdriver()
 
         src = None
-        name = person['name']
+        name = subject['name']
         url = self.url(name)
+
+        if(not name):
+            print('[TMDB > Summary] Couldn\'t statisfy all the keys from the subject. \n Required key: name')
+            return None
 
         print('[AsianWiki > poster] URL: %s' % (url))
         driver.get(url)  

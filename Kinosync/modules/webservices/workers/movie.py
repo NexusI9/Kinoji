@@ -27,8 +27,7 @@ class Movie:
     def fetch(self):
 
         movie = Movie()
-
-
+        
         #set basic info (title; poster; summary)
         details = movie.details(self.id)
         self.title = details.title

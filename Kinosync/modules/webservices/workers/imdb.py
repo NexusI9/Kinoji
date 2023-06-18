@@ -1,6 +1,6 @@
-from webservices.lib.tmdbapi import tmdb
 from tmdbv3api import Person
-from webservices.lib.webdriver import Webdriver
+from modules.webservices.lib.tmdbapi import tmdb
+from modules.webservices.lib.webdriver import Webdriver
 from lib.utils import approximate_string_match
 
 class Imdb:
@@ -14,13 +14,17 @@ class Imdb:
     def url(self, id):
         return "https://www.imdb.com/name/%s" % (id)
     
-    def summary(self, person):
+    def summary(self, subject):
 
-        id = person['id']
-        imdbID = self.imdbID(id)
-        name = person['name']
+        id = subject['id']
+        name = subject['name']
         summary = None
 
+        if(not name or not id):
+            print('[TMDB > Summary] Couldn\'t statisfy all the keys from the subject. \n Required keys: name | id')
+            return None
+
+        imdbID = self.imdbID(id)
         if(imdbID):
             url = "%s/bio/" % (self.url(imdbID))
             print('[IMDB > summary] URL: %s' % (url))

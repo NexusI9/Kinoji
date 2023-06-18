@@ -1,4 +1,4 @@
-from webservices.lib.webdriver import Webdriver
+from modules.webservices.lib.webdriver import Webdriver
 from selenium.webdriver.common.by import By
 
 
@@ -13,12 +13,17 @@ class Mubi:
         return "https://mubi.com/cast/%s" % ( name.replace(' ','-') )
 
 
-    def poster(self, person):
+    def poster(self, subject):
 
         driver = Webdriver()
 
         src = None
-        name = person['name']
+        name = subject['name']
+
+        if(not name):
+            print('[TMDB > Summary] Couldn\'t statisfy all the keys from the subject. \n Required key: name')
+            return None
+        
         url = self.url(name)
 
         print('[Mubi > poster]\tURL: %s' % (url))

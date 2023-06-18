@@ -1,4 +1,4 @@
-from webservices.lib.tmdbapi import tmdb
+from modules.webservices.lib.tmdbapi import tmdb
 from tmdbv3api import Person
 
 class Tmdb:
@@ -9,11 +9,15 @@ class Tmdb:
     def url(self, id):
         return "https://www.themoviedb.org/person/%s" % (id)
 
-    def summary(self, person):
+    def summary(self, subject):
 
-        id = person['id']
+        id = subject['id']
         biography = Person().details(id)['biography']
-        name = person['name']
+        name = subject['name']
+
+        if(not name or not id):
+            print('[TMDB > Summary] Couldn\'t statisfy all the keys from the subject. \n Missing keys: name | id')
+            return None
 
         if(biography):
             print('[TMDB > Summary] Found content for %s' % (name))
@@ -22,9 +26,9 @@ class Tmdb:
         
         return biography
 
-    def poster(self, person):
+    def poster(self, subject):
 
-        id = person['id']
+        id = subject['id']
         src = Person().details(id)['profile_path']
         if(src):
             src = "https://image.tmdb.org/t/p/w300%s" % (src)

@@ -1,8 +1,9 @@
-from process.updateDatabase import UpdateDatabase as Update
-from process.addMovies import Fetcher
+from modules.process.updateDatabase import UpdateDatabase as Update
+from modules.process.addMovies import Fetcher
 #from classifier import Classifier
-from process.wiper import Wiper
-from webservices.explorer import Explorer
+from modules.process.wiper import Wiper
+from modules.webservices.explorer import Explorer
+
 
 
 Explorer({"name":"Kuang-Hui Liu", "id":2693161, "job":"director"}).process()
