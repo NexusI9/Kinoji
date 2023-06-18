@@ -63,9 +63,7 @@ class Explorer:
             self.results['poster'] = fetcher.poster()
             self.results['summary'] = fetcher.summary()
 
-            
-
-            return True
+            return self.results
         
 
         
