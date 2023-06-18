@@ -5,7 +5,7 @@ from process.wiper import Wiper
 from webservices.explorer import Explorer
 
 
-Explorer({"name":"Wong Kar-Wai", "id":12453, "job":"director"}).process()
+Explorer({"name":"Kuang-Hui Liu", "id":2693161, "job":"director"}).process()
 
 
 """

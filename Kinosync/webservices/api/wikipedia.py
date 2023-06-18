@@ -12,8 +12,15 @@ class Wikipedia:
     
     def summary(self, person):
         name = person['name']
-        Wiki.summary(name,auto_suggest=False)
-        return name
+        summary = Wiki.summary(name,auto_suggest=False)
+        name = person['name']
+
+        if(summary):
+            print('[Wikipedia > Summary] Found content for %s' % (name))
+        else:
+            print('[Wikipedia > Summary] FAILURE: Couldn\'t find any content for %s' % (name))
+        
+        return summary
     
     def poster(self, person):
         src=None

@@ -46,24 +46,25 @@ class Explorer:
 
       def __init__(self, person):
             self.person = person
+            
             self.services = CONFIG['fetching']['services']
 
             self.results = {
                   "summary":{},
                   "poster":{}
             }
-            
-
-            return None
         
       def process(self):
 
             #fetch data
             fetcher = Fetcher(self.person, self.services)
-            self.results['poster'] = fetcher.poster()
-            self.results['summary'] = fetcher.summary()
 
+            #self.results['poster'] = fetcher.poster()
+            self.results['summary'] = fetcher.summary()
+            
+            print(self.results)
             return self.results
+      
         
 
         

@@ -15,15 +15,41 @@ class Imdb:
         return "https://www.imdb.com/name/%s" % (id)
     
     def summary(self, person):
-        return person
+
+        id = person['id']
+        imdbID = self.imdbID(id)
+        name = person['name']
+        summary = None
+
+        if(imdbID):
+            url = "%s/bio/" % (self.url(imdbID))
+            print('[IMDB > summary] URL: %s' % (url))
+
+            driver = Webdriver()
+            driver.get(url)
+            #1. get UL elements
+            containers = driver.find_elements_by_tagName('div') 
+
+            #2. get element with attribute data-testid
+            for div in containers:
+                testid = div.get_attribute('data-testid')
+                if(testid and 'mini_bio' in testid and div.text):
+                        #3. get text of div
+                        print('[IMDB > Summary] Found content for %s' % (name))
+                        summary = div.text
+
+            driver.quit()
+        else:
+            print('[IMDB > poster] FAILURE: Couldn\'t find any imdb_id for %s' % (name))
+
+        return summary
     
     def poster(self,person):
 
-        driver = Webdriver()
 
         name=person['name']
         id=person['id']
-        imdbID = self.imdbID(id);
+        imdbID = self.imdbID(id)
         src=None
 
         if(imdbID):
@@ -31,6 +57,8 @@ class Imdb:
 
             url = self.url(imdbID)
             print('[IMDB > poster] URL: %s' % (url))
+            driver = Webdriver()
+
             driver.get( url )
             images = driver.find_elements_by_tagName('img')
 

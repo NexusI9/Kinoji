@@ -10,7 +10,17 @@ class Tmdb:
         return "https://www.themoviedb.org/person/%s" % (id)
 
     def summary(self, person):
-        return person
+
+        id = person['id']
+        biography = Person().details(id)['biography']
+        name = person['name']
+
+        if(biography):
+            print('[TMDB > Summary] Found content for %s' % (name))
+        else:
+            print('[TMDB > Summary] FAILURE: Couldn\'t find any content for %s' % (name))
+        
+        return biography
 
     def poster(self, person):
 

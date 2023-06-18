@@ -9,7 +9,7 @@ class Perplexity:
     def __init__(self):
         return None
 
-    def summary(self, person):
+    def summarys(self, person):
 
         name = person['name']
         job = person['job']

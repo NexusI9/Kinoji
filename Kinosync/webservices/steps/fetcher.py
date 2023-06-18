@@ -3,26 +3,28 @@ class Fetcher:
     def __init__(self, person, services):
         self.person = person
         self.services = services
-        
-    def summary(self):
-        return True
-    
-    def poster(self):
-        posters = {}
 
-        for service in self.services:
+    
+    def thread(self, type, callback, services):
+        result = {}
+
+        for service in services:
                 print('\n')
                 servicePoster = None
                 try:    
-                    servicePoster = self.services[service]().poster(self.person)
+                    servicePoster = callback( self.services[service]() )
                 except:
-                    print('PASS:\tCouldn\'t get poster from %s (method doesn\'t exist?)' % (service))
-                    break
+                    print('PASS: Couldn\'t get %s from %s' % (type, service))
                 finally:
                     if(servicePoster):
-                            posters[service] = servicePoster
+                            result[service] = servicePoster
+        
         print('\n')
-        print(posters)
-
-        #result = base64.b64encode(requests.get(src).content)
-        return posters
+        return result
+         
+        
+    def summary(self):
+        return self.thread( 'summary', lambda e : e.summary(self.person), self.services )
+    
+    def poster(self):
+        return self.thread( 'poster', lambda e : e.poster(self.person), self.services )
