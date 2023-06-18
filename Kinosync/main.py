@@ -2,8 +2,14 @@ from process.updateDatabase import UpdateDatabase as Update
 from process.addMovies import Fetcher
 #from classifier import Classifier
 from process.wiper import Wiper
+from webutils.webscrapper import Webscrapper
 
 
+
+Webscrapper("Wong Kar-Wai", 12453, 'director').poster()
+
+
+"""
 print('-------------KINOJI SYNCHER--------------\n\n\n')
 print('Choose an option : \n')
 print('[ 1 ] - Generate thumbnails from Shots and update aesthetic database\n')
@@ -22,3 +28,4 @@ if( mode == '3' ):
     #Classifier().start()
 if( mode == '4'):
     Wiper().start()
+"""

@@ -1,15 +1,15 @@
 import os
 from datetime import datetime
-from utilities.utils import Utils
-from utilities.connector import Connector
+from lib.utils import config
+from lib.connector import Connector
 import re
 
 
-DEST_PATH = Utils.GET_CONFIG("DEST_PATH")
-USERNAME = Utils.GET_CONFIG("USERNAME")
-HOSTNAME = Utils.GET_CONFIG("HOSTNAME")
-PASSWORD = Utils.GET_CONFIG("PASSWORD")
-DTBNAME = Utils.GET_CONFIG("DTBNAME")
+DEST_PATH = config("DEST_PATH")
+USERNAME = config("USERNAME")
+HOSTNAME = config("HOSTNAME")
+PASSWORD = config("PASSWORD")
+DTBNAME = config("DTBNAME")
 
 connector = Connector(HOSTNAME,USERNAME,PASSWORD,DTBNAME)
 

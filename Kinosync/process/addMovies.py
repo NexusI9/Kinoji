@@ -4,25 +4,22 @@ Create Thumbnails directory
 Add aeshetics tags
 '''
 
-
-
 from PIL import Image
 import os
 import re
 import shutil
-from lib.utils import Utils
-from datetime import datetime
-from process.updateDatabase import UpdateDatabase as Update
+from lib.utils import config
 from lib.connector import Connector
+from datetime import datetime
 
 
-SRC_PATH = Utils.CONFIG("SRC_PATH")
-DEST_PATH = Utils.CONFIG("DEST_PATH")
+SRC_PATH = config("SRC_PATH")
+DEST_PATH = config("DEST_PATH")
 
-USERNAME = Utils.CONFIG("USERNAME")
-HOSTNAME = Utils.CONFIG("HOSTNAME")
-PASSWORD = Utils.CONFIG("PASSWORD")
-DTBNAME = Utils.CONFIG("DTBNAME")
+USERNAME = config("USERNAME")
+HOSTNAME = config("HOSTNAME")
+PASSWORD = config("PASSWORD")
+DTBNAME = config("DTBNAME")
 
 movies = []
 thumb = []

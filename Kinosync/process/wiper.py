@@ -1,14 +1,14 @@
 from lib.connector import Connector
-from lib.utils import Utils
+from lib.utils import config
 import os
 import shutil
 
-USERNAME = Utils.CONFIG("USERNAME")
-HOSTNAME = Utils.CONFIG("HOSTNAME")
-PASSWORD = Utils.CONFIG("PASSWORD")
-DTBNAME = Utils.CONFIG("DTBNAME")
+USERNAME = config("USERNAME")
+HOSTNAME = config("HOSTNAME")
+PASSWORD = config("PASSWORD")
+DTBNAME = config("DTBNAME")
 
-shots_path = Utils.CONFIG("DEST_PATH")
+shots_path = config("DEST_PATH")
 
 class Wiper:
 

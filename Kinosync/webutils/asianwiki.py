@@ -1,5 +1,5 @@
 
-from webscrapper.webdriver import Driver
+from webutils.webdriver import Driver
 from selenium.webdriver.common.by import By
 
 
@@ -14,7 +14,7 @@ class AsianWiki:
     def poster(self, name):
 
         url = self.url(name)
-        print('[AsianWiki > poster] url: \t%s' % (url))
+        print('[AsianWiki > poster]\tURL: \t%s' % (url))
         Driver.get( url )
 
         #1 get element by class thumbimage (direct target)
@@ -23,9 +23,9 @@ class AsianWiki:
 
         if(poster):
             src = poster.get_attribute('src')
-            print('[AsianWiki > poster] Picture found: \n=> %s' % (src))
+            print('[AsianWiki > poster]\tPicture found: \n=> %s' % (src))
         else:
-            print('[AsianWiki > poster] no poster found.')
+            print('[AsianWiki > poster]\tFAILURE: No poster found.')
         
         Driver.quit()
 

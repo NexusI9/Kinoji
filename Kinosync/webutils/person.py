@@ -1,11 +1,12 @@
-from tmdbv3api import Movie, Person
+from tmdbv3api import Movie
+from tmdbv3api import Person as tmdbPerson
 import wikipedia as wiki
 
 
-class PERSON:
+class Person:
 
     def __init__(self, movieId, job):
-        self.person = Person()
+        self.person = tmdbPerson()
         self.movieId = movieId
         self.job = job
         return

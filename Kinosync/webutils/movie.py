@@ -1,6 +1,6 @@
 from tmdbv3api import Movie
 
-class MOVIE:
+class Movie:
 
     def __init__(self,dd):
         self.id = dd

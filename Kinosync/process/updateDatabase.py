@@ -1,22 +1,15 @@
 #fetch data from Wikipedia and TMDB api to fill Database info
 
-from tmdbv3api import TMDb
-from lib.utils import Utils
+from lib.tmdbapi import tmdb
 from lib.connector import Connector
-from lib.tmdb.person import PERSON
-from lib.tmdb.movie import MOVIE
+from webutils.person import Person
+from webutils.movie import Movie
+from lib.utils import config
 
-apiKey = Utils.CONFIG("API_KEY")
-
-tmdb = TMDb()
-tmdb.api_key = apiKey
-tmdb.language = 'en'
-tmdb.debug = True
-
-USERNAME = Utils.CONFIG("USERNAME")
-HOSTNAME = Utils.CONFIG("HOSTNAME")
-PASSWORD = Utils.CONFIG("PASSWORD")
-DTBNAME = Utils.CONFIG("DTBNAME")
+USERNAME = config("USERNAME")
+HOSTNAME = config("HOSTNAME")
+PASSWORD = config("PASSWORD")
+DTBNAME = config("DTBNAME")
 
 
 class UpdateDatabase:
@@ -60,10 +53,10 @@ class UpdateDatabase:
                 print("Error getting ID")
             else:
 
-               movieData = MOVIE(mv_id).fetch()
-               directorData = PERSON(mv_id, 'director').fetch()
-               dopData = PERSON(mv_id, 'dop').fetch()
-               artdirData = PERSON(mv_id, 'artdir').fetch()
+               movieData = Movie(mv_id).fetch()
+               directorData = Person(mv_id, 'director').fetch()
+               dopData = Person(mv_id, 'dop').fetch()
+               artdirData = Person(mv_id, 'artdir').fetch()
 
                print("------------------------------------------------")
                print("------------------------------------------------")

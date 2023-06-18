@@ -1,12 +1,12 @@
 
-from utilities.connector import Connector
-from utilities.utils import Utils
+from lib.connector import Connector
+from lib.utils import config
 import json
 
-USERNAME = Utils.GET_CONFIG("USERNAME")
-HOSTNAME = Utils.GET_CONFIG("HOSTNAME")
-PASSWORD = Utils.GET_CONFIG("PASSWORD")
-DTBNAME = Utils.GET_CONFIG("DTBNAME")
+USERNAME = config("USERNAME")
+HOSTNAME = config("HOSTNAME")
+PASSWORD = config("PASSWORD")
+DTBNAME = config("DTBNAME")
 
 connection = Connector(HOSTNAME,USERNAME,PASSWORD,DTBNAME)
 path = "../data/webcolors.json"

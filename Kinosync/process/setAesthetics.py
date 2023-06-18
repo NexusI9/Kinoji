@@ -3,24 +3,24 @@
 
 import os
 import json
-from lib.utils import Utils
+from lib.utils import config
 from imageai.Classification import ImageClassification
 from colorthief import ColorThief
 import ssl
-import webcolors
+from lib.utils import webcolors
 from lib.connector import Connector
 
 ssl._create_default_https_context = ssl._create_unverified_context
-model_path = Utils.CONFIG("MODEL_PATH")
-shots_path = Utils.CONFIG("SHOTS_PATH")
-movie_dtb = Utils.CONFIG("MOVIE_PATH")
-color_path = Utils.CONFIG("COLOR_PATH")
+model_path = config("MODEL_PATH")
+shots_path = config("SHOTS_PATH")
+movie_dtb = config("MOVIE_PATH")
+color_path = config("COLOR_PATH")
 
 
-USERNAME = Utils.CONFIG("USERNAME")
-HOSTNAME = Utils.CONFIG("HOSTNAME")
-PASSWORD = Utils.CONFIG("PASSWORD")
-DTBNAME = Utils.CONFIG("DTBNAME")
+USERNAME = config("USERNAME")
+HOSTNAME = config("HOSTNAME")
+PASSWORD = config("PASSWORD")
+DTBNAME = config("DTBNAME")
 
 class Palette:
 

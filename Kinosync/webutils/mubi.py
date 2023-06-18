@@ -1,4 +1,4 @@
-from webscrapper.webdriver import Driver
+from webutils.webdriver import Driver
 from selenium.webdriver.common.by import By
 
 
