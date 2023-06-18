@@ -1,5 +1,5 @@
-from process.fetchOnlineData import UpdateDatabase as Update
-from process.addNewMovies import Fetcher
+from process.updateDatabase import UpdateDatabase as Update
+from process.addMovies import Fetcher
 #from classifier import Classifier
 from process.wiper import Wiper
 

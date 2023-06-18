@@ -3,20 +3,20 @@
 from tmdbv3api import TMDb
 from lib.utils import Utils
 from lib.connector import Connector
-from lib.person import PERSON
-from lib.movie import MOVIE
+from lib.tmdb.person import PERSON
+from lib.tmdb.movie import MOVIE
 
-apiKey = Utils.GET_CONFIG("API_KEY")
+apiKey = Utils.CONFIG("API_KEY")
 
 tmdb = TMDb()
 tmdb.api_key = apiKey
 tmdb.language = 'en'
 tmdb.debug = True
 
-USERNAME = Utils.GET_CONFIG("USERNAME")
-HOSTNAME = Utils.GET_CONFIG("HOSTNAME")
-PASSWORD = Utils.GET_CONFIG("PASSWORD")
-DTBNAME = Utils.GET_CONFIG("DTBNAME")
+USERNAME = Utils.CONFIG("USERNAME")
+HOSTNAME = Utils.CONFIG("HOSTNAME")
+PASSWORD = Utils.CONFIG("PASSWORD")
+DTBNAME = Utils.CONFIG("DTBNAME")
 
 
 class UpdateDatabase:

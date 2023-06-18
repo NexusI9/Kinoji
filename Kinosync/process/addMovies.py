@@ -12,17 +12,17 @@ import re
 import shutil
 from lib.utils import Utils
 from datetime import datetime
-from process.fetchOnlineData import UpdateDatabase as Update
+from process.updateDatabase import UpdateDatabase as Update
 from lib.connector import Connector
 
 
-SRC_PATH = Utils.GET_CONFIG("SRC_PATH")
-DEST_PATH = Utils.GET_CONFIG("DEST_PATH")
+SRC_PATH = Utils.CONFIG("SRC_PATH")
+DEST_PATH = Utils.CONFIG("DEST_PATH")
 
-USERNAME = Utils.GET_CONFIG("USERNAME")
-HOSTNAME = Utils.GET_CONFIG("HOSTNAME")
-PASSWORD = Utils.GET_CONFIG("PASSWORD")
-DTBNAME = Utils.GET_CONFIG("DTBNAME")
+USERNAME = Utils.CONFIG("USERNAME")
+HOSTNAME = Utils.CONFIG("HOSTNAME")
+PASSWORD = Utils.CONFIG("PASSWORD")
+DTBNAME = Utils.CONFIG("DTBNAME")
 
 movies = []
 thumb = []

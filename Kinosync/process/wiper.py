@@ -3,12 +3,12 @@ from lib.utils import Utils
 import os
 import shutil
 
-USERNAME = Utils.GET_CONFIG("USERNAME")
-HOSTNAME = Utils.GET_CONFIG("HOSTNAME")
-PASSWORD = Utils.GET_CONFIG("PASSWORD")
-DTBNAME = Utils.GET_CONFIG("DTBNAME")
+USERNAME = Utils.CONFIG("USERNAME")
+HOSTNAME = Utils.CONFIG("HOSTNAME")
+PASSWORD = Utils.CONFIG("PASSWORD")
+DTBNAME = Utils.CONFIG("DTBNAME")
 
-shots_path = Utils.GET_CONFIG("DEST_PATH")
+shots_path = Utils.CONFIG("DEST_PATH")
 
 class Wiper:
 

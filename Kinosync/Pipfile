@@ -4,25 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-mysql-connector-python = "*"
-colorthief = "*"
-webcolors = "*"
-wikipedia = "*"
-tmdbv3api = "*"
-tensorflow = "==2.4.0"
-keras = "==2.4.3"
-numpy = "==1.19.3"
-scipy = "==1.4.1"
-h5py = "==2.10.0"
-matplotlib = "==3.3.2"
-opencv-python = "==4.4.0.44"
-keras-resnet = "*"
-imageai = "*"
-pillow = "*"
-perplexity-api = {editable = true, git = "https://gitlab.com/robowaifudev/perplexity-api"}
-openai = "*"
+selenium = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.7"
+python_version = "2.7"
