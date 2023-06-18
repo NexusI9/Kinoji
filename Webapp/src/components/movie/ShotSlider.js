@@ -101,9 +101,7 @@ const ShotSlider = ({number=6, nav=false}) => {
                                             <img src={currentShot.movie.poster} alt='movie poster' />
                                             <div>
                                                 <h4><Link href={`/movies/${currentShot.movie.id}`}>{ currentShot.movie.title }<span className="light"> ({currentShot.movie.date?.split('-')[0]})</span></Link> </h4>
-                                                <section>
-                                                    <PeopleLabel id={currentShot.movie.director} popup={false} /> <InfoTag>director</InfoTag> 
-                                                </section>
+                                                <PeopleLabel id={currentShot.movie.director} popup={false} />
                                             </div>
                                     </motion.div>
 

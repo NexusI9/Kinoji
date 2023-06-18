@@ -9,7 +9,7 @@ import noposter from '@/assets/noposter.jpg';
 import { InfoTag } from '../header';
 
 
-const Banner = ({ movie, summary=true, linked=true, spheros=false, tags=true}) =>{
+const Banner = ({ movie, summary=true, linked=true, spheros=false, tags=true, peopleTag=true}) =>{
 
   const date = getMovieYear(movie) ? ('('+getMovieYear(movie)+')') : '';
   return(
@@ -27,7 +27,7 @@ const Banner = ({ movie, summary=true, linked=true, spheros=false, tags=true}) =
             }
             <TMDBLink link={'https://www.themoviedb.org/movie/'+movie.id} />
             </div>
-              <PeopleLabel id={movie.director} />
+              <PeopleLabel id={movie.director} tag={peopleTag}/>
             <br></br>
           {summary && <p className='summary'>{movie.summary}</p> }
           { tags && movie.tag && <div className='tagdiv'>{movie.tag.split(';').map( (tag,i) => <TagLabel key={'taglabel'+tag+i} label={tag} discrete={true} /> ) }</div> }

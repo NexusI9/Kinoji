@@ -1086,6 +1086,10 @@ a {
 
 }
 
+.people-label{
+  display: inline-block;
+}
+
 
 #shotSlider {
   position: relative;
@@ -1175,11 +1179,10 @@ a {
 
         &>div {
           text-align: left;
-
-          section {
+          .people-label{
             display: flex;
             flex-direction: row;
-            gap: 10px;
+            gap:6px;
             align-items: center;
           }
         }

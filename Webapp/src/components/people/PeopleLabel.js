@@ -9,7 +9,7 @@ import Link from 'next/link';
 
 import noposter from '@/assets/noposter.jpg';
 
-export default ({ id, popup = true }) => {
+export default ({ id, popup = true, tag=false }) => {
 
   const [dir, setDir] = useState([]);
   const [hover, setHover] = useState(false);
@@ -58,9 +58,9 @@ export default ({ id, popup = true }) => {
   }, [id, hover]);
 
   return (
-    <div style={{ display: 'inline-block' }} >
+    <div className='people-label'>
       {dir.map(({ id, name }) => <Link  onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} key={`dir${id}`} href={`/people/${id}`} className='link' replace>{name}</Link>)}
-      <InfoTag>{jobFullName(dir.map( ({job}) => job ))}</InfoTag>
+      {tag && <InfoTag>{jobFullName(dir.map( ({job}) => job ))}</InfoTag>}
       {pop && <Popup content={pop.content} event={pop.event} margin={20} />}
     </div>
   );
