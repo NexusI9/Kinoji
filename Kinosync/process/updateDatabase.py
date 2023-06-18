@@ -1,6 +1,6 @@
 #fetch data from Wikipedia and TMDB api to fill Database info
 
-from lib.tmdbapi import tmdb
+from webservices.lib.tmdbapi import tmdb
 from lib.connector import Connector
 from webservices.api.person import Person
 from webservices.api.movie import Movie

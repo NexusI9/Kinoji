@@ -1,4 +1,4 @@
-from lib.tmdbapi import tmdb
+from webservices.lib.tmdbapi import tmdb
 from tmdbv3api import Person
 
 class Tmdb:
@@ -6,15 +6,15 @@ class Tmdb:
     def __init__(self):
         return None
     
-
     def url(self, id):
         return "https://www.themoviedb.org/person/%s" % (id)
 
-    def summary(self, id):
-        return id
+    def summary(self, person):
+        return person
 
-    def poster(self, id):
+    def poster(self, person):
 
+        id = person['id']
         src = Person().details(id)['profile_path']
         if(src):
             src = "https://image.tmdb.org/t/p/w300%s" % (src)

@@ -2,11 +2,10 @@ from process.updateDatabase import UpdateDatabase as Update
 from process.addMovies import Fetcher
 #from classifier import Classifier
 from process.wiper import Wiper
-from webservices.webscrapper import Webscrapper
+from webservices.explorer import Explorer
 
 
-
-Webscrapper("Wong Kar-Wai", 12453, 'director').poster()
+Explorer({"name":"Wong Kar-Wai", "id":12453, "job":"director"}).process()
 
 
 """

@@ -10,24 +10,26 @@ class Wikipedia:
     def url(self, name):
          return Wiki.page(name,auto_suggest=False).url
     
-    def summary(self, name):
+    def summary(self, person):
+        name = person['name']
         Wiki.summary(name,auto_suggest=False)
         return name
     
-    def poster(self, name):
+    def poster(self, person):
         src=None
+        name = person['name']
         page= Wiki.WikipediaPage(name)
 
         if(page):
-            print('[Wikipedia > poster]\tFound page')
+            print('[Wikipedia > poster] Found page')
             images = page.images
-            print('[Wikipedia > poster]\tFound %s pictures' % ( len(images) ))
+            print('[Wikipedia > poster] Found %s pictures' % ( len(images) ))
 
             matched_url = approximate_string_match(images, name)
             if(matched_url):
-                 print('[Wikipedia > poster]\tFound url matching %s: \n=> %s' % (name, matched_url) )
+                 print('[Wikipedia > poster] Found url matching %s: \n=> %s' % (name, matched_url) )
                  src=matched_url
             else:
-                print('[Wikipedia > poster]\tFAILURE: Couldn\'t find any url that satisfies %s \n Wikipedia page: %s ' % (name, page.url) )
+                print('[Wikipedia > poster] FAILURE: Couldn\'t find any url that satisfies %s \n Wikipedia page: %s ' % (name, page.url) )
 
         return src

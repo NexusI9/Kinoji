@@ -1,4 +1,4 @@
-from webservices.webdriver import Driver
+from webservices.lib.webdriver import Webdriver
 from selenium.webdriver.common.by import By
 
 
@@ -13,15 +13,19 @@ class Mubi:
         return "https://mubi.com/cast/%s" % ( name.replace(' ','-') )
 
 
-    def poster(self, name):
+    def poster(self, person):
+
+        driver = Webdriver()
+
         src = None
+        name = person['name']
         url = self.url(name)
 
-        print('[Mubi > poster] url: \t%s' % (url))
-        Driver.get(url)
+        print('[Mubi > poster]\tURL: %s' % (url))
+        driver.get(url)
 
         #1 get all img elements
-        poster = Driver.find_elements(By.TAG_NAME,'img')
+        poster = driver.find_elements_by_tagName('img')
          
         #2 check if src contains cast_member
         if(poster):
@@ -31,13 +35,13 @@ class Mubi:
                     src = imgSrc
                     break
             if(src):
-                print('[Mubi > poster] Found cast_member picture: \n=> %s' % (src))
+                print('[Mubi > poster]\tFound cast_member picture: \n=> %s' % (src))
             else:
-                print('[Mubi > poster] Pictures were found, but no cast_member in src.')
+                print('[Mubi > poster]\tPictures were found, but no cast_member in src.')
 
         else:
             print('[Mubi > poster] No poster found.')
             
-        Driver.quit()
+        driver.quit()
 
         return src

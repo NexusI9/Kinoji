@@ -1,7 +1,6 @@
-from lib.tmdbapi import tmdb
+from webservices.lib.tmdbapi import tmdb
 from tmdbv3api import Person
-from webservices.webdriver import Driver
-from selenium.webdriver.common.by import By
+from webservices.lib.webdriver import Webdriver
 from lib.utils import approximate_string_match
 
 class Imdb:
@@ -15,11 +14,15 @@ class Imdb:
     def url(self, id):
         return "https://www.imdb.com/name/%s" % (id)
     
-    def summary(self, id):
-
-        return id
+    def summary(self, person):
+        return person
     
-    def poster(self,name,id):
+    def poster(self,person):
+
+        driver = Webdriver()
+
+        name=person['name']
+        id=person['id']
         imdbID = self.imdbID(id);
         src=None
 
@@ -28,8 +31,8 @@ class Imdb:
 
             url = self.url(imdbID)
             print('[IMDB > poster] URL: %s' % (url))
-            Driver.get( url )
-            images = Driver.find_elements(By.TAG_NAME,'img')
+            driver.get( url )
+            images = driver.find_elements_by_tagName('img')
 
             if(images):
                 print('[IMDB > poster]\tFound %s img elements in the page' % (len(images)))
@@ -51,5 +54,7 @@ class Imdb:
 
         else:
             print('[IMDB > poster] FAILURE: Couldn\'t find any imdb_id for %s' % (name))
+
+        driver.quit()
 
         return src
