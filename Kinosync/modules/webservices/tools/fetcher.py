@@ -1,4 +1,4 @@
-from modules.webservices.lib.workers import WORKERS
+from modules.webservices.explorer_workers import WORKERS
 
 class Fetcher():
 

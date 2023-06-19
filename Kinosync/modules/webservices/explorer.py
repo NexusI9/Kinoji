@@ -1,14 +1,21 @@
 #importing workers
-from modules.webservices.lib.workers import WORKERS
+from modules.webservices.explorer_workers import WORKERS
+
+#import default config
+from modules.webservices.explorer_config import PERSON_CONFIG
 
 #importing analysis tools
 from modules.webservices.tools.fetcher import Fetcher
 
-#import default config
-from modules.webservices.lib.config import PERSON_CONFIG
 
 
 class Explorer:
+
+      """
+      Explorer use a config file as well as various workers to fetch data from the web.
+      The Workers either use a API or a Web Scrapping approach to get data.
+      The Explorer can either fetch a summary (string) or a poster.
+      """
 
       def __init__(self, subject={}, config=PERSON_CONFIG, resultType='BOTH'):
             
@@ -18,7 +25,7 @@ class Explorer:
             self.resultType = resultType
 
             try:
-                  self.sources = config['fetching']['workers']
+                  self.sources = config['workers']
             except:
                   self.sources = WORKERS.keys()
             
@@ -36,7 +43,7 @@ class Explorer:
 
             resultType = None
             try: 
-                  resultType = self.config['result_type']
+                  resultType = self.config['type']
             except:                                   #get all results
                   self.results['poster'] = fetcher.poster()
                   self.results['summary'] = fetcher.summary()

@@ -910,6 +910,7 @@ a {
 .amount-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  margin: auto;
   justify-content: center;
   align-items: center;
   max-width: 1920px;
@@ -985,6 +986,8 @@ a {
 
 .highlight_container {
 
+  position: relative;
+
   &>svg {
     position: absolute;
     left: 0;
@@ -1007,8 +1010,6 @@ a {
 
   }
 
-  min-height: 100vh;
-  position: relative;
 
   &>h2,
   &>h4 {
@@ -1024,7 +1025,7 @@ a {
     margin-top: 100px;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
-    //height: 100vh;
+    min-height:400px;
     position: relative;
     left: 0;
     width: 100%;
@@ -1062,7 +1063,7 @@ a {
 
 
         .movie_banner {
-          grid-template-columns: 140px auto;
+          grid-template-columns: 100px auto;
 
           h3 {
             font-size: var(--header4);

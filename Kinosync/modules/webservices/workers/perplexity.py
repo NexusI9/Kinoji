@@ -1,49 +1,41 @@
 import re
 import base64
 import time
-from modules.webservices.lib.prompts import BIOGRAPHY_PROMPT
+from modules.webservices.lib.prompts import PROMPTS
 
 
 class Perplexity:
 
     def __init__(self):
         return None
+    
+    def remplacePromptVariables(self, subject, prompt):
+        # Use regular expression to find words between curved brackets
+        pattern = r"\{(\w+)\}"
+        # Find all matches in the text
+        matches = re.findall(pattern, prompt)
 
-    def summary(self, person):
+        for word in matches:
+            if(not subject[word]):
+                print('[Perplexity > Summary > Prompt alterate] Couldn\'t resolve and replace the key %s' % (word))
+                return None
+            
+            prompt.replace('{%s}' % (word), subject[word])
 
-        name = person['name']
-        job = person['job']
+        print('[Perplexity > Summary > Prompt alterate] Successfuly alterate the prompt variables')
+        return prompt
 
-        if(not name or not job):
-            print('[TMDB > Summary] Couldn\'t statisfy all the keys from the subject. \n Required keys: name | job')
-            return None
-        
-        print("\nSearching for %s..." % (name) )
-        newPrompt  = BIOGRAPHY_PROMPT.replace('{job}',job).replace('{name}',name)
+    def summary(self, subject, prompt="BIOGRAPHY"):
+
         result = None
 
-        try:
-            result = ppl.query(newPrompt, follow_up=True)
-        except:
-            print("Error while processing %s" % (name) )
-            print('Waiting 30 seconds before retrying...')
-            time.sleep(30)
- 
+        if(not PROMPTS[prompt]):
+            print('[Perplexity > Summary] Couldn\'t find any Prompt under the key %s. \n Check the prompts available at lib/prompts' % (prompt))
+            return None
+    
 
-        if(result):
-            paragraph = re.search('(?<=BEGIN)(.*?)(?=FROM)',result, flags=re.S)
-            print("\n\n PARAGRAPH:")
-            print(paragraph.group())
-            return
-            sources = re.search('(?<=FROM:)(.*?)(?=END)',result, flags=re.S)
-            print(sources)
-            if(sources):
-                sources = sources.group().split(";")
-                print("\n\n SOURCES:")
-                print(sources)
-                for s in range(len(sources)):
-                    sources[s] = base64.b64decode( sources[s] )
-                
-                ';'.join(sources)
-                print(sources)
+        newPrompt  = self.remplacePromptVariables(subject, PROMPTS[prompt])
+
+
+        return result
 
