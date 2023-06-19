@@ -69,6 +69,5 @@ class Person:
                             'birthday':self.getDate(self.id)['birthday'],
                             'deathday':self.getDate(self.id)['deathday'],
                             'country':self.getCountry(self.id),
-                            "summary": summary
                         }
 

@@ -37,5 +37,8 @@ class Perplexity:
         newPrompt  = self.remplacePromptVariables(subject, PROMPTS[prompt])
 
 
-        return result
+        return {
+            "content":result,
+            "sources":""
+            }
 

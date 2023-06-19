@@ -8,7 +8,7 @@ from imageai.Classification import ImageClassification
 from colorthief import ColorThief
 import ssl
 from lib.utils import webcolors
-from lib.connector import Connector
+from modules.process.lib.connector import Connector
 
 ssl._create_default_https_context = ssl._create_unverified_context
 model_path = config("MODEL_PATH")

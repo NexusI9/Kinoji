@@ -24,7 +24,10 @@ class Tmdb:
         else:
             print('[TMDB > Summary] FAILURE: Couldn\'t find any content for %s' % (name))
         
-        return biography
+        return {
+            "content":biography, 
+            "sources":[self.url(id)]
+            }
 
     def poster(self, subject):
 

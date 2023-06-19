@@ -9,7 +9,7 @@ import os
 import re
 import shutil
 from lib.utils import config
-from lib.connector import Connector
+from modules.process.lib.connector import Connector
 from datetime import datetime
 
 

@@ -20,13 +20,15 @@ class Imdb:
         name = subject['name']
         summary = None
 
+
         if(not name or not id):
             print('[TMDB > Summary] Couldn\'t statisfy all the keys from the subject. \n Required keys: name | id')
             return None
 
         imdbID = self.imdbID(id)
+        url = "%s/bio/" % (self.url(imdbID))
+        
         if(imdbID):
-            url = "%s/bio/" % (self.url(imdbID))
             print('[IMDB > summary] URL: %s' % (url))
 
             driver = Webdriver()
@@ -46,7 +48,10 @@ class Imdb:
         else:
             print('[IMDB > poster] FAILURE: Couldn\'t find any imdb_id for %s' % (name))
 
-        return summary
+        return {
+            "content": summary,
+            "sources":[url]
+        }
     
     def poster(self,person):
 

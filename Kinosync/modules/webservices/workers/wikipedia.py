@@ -24,7 +24,10 @@ class Wikipedia:
         else:
             print('[Wikipedia > Summary] FAILURE: Couldn\'t find any content for %s' % (name))
         
-        return summary
+        return {
+            "content":summary,
+            "sources":[self.url(name)]
+        }
     
     def poster(self, person):
         src=None

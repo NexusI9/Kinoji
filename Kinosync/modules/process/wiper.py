@@ -1,4 +1,4 @@
-from lib.connector import Connector
+from modules.process.lib.connector import Connector
 from lib.utils import config
 import os
 import shutil
