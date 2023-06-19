@@ -2,7 +2,7 @@
 
 PERSON_CONFIG = {
       "fetching": {
-            "sources": ["tmdb","imdb","mubi","wikipedia","asianwiki","perplexity"],
+            "workers": ["tmdb","imdb","mubi","wikipedia","asianwiki","perplexity"],
             "custom":{
                   "summary":{},
                   "poster":{

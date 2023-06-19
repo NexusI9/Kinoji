@@ -24,7 +24,7 @@ DTBNAME = config("DTBNAME")
 movies = []
 thumb = []
 
-class Fetcher:
+class AddMovies:
 
 
     def __init__(self):

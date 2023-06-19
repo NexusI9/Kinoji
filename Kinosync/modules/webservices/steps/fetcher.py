@@ -1,18 +1,24 @@
+from modules.webservices.lib.workers import WORKERS
+
 class Fetcher():
 
-    def __init__(self, subject, services, sources):
+    def __init__(self, subject, sources, config):
         self.subject = subject
         self.sources = sources
-        self.services = services
+        self.config = config
     
-    def thread(self, type, callback, sources):
+    def thread(self, type, callback):
         result = {}
 
-        for source in sources:
+        for source in self.sources:
                 print('\n')
                 serviceResult = None
-                try:    
-                    serviceResult = callback( self.services[source]() )
+                try:
+                    if(not WORKERS[source]):
+                         print('The %s Worker couldn\'t be found')
+                         continue    
+                    
+                    serviceResult = callback( WORKERS[source]() )
                 except:
                     print('PASS: Couldn\'t get %s from %s' % (type, source))
                 finally:
@@ -24,7 +30,7 @@ class Fetcher():
          
         
     def summary(self):
-        return self.thread( 'summary', lambda e : e.summary(self.subject), self.sources )
+        return self.thread( 'summary', lambda e : e.summary(self.subject))
     
     def poster(self):
-        return self.thread( 'poster', lambda e : e.poster(self.subject), self.sources )
+        return self.thread( 'poster', lambda e : e.poster(self.subject))

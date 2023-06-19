@@ -1,5 +1,5 @@
-from modules.process.updateDatabase import UpdateDatabase as Update
-from modules.process.addMovies import Fetcher
+from modules.process.updatedatabase import UpdateDatabase as Update
+from modules.process.addmovies import AddMovies
 #from classifier import Classifier
 from modules.process.wiper import Wiper
 from modules.webservices.explorer import Explorer
@@ -20,7 +20,7 @@ print('[ 4 ] - Wipe removed movies from databases\n')
 mode = input("=> ")
 
 if( mode ==  '1' ):
-    Fetcher().start()
+    AddMovies().start()
 if( mode == '2' ):
     Update().start()
 if( mode == '3' ):
