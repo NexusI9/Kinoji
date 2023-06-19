@@ -15,7 +15,7 @@ class Fetcher():
                 serviceResult = None
                 try:
                     if(not WORKERS[source]):
-                         print('The %s Worker couldn\'t be found')
+                         print('The %s Worker couldn\'t be found, make sure you\'ve added it to lib/workers')
                          continue    
                     
                     serviceResult = callback( WORKERS[source]() )
