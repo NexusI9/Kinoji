@@ -25,9 +25,15 @@ class Perplexity:
         print('[Perplexity > Summary > Prompt alterate] Successfuly alterate the prompt variables')
         return prompt
 
-    def summary(self, subject, prompt="BIOGRAPHY"):
+    def summary(self, subject, config):
 
         result = None
+
+        prompt =  None
+        try:
+            prompt = config['summary']['prompt']
+        except:
+            prompt = "BIOGRAPHY"
 
         if(not PROMPTS[prompt]):
             print('[Perplexity > Summary] Couldn\'t find any Prompt under the key %s. \n Check the prompts available at lib/prompts' % (prompt))
@@ -36,6 +42,7 @@ class Perplexity:
 
         newPrompt  = self.remplacePromptVariables(subject, PROMPTS[prompt])
 
+        print(newPrompt)
 
         return {
             "content":result,

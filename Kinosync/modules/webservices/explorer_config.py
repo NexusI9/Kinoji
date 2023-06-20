@@ -3,19 +3,23 @@
 #Get personnalities info and poster
 PERSON_CONFIG = {
       "workers": ["tmdb","imdb","mubi","wikipedia","asianwiki","perplexity"],
-      "prompt": "BIOGRAPHY_PROMPT",
-      "custom":{
-            "summary":{},
-            "poster":{
-                  "asianwiki": lambda name, job : "%s (%d)" % (name, job)
+      "summary":{
+            "method":"SINTHETIZE",
+            "prompt": "BIOGRAPHY",
+            "keywords":{
+                  "avoid":["football"],
+                  "include":["cinema"] 
+            },
+            "custom":{
+                  "asianwiki": lambda subject : "%s (%d)" % (subject['name'], subject['job'])
             }
       },
-      "keywords":["football"],
-      "resize":"300",
-      "methods":{
-            "summary": "SYNTHETISE",
-            "poster": "MANUAL"
+      "poster":{
+            "method":"MANUAL",
+            "size":"300", 
+            "encode":"BASE64"
       }
+
 }
 
 
@@ -24,8 +28,8 @@ PERSON_CONFIG = {
 HISTORY_CONFIG = {
       "type": "SUMMARY",
       "workers": ["wikipedia","perplexity"],
-      "prompt":"BIOGRAPHY_PROMPT",
-      "methods":{
-            "summary": "SYNTHETISE",
+      "summary":{
+            "prompt":"HISTORY",
+            "method":"SYNTHETISE"
       }
 }
