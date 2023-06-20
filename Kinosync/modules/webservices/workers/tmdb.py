@@ -9,14 +9,14 @@ class Tmdb:
     def url(self, id):
         return "https://www.themoviedb.org/person/%s" % (id)
 
-    def summary(self, subject):
+    def summary(self, payload):
 
-        id = subject['id']
+        id = payload['id']
         biography = Person().details(id)['biography']
-        name = subject['name']
+        name = payload['name']
 
         if(not name or not id):
-            print('[TMDB > Summary] Couldn\'t statisfy all the keys from the subject. \n Missing keys: name | id')
+            print('[TMDB > Summary] Couldn\'t statisfy all the keys from the payload. \n Missing keys: name | id')
             return None
 
         if(biography):
@@ -29,9 +29,9 @@ class Tmdb:
             "sources":[self.url(id)]
             }
 
-    def poster(self, subject):
+    def poster(self, payload):
 
-        id = subject['id']
+        id = payload['id']
         src = Person().details(id)['profile_path']
         if(src):
             src = "https://image.tmdb.org/t/p/w300%s" % (src)

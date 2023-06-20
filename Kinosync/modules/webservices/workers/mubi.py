@@ -1,6 +1,4 @@
 from modules.webservices.lib.webdriver import Webdriver
-from selenium.webdriver.common.by import By
-
 
 class Mubi:
 
@@ -13,15 +11,15 @@ class Mubi:
         return "https://mubi.com/cast/%s" % ( name.replace(' ','-') )
 
 
-    def poster(self, subject):
+    def poster(self, payload):
 
         driver = Webdriver()
 
         src = None
-        name = subject['name']
+        name = payload['name']
 
         if(not name):
-            print('[TMDB > Summary] Couldn\'t statisfy all the keys from the subject. \n Required key: name')
+            print('[TMDB > Summary] Couldn\'t statisfy all the keys from the payload. \n Required key: name')
             return None
         
         url = self.url(name)

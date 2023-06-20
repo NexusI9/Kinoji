@@ -10,13 +10,13 @@ class Wikipedia:
     def url(self, name):
          return Wiki.page(name,auto_suggest=False).url
     
-    def summary(self, person):
+    def summary(self, payload):
         
-        name = person['name']
+        name = payload['name']
         summary = Wiki.summary(name,auto_suggest=False)
 
         if(not name):
-            print('[TMDB > Summary] Couldn\'t statisfy all the keys from the subject. \n Required keys: name')
+            print('[TMDB > Summary] Couldn\'t statisfy all the keys from the payload. \n Required keys: name')
             return None
 
         if(summary):
@@ -29,9 +29,9 @@ class Wikipedia:
             "sources":[self.url(name)]
         }
     
-    def poster(self, person):
+    def poster(self, payload):
         src=None
-        name = person['name']
+        name = payload['name']
         page= Wiki.WikipediaPage(name)
 
         if(page):

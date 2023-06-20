@@ -1,5 +1,3 @@
-
-
 #Get personnalities info and poster
 PERSON_CONFIG = {
       "workers": ["tmdb","imdb","mubi","wikipedia","asianwiki","perplexity"],
@@ -11,7 +9,8 @@ PERSON_CONFIG = {
                   "include":["cinema"] 
             },
             "custom":{
-                  "asianwiki": lambda subject : "%s (%d)" % (subject['name'], subject['job'])
+                  "asianwiki": lambda payload : "%s (%d)" % (payload['name'], payload['job']),
+                  "perplex": lambda payload: {**payload, "prompt":'BIOGRAPHY'}
             }
       },
       "poster":{
@@ -30,6 +29,9 @@ HISTORY_CONFIG = {
       "workers": ["wikipedia","perplexity"],
       "summary":{
             "prompt":"HISTORY",
-            "method":"SYNTHETISE"
+            "method":"SYNTHETISE",
+            "custom":{
+                "perplexity": lambda payload : {**payload, "prompt":"HISTORY"}
+            }
       }
 }

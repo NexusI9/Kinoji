@@ -8,12 +8,11 @@ from modules.webservices.workers.mubi import Mubi
 from modules.webservices.workers.wikipedia import Wikipedia
 from modules.webservices.workers.tmdb import Tmdb
 
-
 WORKERS = {
-      "tmdb": Tmdb,
-      "imdb": Imdb,
-      "mubi": Mubi,
-      "wikipedia": Wikipedia,
-      "asianwiki": AsianWiki,
-      "perplexity": Perplexity
+    "perplexity": Perplexity,
+    "asianwiki": AsianWiki,
+    "imdb": Imdb,
+    "mubi": Mubi,
+    "wikipedia":Wikipedia,
+    "tmdb": Tmdb
 }

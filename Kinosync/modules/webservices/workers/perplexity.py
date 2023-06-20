@@ -9,29 +9,29 @@ class Perplexity:
     def __init__(self):
         return None
     
-    def remplacePromptVariables(self, subject, prompt):
+    def remplacePromptVariables(self, payload, prompt):
         # Use regular expression to find words between curved brackets
         pattern = r"\{(\w+)\}"
         # Find all matches in the text
         matches = re.findall(pattern, prompt)
 
         for word in matches:
-            if(not subject[word]):
+            if(not payload[word]):
                 print('[Perplexity > Summary > Prompt alterate] Couldn\'t resolve and replace the key %s' % (word))
                 return None
             
-            prompt.replace('{%s}' % (word), subject[word])
+            prompt.replace('{%s}' % (word), payload[word])
 
         print('[Perplexity > Summary > Prompt alterate] Successfuly alterate the prompt variables')
         return prompt
 
-    def summary(self, subject, config):
+    def summary(self, payload):
 
         result = None
 
         prompt =  None
         try:
-            prompt = config['summary']['prompt']
+            prompt = payload['prompt']
         except:
             prompt = "BIOGRAPHY"
 
@@ -40,7 +40,7 @@ class Perplexity:
             return None
     
 
-        newPrompt  = self.remplacePromptVariables(subject, PROMPTS[prompt])
+        newPrompt  = self.remplacePromptVariables(payload, PROMPTS[prompt])
 
         print(newPrompt)
 

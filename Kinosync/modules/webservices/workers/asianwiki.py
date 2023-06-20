@@ -9,16 +9,16 @@ class AsianWiki:
     def url(self,name):
         return "https://asianwiki.com/%s" % (name.replace(' ','_'))
     
-    def poster(self, subject):
+    def poster(self, payload):
 
         driver = Webdriver()
 
         src = None
-        name = subject['name']
+        name = payload['name']
         url = self.url(name)
 
         if(not name):
-            print('[TMDB > Summary] Couldn\'t statisfy all the keys from the subject. \n Required key: name')
+            print('[TMDB > Summary] Couldn\'t statisfy all the keys from the payload. \n Required key: name')
             return None
 
         print('[AsianWiki > poster] URL: %s' % (url))

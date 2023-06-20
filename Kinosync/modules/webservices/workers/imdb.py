@@ -14,15 +14,15 @@ class Imdb:
     def url(self, id):
         return "https://www.imdb.com/name/%s" % (id)
     
-    def summary(self, subject):
+    def summary(self, payload):
 
-        id = subject['id']
-        name = subject['name']
+        id = payload['id']
+        name = payload['name']
         summary = None
 
 
         if(not name or not id):
-            print('[TMDB > Summary] Couldn\'t statisfy all the keys from the subject. \n Required keys: name | id')
+            print('[TMDB > Summary] Couldn\'t statisfy all the keys from the payload. \n Required keys: name | id')
             return None
 
         imdbID = self.imdbID(id)
