@@ -14,7 +14,7 @@ class Explorer:
       """
       Explorer uses a config file as well as various workers to fetch data from the web.
       The Workers either use a API or a Web Scrapping approach to get data.
-      The Explorer can either fetch a summary (string) or a poster.
+      The Explorer can either fetch a summary (string) or a poster (URL / BASE64 depending of confing).
       """
 
       def __init__(self, payload={}, config=PERSON_CONFIG, resultType='BOTH'):

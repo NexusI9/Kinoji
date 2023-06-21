@@ -1,4 +1,5 @@
 #Get personnalities info and poster
+#["tmdb","mubi","imdb","wikipedia","asianwiki","perplexity"]
 PERSON_CONFIG = {
       "workers": ["perplexity"],
       "summary":{

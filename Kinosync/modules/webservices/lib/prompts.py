@@ -1,6 +1,5 @@
 PROMPTS = {
     "BIOGRAPHY":"""
-        Write BEGIN and do a line break.
         Then write a mid-length paragraph about the {job} {name}. 
         Use a formal and neutral tone. The paragraph should suit an audience well educated about cinema and can include technical terms as well as in-depth insights.
         For every foreign movie titles, foreign people names, foreign cities names such as chinese, japanese, arabic, hebrew or russian names, city, title: write the original name in its original language in parenthesis next to it. 
@@ -22,8 +21,6 @@ PROMPTS = {
         - if there are notable controversy include it too, else don't write anything about the controversy.
         - if the person is dead: the person date and location of death.
 
-        Finally, it's mandatory to include at the end of the paragraph FROM followed by a line break and write down without formatting every URLs from which you picked those information. The URLS should imperatively be encoded in base64. Do not write them in a list, all the URL should be written without formatting, they should be written on one line and be separated by a semi-colon.
-        Do a line break and write END
     """,
     "HISTORY":"""history prompt {envent} here"""
 }
