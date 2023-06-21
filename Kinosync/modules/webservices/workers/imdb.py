@@ -46,7 +46,7 @@ class Imdb:
 
             driver.quit()
         else:
-            print('[IMDB > poster] FAILURE: Couldn\'t find any imdb_id for %s' % (name))
+            print(' FAILURE: Couldn\'t find any imdb_id for %s' % (name))
 
         return {
             "content": summary,
@@ -62,17 +62,17 @@ class Imdb:
         src=None
 
         if(imdbID):
-            print('[IMDB > poster]\tFound imdb_id: %s' % (imdbID))
+            print('Found imdb_id: %s' % (imdbID))
 
             url = self.url(imdbID)
-            print('[IMDB > poster] URL: %s' % (url))
+            print('URL: %s' % (url))
             driver = Webdriver()
 
             driver.get( url )
             images = driver.find_elements_by_tagName('img')
 
             if(images):
-                print('[IMDB > poster]\tFound %s img elements in the page' % (len(images)))
+                print('Found %s img elements in the page' % (len(images)))
                 arrayImg = []
                 for img in images:
                     arrayImg.append({"alt":img.get_attribute('alt'), "src":img.get_attribute('src')})
@@ -82,15 +82,15 @@ class Imdb:
                 if(match_key):
                     match_img = filter( lambda ar : ar['alt'] == match_key, arrayImg )
                     src = list(match_img)[0]['src']
-                    print('[IMDB > poster]\tFound a src with the alt attribute close to %s: \n=> %s' % (name,src))
+                    print('Found a src with the alt attribute close to %s: \n=> %s' % (name,src))
                 else:
-                    print('[IMDB > poster]\tFAILURE: Couldn\'t find any similar alt attribute to %s' % (name))
+                    print('FAILURE: Couldn\'t find any similar alt attribute to %s' % (name))
 
             else:
-                print('[IMDB > poster]\tFAILURE: Couldn\'t find any img elements in the page')
+                print('FAILURE: Couldn\'t find any img elements in the page')
 
         else:
-            print('[IMDB > poster] FAILURE: Couldn\'t find any imdb_id for %s' % (name))
+            print('FAILURE: Couldn\'t find any imdb_id for %s' % (name))
 
         driver.quit()
 

@@ -17,26 +17,27 @@ class Perplexity:
 
         for word in matches:
             if(not payload[word]):
-                print('[Perplexity > Summary > Prompt alterate] Couldn\'t resolve and replace the key %s' % (word))
+                print('Couldn\'t resolve and replace the key %s' % (word))
                 return None
             
-            prompt.replace('{%s}' % (word), payload[word])
+            prompt = prompt.replace('{%s}' % (word), payload[word])
 
-        print('[Perplexity > Summary > Prompt alterate] Successfuly alterate the prompt variables')
+        print('Successfuly alterate the prompt following keys: %s' % (' | '.join(matches)))
         return prompt
 
     def summary(self, payload):
 
         result = None
-
         prompt =  None
+        
+
         try:
             prompt = payload['prompt']
         except:
             prompt = "BIOGRAPHY"
 
         if(not PROMPTS[prompt]):
-            print('[Perplexity > Summary] Couldn\'t find any Prompt under the key %s. \n Check the prompts available at lib/prompts' % (prompt))
+            print('Couldn\'t find any Prompt under the key %s. \n Check the prompts available at lib/prompts' % (prompt))
             return None
     
 

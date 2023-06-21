@@ -19,12 +19,12 @@ class Mubi:
         name = payload['name']
 
         if(not name):
-            print('[TMDB > Summary] Couldn\'t statisfy all the keys from the payload. \n Required key: name')
+            print('Couldn\'t statisfy all the keys from the payload. \n Required key: name')
             return None
         
         url = self.url(name)
 
-        print('[Mubi > poster]\tURL: %s' % (url))
+        print('URL: %s' % (url))
         driver.get(url)
 
         #1 get all img elements
@@ -38,12 +38,12 @@ class Mubi:
                     src = imgSrc
                     break
             if(src):
-                print('[Mubi > poster]\tFound cast_member picture: \n=> %s' % (src))
+                print('Found cast_member picture: \n=> %s' % (src))
             else:
-                print('[Mubi > poster]\tPictures were found, but no cast_member in src.')
+                print('Pictures were found, but no cast_member in src.')
 
         else:
-            print('[Mubi > poster] No poster found.')
+            print('No poster found.')
             
         driver.quit()
 

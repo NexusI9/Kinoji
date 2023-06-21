@@ -5,21 +5,21 @@ from modules.webservices.explorer_workers import WORKERS
 from modules.webservices.explorer_config import PERSON_CONFIG
 
 #importing analysis tools
-from modules.webservices.tools.fetcher import Fetcher
+from modules.webservices.subprocess.fetcher import Fetcher
 
 
 
 class Explorer:
 
       """
-      Explorer use a config file as well as various workers to fetch data from the web.
+      Explorer uses a config file as well as various workers to fetch data from the web.
       The Workers either use a API or a Web Scrapping approach to get data.
       The Explorer can either fetch a summary (string) or a poster.
       """
 
-      def __init__(self, subject={}, config=PERSON_CONFIG, resultType='BOTH'):
+      def __init__(self, payload={}, config=PERSON_CONFIG, resultType='BOTH'):
             
-            self.subject = subject
+            self.payload = payload
             self.sources = None
             self.config = config
             self.resultType = resultType
@@ -39,7 +39,7 @@ class Explorer:
       def process(self):
 
             #fetch data
-            fetcher = Fetcher(self.subject, self.sources, self.config)
+            fetcher = Fetcher(self.payload, self.sources, self.config)
 
             resultType = None
             try: 
@@ -51,7 +51,7 @@ class Explorer:
                   if(resultType == 'POSTER'):       #get poster only
                         self.results['poster'] = fetcher.poster()
                   elif(resultType == 'SUMMARY'):    #get summary only
-                        self.results['poster'] = fetcher.summary()                                                     #get both only
+                        self.results['poster'] = fetcher.summary()
 
             
             print(self.results)

@@ -16,13 +16,13 @@ class Tmdb:
         name = payload['name']
 
         if(not name or not id):
-            print('[TMDB > Summary] Couldn\'t statisfy all the keys from the payload. \n Missing keys: name | id')
+            print('Couldn\'t statisfy all the keys from the payload. \n Missing keys: name | id')
             return None
 
         if(biography):
-            print('[TMDB > Summary] Found content for %s' % (name))
+            print('Found content for %s' % (name))
         else:
-            print('[TMDB > Summary] FAILURE: Couldn\'t find any content for %s' % (name))
+            print('FAILURE: Couldn\'t find any content for %s' % (name))
         
         return {
             "content":biography, 

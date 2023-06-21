@@ -1,6 +1,6 @@
 #Get personnalities info and poster
 PERSON_CONFIG = {
-      "workers": ["tmdb","imdb","mubi","wikipedia","asianwiki","perplexity"],
+      "workers": ["perplexity"],
       "summary":{
             "method":"SINTHETIZE",
             "prompt": "BIOGRAPHY",
@@ -9,8 +9,7 @@ PERSON_CONFIG = {
                   "include":["cinema"] 
             },
             "custom":{
-                  "asianwiki": lambda payload : "%s (%d)" % (payload['name'], payload['job']),
-                  "perplex": lambda payload: {**payload, "prompt":'BIOGRAPHY'}
+                  "perplexity": lambda payload: {**payload,  "prompt":'BIOGRAPHY'}
             }
       },
       "poster":{

@@ -1,7 +1,7 @@
 PROMPTS = {
     "BIOGRAPHY":"""
         Write BEGIN and do a line break.
-        Then write a mid-length paragraph about the {job} {director}. 
+        Then write a mid-length paragraph about the {job} {name}. 
         Use a formal and neutral tone. The paragraph should suit an audience well educated about cinema and can include technical terms as well as in-depth insights.
         For every foreign movie titles, foreign people names, foreign cities names such as chinese, japanese, arabic, hebrew or russian names, city, title: write the original name in its original language in parenthesis next to it. 
         As instance Wong Kar-Wai is a chinese name translated in english, so you should write next to it the original name (王家衛).

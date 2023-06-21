@@ -18,10 +18,10 @@ class AsianWiki:
         url = self.url(name)
 
         if(not name):
-            print('[TMDB > Summary] Couldn\'t statisfy all the keys from the payload. \n Required key: name')
+            print('Couldn\'t statisfy all the keys from the payload. \n Required key: name')
             return None
 
-        print('[AsianWiki > poster] URL: %s' % (url))
+        print('URL: %s' % (url))
         driver.get(url)  
 
         #1 get element by class thumbimage (direct target)
@@ -29,9 +29,9 @@ class AsianWiki:
         
         if(poster):
             src = poster.get_attribute('src')
-            print('[AsianWiki > poster] Picture found: \n=> %s' % (src))
+            print('Picture found: \n=> %s' % (src))
         else:
-            print('[AsianWiki > poster] FAILURE: No poster found.')
+            print('FAILURE: No poster found.')
 
         driver.quit()
 
