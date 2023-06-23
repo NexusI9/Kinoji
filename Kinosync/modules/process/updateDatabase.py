@@ -5,8 +5,7 @@ from modules.webworkers.lib.tmdbapi import tmdb
 from modules.webworkers.workers.person import Person
 from modules.webworkers.workers.movie import Movie
 
-from lib.utils import config
-from lib.utils import clear
+from lib.utils import config, clear, beautyprint
 
 USERNAME = config("USERNAME")
 HOSTNAME = config("HOSTNAME")
@@ -26,8 +25,7 @@ class UpdateDatabase:
         for mv in moviesList:
             print("\n\n\n")
             print("----------------")
-            for key in mv.keys():
-                print('{:<14} {:<40}'.format(key, mv[key]))
+            beautyprint(mv)
 
             try:
                 movieID = mv["id"]
@@ -38,24 +36,23 @@ class UpdateDatabase:
                 #retrieving movie data
                 print('Retrieving movie data...')
                 movieData = Movie(movieID).fetch()
+                print("Updating %s" % (movieData["title"]))
+                #self.commitSQL("peoples", movieData)
+                beautyprint(movieData)
 
                 #retrieving peoples data
                 peoples = ['director','dop','artdir']
                 for job in peoples:
-                    if(movieData[job]):
-                        print('Retrieving %s data...' % (job))
-                        peopleData = Person(movieData, job).fetch()
-                        self.commitSQL("peoples", peopleData)
-
-
-                print("------------------------------------------------")
-                print("------------------------------------------------")
-
-                print("Updating %s" % (movieData["title"]))
-                self.commitSQL("peoples", movieData)
-
-
-
+                    peopleID = movieData[job]
+                    if(peopleID):
+                        print('\nRetrieving %s data...' % (job))
+                        peopleData = Person(peopleID, job).fetch()
+                        #self.commitSQL("peoples", peopleData)
+                        if(peopleData):
+                            beautyprint(peopleData)
+                        else:
+                            print('Could not find data for %s (id: %s)' % (job % peopleID))
+                
         return
 
 

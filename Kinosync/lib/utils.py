@@ -32,6 +32,11 @@ def approximate_string_match(urls, key):
 def clear():
     os.system('clear')
 
+
+def beautyprint(obj):
+    for key in obj.keys():
+        print('{:<14} {:<40}'.format(key, obj[key] or ''))
+
 webcolors = [
     {
         "name": "Lavender",
