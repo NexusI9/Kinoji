@@ -1,6 +1,6 @@
 import re
-from modules.webservices.lib.prompts import PROMPTS
-from modules.webservices.lib.webdriver import Webdriver
+from modules.webworkers.lib.prompts import PROMPTS
+from modules.webworkers.lib.webdriver import Webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys

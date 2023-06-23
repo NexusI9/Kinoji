@@ -2,11 +2,11 @@ from modules.process.updatedatabase import UpdateDatabase as Update
 from modules.process.addmovies import AddMovies
 #from classifier import Classifier
 from modules.process.wiper import Wiper
-from modules.webservices.explorer import Explorer
+from modules.webworkers.webworkers import Webworkers
 
 
 
-Explorer({"name":"Michael Anderson", "id":20412, "job":"director"}).process()
+Webworkers({"name":"Michael Anderson", "id":20412, "job":"director"}).process()
 
 
 """

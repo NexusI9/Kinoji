@@ -1,4 +1,4 @@
-from modules.webservices.lib.webdriver import Webdriver
+from modules.webworkers.lib.webdriver import Webdriver
 
 
 class AsianWiki:

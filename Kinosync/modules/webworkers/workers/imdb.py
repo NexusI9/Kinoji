@@ -1,6 +1,6 @@
 from tmdbv3api import Person
-from modules.webservices.lib.tmdbapi import tmdb
-from modules.webservices.lib.webdriver import Webdriver
+from modules.webworkers.lib.tmdbapi import tmdb
+from modules.webworkers.lib.webdriver import Webdriver
 from lib.utils import approximate_string_match
 
 class Imdb:

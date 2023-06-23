@@ -1,20 +1,20 @@
 #importing workers
-from modules.webservices.explorer_workers import WORKERS
+from modules.webworkers.webworkers_workers import WORKERS
 
 #import default config
-from modules.webservices.explorer_config import PERSON_CONFIG
+from modules.webworkers.webworkers_config import PERSON_CONFIG
 
 #importing analysis tools
-from modules.webservices.subprocess.fetcher import Fetcher
+from modules.webworkers.subprocess.fetcher import Fetcher
 
 
 
-class Explorer:
+class Webworkers:
 
       """
-      Explorer uses a config file as well as various workers to fetch data from the web.
+      Webworkers uses a config file as well as various workers to fetch data from the web.
       The Workers either use a API or a Web Scrapping approach to get data.
-      The Explorer can either fetch a summary (string) or a poster (URL / BASE64 depending of confing).
+      The Webworkers can either fetch a summary (string) or a poster (URL / BASE64 depending of confing).
       """
 
       def __init__(self, payload={}, config=PERSON_CONFIG, resultType='BOTH'):

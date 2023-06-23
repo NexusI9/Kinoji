@@ -1,4 +1,4 @@
-from modules.webservices.lib.tmdbapi import tmdb
+from modules.webworkers.lib.tmdbapi import tmdb
 from tmdbv3api import Person
 
 class Tmdb:
