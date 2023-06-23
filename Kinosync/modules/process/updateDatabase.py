@@ -72,6 +72,21 @@ class UpdateDatabase:
             return self.fetchDataOfMovies(movie)
     
     def people(self):
+        id = input('Type de the tmdb ID of the movie you wish to fetch:\n=> ')
+        people = self.connector.getJSON("""SELECT * from peoples where id = %s """, [id])
+
+        if(len(people) == 0):
+            print('No people with id %s found in the database' % (id))
+            return self.people()
+        else:
+            pplData = Person(people['id'], people['job'])
+            if pplData:
+                beautyprint(pplData)
+                self.connector.commit('peoples', pplData)
+            else:
+                print('Could not find any data for people %s' % (people['id']))
+            return 
+    
         return
 
     def bruteUpdate(self):

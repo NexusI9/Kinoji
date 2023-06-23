@@ -1,4 +1,4 @@
-from modules.process.updateDatabase import UpdateDatabase as Update
+from modules.process.updateDatabase import UpdateDatabase
 from modules.process.addMovies import AddMovies
 #from classifier import Classifier
 from modules.process.wiper import Wiper
@@ -13,15 +13,12 @@ print('[ 2 ] - Update database data for movies and peoples\n')
 print('[ 3 ] - Update Image AI recognition database\n')
 print('[ 4 ] - Wipe removed movies from databases\n')
 
-mode = input("=> ")
+mode = {
+    '1': lambda: AddMovies().start(),
+    '2': lambda: UpdateDatabase().start(),
+    '3': lambda: print('no AI available yet (coming soon...)'),
+    '4': lambda: Wiper().start()
+}[input("=> ")]()
 
-if( mode ==  '1' ):
-    AddMovies().start()
-if( mode == '2' ):
-    Update().start()
-if( mode == '3' ):
-    print('no AI available')
-    #Classifier().start()
-if( mode == '4'):
-    Wiper().start()
+
 

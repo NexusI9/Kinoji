@@ -14,25 +14,18 @@ class Person:
     def fetch(self):
 
         #get TMDB director info from webscrappers and TMDB
-        fulljob = 'Director'
+        fulljob = {
+            "dop": "Director of Photography",
+            "ardir": "Art Direction",
+            "director": "Director"
+        }[self.job]
 
-        if(self.job == 'director'):
-            fulljob = 'Director'
-        elif(self.job == 'dop'):
-            fulljob = 'Director of Photography'
-        elif(self.job == 'artdir'):
-            fulljob = 'Art Direction'
-            
-        webresults = {
-            "poster":"",
-            "summary":{"content":"", "sources":[]}
-        }
+        webresults = Webworkers({"name":self.name, "id":self.id, "job":fulljob or ''}).process()                    
 
-        #webresults = Webworkers({"name":self.name, "id":self.id, "job":fulljob}).process()                    
-        sources = None
         try:
             sources = ';'.join(webresults['summary']['sources'])
         except:
+            sources = None
             pass
 
         return {'name': self.name,

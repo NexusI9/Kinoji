@@ -79,7 +79,7 @@ class AddMovies:
             movieID = input("ID not found, type manually the Tmdb ID: ")
 
 
-        movie_tag = input("""\n\nType the movie shots aesthetic (separate with space): \n
+        movieTag = input("""\n\nType the movie shots aesthetic (separate with space): \n
        Existing aetshetics: \n
            - Artificial \n
            - Colourful \n
@@ -105,7 +105,7 @@ class AddMovies:
         movieGenre = input( """\n\nType the movie collection (separate with space): \n
         {}
            \n
-       => """.format(genres))
+        => """.format(genres))
 
         if(movieGenre):
             movieGenre = movieGenre.split(" ")
@@ -115,7 +115,7 @@ class AddMovies:
         movieData = {
             "folder": folder,
             "id": movieID,
-            "tag": movie_tag.lower().replace(' ',';'),
+            "tag": movieTag.lower().replace(' ',';'),
             "shots": self.fetchPictures(os.path.join(SHOTS_PATH,folder)),
             "added": datetime.fromtimestamp(os.stat(SHOTS_PATH+folder).st_birthtime).strftime('%Y-%m-%d %H:%M:%S')
         }
