@@ -6,10 +6,6 @@ from modules.webworkers.webworkers import Webworkers
 
 
 
-Webworkers({"name":"Michael Anderson", "id":20412, "job":"director"}).process()
-
-
-"""
 print('-------------KINOJI SYNCHER--------------\n\n\n')
 print('Choose an option : \n')
 print('[ 1 ] - Generate thumbnails from Shots and update aesthetic database\n')
@@ -28,4 +24,4 @@ if( mode == '3' ):
     #Classifier().start()
 if( mode == '4'):
     Wiper().start()
-"""
+
