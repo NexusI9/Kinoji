@@ -104,19 +104,16 @@ class UpdateDatabase:
         [ 3 ] - Fetch specific people\n
         [ 4 ] - Brute fetch all movies (global update)""")
         
-        fetchMethod = input("""=> """)
-        
-
-        if(fetchMethod == '1'):
-            return self.newMovies() #fetch new movies
-        elif(fetchMethod == '2'):
-            return self.movie() #fetch specific movie (by TMDB id)
-        elif(fetchMethod == '3'):
-            return self.people() #fetch specific people (by TMDB id)
-        elif(fetchMethod == '4'):
-            return self.bruteUpdate() #fetch all movies and peoples
-        else:
+        try: 
+            fetchMethod = {
+                '1': lambda: self.newMovies(),  #fetch new movies
+                '2': lambda: self.movie(),      #fetch specific movie (by TMDB id)
+                '3': lambda: self.people(),     #fetch specific people (by TMDB id)
+                '4': lambda: self.bruteUpdate() #fetch all movies and peoples
+            }[input("=> ")]()
+        except:
             print('%s is not a valid input, please enter a valid number' % (fetchMethod))
             return self.start()
+
         
        
