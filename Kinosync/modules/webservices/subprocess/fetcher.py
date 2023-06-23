@@ -2,15 +2,14 @@ from modules.webservices.explorer_workers import WORKERS
 
 class Fetcher():
 
-    def __init__(self, payload, sources, config):
+    def __init__(self, payload, config):
         self.payload = payload
-        self.sources = sources
         self.config = config
     
     def thread(self, type, callback):
         result = {}
 
-        for source in self.sources:
+        for source in self.config[type]['workers']:
                 print('\n')
                 print('------------------')
                 print('[%s > %s]' % (source, type))

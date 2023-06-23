@@ -1,8 +1,8 @@
 #Get personnalities info and poster
 #["tmdb","mubi","imdb","wikipedia","asianwiki","perplexity"]
 PERSON_CONFIG = {
-      "workers": ["perplexity"],
       "summary":{
+            "workers": ["perplexity"],
             "method":"SINTHETIZE",
             "prompt": "BIOGRAPHY",
             "keywords":{
@@ -14,6 +14,7 @@ PERSON_CONFIG = {
             }
       },
       "poster":{
+            "workers": ["tmdb","mubi","imdb","wikipedia","asianwiki"],
             "method":"MANUAL",
             "size":"300", 
             "encode":"BASE64"
@@ -26,8 +27,8 @@ PERSON_CONFIG = {
 #Get History events info and poster
 HISTORY_CONFIG = {
       "type": "SUMMARY",
-      "workers": ["wikipedia","perplexity"],
       "summary":{
+            "workers": ["wikipedia","perplexity"],
             "prompt":"HISTORY",
             "method":"SYNTHETISE",
             "custom":{

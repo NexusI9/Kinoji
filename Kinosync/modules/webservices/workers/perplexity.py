@@ -15,48 +15,47 @@ class Perplexity:
     
 
     def query(self, prompt, timeout = 10, responseTimeout=30):
+        
+        print('Query in perplexity AI')
+        self.driver = Webdriver()
 
-        driver = Webdriver(False)
-
-        driver.get(self.url)
+        self.driver.get(self.url)
         result=None
         sources=None
 
         #getting text area
-        textarea = driver.find_elements_by_CSS("textarea")[0]
+        textarea = self.driver.find_elements_by_CSS("textarea")[0]
         textarea.send_keys(prompt)
         textarea.send_keys(Keys.ENTER)
         
         #wait until bottom bar appear (meaning text got sent to be treated)
         try:
-            count = len(driver.find_elements_by_CSS(".-ml-sm")) + 1 
-            WebDriverWait(driver, timeout).until(lambda driver: len(driver.find_elements_by_CSS(".prose")) == 1) #wait until prose (response appear)
-        except:
-            pass
+            count = len(self.driver.find_elements_by_CSS(".-ml-sm")) + 1 
+            WebDriverWait(self.driver, timeout).until(lambda driver: len(driver.find_elements_by_CSS(".prose")) == 1) #wait until prose (response appear)
+        except Exception as er:
+            print(er)
         else:
             print('Pass first query step')
 
         #wait until share and suggestions are done being append in the DOM
         try:
-            WebDriverWait(driver, responseTimeout).until(
+            WebDriverWait(self.driver, responseTimeout).until(
                 (lambda driver: len(driver.find_elements_by_CSS(".-ml-sm")) == count and
                 EC.visibility_of(driver.find_elements_by_CSS(".-ml-sm")[count-1]))
             )
-        except: 
-            pass
+        except Exception as er:
+            print(er) 
         else:
             print('Pass second query step')
 
 
-        sources= driver.find_elements_by_CSS(".mt-xs a")
+        sources= self.driver.find_elements_by_CSS(".mt-xs a")
         sources = map(lambda a : a.get_attribute('href'), sources)
 
-        result = driver.find_element_by_CSS(".prose")
+        result = self.driver.find_element_by_CSS(".prose")
         #print(result.text)
         #print(list(sources))
-
-        driver.quit()
-
+        
 
         return {
             "content":result.text,
@@ -85,9 +84,7 @@ class Perplexity:
 
     def summary(self, payload):
 
-
         prompt =  None
-        
 
         try:
             prompt = payload['prompt']
@@ -101,6 +98,7 @@ class Perplexity:
         newPrompt  = self.remplacePromptVariables(payload, PROMPTS[prompt])
         result = self.query(newPrompt)
 
-        print(result)
+        self.driver.quit()
+
         return result
 

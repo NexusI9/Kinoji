@@ -6,7 +6,7 @@ from modules.webservices.explorer import Explorer
 
 
 
-Explorer({"name":"Wong Kar-Wai", "id":12453, "job":"director"}).process()
+Explorer({"name":"Michael Anderson", "id":20412, "job":"director"}).process()
 
 
 """

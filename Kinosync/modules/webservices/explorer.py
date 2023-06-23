@@ -20,17 +20,9 @@ class Explorer:
       def __init__(self, payload={}, config=PERSON_CONFIG, resultType='BOTH'):
             
             self.payload = payload
-            self.sources = None
             self.config = config
             self.resultType = resultType
-
-            try:
-                  self.sources = config['workers']
-            except:
-                  self.sources = WORKERS.keys()
-            
             self.workers = WORKERS;
-
             self.results = {
                   "summary":{},
                   "poster":{}
@@ -39,7 +31,7 @@ class Explorer:
       def process(self):
 
             #fetch data
-            fetcher = Fetcher(self.payload, self.sources, self.config)
+            fetcher = Fetcher(self.payload, self.config)
 
             resultType = None
             try: 
