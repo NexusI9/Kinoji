@@ -8,7 +8,7 @@ HOSTNAME = config("HOSTNAME")
 PASSWORD = config("PASSWORD")
 DTBNAME = config("DTBNAME")
 
-shots_path = config("DEST_PATH")
+shots_path = config("SHOTS_PATH")
 
 class Wiper:
 

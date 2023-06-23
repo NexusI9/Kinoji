@@ -5,7 +5,7 @@ from lib.connector import Connector
 import re
 
 
-DEST_PATH = config("DEST_PATH")
+SHOTS_PATH = config("SHOTS_PATH")
 USERNAME = config("USERNAME")
 HOSTNAME = config("HOSTNAME")
 PASSWORD = config("PASSWORD")
@@ -101,15 +101,15 @@ def pushNewMovies(path, moviename):
             'folder':moviename,
             'id': movie_id,
             'shots':';'.join(sorted_shots),
-            'added': datetime.fromtimestamp(os.stat(DEST_PATH+moviename).st_birthtime).strftime('%Y-%m-%d %H:%M:%S')
+            'added': datetime.fromtimestamp(os.stat(SHOTS_PATH+moviename).st_birthtime).strftime('%Y-%m-%d %H:%M:%S')
         }
 
         print(json)
         connector.update(table='movies', data=json);
 
-if (os.path.isdir(DEST_PATH)):
-    for directory in os.listdir(DEST_PATH):
-        fullpath = os.path.join(DEST_PATH, directory)
+if (os.path.isdir(SHOTS_PATH)):
+    for directory in os.listdir(SHOTS_PATH):
+        fullpath = os.path.join(SHOTS_PATH, directory)
         if(os.path.isdir(fullpath)):
             pushNewMovies(fullpath, directory)
             print('\n\n')

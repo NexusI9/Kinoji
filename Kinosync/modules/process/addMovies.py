@@ -14,7 +14,7 @@ from datetime import datetime
 
 
 SRC_PATH = config("SRC_PATH")
-DEST_PATH = config("DEST_PATH")
+SHOTS_PATH = config("SHOTS_PATH")
 
 USERNAME = config("USERNAME")
 HOSTNAME = config("HOSTNAME")
@@ -37,7 +37,7 @@ class AddMovies:
             self.connector.update(table='movies', data=movies);
         print("> Done !")
 
-    def get_index(file):
+    def get_index(self, file):
         return int(re.findall(r'\d+', file)[-1])
     
     def fetchPictures(self, path):
@@ -124,8 +124,8 @@ class AddMovies:
             "folder": folder,
             "id": movie_id,
             "tag": movie_tag.lower().replace(' ',';'),
-            "shots": self.fetchPictures(os.path.join(DEST_PATH,folder)),
-            "added": datetime.fromtimestamp(os.stat(DEST_PATH+folder).st_birthtime).strftime('%Y-%m-%d %H:%M:%S')
+            "shots": self.fetchPictures(os.path.join(SHOTS_PATH,folder)),
+            "added": datetime.fromtimestamp(os.stat(SHOTS_PATH+folder).st_birthtime).strftime('%Y-%m-%d %H:%M:%S')
 
         })
 
@@ -182,23 +182,23 @@ class AddMovies:
                 os.utime(newFile, (stat.st_atime, stat.st_mtime)) #keep meta-data
                 
                 #move shot to destination directory
-                shutil.copy2(os.path.join(SRC_PATH,movie,newName), os.path.join(DEST_PATH,movie,newName))
+                shutil.copy2(os.path.join(SRC_PATH,movie,newName), os.path.join(SHOTS_PATH,movie,newName))
                 
                 #convert to webp
                 print('...Processing: ' + newName)
 
-                large = Image.open( os.path.join(DEST_PATH,movie,newName) )            
-                thumb = Image.open( os.path.join(DEST_PATH,movie,newName) )
+                large = Image.open( os.path.join(SHOTS_PATH,movie,newName) )            
+                thumb = Image.open( os.path.join(SHOTS_PATH,movie,newName) )
 
                 #resize thumbnail
                 thumb.thumbnail((235, 235))
 
                 #convert to webp
                 webName = newName.replace(".png", "") + ".webp"
-                thumb.save(os.path.join(DEST_PATH,movie,"thumbnails", webName), "WEBP")
-                large.save(os.path.join(DEST_PATH,movie,webName), "WEBP")
+                thumb.save(os.path.join(SHOTS_PATH,movie,"thumbnails", webName), "WEBP")
+                large.save(os.path.join(SHOTS_PATH,movie,webName), "WEBP")
 
-                os.remove( os.path.join(DEST_PATH,movie,newName) )
+                os.remove( os.path.join(SHOTS_PATH,movie,newName) )
 
                 i += 1
 
@@ -211,11 +211,11 @@ class AddMovies:
 
     def createThumbFolder(self, movie):
         print("[...] Creating thumbnail directory")
-        os.mkdir(os.path.join(DEST_PATH,movie,'thumbnails'))
+        os.mkdir(os.path.join(SHOTS_PATH,movie,'thumbnails'))
 
     def createMovieFolder(self, movie):
         print("[...] Creating Movie directory")
-        os.mkdir(os.path.join(DEST_PATH,movie))    
+        os.mkdir(os.path.join(SHOTS_PATH,movie))    
 
 
     def start(self):
@@ -223,7 +223,7 @@ class AddMovies:
         movies = []
 
         for movieDirectory in os.listdir(SRC_PATH):
-            if( movieDirectory.startswith('.') == False and os.path.isdir( os.path.join(DEST_PATH,movieDirectory) ) == False ):
+            if( movieDirectory.startswith('.') == False and os.path.isdir( os.path.join(SHOTS_PATH,movieDirectory) ) == False ):
                 movies.append(movieDirectory)
 
 
