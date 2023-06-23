@@ -1,6 +1,6 @@
 #result = base64.b64encode(requests.get(src).content)
 
-class Fliter:
+class Filter:
 
     def __init__(self):
         pass

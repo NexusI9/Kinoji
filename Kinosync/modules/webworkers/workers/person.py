@@ -1,20 +1,16 @@
 from tmdbv3api import Movie
 from tmdbv3api import Person as tmdbPerson
-import wikipedia as wiki
+from modules.webworkers.webworkers import Webworkers
 
 
 class Person:
 
-    def __init__(self, movieId, job):
-        self.person = tmdbPerson()
-        self.movieId = movieId
+    def __init__(self, personID, job):
+        self.id = personID
+        self.person = tmdbPerson().details(personID)
+        self.name = self.person["name"]
         self.job = job
         return
-    
-
-    def getCountry(self,id):
-        details = self.person.details(id)
-        return details['place_of_birth']
 
     def getDate(self, id):
         details = self.person.details(id)
@@ -25,49 +21,31 @@ class Person:
 
     def fetch(self):
 
-        #get TMDB director info from wiki
+        #get TMDB director info from webscrappers and TMDB
+        fulljob = 'Director'
 
-        #set crew/ cast info (director; dop...)
-        crew = Movie().credits(self.movieId).crew
+        if(self.job == 'director'):
+            fulljob = 'Director'
+        elif(self.job == 'dop'):
+            fulljob = 'Director of Photography'
+        elif(self.job == 'artdir'):
+            fulljob = 'Art Direction'
 
-        if(crew):
-            for job in crew:
+            webresults = Webworkers({"name":self.name, "id":self.id, "job":fulljob}).process()                    
+            sources = None
+            try:
+                sources = ';'.join(webresults['summary']['sources'])
+            except:
+                pass
 
-                if( (job["job"] == "Director" and self.job=='director') or 
-                    (job["job"] == "Director of Photography" and self.job == 'dop' ) or 
-                    (job["job"] == "Art Direction" and self.job == 'artdir') ):
-                    
-                    self.name = job["name"]
-                    self.id = job['id']
-
-                    try:
-                        self.poster = "https://image.tmdb.org/t/p/w300"+job["profile_path"]
-                    except:
-                        self.poster = None
-                    
-
-                    try:
-                        wiki_url = wiki.page(self.name,auto_suggest=False).url
-                    except:
-                        wiki_url = ''
-                    try:
-                        summary = wiki.summary(self.name,auto_suggest=False)
-                    except:
-                        summary = ''
-
-                    
-                    self.sources = ";".join([wiki_url, "https://www.themoviedb.org/person/" + str(self.id)])
-
-
-
-                    return {'name': self.name,
-                            'id': self.id,
-                            'job':self.job,
-                            'poster': self.poster,
-                            'sources':self.sources,
-                            'summary':summary,
-                            'birthday':self.getDate(self.id)['birthday'],
-                            'deathday':self.getDate(self.id)['deathday'],
-                            'country':self.getCountry(self.id),
-                        }
+            return {'name': self.name,
+                    'id': self.id,
+                    'job':self.job,
+                    'poster': webresults['poster'],
+                    'sources':sources,
+                    'summary':webresults['summary']['content'],
+                    'birthday':self.person['birthday'],
+                    'deathday':self.person['deathday'],
+                    'country':self.person['place_of_birth']
+                }
 

@@ -1,15 +1,15 @@
-from modules.process.updatedatabase import UpdateDatabase as Update
-from modules.process.addmovies import AddMovies
+from modules.process.updateDatabase import UpdateDatabase as Update
+from modules.process.addMovies import AddMovies
 #from classifier import Classifier
 from modules.process.wiper import Wiper
-from modules.webworkers.webworkers import Webworkers
+from lib.utils import clear
 
 
-
+clear()
 print('-------------KINOJI SYNCHER--------------\n\n\n')
 print('Choose an option : \n')
 print('[ 1 ] - Generate thumbnails from Shots and update aesthetic database\n')
-print('[ 2 ] - Update TDMB and Wikipedia database info (for movie & director)\n')
+print('[ 2 ] - Update database data for movies and peoples\n')
 print('[ 3 ] - Update Image AI recognition database\n')
 print('[ 4 ] - Wipe removed movies from databases\n')
 

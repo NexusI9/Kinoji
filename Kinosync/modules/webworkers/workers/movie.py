@@ -1,9 +1,9 @@
-from tmdbv3api import Movie
+from tmdbv3api import Movie as TmdbMovie
 
 class Movie:
 
-    def __init__(self,dd):
-        self.id = dd
+    def __init__(self,tmdbID):
+        self.id = tmdbID
         self.director = None
         self.dop = None
         self.artdir = None
@@ -26,29 +26,32 @@ class Movie:
 
     def fetch(self):
 
-        movie = Movie()
+        movie = TmdbMovie()
         
         #set basic info (title; poster; summary)
         details = movie.details(self.id)
         self.title = details.title
         self.date = details.release_date
         self.production = self.getCompany(details)
+        self.poster = None
+        self.summary = ""
+        self.country = ""
+
         try:
             self.poster = "https://image.tmdb.org/t/p/w300"+details.poster_path
         except:
-            self.poster = None
+            pass
         try:
             self.country = details.production_countries[0]['name']
         except:
-            self.country = ""
+            pass
         try:
             self.summary = details.overview
         except:
-            self.summary = ""
+            pass
 
-               #set crew/ cast info (director; dop...)
+        #set crew/ cast info from movie credits (director; dop...)
         crew = movie.credits(self.id).crew
-
         if(crew):
             for job in crew:
 

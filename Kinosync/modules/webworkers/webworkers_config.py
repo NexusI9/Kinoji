@@ -3,7 +3,7 @@
 PERSON_CONFIG = {
       "summary":{
             "workers": ["perplexity"],
-            "method":"SINTHETIZE",
+            "method":"PRIORITY",
             "prompt": "BIOGRAPHY",
             "keywords":{
                   "avoid":["football"],
@@ -15,7 +15,7 @@ PERSON_CONFIG = {
       },
       "poster":{
             "workers": ["tmdb","mubi","imdb","wikipedia","asianwiki"],
-            "method":"MANUAL",
+            "method":"PRIORITY",
             "size":"300", 
             "encode":"BASE64"
       }

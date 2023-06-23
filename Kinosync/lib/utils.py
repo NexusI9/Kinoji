@@ -2,6 +2,7 @@
 
 import json
 import difflib
+import os
 
 
 def config(var):
@@ -27,6 +28,9 @@ def approximate_string_match(urls, key):
 
     return best_match
 
+
+def clear():
+    os.system('clear')
 
 webcolors = [
     {

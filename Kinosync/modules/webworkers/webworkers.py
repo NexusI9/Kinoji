@@ -6,6 +6,7 @@ from modules.webworkers.webworkers_config import PERSON_CONFIG
 
 #importing analysis tools
 from modules.webworkers.subprocess.fetcher import Fetcher
+from modules.webworkers.subprocess.filter import Filter
 
 
 
@@ -30,24 +31,30 @@ class Webworkers:
         
       def process(self):
 
-            #fetch data
+            #1. fetch data
             fetcher = Fetcher(self.payload, self.config)
 
+
             resultType = None
+            fetchResult = {}
             try: 
                   resultType = self.config['type']
             except:                                   #get all results
-                  self.results['poster'] = fetcher.poster()
-                  self.results['summary'] = fetcher.summary()
+                  fetchResult['poster'] = fetcher.poster()
+                  fetchResult['summary'] = fetcher.summary()
             else:
                   if(resultType == 'POSTER'):       #get poster only
-                        self.results['poster'] = fetcher.poster()
+                        fetchResult['poster'] = fetcher.poster()
                   elif(resultType == 'SUMMARY'):    #get summary only
-                        self.results['poster'] = fetcher.summary()
+                        fetchResult['poster'] = fetcher.summary()
 
             
-            print(self.results)
-            return self.results
+            #2. filter and convert data
+            filter = Filter(fetchResult, self.config)
+            filteredResult = filter.init()
+
+
+            return filteredResult
       
         
 
