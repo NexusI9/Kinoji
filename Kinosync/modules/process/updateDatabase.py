@@ -37,7 +37,7 @@ class UpdateDatabase:
                 print('Retrieving movie data...')
                 movieData = Movie(movieID).fetch()
                 print("Updating %s" % (movieData["title"]))
-                #self.commitSQL("peoples", movieData)
+                #self.connector.commit("peoples", movieData)
                 beautyprint(movieData)
 
                 #retrieving peoples data
@@ -47,7 +47,7 @@ class UpdateDatabase:
                     if(peopleID):
                         print('\nRetrieving %s data...' % (job))
                         peopleData = Person(peopleID, job).fetch()
-                        #self.commitSQL("peoples", peopleData)
+                        #self.connector.commit("peoples", peopleData)
                         if(peopleData):
                             beautyprint(peopleData)
                         else:
@@ -78,17 +78,6 @@ class UpdateDatabase:
         movieList = self.connector.getJSON("""SELECT * FROM movies""")
         self.fetchDataOfMovies(movieList)
         return
-
-
-
-    def commitSQL(self, tb, obj):
-        if(not obj or obj == None):
-            return
-        
-        print("[...] Committing to Database")
-        self.connector.update(table=tb,data=obj)
-        print("> DONE !")
-
 
 
     def start(self):

@@ -30,6 +30,13 @@ class Connector:
 
             return con
 
+    def commit(self, tb, obj):
+        if(not obj or obj == None):
+            return
+        
+        print("Committing to Database Table: %s" % (tb))
+        self.update(table=tb,data=obj)
+        print("> DONE !")
 
     def execute(self, query, args=()):
         cursor = self.connection.cursor(buffered=True)

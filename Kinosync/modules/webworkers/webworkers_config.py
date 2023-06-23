@@ -1,23 +1,18 @@
-#Get personnalities info and poster
-#["tmdb","mubi","imdb","wikipedia","asianwiki","perplexity"]
+
 PERSON_CONFIG = {
       "summary":{
             "workers": ["perplexity"],
-            "method":"PRIORITY",
+            "filter":"BY_ORDER",
             "prompt": "BIOGRAPHY",
-            "keywords":{
-                  "avoid":["football"],
-                  "include":["cinema"] 
-            },
             "custom":{
                   "perplexity": lambda payload: {**payload,  "prompt":'BIOGRAPHY'}
             }
       },
       "poster":{
             "workers": ["tmdb","mubi","imdb","wikipedia","asianwiki"],
-            "method":"PRIORITY",
+            "filter":"BY_ORDER",
             "size":"300", 
-            "encode":"BASE64"
+            "output":"DOWNLOAD"
       }
 
 }

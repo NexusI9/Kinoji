@@ -31,12 +31,6 @@ class AddMovies:
         print("\n\nMode 1 : Generate thumbnails from Shots and update aesthetic database")
         self.connector = Connector(HOSTNAME,USERNAME,PASSWORD,DTBNAME)
 
-    def commitSQL(self, JSON):
-        print("[...] Committing changes to database")
-        for movies in JSON:
-            self.connector.update(table='movies', data=movies);
-        print("> Done !")
-
     def get_index(self, file):
         return int(re.findall(r'\d+', file)[-1])
     
@@ -75,16 +69,14 @@ class AddMovies:
         print("---------- Add new movies to database ----------")
         print("------------------------------------------------")
 
-        JSON = []
-        print("Movie : " + folder)
+        print("Movie : %s" % (folder) )
 
         #set id from folder name
-        movie_id = re.findall("(\d+)[^-]*$", folder)
-        if(movie_id and movie_id[0]):
-            movie_id = movie_id[0]
-        else:
-            movie_id = input("ID not found, type manually the ID : ")
-            return
+        movieID = re.findall("(\d+)[^-]*$", folder)
+        try: 
+            movieID = movieID[0]
+        except: 
+            movieID = input("ID not found, type manually the Tmdb ID: ")
 
 
         movie_tag = input("""\n\nType the movie shots aesthetic (separate with space): \n
@@ -110,27 +102,26 @@ class AddMovies:
                 genres[g] = str(genres[g][0]) + ' - ' + str(genres[g][1])
             genres = ',\n'.join(genres)
 
-        movie_genre = input( """\n\nType the movie collection (separate with space): \n
+        movieGenre = input( """\n\nType the movie collection (separate with space): \n
         {}
            \n
        => """.format(genres))
 
-        if(movie_genre):
-            movie_genre = movie_genre.split(" ")
-            for genre_id in movie_genre:
-                self.addMovieIdToGenre(genre_id, movie_id)
+        if(movieGenre):
+            movieGenre = movieGenre.split(" ")
+            for genreID in movieGenre:
+                self.addMovieIdToGenre(genreID, movieID)
 
-        JSON.append({
+        movieData = {
             "folder": folder,
-            "id": movie_id,
+            "id": movieID,
             "tag": movie_tag.lower().replace(' ',';'),
             "shots": self.fetchPictures(os.path.join(SHOTS_PATH,folder)),
             "added": datetime.fromtimestamp(os.stat(SHOTS_PATH+folder).st_birthtime).strftime('%Y-%m-%d %H:%M:%S')
+        }
 
-        })
-
-
-        self.commitSQL(JSON)
+        self.connector.commit('movies', movieData)
+            
         print("\n> DONE !")
 
     def setShots(self,movie,sortBy=None):
