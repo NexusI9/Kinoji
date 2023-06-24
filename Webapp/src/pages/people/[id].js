@@ -54,7 +54,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({params}) {
   const people = await useAPI().fetch({type:'GET_PEOPLE_FROM_ID', id:params.id});
   const peopleMovie = await useAPI().fetch({type:'GET_MOVIES_FROM_PEOPLE', id:params.id});
-  console.log(people);
+
   return {
     props: {
       people:people,

@@ -22,6 +22,7 @@ $container_margin: 3% 0;
   --blue70: #1f242d;
   --blue50: #3c4658;
   --blue30: #66799d;
+  --blue20: #c8d3e8;
 
   --gradient-blue: #264370;
   --red: #B81E1E;
@@ -1903,6 +1904,8 @@ a {
 
   img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   span {
@@ -3230,6 +3233,30 @@ a {
   background: var(--blue80);
   box-shadow: none;
 
+  &.light{
+    background: var(--paper);
+    border-color: var(--blue30);
+    &, input{ color: var(--blue80); }
+
+    .suggest_list{
+      @include card.card('light');
+      .suggest{
+        color: var(--blue80);
+        border-bottom-color: var(--blue30);
+        &:hover {
+          background: var(--blue20);
+        }
+      }
+
+      .arrowlabel{
+        color: var(--blue80);
+        svg{
+          fill:var(--blue80);
+        }
+      }
+    }
+  }
+
   .ico.search {
 
     &,
@@ -3261,7 +3288,7 @@ a {
     left: 50%;
     transform: translateX(-50%);
     flex-direction: column;
-    @include card.card;
+    @include card.card();
 
     input {
       font-size: 16px;
@@ -3270,7 +3297,6 @@ a {
     li {
       transition: opacity 0.3s ease, transform 0.25s ease, box-shadow 0.25s ease;
       box-sizing: border-box;
-      margin-bottom: 5px;
       padding: 10px 5px;
       cursor: pointer;
 
@@ -3323,6 +3349,7 @@ a {
 
     p {
       margin: 0;
+      font-weight: 400;
     }
 
   }
@@ -3364,6 +3391,10 @@ a {
 
       h1 {
         white-space: nowrap;
+      }
+
+      h3{
+        font-size: 24px;
       }
     }
 
@@ -3665,7 +3696,7 @@ a {
   .spheros {
     height: 40vh;
     position: absolute;
-    width: 120%;
+    width: 100vw;
     transform: translateX(-50%);
     left: 50%;
     @include genSpheros($maxY: 10);

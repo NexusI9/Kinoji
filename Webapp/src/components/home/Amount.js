@@ -30,7 +30,8 @@ export default () => {
 
         const onScroll = () => {
             
-            const { top } = container.current?.getBoundingClientRect();
+            if(!container.current){return;}
+            const { top } = container.current.getBoundingClientRect();
 
             if(top < window.innerHeight/2){
                 setDisplay(true);

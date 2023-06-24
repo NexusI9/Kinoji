@@ -34,7 +34,7 @@ export default ({title, toolbar = false}) => {
         
           <img alt='kinojiLogo' src={kinojilogo.src} />
           {title && <h1>{title}</h1> }
-          <SearchBar />
+          <SearchBar theme='light' />
           <div id='tools_search_bar'>
             { toolbar && tools.map( ({link, ico, label}) => <Link key={link+'tools_search'} href={'/'+link} >{ico()}{label}</Link> )}
           </div>

@@ -8,7 +8,7 @@ import ArrowLabel from './ArrowLabel';
 
 import noposter from '@/assets/noposter.jpg';
 
-export default ({ limit = 5 }) => {
+export default ({ limit = 5, theme='default' }) => {
 
   const [suggest, setSuggest] = useState();
   const [value, setValue] = useState();
@@ -132,7 +132,7 @@ export default ({ limit = 5 }) => {
 
 
   return (
-    <section className='search_bar suggest_container' onKeyDown={onKeyDown}>
+    <section className={'search_bar suggest_container ' + (theme !== 'default' && theme) } onKeyDown={onKeyDown}>
       <span className="ico search"></span>
       <input className="field" id="search_input" autoComplete="off" placeholder="Type a movie, director, or a subject" type="text" onChange={onChange} />
       {
