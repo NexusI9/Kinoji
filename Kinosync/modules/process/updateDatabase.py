@@ -89,9 +89,17 @@ class UpdateDatabase:
             return 
     
 
-    def bruteUpdate(self):
+    def bruteUpdateMovies(self):
         movieList = self.connector.getJSON("""SELECT * FROM movies""")
         self.fetchDataOfMovies(movieList)
+        return
+    
+    def bruteUpdatePeoples(self):
+        peoples = self.connector.getJSON("""SELECT * FROM peoples""")
+        for ppl in peoples:
+            pplData = Person(ppl['id'], ppl['job']).fetch()
+            beautyprint(pplData)
+            #self.connector.commit('peoples', pplData)
         return
 
 
@@ -103,14 +111,16 @@ class UpdateDatabase:
     [ 2 ] - Fetch specific movie\n
     [ 3 ] - Fetch specific people\n
     [ 4 ] - Brute fetch all movies (global update)\n
+    [ 5 ] - Brute fetch all peoples (global update)\n
     (0 to exit)\n""")        
 
         {
             '0': sys.exit,
-            '1': self.newMovies,  #fetch new movies
-            '2': self.movie,      #fetch specific movie (by TMDB id)
-            '3': self.people,     #fetch specific people (by TMDB id)
-            '4': self.bruteUpdate #fetch all movies and peoples
+            '1': self.newMovies,            #fetch new movies
+            '2': self.movie,                #fetch specific movie (by TMDB id)
+            '3': self.people,               #fetch specific people (by TMDB id)
+            '4': self.bruteUpdateMovies,    #fetch all movies and peoples
+            '5': self.bruteUpdatePeoples    #fetch all movies and peoples
         }[input("=> ")]()
 
 

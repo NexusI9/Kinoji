@@ -14,7 +14,7 @@ PERSON_CONFIG = {
             "workers": ["tmdb","mubi","imdb","wikipedia","asianwiki"],
             "filter":"BY_ORDER",
             "resize":"300", 
-            "download":config('PEOPLES_POSTERS_PATH'),
+            "download": config('PEOPLES_POSTERS_PATH')
       }
 }
 
