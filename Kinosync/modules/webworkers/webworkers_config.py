@@ -1,3 +1,5 @@
+from lib.utils import config
+
 
 PERSON_CONFIG = {
       "summary":{
@@ -11,21 +13,20 @@ PERSON_CONFIG = {
       "poster":{
             "workers": ["tmdb","mubi","imdb","wikipedia","asianwiki"],
             "filter":"BY_ORDER",
-            "size":"300", 
-            "output":"DOWNLOAD"
+            "resize":"300", 
+            "download":config('PEOPLES_POSTERS_PATH'),
       }
-
 }
+
 
 
 
 #Get History events info and poster
 HISTORY_CONFIG = {
-      "type": "SUMMARY",
       "summary":{
             "workers": ["wikipedia","perplexity"],
             "prompt":"HISTORY",
-            "method":"SYNTHETISE",
+            "filter":"SYNTHETISE",
             "custom":{
                 "perplexity": lambda payload : {**payload, "prompt":"HISTORY"}
             }

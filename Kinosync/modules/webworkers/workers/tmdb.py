@@ -35,8 +35,8 @@ class Tmdb:
         src = Person().details(id)['profile_path']
         if(src):
             src = "https://image.tmdb.org/t/p/w300%s" % (src)
-            print('[TMDB > poster]\tProfile_path found: \n=> %s' % (src) )
+            print('Profile_path found: \n=> %s' % (src) )
         else:
-            print('[TMDB > poster]\tFAILURE: Couldn\'t find any profile_path')
+            print('FAILURE: Couldn\'t find any profile_path')
 
         return src

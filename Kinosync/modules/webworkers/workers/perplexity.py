@@ -53,8 +53,6 @@ class Perplexity:
         sources = map(lambda a : a.get_attribute('href'), sources)
 
         result = self.driver.find_element_by_CSS(".prose")
-        #print(result.text)
-        #print(list(sources))
         
 
         return {

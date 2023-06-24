@@ -5,6 +5,7 @@ from modules.webworkers.lib.tmdbapi import tmdb
 from modules.webworkers.workers.person import Person
 from modules.webworkers.workers.movie import Movie
 
+import sys
 from lib.utils import config, clear, beautyprint
 
 USERNAME = config("USERNAME")
@@ -73,21 +74,20 @@ class UpdateDatabase:
     
     def people(self):
         id = input('Type de the tmdb ID of the movie you wish to fetch:\n=> ')
-        people = self.connector.getJSON("""SELECT * from peoples where id = %s """, [id])
+        people = self.connector.getJSON("""SELECT * FROM peoples WHERE id = %s """, [id])
 
         if(len(people) == 0):
             print('No people with id %s found in the database' % (id))
-            return self.people()
+            return
         else:
-            pplData = Person(people['id'], people['job'])
+            pplData = Person(people[0]['id'], people[0]['job']).fetch()
             if pplData:
                 beautyprint(pplData)
-                self.connector.commit('peoples', pplData)
+                #self.connector.commit('peoples', pplData)
             else:
-                print('Could not find any data for people %s' % (people['id']))
+                print('Could not find any data for people %s' % (people[0]['id']))
             return 
     
-        return
 
     def bruteUpdate(self):
         movieList = self.connector.getJSON("""SELECT * FROM movies""")
@@ -98,22 +98,21 @@ class UpdateDatabase:
     def start(self):
 
         clear()
-        print("""How do you want to fetch web data: \n
-        [ 1 ] - Fetch newly added movies\n
-        [ 2 ] - Fetch specific movie\n
-        [ 3 ] - Fetch specific people\n
-        [ 4 ] - Brute fetch all movies (global update)""")
-        
-        try: 
-            fetchMethod = {
-                '1': lambda: self.newMovies(),  #fetch new movies
-                '2': lambda: self.movie(),      #fetch specific movie (by TMDB id)
-                '3': lambda: self.people(),     #fetch specific people (by TMDB id)
-                '4': lambda: self.bruteUpdate() #fetch all movies and peoples
-            }[input("=> ")]()
-        except:
-            print('%s is not a valid input, please enter a valid number' % (fetchMethod))
-            return self.start()
+        print("""\nHow do you want to fetch web data: \n
+    [ 1 ] - Fetch newly added movies\n
+    [ 2 ] - Fetch specific movie\n
+    [ 3 ] - Fetch specific people\n
+    [ 4 ] - Brute fetch all movies (global update)\n
+    (0 to exit)\n""")        
+
+        {
+            '0': sys.exit,
+            '1': self.newMovies,  #fetch new movies
+            '2': self.movie,      #fetch specific movie (by TMDB id)
+            '3': self.people,     #fetch specific people (by TMDB id)
+            '4': self.bruteUpdate #fetch all movies and peoples
+        }[input("=> ")]()
+
 
         
        

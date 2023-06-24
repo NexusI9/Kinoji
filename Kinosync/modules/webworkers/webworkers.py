@@ -25,36 +25,28 @@ class Webworkers:
             self.resultType = resultType
             self.workers = WORKERS;
             self.results = {
-                  "summary":{},
-                  "poster":{}
+                  **self.payload
             }
         
       def process(self):
 
             #1. fetch data
             fetcher = Fetcher(self.payload, self.config)
-
-
-            resultType = None
-            fetchResult = {}
-            try: 
-                  resultType = self.config['type']
-            except:                                   #get all results
-                  fetchResult['poster'] = fetcher.poster()
-                  fetchResult['summary'] = fetcher.summary()
-            else:
-                  if(resultType == 'POSTER'):       #get poster only
-                        fetchResult['poster'] = fetcher.poster()
-                  elif(resultType == 'SUMMARY'):    #get summary only
-                        fetchResult['poster'] = fetcher.summary()
-
+      
+            for key in self.config:
+                  try:
+                        self.results[key] = {
+                              'poster': fetcher.poster,
+                              'summary': fetcher.summary
+                              }[key]()
+                  except:
+                        continue
+            print('Fetching done')
             
-            #2. filter and convert data
-            filter = Filter(fetchResult, self.config)
-            filteredResult = filter.init()
+            #2. filter and convert overall data
+            self.results = Filter(self.results, self.config).init()
 
-
-            return filteredResult
+            return self.results
       
         
 

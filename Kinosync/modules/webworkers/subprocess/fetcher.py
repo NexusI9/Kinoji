@@ -12,9 +12,10 @@ class Fetcher():
         for source in self.config[type]['workers']:
                 print('\n')
                 print('------------------')
-                print('[%s > %s]' % (source, type))
+                print('{:10} {:10}'.format('source', source))
+                print('{:10} {:10}'.format('type', type))
+
                 serviceResult = None
-                custom = None
                 payload = self.payload
 
                 #check if workers of current source is subscribed
@@ -25,11 +26,11 @@ class Fetcher():
                     
                     #check if custom arguments
                     try:
-                         custom = self.config[type]['custom'][source]
+                         customCallback = self.config[type]['custom'][source]
                     except:
                          pass
                     else:
-                         payload = custom(payload)
+                         payload = customCallback(payload)
 
                     serviceResult = callback( WORKERS[source](),  payload)
 
