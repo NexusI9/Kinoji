@@ -1,8 +1,9 @@
 import os
 from datetime import datetime
-from lib.utils import config, downloadPicture, resizePicture
+from lib.utils import config, downloadPicture, resizePicture, md5
 from modules.process.lib.connector import Connector
 import re
+import shutil
 
 
 SHOTS_PATH = config("SHOTS_PATH")
@@ -119,7 +120,7 @@ def traverseDirectory():
     else:
         print('no root')
 
-#download movie posters
+#download movie posters and resize them
 def downloadMoviePosters():
 
     movies = connector.getJSON("""SELECT poster, id from movies""")
@@ -132,8 +133,33 @@ def downloadMoviePosters():
             resizePicture(dlPic, (300,300))
             connector.update('movies', {"id":id, "poster": f"/assets/posters/movies/{id}.webp" })
 
+#check for mubi no portrait through MD5 analysis
+def moveMubiNoPortrait():
+
+    ids = connector.getJSON("""SELECT id from peoples""")
+
+    for id in ids:
+        id = id['id']
+        fullpath = os.path.join(config('PEOPLES_POSTERS_PATH'),f"{id}.webp")
+
+        fileMd5 = md5(fullpath)
+        if(fileMd5 and fileMd5 == "9a4e8ab1486bf2f2c95486046778c99e"):
+
+            # Specify the destination directory path on the desktop
+            destination_dir = os.path.expanduser('~/Desktop/' + 'blank')
+
+            # Create the destination directory if it doesn't exist
+            if not os.path.exists(destination_dir):
+                os.makedirs(destination_dir)
+
+            shutil.move(fullpath, destination_dir)
+            connector.update('peoples', {'id':id, 'poster':None})
+                    
+                    
+
+
 def Sandbox():
 
-    downloadMoviePosters()
+    moveMubiNoPortrait()
 
     return

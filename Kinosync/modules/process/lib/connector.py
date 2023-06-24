@@ -57,9 +57,9 @@ class Connector:
         return json.loads(json.dumps(r, default=str))
 
     def cleanUp(self,object):
-        #remove None
+
         for key, value in dict(object).items():
-            if value is None or value == '':
+            if value == '':
                 del object[key]
         return object
 
@@ -95,5 +95,5 @@ class Connector:
         ON DUPLICATE KEY UPDATE
             %s
         """ % (table, columns, values, update)
-        print(QUERY)
+
         self.execute(QUERY)

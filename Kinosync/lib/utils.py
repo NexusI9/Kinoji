@@ -6,6 +6,7 @@ import os
 import datetime
 import requests
 from PIL import Image
+import hashlib
 
 
 def config(var):
@@ -85,6 +86,17 @@ def downloadPicture(url, directory, id):
 def getFirstItem(obj):
     return list(obj.values())[0]
 
+def md5(path):
+    if(os.path.exists(path)):
+        with open(path, 'rb') as file:
+            # Read the file in binary mode
+            data = file.read()
+
+            # Calculate the MD5 hash
+            md5 = hashlib.md5(data).hexdigest()
+            return md5
+    else:
+        return None
 
 webcolors = [
     {

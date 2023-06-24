@@ -34,7 +34,7 @@ class Mubi:
         if(poster):
             for img in poster:
                 imgSrc = img.get_attribute('src')
-                if( 'cast_member' in imgSrc ):
+                if( 'cast_member' in imgSrc and 'placeholder' not in imgSrc ):
                     src = imgSrc
                     break
             if(src):
