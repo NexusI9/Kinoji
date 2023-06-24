@@ -29,8 +29,8 @@ export default () => {
     useEffect(() => {
 
         const onScroll = () => {
-
-            const { top } = container.current.getBoundingClientRect();
+            
+            const { top } = container.current?.getBoundingClientRect();
 
             if(top < window.innerHeight/2){
                 setDisplay(true);
