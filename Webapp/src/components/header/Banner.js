@@ -19,7 +19,7 @@ export default ({ hero = true, visual, header, summary, sources, spheros = false
           footer={sources &&
             <div className='sources'>
               <h4>Sources</h4>
-              <ul>{sources.split(';').map( src => <li><a href={src}><small>{src}</small></a></li> )}</ul>
+              <ul>{sources.split(';').map( src => <li><a href={src} target='_blank'><small>{src}</small></a></li> )}</ul>
             </div>
           }
         />

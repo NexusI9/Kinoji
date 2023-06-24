@@ -3,18 +3,21 @@ import { useState } from 'react';
 
 export default (props) => {
 
-    const [ state, setState ] = useState(false);
+    const [ expanded, setExpanded ] = useState(false);
   
     const onClick = () => {
-      setState(!state);
-      if(props.onClick){ props.onClick(!state ? 'revealed' : 'hidden'); }
+      setExpanded(!expanded);
+      if(props.onClick){ props.onClick(!expanded ? 'revealed' : 'hidden'); }
     }
   
     return(
   
-          <div className='readmore'>
-            <span></span>
-            <Button label={!state ? 'read more' : 'read less'} onClick={onClick} />
+          <div className='readmore' onClick={onClick}>
+            <p><small>{!expanded ? 'read more' : 'read less'}</small></p>
+            <div className={'ico ' + (!expanded ? 'plus' : 'less')}>
+              <span></span>
+              <span></span>
+            </div>
           </div>
   
     );

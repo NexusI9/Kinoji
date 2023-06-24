@@ -194,7 +194,7 @@ h4 {
   }
 }
 
-h4{
+h4 {
   font-weight: 500;
 }
 
@@ -564,8 +564,8 @@ a {
   white-space: nowrap;
   font-weight: 500;
 
-  svg{
-    fill:var(--blue30);
+  svg {
+    fill: var(--blue30);
     transition: fill 0.2s ease;
   }
 
@@ -573,11 +573,13 @@ a {
     margin: 0;
   }
 
-  &:hover {
-    color: var(--red);
+  @media (hover:'hover') {
+    &:hover {
+      color: var(--red);
 
-    span {
-      background-color: var(--red);
+      svg {
+        fill: var(--red);
+      }
     }
   }
 
@@ -1031,7 +1033,7 @@ a {
     margin-top: 100px;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
-    min-height:400px;
+    min-height: 400px;
     position: relative;
     left: 0;
     width: 100%;
@@ -1093,7 +1095,7 @@ a {
 
 }
 
-.people-label{
+.people-label {
   display: inline-block;
 }
 
@@ -1186,10 +1188,11 @@ a {
 
         &>div {
           text-align: left;
-          .people-label{
+
+          .people-label {
             display: flex;
             flex-direction: row;
-            gap:6px;
+            gap: 6px;
             align-items: center;
           }
         }
@@ -1348,15 +1351,15 @@ a {
     font-weight: normal;
   }
 
-  h4{
+  h4 {
     margin: 13px 0;
     display: flex;
     flex-direction: row;
     align-items: center;
-    color:var(--blue30);
+    color: var(--blue30);
   }
 
-  hr{
+  hr {
     border-color: var(--blue50);
   }
 
@@ -1368,10 +1371,11 @@ a {
     visibility: hidden;
   }
 
-  .default-grid{
+  .default-grid {
     grid-template-columns: repeat(4, 1fr);
-    gap:7px;
-    .movie-poster.small{
+    gap: 7px;
+
+    .movie-poster.small {
       width: 100%;
     }
   }
@@ -1404,13 +1408,15 @@ a {
     margin: 0;
     padding: 0;
     margin-bottom: 20px;
-    
-    .title{
+
+    .title {
       margin: 0;
     }
-    .expandable{
+
+    .expandable {
       width: 100%;
-      p{
+
+      p {
         font-size: small;
       }
     }
@@ -1450,57 +1456,6 @@ a {
   li {
     font-size: 0.8em;
     margin: 5px 0;
-  }
-
-  .plusless {
-    position: relative;
-
-    * {
-      transition: opacity 0.2s ease;
-    }
-
-    &>* {
-      &:last-child {
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        opacity: 0;
-        top: 0;
-        border-style: solid;
-        border-width: 1px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-    }
-  }
-
-  .bar {
-    height: 1px;
-    background: var(--settingsDark);
-    display: block;
-    transition: clip-path 0.2s ease;
-    clip-path: inset(0 0 0 100%);
-  }
-
-  &.active {
-
-    .bar,
-    ul {
-      clip-path: inset(0 0 0 0);
-    }
-
-    .plusless {
-      * {
-        &:first-child {
-          opacity: 0;
-        }
-
-        &:last-child {
-          opacity: 1;
-        }
-      }
-    }
   }
 
 
@@ -2180,118 +2135,142 @@ a {
   }
 
   /*tag ico*/
-  &#tag,
-  {
-  mask-image: url("../assets/settings/tag/tag.svg");
-}
-
-&.tag {
-  mask-image: url("../assets/settings/tag/tag.svg");
-}
-
-/*clap ico*/
-&.clap {
-  mask-image: url("../assets/settings/clap/clap.svg");
-}
-
-/*chrono ico*/
-&.date {
-  mask-image: url("../assets/settings/globe/globe.svg");
-}
-
-
-/*mosaic ico*/
-&.poster {
-  mask-image: url("../assets/poster.svg");
-}
-
-&.mosaic {
-  mask-image: url("../assets/mosaic.svg");
-}
-
-&.arrowRight {
-  mask-image: url("../assets/arrowRight.svg");
-}
-
-&.backArrow {
-  mask-image: url("../assets/arrowback.svg");
-  margin-right: 6%;
-  margin-left: 6%;
-  width: 100%;
-  height: 20px;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-
-}
-
-&[alt="tmdb icon"] {
-
-  &,
-  &:hover {
-    background-color: transparent;
-  }
-}
-
-&.country {
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-
-  &[name="china"] {
-    background-image: url('./../assets/countries/china.svg');
+  &#tag {
+    mask-image: url("../assets/settings/tag/tag.svg");
   }
 
-  &[name="japan"] {
-    background-image: url('./../assets/countries/japan.svg');
-  }
-
-  &[name="taiwan"] {
-    background-image: url('./../assets/countries/taiwan.svg');
-  }
-
-  &[name="vietnam"] {
-    background-image: url('./../assets/countries/vietnam.svg');
-  }
-
-  &[name="indonesia"] {
-    background-image: url('./../assets/countries/indonesia.svg');
-  }
-
-  &[name="russia"] {
-    background-image: url('./../assets/countries/russia.svg');
-  }
-
-  &[name="south korea"] {
-    background-image: url('./../assets/countries/korea.svg');
-  }
-
-  &[name="india"] {
-    background-image: url('./../assets/countries/india.svg');
-  }
-
-  &[name="world"] {
-    background-image: url('./../assets/countries/worldwide.svg');
-  }
-
-}
-
-#micro_name & {
-  mask-image: url("../assets/az.svg");
-}
-
-#micro_year & {
-  mask-image: url("../assets/calendar.svg");
-}
-
-&.colours {
-  border-radius: 100%;
-
-  @each $colour,
-  $hex in $colours {
-    &[name=#{$colour}] {
-      background: $hex;
+  &.plus, &.less{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    span{
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: var(--blue50);
+      border-radius: 10em;
+      &:last-of-type{
+        position: absolute;
+        transition: transform 0.14s ease;
+        transform: rotate3d(0, 0, 1, 0deg);
+      }
     }
   }
-}
+
+  &.plus{
+    span:last-of-type{
+      transform: rotate3d(0, 0, 1, 90deg);
+    }
+  }
+
+  &.tag {
+    mask-image: url("../assets/settings/tag/tag.svg");
+  }
+
+  /*clap ico*/
+  &.clap {
+    mask-image: url("../assets/settings/clap/clap.svg");
+  }
+
+  /*chrono ico*/
+  &.date {
+    mask-image: url("../assets/settings/globe/globe.svg");
+  }
+
+
+  /*mosaic ico*/
+  &.poster {
+    mask-image: url("../assets/poster.svg");
+  }
+
+  &.mosaic {
+    mask-image: url("../assets/mosaic.svg");
+  }
+
+  &.arrowRight {
+    mask-image: url("../assets/arrowRight.svg");
+  }
+
+  &.backArrow {
+    mask-image: url("../assets/arrowback.svg");
+    margin-right: 6%;
+    margin-left: 6%;
+    width: 100%;
+    height: 20px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+
+  }
+
+  &[alt="tmdb icon"] {
+
+    &,
+    &:hover {
+      background-color: transparent;
+    }
+  }
+
+  &.country {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    &[name="china"] {
+      background-image: url('./../assets/countries/china.svg');
+    }
+
+    &[name="japan"] {
+      background-image: url('./../assets/countries/japan.svg');
+    }
+
+    &[name="taiwan"] {
+      background-image: url('./../assets/countries/taiwan.svg');
+    }
+
+    &[name="vietnam"] {
+      background-image: url('./../assets/countries/vietnam.svg');
+    }
+
+    &[name="indonesia"] {
+      background-image: url('./../assets/countries/indonesia.svg');
+    }
+
+    &[name="russia"] {
+      background-image: url('./../assets/countries/russia.svg');
+    }
+
+    &[name="south korea"] {
+      background-image: url('./../assets/countries/korea.svg');
+    }
+
+    &[name="india"] {
+      background-image: url('./../assets/countries/india.svg');
+    }
+
+    &[name="world"] {
+      background-image: url('./../assets/countries/worldwide.svg');
+    }
+
+  }
+
+  #micro_name & {
+    mask-image: url("../assets/az.svg");
+  }
+
+  #micro_year & {
+    mask-image: url("../assets/calendar.svg");
+  }
+
+  &.colours {
+    border-radius: 100%;
+
+    @each $colour,
+    $hex in $colours {
+      &[name=#{$colour}] {
+        background: $hex;
+      }
+    }
+  }
 
 }
 
@@ -2921,7 +2900,7 @@ a {
   padding: 1px 10px;
   font-size: small;
   margin-left: 8px;
-  color:var(--paper);
+  color: var(--paper);
 }
 
 
@@ -2943,8 +2922,8 @@ a {
     background: #07070b;
   }
 
-  h4{
-    color:var(--blue30);
+  h4 {
+    color: var(--blue30);
   }
 
   h2,
@@ -2952,7 +2931,9 @@ a {
     cursor: default;
   }
 
-  .label{gap: 0;}
+  .label {
+    gap: 0;
+  }
 
 
 }
@@ -3019,26 +3000,47 @@ a {
 }
 
 .readmore {
-  display: flex;
-  flex-direction: column;
   align-items: center;
   width: 100%;
+  margin: auto;
+  margin-top: 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  color: var(--blue30);
+  justify-content: center;
+  border-top: solid 1px var(--blue50);
+  padding-top: 10px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transition: color 0.12s ease;
 
-  &>span {
-    width: 100%;
-    display: block;
-    background: var(--blue50);
-    height: 0.5px;
-    box-sizing: border-box;
-
+  .ico{
+    width: 12px;
+    height: 12px;
+    background-color: transparent;
+    &.plus, &.less{
+      span{
+        transition: background 0.12s ease;
+        background: var(--blue30);
+        height: 1px;
+      }
+    }
   }
 
-  .button {
-    margin-top: 10px;
-    border: none;
+  @media(hover:'hover'){
+    &:hover{
+      color: var(--blue20);
+      .ico span{
+        background-color: var(--blue20);
+      }
+    }
   }
+
 
 }
+
 
 .rubrique {
   overflow: hidden;
@@ -3238,25 +3240,32 @@ a {
   background: var(--blue80);
   box-shadow: none;
 
-  &.light{
+  &.light {
     background: var(--paper);
     border-color: var(--blue30);
-    &, input{ color: var(--blue80); }
 
-    .suggest_list{
+    &,
+    input {
+      color: var(--blue80);
+    }
+
+    .suggest_list {
       @include card.card('light');
-      .suggest{
+
+      .suggest {
         color: var(--blue80);
         border-bottom-color: var(--blue30);
+
         &:hover {
           background: var(--blue20);
         }
       }
 
-      .arrowlabel{
+      .arrowlabel {
         color: var(--blue80);
-        svg{
-          fill:var(--blue80);
+
+        svg {
+          fill: var(--blue80);
         }
 
       }
@@ -3316,18 +3325,13 @@ a {
     &>.arrowlabel {
       margin-left: auto;
       padding-bottom: 10px;
-      svg{
-        fill:var(--paper);
-      }
-      @media (hover:'hover') {
-        &:hover{
-          color:var(--red);
-          svg{fill:var(--red);}
-        }
+
+      svg {
+        fill: var(--paper);
       }
     }
 
-    
+
 
     a:last-of-type {
       margin-top: 10px;
@@ -3410,7 +3414,7 @@ a {
         white-space: nowrap;
       }
 
-      h3{
+      h3 {
         font-size: 24px;
       }
     }
@@ -3711,18 +3715,22 @@ a {
   position: relative;
 
 
-  .sources{
-    h4{
+  .sources {
+    h4 {
       margin-bottom: 10px;
     }
-    li{
+
+    li {
       margin: 6px 0;
     }
-    a, li{
-      color:var(--blue30);
+
+    a,
+    li {
+      color: var(--blue30);
     }
-    a:hover{
-      color:var(--red);
+
+    a:hover {
+      color: var(--red);
     }
   }
 

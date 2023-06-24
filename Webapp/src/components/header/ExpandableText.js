@@ -24,7 +24,7 @@ export default ({paragraph, height=200, footer}) => {
         <motion.div
           initial={{height: hidden ? height : initHeight }}
           animate={{height: hidden ? height : initHeight}}
-          transition={{duration: 0.3, type:'tween', ease:'backOut'}}
+          transition={{duration: 0.3, type:'tween', ease:'circOut'}}
           ref={ref}>
           <p>{paragraph}</p>
           {footer && footer}
