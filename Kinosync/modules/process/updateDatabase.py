@@ -20,6 +20,14 @@ class UpdateDatabase:
         self.connector = Connector(HOSTNAME, USERNAME, PASSWORD, DTBNAME)
         print('\n\nMode 2: Update TDMB and Wikipedia database')
 
+    def fetchDataOfPeople(self, id, job):
+        peopleData = Person(id, job).fetch()
+        if(peopleData):
+            self.connector.commit("peoples", peopleData)
+            beautyprint(peopleData)
+        else:
+            print(f'Could not find data for {job} (id: {id})')
+
     def fetchDataOfMovies(self, moviesList):
 
         print(moviesList)
@@ -47,12 +55,8 @@ class UpdateDatabase:
                     peopleID = movieData[job]
                     if(peopleID):
                         print('\nRetrieving %s data...' % (job))
-                        peopleData = Person(peopleID, job).fetch()
-                        #self.connector.commit("peoples", peopleData)
-                        if(peopleData):
-                            beautyprint(peopleData)
-                        else:
-                            print('Could not find data for %s (id: %s)' % (job % peopleID))
+                        self.fetchDataOfPeople(peopleID, job)
+
                 
         return
 
@@ -73,19 +77,14 @@ class UpdateDatabase:
             return self.fetchDataOfMovies(movie)
     
     def people(self):
-        id = input('Type de the tmdb ID of the movie you wish to fetch:\n=> ')
+        id = input('Type de the tmdb ID of the people you wish to fetch:\n=> ')
         people = self.connector.getJSON("""SELECT * FROM peoples WHERE id = %s """, [id])
 
         if(len(people) == 0):
             print('No people with id %s found in the database' % (id))
             return
         else:
-            pplData = Person(people[0]['id'], people[0]['job']).fetch()
-            if pplData:
-                beautyprint(pplData)
-                #self.connector.commit('peoples', pplData)
-            else:
-                print('Could not find any data for people %s' % (people[0]['id']))
+            self.fetchDataOfPeople(people[0]['id'], people[0]['job'])
             return 
     
 
@@ -97,9 +96,7 @@ class UpdateDatabase:
     def bruteUpdatePeoples(self):
         peoples = self.connector.getJSON("""SELECT * FROM peoples""")
         for ppl in peoples:
-            pplData = Person(ppl['id'], ppl['job']).fetch()
-            beautyprint(pplData)
-            #self.connector.commit('peoples', pplData)
+            self.fetchDataOfPeople(ppl['id'], ppl['job'])
         return
 
 
