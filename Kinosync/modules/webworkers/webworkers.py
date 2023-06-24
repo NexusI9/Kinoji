@@ -24,9 +24,7 @@ class Webworkers:
             self.config = config
             self.resultType = resultType
             self.workers = WORKERS;
-            self.results = {
-                  **self.payload
-            }
+            self.results = {**self.payload}
         
       def process(self):
 

@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
-from lib.utils import config
-from lib.connector import Connector
+from lib.utils import config, downloadPicture, resizePicture
+from modules.process.lib.connector import Connector
 import re
 
 
@@ -76,6 +76,7 @@ def collectIDToGenre(path, moviename):
 
     return ''
 
+
 def pushNewMovies(path, moviename):
     shots = [ f.replace('.webp','') for f in os.listdir(path) if f != 'thumbnails' and f != '.' and f != '..' and f != '.DS_Store']
     shots.sort()
@@ -107,11 +108,32 @@ def pushNewMovies(path, moviename):
         print(json)
         connector.update(table='movies', data=json);
 
-if (os.path.isdir(SHOTS_PATH)):
-    for directory in os.listdir(SHOTS_PATH):
-        fullpath = os.path.join(SHOTS_PATH, directory)
-        if(os.path.isdir(fullpath)):
-            pushNewMovies(fullpath, directory)
-            print('\n\n')
-else:
-    print('no root')
+#go through the SHOTS_PATHS directory
+def traverseDirectory():
+    if (os.path.isdir(SHOTS_PATH)):
+        for directory in os.listdir(SHOTS_PATH):
+            fullpath = os.path.join(SHOTS_PATH, directory)
+            if(os.path.isdir(fullpath)):
+                pushNewMovies(fullpath, directory)
+                print('\n\n')
+    else:
+        print('no root')
+
+#download movie posters
+def downloadMoviePosters():
+
+    movies = connector.getJSON("""SELECT poster, id from movies""")
+    print(list(movies))
+
+    for mv in movies:
+        if(mv['poster']):
+            id= mv['id']
+            dlPic = downloadPicture(mv['poster'], config('MOVIES_POSTERS_PATH'), id )
+            resizePicture(dlPic, (300,300))
+            connector.update('movies', {"id":id, "poster": f"/assets/posters/movies/{id}.webp" })
+
+def Sandbox():
+
+    downloadMoviePosters()
+
+    return

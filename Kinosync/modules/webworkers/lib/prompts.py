@@ -16,7 +16,9 @@ PROMPTS = {
         - the main characteristics of the person movies.
         - what the person is known for.
         - the person contribution to the cinema industry.
-
+        
+        Feel free to add any other kinds of information that may be important in a biography.
+        
         The paragraph can also eventually include the following information if they are relevent. If the following information are not relevent, then do not include it:
         - if there are notable controversy include it too, else don't write anything about the controversy.
         - if the person is dead: the person date and location of death.

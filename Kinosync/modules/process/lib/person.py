@@ -39,6 +39,8 @@ class Person:
         
         try:
             poster = webresults['poster']
+            if(poster):
+                poster = f'/assets/posters/peoples/{self.id}.webp'
         except:
             poster = None
 

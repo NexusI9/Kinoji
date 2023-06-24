@@ -1,4 +1,5 @@
 from tmdbv3api import Movie as TmdbMovie
+from lib.utils import config, getDateTime, downloadPicture, resizePicture
 
 class Movie:
 
@@ -38,7 +39,10 @@ class Movie:
         self.country = ""
 
         try:
-            self.poster = "https://image.tmdb.org/t/p/w300"+details.poster_path
+            posterUrl = "https://image.tmdb.org/t/p/w300"+details.poster_path
+            dlPic = downloadPicture(posterUrl, config('MOVIES_POSTERS_PATH'), self.id )
+            resizePicture(dlPic, (300,300))
+            self.poster = f"/assets/posters/movies/{self.id}.webp"
         except:
             pass
         try:
@@ -73,6 +77,7 @@ class Movie:
                 'poster':self.poster,
                 'country':self.country,
                 'summary':self.summary,
-                'production':self.production
+                'production':self.production,
+                'last_update':getDateTime()
             }
  

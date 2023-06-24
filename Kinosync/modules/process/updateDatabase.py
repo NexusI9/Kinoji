@@ -2,8 +2,8 @@
 from modules.process.lib.connector import Connector
 
 from modules.webworkers.lib.tmdbapi import tmdb
-from modules.webworkers.workers.person import Person
-from modules.webworkers.workers.movie import Movie
+from modules.process.lib.person import Person
+from modules.process.lib.movie import Movie
 
 import sys
 from lib.utils import config, clear, beautyprint
