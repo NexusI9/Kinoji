@@ -1,6 +1,7 @@
 from tmdbv3api import Person as TmdbPerson
 from modules.webworkers.webworkers import Webworkers
-from lib.utils import beautyprint
+from lib.utils import beautyprint, getDateTime
+
 
 
 class Person:
@@ -18,7 +19,7 @@ class Person:
         try:
             fulljob = {
                 "dop": "Director of Photography",
-                "ardir": "Art Direction",
+                "artdir": "Art Direction",
                 "director": "Director"
             }[self.job]
         except:
@@ -49,6 +50,7 @@ class Person:
                 'summary':summary,
                 'birthday':self.person['birthday'],
                 'deathday':self.person['deathday'],
-                'country':self.person['place_of_birth']
+                'country':self.person['place_of_birth'],
+                'last_update': getDateTime()
             }
 

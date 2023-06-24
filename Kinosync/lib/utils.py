@@ -3,6 +3,7 @@
 import json
 import difflib
 import os
+import datetime
 
 
 def config(var):
@@ -36,6 +37,14 @@ def clear():
 def beautyprint(obj):
     for key in obj.keys():
         print('{:<14} {:<40}'.format(key, obj[key] or ''))
+
+def getDateTime():
+    # Get the current date and time
+    current_datetime = datetime.datetime.now()
+
+    # Format the datetime object as a string in the desired format
+    formatted_datetime = current_datetime.strftime('%Y-%m-%d %H:%M:%S')
+    return formatted_datetime
 
 webcolors = [
     {

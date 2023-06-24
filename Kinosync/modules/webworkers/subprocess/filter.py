@@ -17,7 +17,7 @@ class Filter:
         print(f'Resizing picture to {maxSize[0]}')
         #convert to webp and resize
         image = Image.open(path)
-        image.thumbnail(maxSize, Image.Resampling.LANCZOS)
+        image.thumbnail(maxSize)
         webName = f'{os.path.splitext(path)[0]}.webp'
         image.save(webName,'WEBP')
         print(f'Picture successfuly saved to: {webName}')
@@ -54,8 +54,11 @@ class Filter:
 
         #1. result selection
         for key in self.config.keys():
+
             
             currentValue = self.payload[key]
+            if(not currentValue):
+                continue
             try:
                 filterMethod = self.config[key]['filter']
             except:
@@ -71,6 +74,8 @@ class Filter:
         for key in self.config.keys():
 
             currentValue = self.payload[key]
+            if(not currentValue):
+                continue
             try:
                 downloadPath = self.config[key]['download']
             except Exception as er:
@@ -82,6 +87,8 @@ class Filter:
         for key in self.config.keys():
 
             currentValue = self.payload[key]
+            if(not currentValue):
+                continue
             try:
                 resizeValue = int(self.config[key]['resize'])
             except Exception as er:

@@ -94,7 +94,7 @@ class UpdateDatabase:
         return
     
     def bruteUpdatePeoples(self):
-        peoples = self.connector.getJSON("""SELECT * FROM peoples""")
+        peoples = self.connector.getJSON("""SELECT * FROM peoples WHERE last_update IS NULL""")
         for ppl in peoples:
             self.fetchDataOfPeople(ppl['id'], ppl['job'])
         return

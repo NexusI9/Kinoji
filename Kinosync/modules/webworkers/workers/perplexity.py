@@ -17,7 +17,7 @@ class Perplexity:
     def query(self, prompt, timeout = 10, responseTimeout=30):
         
         print('Query in perplexity AI')
-        self.driver = Webdriver()
+        self.driver = Webdriver(True)
 
         self.driver.get(self.url)
         result=None

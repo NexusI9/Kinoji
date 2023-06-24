@@ -41,6 +41,7 @@ class Webworkers:
                               }[key]()
                   except:
                         continue
+
             print('Fetching done')
             
             #2. filter and convert overall data
