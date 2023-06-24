@@ -28,7 +28,7 @@ export default () => {
       header:"About",
       content:[
         { label:'The project', link:'/about' },
-        { label:'Contribute', link:'/contribute' }
+        /*{ label:'Contribute', link:'/contribute' }*/
       ]
     },
   ];
