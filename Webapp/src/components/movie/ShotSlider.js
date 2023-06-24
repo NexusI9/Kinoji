@@ -1,10 +1,8 @@
 import useAPI from "../../lib/api";
 import { useState, useEffect, useRef } from 'react';
-import { ArrowLabel } from "../inputs";
 import { PeopleLabel } from "../people";
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Link from "next/link";
-import { InfoTag } from "../header";
 
 const variants = {
     content:{

@@ -21,7 +21,7 @@ return(
         category={ jobFullName(infos.job) }
         header={infos.name}
         summary={infos.summary || ''}
-        sources={infos.source}
+        sources={infos.sources}
         spheros={true}
       />)
   }

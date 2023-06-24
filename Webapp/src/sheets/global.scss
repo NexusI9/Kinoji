@@ -564,6 +564,11 @@ a {
   white-space: nowrap;
   font-weight: 500;
 
+  svg{
+    fill:var(--blue30);
+    transition: fill 0.2s ease;
+  }
+
   p {
     margin: 0;
   }
@@ -3253,6 +3258,7 @@ a {
         svg{
           fill:var(--blue80);
         }
+
       }
     }
   }
@@ -3310,7 +3316,18 @@ a {
     &>.arrowlabel {
       margin-left: auto;
       padding-bottom: 10px;
+      svg{
+        fill:var(--paper);
+      }
+      @media (hover:'hover') {
+        &:hover{
+          color:var(--red);
+          svg{fill:var(--red);}
+        }
+      }
     }
+
+    
 
     a:last-of-type {
       margin-top: 10px;
@@ -3692,6 +3709,22 @@ a {
   background: transparent;
   color: var(--paper);
   position: relative;
+
+
+  .sources{
+    h4{
+      margin-bottom: 10px;
+    }
+    li{
+      margin: 6px 0;
+    }
+    a, li{
+      color:var(--blue30);
+    }
+    a:hover{
+      color:var(--red);
+    }
+  }
 
   .spheros {
     height: 40vh;

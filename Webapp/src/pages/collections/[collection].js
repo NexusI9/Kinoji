@@ -11,7 +11,13 @@ import Head from 'next/head';
 
 export default function Collections(props) {
 
-  const tabs = Object.keys(props.peoples).map(job => ({ job: job, name: job === 'director' ? 'Directors' : job === 'dop' ? 'Directors of Photography' : job === 'artdir' ? 'Art Directors' : '' }));
+  const tabs = Object.keys(props.peoples).map( (job,i) => ({ 
+    job: job, 
+    name: job === 'director' ? 'Directors' : 
+          job === 'dop' ? 'Directors of Photography' : 
+          job === 'artdir' ? 'Art Directors' : '',
+    defaultChecked: !(!!i)
+  }));
   const [people, setPeople] = useState(Object.keys(props.peoples)[0]);
 
 
@@ -30,14 +36,23 @@ export default function Collections(props) {
 
       {props.collection &&
         <>
-          {props.movies && props.collection.map(info => <Banner visual={<Pile movies={props.movies} />} category='collection' key={'banner_' + info.tag} header={info.name} summary={info.summary} source={info.source} spheros={true} />)}
+          {props.movies && props.collection.map(info =>
+            <Banner
+              visual={<Pile movies={props.movies} />}
+              category='collection'
+              key={'banner_' + info.tag}
+              header={info.name}
+              summary={info.summary}
+              sources={info.sources}
+              spheros={true} />
+          )}
           {(props.peoples) &&
             <>
               <TabBar tabs={tabs} onChange={(t) => setPeople(t.job)} name='peoplescollection' />
               <div className='people-cardlist default-grid' >
                 <AnimatePresence mode='wait'>
                   {
-                    props.peoples[people].map( (ppl,id) => <Poster key={'poster_genre_' + ppl.id} people={ppl} delay={id/30} />)
+                    props.peoples[people].map((ppl, id) => <Poster key={'poster_genre_' + ppl.id} people={ppl} delay={id / 30} />)
                   }
                 </AnimatePresence>
               </div>

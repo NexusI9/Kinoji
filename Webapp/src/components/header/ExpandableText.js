@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { ReadMore } from '../inputs';
 import { motion } from 'framer-motion';
 
-export default ({paragraph, height=200}) => {
+export default ({paragraph, height=200, footer}) => {
 
     const ref = useRef(null);
     const [ hidden, setHidden ] = useState(false);
@@ -21,13 +21,14 @@ export default ({paragraph, height=200}) => {
   
     return (
       <div className='expandable'>
-        <motion.p
+        <motion.div
           initial={{height: hidden ? height : initHeight }}
           animate={{height: hidden ? height : initHeight}}
           transition={{duration: 0.3, type:'tween', ease:'backOut'}}
           ref={ref}>
-          {paragraph}
-          </motion.p>
+          <p>{paragraph}</p>
+          {footer && footer}
+          </motion.div>
         { bigSummary ? <>
             <ReadMore onClick={onClick}/>
           </>:<></>}
