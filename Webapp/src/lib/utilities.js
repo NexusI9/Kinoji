@@ -76,7 +76,12 @@ export function truncate(str, n){
 
 
 export function firstSentenceOf(str){
-  return str && str.match(/^.*?[\.!\?](?:\s|$)/)[0] || str;
+  try{
+    str = str.match(/^.*?[\.!\?](?:\s|$)/)[0]
+    return str;
+  }catch{
+    return str;
+  }
 }
 
 export function setTagArray(ob){

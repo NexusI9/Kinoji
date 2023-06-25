@@ -23,10 +23,14 @@ export default ({ number = 3, speed = 5000 }) => {
     const [movies, setMovies] = useState();
     const [active, setActive] = useState(false);
     const [roll, setRoll] = useState(0);
+    const [numberMovies, setNumberMovies]= useState(3);
     const step = useRef(0);
     const container = useRef();
     const interval = useRef();
 
+    useEffect(() => {
+        setNumberMovies( window.matchMedia('(min-width:800px').matches ? 3 : 1)
+    },[]);
     useEffect(() => {
 
         const onScroll = () => {
@@ -91,7 +95,7 @@ export default ({ number = 3, speed = 5000 }) => {
             <h2 className='big'>Discover</h2>
             <h4>Explore countless movies and atmospheres from Kinoji's movies library</h4>
             <div className='highlight_wrapper'>
-                {[...Array(3)].map((_, index) =>
+                {[...Array(numberMovies)].map((_, index) =>
                     <div key={`cell+${index}`} className='highlight_cell'>
                         <AnimatePresence>
                             {
