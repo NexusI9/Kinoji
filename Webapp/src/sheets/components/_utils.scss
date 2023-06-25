@@ -1,0 +1,23 @@
+@use "sass:math";
+@use "sass:map";
+
+$body-size: 16px;
+
+$media-breakpoints: (
+  mobile: 340px,
+  desktop: 1440px,
+);
+
+@function to-rems($px, $base-size: $body-size) {
+    $rems: math.div($px, $base-size) * 1rem;
+    @return $rems;
+}
+
+@function clamped($min-px, $max-px, $min-bp: map.get($media-breakpoints, 'mobile'), $max-bp: map.get($media-breakpoints, 'desktop')) {
+    $slope: math.div($max-px - $min-px, $max-bp - $min-bp);
+    $slope-vw: $slope * 100;
+    $intercept-rems: to-rems($min-px - $slope * $min-bp);
+    $min-rems: to-rems($min-px);
+    $max-rems: to-rems($max-px);
+    @return clamp(#{$min-rems}, #{$slope-vw}vw + #{$intercept-rems}, #{$max-rems});
+  }

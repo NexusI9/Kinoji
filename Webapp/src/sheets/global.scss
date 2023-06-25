@@ -1,5 +1,6 @@
 @use "components/round";
 @use "components/card";
+@use "components/utils";
 
 @charset "UTF-8";
 /* CSS Document */
@@ -196,23 +197,20 @@ h4 {
 
 h4 {
   font-weight: 500;
+  font-size: utils.clamped(20px, 24px);
 }
 
 
 h1 {
-  font-size: 64px;
+  font-size: utils.clamped(50px,64px);
 }
 
 h2 {
-  font-size: 46px;
+  font-size: utils.clamped(25px, 46px);
 }
 
 h3 {
   font-size: 32px;
-}
-
-h4 {
-  font-size: 22px;
 }
 
 p {
@@ -931,7 +929,7 @@ a {
     justify-content: flex-start;
     align-items: center;
     color: var(--paper);
-    font-size: clamp(30px, 8vw, 170px);
+    font-size: clamp(120px, 8vw, 170px);
     font-style: italic;
     font-weight: 800;
     line-height: 0.7em;
@@ -945,7 +943,7 @@ a {
       font-weight: 600;
       color: var(--red);
       margin-left: 3em;
-      font-size: clamp(30px, 4vw, 170px);
+      font-size: clamp(60px, 4vw, 170px);
       font-style: normal;
     }
   }
@@ -1001,6 +999,7 @@ a {
     position: absolute;
     left: 0;
     top: 0;
+    max-width: 100vw;
   }
 
   &::before {
@@ -1615,7 +1614,8 @@ a {
 
   h1 {
     font-size: var(--header3);
-    line-height: 0;
+    text-align: center;
+    margin: 5px 0;
   }
 
   .search_bar {
@@ -2545,13 +2545,12 @@ a {
   #toolsBar {
     display: flex;
     justify-content: center;
+    width: utils.clamped(170px, 300px);
+    justify-self: center;
 
     .search_bar {
       background: transparent;
-
-      .field {
-        width: 300px;
-      }
+      width: 100%;
     }
 
 
@@ -2920,7 +2919,11 @@ a {
     position: sticky;
     top: 59px;
     z-index: 2;
-    background: #07070b;
+    background: transparent;
+    transition: background 0.12s linear;
+    &.stuck{
+      background: #07070b;
+    }
   }
 
   h4 {
@@ -2954,6 +2957,10 @@ a {
   display: block;
 }
 
+.container:has(+#rubrique_container){
+  margin-bottom: 0;
+}
+
 #rubrique_container {
   position: relative;
   box-sizing: border-box;
@@ -2963,8 +2970,7 @@ a {
   flex-direction: row;
   flex-wrap: nowrap;
   overflow: scroll;
-  width: 116%;
-  transform: translateX(-6%);
+  width: 100%;
 
 
   .rubrique:first-of-type {
@@ -3046,14 +3052,13 @@ a {
 .rubrique {
   overflow: hidden;
   width: min-content;
-  min-width: 40%;
-  width: 100% !important;
+  width: 600px;
   display: flex;
+  flex-shrink: 0;
   flex-direction: column;
   @include box-border;
   @include card.card;
   padding-bottom: 15px;
-  max-width: 600px;
 
 
   & section {
@@ -3217,7 +3222,6 @@ a {
   background: none;
   color: #ffffff;
   width: 100%;
-  min-width: 200px;
   margin-right: 10px;
   cursor: text;
 
