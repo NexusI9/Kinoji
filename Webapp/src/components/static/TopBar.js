@@ -46,6 +46,8 @@ export default () => {
          document.removeEventListener('scroll', onScroll);
        }
 
+       setOpen(false);
+
       return () => {
         document.removeEventListener('scroll', onScroll);
       }

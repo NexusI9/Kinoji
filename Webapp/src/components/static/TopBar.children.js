@@ -1,14 +1,17 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useRouter } from 'next/router';
 
 export const BurgerMenu = ({ onClick = _ => 0 }) => {
-
+    const { pathname } = useRouter()
     const [open, setOpen] = useState(false);
     const handleOnClick = () => {
         onClick(!open);
         setOpen(!open);
     };
+
+    useEffect( () => { setOpen(false) },[pathname])    
 
     return (
         <div className={`burger-menu ${open ? 'active' : ''}`} onClick={handleOnClick}>
