@@ -25,7 +25,7 @@ const Pile = ({ movies }) => {
   }
 
   return(
-    <div style={{display:'flex', justifyContent:'center', alignContent:'center', height:'100%', alignItems:'flex-start', paddingTop: 2*settings.maxY+'px'}}>
+    <div className='pile'>
     {
       movies.map( movie => <img key={'messy_'+movie.id} alt={movie.title + 'poster'} className='messy' style={transform()} src={movie.poster} /> )
     }

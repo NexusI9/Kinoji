@@ -42,6 +42,9 @@
   }
 
   nav#topMenu{
+    
+    grid-template-columns: 40px 1fr 40px;
+    gap: 30px;
 
     #kinoIco{
       a:not(:first-of-type){
@@ -51,6 +54,10 @@
       img{
         height: 35px;
       }
+    }
+
+    #toolsBar{
+      width: 100%;
     }
 
     #sideFilter{
@@ -126,6 +133,12 @@
     }
   }
 
+  .movie_contain.masonry {
+    .movie_thumbnails{
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
 
 
   .movie_banner{
@@ -135,10 +148,6 @@
     .summary{
       width: 100%;
     }
-  }
-
-  .movie_thumbnails{
-    grid-template-columns: repeat(3, 1fr);
   }
 
   #banner_logo_search{
@@ -161,6 +170,10 @@
     row-gap: 10px;
   }
 
+  #all_rubriques{
+    grid-template-columns: auto;
+  }
+
 
 }
 
@@ -177,6 +190,11 @@
     }
   }
 
+  .movie_contain.masonry {
+    .movie_thumbnails{
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
 
   #movie_page_wrapper{
     margin-top: 90px;
@@ -229,6 +247,7 @@
     gap: 30px;
     .visual{
       &, img{
+        width: 100%;
         margin: auto;
         height: 100%;
         object-fit: contain;

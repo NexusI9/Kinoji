@@ -2489,13 +2489,13 @@ a {
   position: fixed;
   box-sizing: border-box;
   border-bottom: solid 0.5px var(--blue50);
-  width: 100%;
   align-items: center;
   background: var(--blue90);
   transition: transform 0.2s ease, grid-template-columns 0.3s ease-out;
   justify-content: space-between;
   z-index: 10;
   max-height: 60px;
+  width: 100vw;
 
 
   a {
@@ -2662,6 +2662,7 @@ a {
 
   &.open{
     grid-template-columns: 0px 1fr 40px;
+    gap: 0;
 
     #toolsBar{
       width: 90%;
@@ -3101,7 +3102,8 @@ a {
   margin-bottom: 10%;
   box-sizing: border-box;
   padding: 0 10%;
-
+  justify-content: center;
+  
   .rubrique {
     height: 100%;
   }
@@ -3154,7 +3156,7 @@ a {
 .rubrique {
   overflow: hidden;
   width: min-content;
-  width: 600px;
+  width: utils.clamped(300px, 600px);
   display: flex;
   flex-shrink: 0;
   flex-direction: column;
@@ -3861,6 +3863,14 @@ a {
       font-size: 32px;
     }
 
+  }
+
+  .pile{
+    display:flex; 
+    justify-content:center;
+    align-content:center; 
+    height:100%; 
+    align-items:flex-start;
   }
 
   &>* {
