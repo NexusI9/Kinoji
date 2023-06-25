@@ -48,6 +48,9 @@
         display: none;
         width: 40px;
       }
+      img{
+        height: 35px;
+      }
     }
 
     #sideFilter{
@@ -115,6 +118,14 @@
       }
     }
   }
+  
+
+  .newsletter-container{
+    &.container{ 
+      grid-template-columns: auto;
+    }
+  }
+
 
 
   .movie_banner{
@@ -136,11 +147,28 @@
     }
   }
 
+  #aboutKinoji{
+    grid-template-columns: none;
+    grid-template-rows:1fr auto;
+    gap:10px;
+  }
+
+  #latest > div:last-of-type{
+    width: 100%;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-flow: row;
+    gap: initial;
+    row-gap: 10px;
+  }
+
 
 }
 
 @media only screen and (max-width: 500px){
 
+  #latest > div:last-of-type{
+    grid-template-columns: repeat(3, 1fr);
+  }
 
   #videobanner{
     img[alt=kinojiLogo]{
@@ -149,11 +177,6 @@
     }
   }
 
-  .newsletter-container{
-    &.container{ 
-      grid-template-columns: auto;
-    }
-  }
 
   #movie_page_wrapper{
     margin-top: 90px;
@@ -223,11 +246,7 @@
       width: 100%;
     }
   }
-  #aboutKinoji{
-    grid-template-columns: none;
-    grid-template-rows:1fr auto;
-    gap:10px;
-  }
+
 
   .amount-container{
     grid-template-columns: auto;
@@ -246,14 +265,6 @@
     .highlight_wrapper{
       grid-template-columns: auto;
     }
-  }
-
-  #latest > div:last-of-type{
-    width: 100%;
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-flow: row;
-    gap: initial;
-    row-gap: 10px;
   }
 
 
