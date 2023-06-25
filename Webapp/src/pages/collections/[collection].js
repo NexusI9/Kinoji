@@ -31,7 +31,7 @@ export default function Collections(props) {
       className='container'
     >
       <Head>
-        <title>{props.name} on Kinoji</title>
+        <title>{` ${props.name} summary and movies | Kinoji`}</title>
       </Head>
 
       {props.collection &&

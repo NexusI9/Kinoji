@@ -186,9 +186,30 @@
   #videobanner{
     img[alt=kinojiLogo]{
       width: 200px;
+    }
+    #banner_logo_search{
+      position: relative;
+    }
 
+    #vimeoContainer{
+      &::after {
+        background: linear-gradient(90deg, #11111100 72%, var(--background) 100%),
+          linear-gradient(0deg, #11111100 72%, var(--background) 100%),
+          linear-gradient(180deg, #11111100 52%, var(--background) 90%),
+          linear-gradient(270deg, #11111100 72%, var(--background) 100%);
+      }
+    }
+
+  }
+
+  #movie_solo_page_wrapper{
+    .movie_banner{
+      grid-template-columns: auto;
     }
   }
+
+
+
 
   .movie_contain.masonry {
     .movie_thumbnails{

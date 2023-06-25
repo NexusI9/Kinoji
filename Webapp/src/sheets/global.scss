@@ -1560,10 +1560,11 @@ a {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    aspect-ratio: 16/9;
   }
 
-  &>div {
-    &:not(:first-of-type) {
+
+  #banner_logo_search{
       display: flex;
       width: 100%;
       justify-content: center;
@@ -1576,7 +1577,7 @@ a {
       left: 0;
       padding: 5%;
     }
-  }
+
 
 
   h3 {

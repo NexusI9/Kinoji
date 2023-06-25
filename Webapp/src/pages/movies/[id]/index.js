@@ -29,7 +29,7 @@ function Movie(props){
   return(
     <AnimatePresence mode='wait'>
       <Head>
-        <title>{ (props.movie || movie)[0].title } on Kinoji</title>
+        <title>{ `${(props.movie || movie)[0].title} stills library | Kinoji`}</title>
       </Head>
       <motion.div
         variants={container}

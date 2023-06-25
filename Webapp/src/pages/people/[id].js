@@ -12,7 +12,7 @@ function People(props){
 return(
   <div className='container'>
     <Head>
-      <title>{ props.people[0].name } on Kinoji</title>
+      <title>{`${props.people[0].name} biography and movies | Kinoji`}</title>
     </Head>
   {
     props.people.map( infos => <Banner
