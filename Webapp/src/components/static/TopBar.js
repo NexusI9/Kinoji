@@ -9,6 +9,9 @@ import SideMenu from './SideMenu';
 import kinojilogo from '@/assets/logo.svg';
 import minimlogo from '@/assets/logo-minimized.svg';
 
+import { BurgerMenu, Panel } from './TopBar.children';
+import { AnimatePresence } from 'framer-motion';
+
 
 export default () => {
 
@@ -31,6 +34,7 @@ export default () => {
   useEffect(() => {
 
       const onScroll = () => {
+        if(open){ return; }
         if(window.pageYOffset > window.innerHeight){ setActive(true); }
         else{ setActive(false); }
       }
@@ -47,8 +51,11 @@ export default () => {
       }
 
   },[location]);
+
+  useEffect(() => { setActive(true) },[open]);
+
   return(
-        <nav id="topMenu" className={(active ? '' : 'inactive') +' '+(Routing.isSettings(location) ? 'transparent' : '' ) }>
+        <nav id="topMenu" className={`${active ? '' : 'inactive'} ${Routing.isSettings(location) ? 'transparent' : '' } ${open ? 'open' : ''}` }>
             <div id='kinoIco'>
               <Link href='/'>
               <picture>
@@ -62,20 +69,10 @@ export default () => {
             <div id='toolsBar'>
                 <SearchBar />
             </div>
-            {minimized ? 
-            <div className={`burger-menu ${open ? 'active' : ''}`} onClick={ () => setOpen(!open)}>
-                <div className='list'>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
-                <div className='cross'>
-                  <span></span>
-                  <span></span>
-                </div>
-            </div> :
-             <SideMenu />
-            }
+            {minimized ? <BurgerMenu onClick={e => setOpen(e)}/>  : <SideMenu />}
+            <AnimatePresence mode='wait'>
+              {open && <Panel/> }
+            </AnimatePresence>
         </nav>
   );
 
