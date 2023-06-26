@@ -61,7 +61,7 @@ export default () => {
             <div id='kinoIco'>
               <Link href='/'>
               <picture>
-                <source srcset={minimlogo.src} media="(max-width: 800px)" />
+                <source srcSet={minimlogo.src} media="(max-width: 800px)" />
                 <img src={kinojilogo.src} />
               </picture>
                 </Link>
