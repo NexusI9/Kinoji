@@ -42,14 +42,14 @@ function aesthetics($connection, $body)
 
     case 'GET_SHOTS_WITH_COLORS':
       $colours = add_percent($body["colours"]);
-      $id = $body["id"];
 
-      if ($id) { //get shots for specific ID
 
+      if (isset($body["id"])) { //get shots for specific ID
+        $id = $body["id"];
         $query = $connection->buildQuery(
           array(
             "statement" => function ($c) {
-              return "SELECT shots FROM aesthetics WHERE id = ? AND ({$c})";
+              return "SELECT shot FROM aesthetics WHERE id = ? AND ({$c})";
             },
             "arguments" => $colours,
             "condition" => "LOWER(COLOURS) LIKE ?",
@@ -74,12 +74,15 @@ function aesthetics($connection, $body)
 
       $result = $connection->query($query, add_percent($colours));
 
-      echo json_encode(
-        array(
-          "shots" => filter_to_key($result, "shots"),
-          "movies" => array_unique(filter_to_key($result, "id"))
-        )
-      );
+      function getMovie($ar){
+        global $connection;
+        $mv = $connection->query('SELECT * FROM movies WHERE id = ?', [$ar['id']]);
+        return array_merge($ar, array("movie" => $mv[0]));
+      }
+
+      $result = array_map('getMovie', $result);
+
+      echo json_encode($result);
       break;
 
     case 'GET_TAG_SUMMARY':
@@ -92,7 +95,7 @@ function aesthetics($connection, $body)
       $query = $connection->buildQuery(
         array(
           "statement" => function ($c) {
-            return "SELECT DISTINCT movies.* , GROUP_CONCAT(DISTINCT aesthetics.shots SEPARATOR ';') as shots FROM movies INNER JOIN aesthetics WHERE movies.id = aesthetics.id AND ({$c}) GROUP BY movies.id";
+            return "SELECT DISTINCT movies.* , GROUP_CONCAT(DISTINCT aesthetics.shots SEPARATOR ';') as shot FROM movies INNER JOIN aesthetics WHERE movies.id = aesthetics.id AND ({$c}) GROUP BY movies.id";
           },
           "arguments" => $colours,
           "condition" => "aesthetics.colours LIKE ?",

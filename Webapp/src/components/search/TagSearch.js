@@ -17,13 +17,15 @@ export default ({tags, colours, subjects}) => {
           promiseArray.push( post({type:'GET_MOVIES_FROM_TAGS', tags:paramsToArray(tags)}).then( ({data}) => ({tags:data || []}) ) );
         }
         if(colours){
-          promiseArray.push(  post({type:'GET_MOVIES_FROM_COLORS', colours:paramsToArray(colours)}).then( ({data}) => ({colours:data || []}) ) );
+          promiseArray.push(  post({type:'GET_SHOTS_WITH_COLORS', colours:paramsToArray(colours)}).then( ({data}) => ({colours:data || []}) ) );
         }
 
         Promise.all(promiseArray).then( result => {
            result = {...result[0], ...result[1]};
            const { tags, colours } = result;
+          console.log(colours);
 
+          return;
            if( tags?.length && colours?.length ){
               //get union of two arrays and replace shots of colours
               const filteredArray = [];
