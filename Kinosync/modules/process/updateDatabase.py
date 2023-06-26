@@ -86,7 +86,6 @@ class UpdateDatabase:
         else:
             self.fetchDataOfPeople(people[0]['id'], people[0]['job'])
             return 
-    
 
     def bruteUpdateMovies(self):
         movieList = self.connector.getJSON("""SELECT * FROM movies""")
@@ -108,7 +107,7 @@ class UpdateDatabase:
     [ 2 ] - Fetch specific movie\n
     [ 3 ] - Fetch specific people\n
     [ 4 ] - Brute fetch all movies (global update)\n
-    [ 5 ] - Brute fetch all peoples (global update)\n
+    [ 5 ] - Brute fetch all peoples (global update)\n,
     (0 to exit)\n""")        
 
         {
