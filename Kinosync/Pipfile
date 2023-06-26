@@ -10,6 +10,8 @@ wikipedia = "*"
 tmdbv3api = "*"
 pillow = "*"
 requests = "*"
+colorthief = "*"
+webcolors = "*"
 
 [dev-packages]
 

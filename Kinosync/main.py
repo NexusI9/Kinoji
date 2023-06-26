@@ -1,7 +1,7 @@
 import sys
 from modules.process.updateDatabase import UpdateDatabase
 from modules.process.addMovies import AddMovies
-#from classifier import Classifier
+from modules.process.shotsanalyser import ShotsAnalyser
 from modules.process.wiper import Wiper
 from modules.process.tests.moduledtb import Sandbox
 from lib.utils import clear
@@ -22,7 +22,7 @@ Choose an option : \n
     '0': sys.exit,
     '1': lambda: AddMovies().start(),
     '2': lambda: UpdateDatabase().start(),
-    '3': lambda: print('no AI available yet (coming soon...)'),
+    '3': lambda: ShotsAnalyser().start(),
     '4': lambda: Wiper().start(),
     '5': lambda: Sandbox()
 }[input("=> ")]()

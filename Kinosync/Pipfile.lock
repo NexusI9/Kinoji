@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "32e3a9301c3b6ebd4dcb89ea14db7dfa9953806c276b850dfabce9025434399f"
+            "sha256": "9667c9a66fc5bf97abd59b8db3d91dae5986c003c749622ed23275930cdae3c3"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -136,6 +136,14 @@
             ],
             "markers": "python_version >= '3.7'",
             "version": "==8.1.3"
+        },
+        "colorthief": {
+            "hashes": [
+                "sha256:079cb0c95bdd669c4643e2f7494de13b0b6029d5cdbe2d74d5d3c3386bd57221",
+                "sha256:b04fc8ce5cf9c888768745e29cb19b7b688d5711af6fba26e8057debabec56b9"
+            ],
+            "index": "pypi",
+            "version": "==0.2.1"
         },
         "exceptiongroup": {
             "hashes": [
@@ -415,6 +423,14 @@
             ],
             "markers": "python_version >= '3.7'",
             "version": "==2.0.3"
+        },
+        "webcolors": {
+            "hashes": [
+                "sha256:29bc7e8752c0a1bd4a1f03c14d6e6a72e93d82193738fa860cbff59d0fcc11bf",
+                "sha256:c225b674c83fa923be93d235330ce0300373d02885cef23238813b0d5668304a"
+            ],
+            "index": "pypi",
+            "version": "==1.13"
         },
         "werkzeug": {
             "hashes": [

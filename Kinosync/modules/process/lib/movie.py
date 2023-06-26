@@ -3,6 +3,10 @@ from lib.utils import config, getDateTime, downloadPicture, resizePicture
 
 class Movie:
 
+    """
+    Gather information about the movie based of TMDB api and return a dictionnary with the information
+    """
+
     def __init__(self,tmdbID):
         self.id = tmdbID
         self.director = None

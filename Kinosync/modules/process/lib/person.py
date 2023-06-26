@@ -6,6 +6,11 @@ from lib.utils import beautyprint, getDateTime
 
 class Person:
 
+    """
+    Gather information about the person based of TMDB api as well as Webscrappers and AI, 
+    and return a dictionnary with the information.
+    """
+
     def __init__(self, personID, job):
         self.id = personID
         self.person = TmdbPerson().details(personID)

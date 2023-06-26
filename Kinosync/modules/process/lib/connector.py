@@ -45,7 +45,7 @@ class Connector:
             self.connection.commit()
             return cursor.fetchall()
         except Error as err:
-            print(f"Error :'{err}'")
+            print(f"Error executing query:'{err}'")
 
 
     def getJSON(self, query, args=()):
