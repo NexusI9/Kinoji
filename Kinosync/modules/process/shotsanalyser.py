@@ -3,6 +3,7 @@
 
 import os
 import re
+import sys
 from lib.utils import config, clear, beautyprint
 from modules.process.lib.connector import Connector
 from modules.process.lib.palette import Palette
@@ -23,13 +24,12 @@ class ShotsAnalyser:
         return
     
     def folderToFullpath(self,folder):
-        return os.path.join(SHOTS_PATH,folder)
+        return os.path.join(SHOTS_PATH,folder,'thumbnails')
 
-    def analyseFolder(self, id, folder):
+    def scanFolder(self, id, folder):
 
-        print("Scanning folder: %s" % (folder))
+        print("Scanning thumbnails folder: %s" % (folder))
 
-        
         fullPath = self.folderToFullpath(folder)
 
         #list dir and filter pictures
@@ -40,7 +40,7 @@ class ShotsAnalyser:
             picFullPath = os.path.join(fullPath, pic)                
             subjects = None
             #subjects = Classifier().getSubject(picFullPath)
-            colours = Palette().getColours(picFullPath)
+            colours = Palette(maxColor=6).getColours(picFullPath)
 
             result = {
                 "folder": folder,
@@ -53,15 +53,11 @@ class ShotsAnalyser:
             beautyprint(result)
             self.connector.update("aesthetics",result)
 
-    
-    def start(self):
-        
-        clear()
-        idSelection = input("\n\nType an ID to analyze (enter to analyse all registered directories) \n => ")
-
+    def analyse(self, id=None):
+        print(id)
         folders = self.connector.getJSON("""SELECT folder, id FROM movies""")
-        if(len(idSelection)):
-            folders = self.connector.getJSON("""SELECT folder, id FROM movies WHERE id = %s""", [idSelection])
+        if(id):
+            folders = self.connector.getJSON("""SELECT folder, id FROM movies WHERE id = %s""", [id])
        
         if(not len(folders)):
             print('No movie was found please enter a valid ID')
@@ -69,10 +65,48 @@ class ShotsAnalyser:
         else:
             for mv in folders:
                 if(os.path.isdir(self.folderToFullpath(mv['folder']))): #check if folder exists on computer
-                    self.analyseFolder(mv['id'],mv['folder'])
+                    self.scanFolder(mv['id'],mv['folder'])
                 else:
                     print("%s directory not found" % (mv['folder']))
                     continue
+        
+    def newMovies(self):
+        
+        movies = self.connector.getJSON("""SELECT DISTINCT id, folder from movies""")
+        
+        shotsID = [s[0] for s in self.connector.execute("""SELECT DISTINCT id from aesthetics""")]
+        moviesID = [mv['id'] for mv in movies]
+
+        missingID = [id for id in moviesID if id not in shotsID]
+        movies = [mv for mv in movies if mv['id'] in missingID]
+
+        if(len(movies)):
+            print("Movies yet to be analysed:")
+            [print('+ {:10} {:20}'.format(mv['id'], mv['folder'])) for mv in movies]
+            userAdd = input("\nScan the above movies? (y/n)\n=> ")
+            if(userAdd == 'y' or not len(userAdd)):
+                [self.analyse(mv['id']) for mv in movies]
+                
+        return
+
+    
+    def start(self):
+        
+        clear()
+        print("""Do you wish to update: \n
+[ 1 ] - Newly added movies \n
+[ 2 ] - Specific movie ID\n
+[ 3 ] - All the shots (brute update)\n
+(0 to quit)\n""")
+ 
+        {
+            '0': lambda: sys.exit(),
+            '1': lambda: self.newMovies(),
+            '2': lambda: self.analyse( input("\nPlease enter movie ID:\n=>") ),
+            '3': lambda: self.analyse()
+        }[input("=> ")]()
+                            
+        return
 
 
 
