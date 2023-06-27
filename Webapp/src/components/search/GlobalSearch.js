@@ -8,7 +8,9 @@ import useAPI from '@/lib/api';
 import ResultText from './ResultText';
 import { TabBar } from '@/components/header';
 import { useRouter } from 'next/router';
-import { lengthOfCategory } from './GlobalSearch.helper';
+import { jobFullName } from '@/lib/utilities';
+
+const PEOPLES_JOB = ['director','dop','artdir'];
 
 export default ({ query }) => {
 
@@ -17,7 +19,7 @@ export default ({ query }) => {
   const CATEGORY_MAP = {
     movies: (ar) => ar.map(movie => <MoviePoster key={'querySearchmovie' + movie.id} movie={movie} />),
     peoples: (ar, title) => (<><h4>{title}</h4><div className='people-cardlist default-grid'>{ar.map(ppl => <PeoplePoster key={'dircard' + ppl.id} people={ppl} />)}</div></>),
-    collections: (ar) => ar.map(genre => <Rubrique key={'rubriquesearch' + genre.name} genre={genre} />),
+    collections: (ar) => ar.map(genre => <Rubrique key={'rubriquesearch' + genre.name} genre={genre} direction={'horizontal'} />),
     colours: (ar) => ar.map(colour => <Card key={'colourbox' + colour.family} label={colour.family} link={'/search?colours=' + colour.family.toLowerCase()} visual={<span name={colour.family.toLowerCase()} className='ico colours' style={{ width: '50px', height: '50px' }}></span>} subtext={'Lookup shots with ' + colour.family + ' hues'} />)
   }
 
@@ -69,16 +71,17 @@ export default ({ query }) => {
 
       case 'peoples':
         setContent(
-          <div id='search-personnalities'>
-            {result.directors.length ? <div>{CATEGORY_MAP[type](result.directors, 'Directors')}</div> : <></>}
-            {result.dops.length ? <div>{CATEGORY_MAP[type](result.dops, 'Directors of photography')}</div> : <></>}
-            {result.artdirs.length ? <div>{CATEGORY_MAP[type](result.artdirs, 'Art Director')}</div> : <></>}
+          <div className='search-personnalities'>
+            {PEOPLES_JOB.map( job => {
+              const peoplesOfJob = result.peoples.filter(ppl => job === ppl.job);
+              return peoplesOfJob.length ? <div>{CATEGORY_MAP[type](peoplesOfJob, jobFullName(job))}</div> : null;
+            })}
           </div>
         );
         break;
 
       case 'collections':
-        setContent(<div>{CATEGORY_MAP[type](result[type])}</div>)
+        setContent(<div className='search-collections'>{CATEGORY_MAP[type](result[type])}</div>)
         break;
 
       case 'colours':
@@ -88,7 +91,7 @@ export default ({ query }) => {
       default:
         let defaultType = CATEGORY_MAP[0];
         for (let category of Object.keys(CATEGORY_MAP)) {
-          if (lengthOfCategory(result, category)) {
+          if (result[category].length) {
             defaultType = category;
             break;
           }
@@ -110,7 +113,7 @@ export default ({ query }) => {
           <LabelBar label='Search results' underline={false} />
           <TabBar tabs={
             Object.keys(CATEGORY_MAP).map(ctg => {
-              const active = lengthOfCategory(result, ctg);
+              const active = result[ctg].length;
               return ({
                 name: ctg,
                 active: !!active,

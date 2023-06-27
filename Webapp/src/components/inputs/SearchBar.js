@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { getMovieYear } from '../../lib/utilities';
-import useAPI from '../../lib/api';
+import { getMovieYear, jobFullName } from '@/lib/utilities';
+import useAPI from '@/lib/api';
 import { InfoTag } from '../header';
 import ArrowLabel from './ArrowLabel';
 
@@ -37,63 +37,44 @@ export default ({ limit = 5, theme='default' }) => {
           </li>
         </Link>,
 
-      directors: (obj) =>
-        <Link key={'suggestdir' + obj.id} href={'/people/' + obj.id} onClick={onClick}>
+      peoples: ({id, poster, name, job}) =>
+        <Link key={'suggestdir' + id} href={'/people/' + id} onClick={onClick}>
           <li className='suggest suggest_poster'>
-            <img src={obj.poster || noposter.src} />
+            <img src={poster || noposter.src} />
             <div>
-              <p>{obj.name}</p>
-              <InfoTag>director</InfoTag>
+              <p>{name}</p>
+              <InfoTag>{jobFullName(job)}</InfoTag>
             </div>
           </li>
         </Link>,
 
-      dops: (obj) =>
-        <Link key={'suggestdop' + obj.id} href={'/people/' + obj.id} onClick={onClick}>
+      collections: ({name}) =>
+        <Link key={'suggestgenre' + name} href={'/collections/' + name} onClick={onClick}>
           <li className='suggest'>
-            <div>
-              <p>{obj.dop}</p>
-              <InfoTag>director of photography</InfoTag>
-            </div>
-          </li>
-        </Link>,
-      artdirs: (obj) =>
-        <Link key={'suggestdop' + obj.id} href={'/people/' + obj.id} onClick={onClick}>
-          <li className='suggest'>
-            <div>
-              <p>{obj.dop}</p>
-              <InfoTag>art director</InfoTag>
-            </div>
-          </li>
-        </Link>,
-
-      collections: (obj) =>
-        <Link key={'suggestgenre' + obj.name} href={'/collections/' + obj.name} onClick={onClick}>
-          <li className='suggest'>
-            <div> {obj.name}
+            <div> <p>{name}</p>
               <InfoTag>collection</InfoTag>
             </div>
           </li>
         </Link>,
 
-      colours: (obj) =>
-        <Link key={'suggestcolors' + obj.family} href={'/search?colours=' + obj.family} onClick={onClick}>
+      colours: ({family}) =>
+        <Link key={'suggestcolors' + family} href={'/search?colours=' + family} onClick={onClick}>
           <li className='suggest suggest_poster'>
             <div className='suggest_color_wrap'>
-              <span className='ico colours' name={obj.family.toLowerCase()}></span>
+              <span className='ico colours' name={family.toLowerCase()}></span>
             </div>
             <div>
-              <p>{obj.family}</p>
-              <InfoTag>shots with {obj.family} hue</InfoTag>
+              <p>{family}</p>
+              <InfoTag>shots with {family} hue</InfoTag>
             </div>
           </li>
         </Link>
     }
     let count = 0;
     const listing = [];
-
+ 
     Object.keys(sug).forEach(key => {
-      if (Array.isArray(sug[key]) && key !== 'dops') {
+      if (Array.isArray(sug[key])) {
         sug[key].map(item => {
           if (count <= limit) {
             listing.push(listMap[key](item))

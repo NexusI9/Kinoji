@@ -17,9 +17,7 @@ function search($connection, $body)
 
       $arResult = array(
         "movies" => $connection->query("SELECT * FROM movies WHERE title LIKE ?", [$query]),
-        "dops" => $connection->query("SELECT * FROM peoples WHERE name LIKE ? AND job='dop'", [$query]),
-        "directors" => $connection->query("SELECT * FROM peoples WHERE name LIKE ? AND job='director' ", [$query]),
-        "artdirs" => $connection->query("SELECT * FROM peoples WHERE name LIKE ? AND job='artdir' ", [$query]),
+        "peoples" => $connection->query("SELECT * FROM peoples WHERE name LIKE ?", [$query]),
         "collections" => $connection->query("SELECT * FROM genres WHERE name LIKE ?", [$query]),
         "colours" => $connection->query("SELECT DISTINCT family FROM colors WHERE family LIKE ?", [$query]),
       );

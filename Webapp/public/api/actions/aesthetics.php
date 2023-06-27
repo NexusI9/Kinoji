@@ -43,7 +43,6 @@ function aesthetics($connection, $body)
     case 'GET_SHOTS_WITH_COLORS':
       $colours = add_percent($body["colours"]);
 
-
       if (isset($body["id"])) { //get shots for specific ID
         $id = $body["id"];
         $query = $connection->buildQuery(
@@ -74,13 +73,13 @@ function aesthetics($connection, $body)
 
       $result = $connection->query($query, add_percent($colours));
 
-      function getMovie($ar){
+      function get_movie($ar){
         global $connection;
         $mv = $connection->query('SELECT * FROM movies WHERE id = ?', [$ar['id']]);
         return array_merge($ar, array("movie" => $mv[0]));
       }
 
-      $result = array_map('getMovie', $result);
+      $result = array_map('get_movie', $result);
 
       echo json_encode($result);
       break;

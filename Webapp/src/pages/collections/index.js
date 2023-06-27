@@ -29,10 +29,10 @@ export default function Collections(){
         initial='initial'
         animate='animate'
         exit='exit'
-        key='all_rubriques_container'
+        key='all-rubriques_container'
         className='container'
       >
-        <div className='padded' id='all_rubriques'>
+        <div className='padded all-rubriques'>
         {genres.map( gr => <Rubrique key={gr.name} genre={gr} />)}
         </div> 
       </motion.div> 

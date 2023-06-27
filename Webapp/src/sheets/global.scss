@@ -1854,7 +1854,7 @@ a {
   overflow-y: hidden;
   display: flex;
   padding: 20px 0;
-  @include footer-margin;
+  margin-bottom: 70px;
 }
 
 .people-poster {
@@ -3091,7 +3091,7 @@ a {
 }
 
 
-#all_rubriques {
+.all-rubriques {
 
   display: grid;
   flex-direction: column;
@@ -3177,7 +3177,7 @@ a {
     &>div {
       margin-left: 20px;
       display: flex;
-      justify-content: space-around;
+      justify-content: flex-start;
     }
   }
 
@@ -3480,6 +3480,11 @@ a {
     p {
       margin: 0;
       font-weight: 400;
+      flex-shrink: 0;
+      line-height: 1.2em;
+      &:first-of-type{
+        flex-shrink: 1;
+      }
     }
 
   }
@@ -3757,9 +3762,19 @@ a {
     }
   }
 
-  #search-personnalities {
+  .search-collections{
     display: flex;
     flex-direction: column;
+    gap:30px;
+  }
+
+  .search-personnalities {
+    display: flex;
+    flex-direction: column;
+
+    h4{
+      margin: 5px;
+    }
 
     .people-cardlist {
       display: grid;
