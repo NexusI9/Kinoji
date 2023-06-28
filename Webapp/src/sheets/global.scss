@@ -2856,7 +2856,7 @@ a {
   display: flex;
   cursor: pointer;
   transition: background 0.15s ease;
-  border-radius: 3px;
+  border-radius: 10em;
 
   &:hover {
     background: var(--blue50);
@@ -2877,7 +2877,7 @@ a {
 
   .label {
     position: relative;
-    margin: 5px 7px;
+    margin: 7px 7px;
 
     .ico:hover {
       background: var(--settings_back);
@@ -2892,7 +2892,7 @@ a {
     right: 0;
     bottom: 0;
     @include thin-paper-border;
-    @include round.round-border;
+    border-radius: 10em;
     -webkit-transition: .4s;
     transition: .4s;
 
@@ -2908,7 +2908,7 @@ a {
       -webkit-transition: .4s;
       background-clip: content-box;
       transition: .4s;
-      border-radius: 3px;
+      border-radius: 10em;
     }
 
   }

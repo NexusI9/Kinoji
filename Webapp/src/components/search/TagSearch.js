@@ -20,7 +20,7 @@ export default ({ tags, colours, subjects, step=5 }) => {
     setShots([]);
     setStart(step);
     return () => window.removeEventListener('scroll', onScroll);
-  },[colours, tags]);
+  },[colours, tags, subjects]);
 
 
 

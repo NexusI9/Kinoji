@@ -46,18 +46,23 @@ class UpdateDatabase:
                 print('Retrieving movie data...')
                 movieData = Movie(movieID).fetch()
                 print("Updating %s" % (movieData["title"]))
-                #self.connector.commit("peoples", movieData)
+                self.connector.commit("movies", movieData)
                 beautyprint(movieData)
 
                 #retrieving peoples data
                 peoples = ['director','dop','artdir']
                 for job in peoples:
                     peopleID = movieData[job]
+                    alreadyExists = self.connector.execute("""SELECT * FROM peoples WHERE id = %s""", [peopleID])
                     if(peopleID):
-                        print('\nRetrieving %s data...' % (job))
-                        self.fetchDataOfPeople(peopleID, job)
+                        if(len(alreadyExists)):
+                            userUpdate = input("People with id %s already exists, do you want to update? (y/n)" % (peopleID))
+                            if(userUpdate == 'y' or not len(userUpdate)):
+                                print('\nRetrieving %s data...' % (job))
+                                self.fetchDataOfPeople(peopleID, job)
+                            else:
+                                continue
 
-                
         return
 
 
