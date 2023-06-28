@@ -7,6 +7,7 @@ import { MovieSettings } from '../inputs';
 import { AnimatePresence, motion } from 'framer-motion';
 import { movie_container } from '@/lib/variants';
 import { sortBy, generateContent } from './Flow.helper';
+import { scrollReachBottom } from '@/lib/utilities';
 
 const Flow = ({ movies }) => {
 
@@ -45,8 +46,6 @@ const Flow = ({ movies }) => {
     let bl = lastBlocks.current;
     if(!bl){ return; }
     
-    const { pageYOffset, innerHeight } = window;
-    
     if(bl.length && !load){
 
       if(!Array.isArray(bl)){ bl=[...bl]; }
@@ -66,7 +65,7 @@ const Flow = ({ movies }) => {
           (last.bottom < threshold && sec.bottom > window.innerHeight/2)
       ){ 
           return setLoad(true);
-      }else if ( ((innerHeight + pageYOffset) >= document.body.offsetHeight-1) ) { //classical scheme
+      }else if ( scrollReachBottom() ) { //classical scheme
           return setLoad(true);
       }
     }

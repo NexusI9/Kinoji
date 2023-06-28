@@ -7,3 +7,4 @@ export { default as Poster } from './Poster';
 export { default as Rubrique } from './Rubrique';
 export { default as Thumbnail } from './Thumbnail';
 export { default as ShotSlider } from './ShotSlider';
+export { default as BigThumbnail} from './BigThumbnail';

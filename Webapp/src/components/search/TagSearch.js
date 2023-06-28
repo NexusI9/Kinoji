@@ -1,70 +1,66 @@
-import { Flow } from '@/components/movie';
+import { BigThumbnail } from '@/components/movie';
 import { TagLabel, ColourLabel } from '@/components/inputs';
-import { useState, useEffect } from 'react';
-import useAPI from '@/lib/api';
+import { useState, useEffect, useRef } from 'react';
 import { paramsToArray } from '@/lib/utilities';
 import ResultText from './ResultText';
+import { scrollReachBottom } from '@/lib/utilities';
+import { loadShots } from './TagSearch.helper';
 
-export default ({tags, colours, subjects}) => {
+export default ({ tags, colours, subjects, step=5 }) => {
 
-    const [ movies, setMovies ] = useState([]);
-  
-    useEffect(() => {
-        const {post} = useAPI();
-        const promiseArray = [];
-        
-        if(tags){
-          promiseArray.push( post({type:'GET_MOVIES_FROM_TAGS', tags:paramsToArray(tags)}).then( ({data}) => ({tags:data || []}) ) );
-        }
-        if(colours){
-          promiseArray.push(  post({type:'GET_SHOTS_WITH_COLORS', colours:paramsToArray(colours)}).then( ({data}) => ({colours:data || []}) ) );
-        }
+  const [shots, setShots] = useState([]);
+  const [load, setLoad] = useState(false);
+  const [start, setStart] = useState(step);
 
-        Promise.all(promiseArray).then( result => {
-           result = {...result[0], ...result[1]};
-           const { tags, colours } = result;
-          console.log(colours);
 
-          return;
-           if( tags?.length && colours?.length ){
-              //get union of two arrays and replace shots of colours
-              const filteredArray = [];
-              tags.forEach( tagMovie => {
-                colours.forEach( colourMovie => { 
-                  if( colourMovie.id === tagMovie.id ){ 
-                    tagMovie.shots = colourMovie.shots; //replace with filtered shots from colours
-                    filteredArray.push( tagMovie ); //push to filtered array
-                  } 
-                });
-              });
-             setMovies(filteredArray);
-           }
-           else if( tags?.length ){ return setMovies(tags); }
-           else if( colours?.length ){ return setMovies(colours); } 
-        });
+  useEffect(()=>{
+    const onScroll = () => (scrollReachBottom() && !load) && setLoad(true);
+    window.addEventListener('scroll',onScroll);
+    setLoad(true);
+    setShots([]);
+    setStart(step);
+    return () => window.removeEventListener('scroll', onScroll);
+  },[colours, tags]);
 
-  
-    },[tags, colours]);
-  
-    return(
-      <>
-        {
-          movies &&
-          <>
-            <ResultText query={
-              <> 
-                &emsp; 
-                { tags && paramsToArray(tags).map(tag => <TagLabel key={'taglabel'+tag} label={tag} />) } 
+
+
+  useEffect(() => {
+
+    if(load){
+      loadShots({
+        colours:colours,
+        tags:tags,
+        stop: start
+      }).then( shots => { 
+        setShots(shots);
+        setLoad(false);
+        setStart(start + step); 
+      });
+    }
+
+  }, [load, tags, colours]);
+
+  return (
+    <>
+      {
+        shots.length &&
+        <>
+          <ResultText
+            query={
+              <>
                 &emsp;
-                { colours && paramsToArray(colours).map(colour => <ColourLabel key={'colourlabel'+colour} label={colour}/>) }
+                {tags && paramsToArray(tags).map(tag => <TagLabel key={'taglabel' + tag} label={tag} />)}
+                &emsp;
+                {colours && paramsToArray(colours).map(colour => <ColourLabel key={'colourlabel' + colour} label={colour} />)}
               </>
             }
-            total={movies.length}
-            />
-            <Flow movies={movies} />
-          </>
-        }
-  
-      </>
-    );
-  }
+            total={shots.length}
+          />
+          <div className='shot-gallery'>
+            {shots.map(shot => <BigThumbnail key={shot.fullpath} {...shot}/>)}
+          </div>
+        </>
+      }
+    </>
+  );
+}

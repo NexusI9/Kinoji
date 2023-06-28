@@ -43,12 +43,18 @@ function aesthetics($connection, $body)
     case 'GET_SHOTS_WITH_COLORS':
       $colours = add_percent($body["colours"]);
 
+      $start = 0;
+      $stop = 10;
+
+      if(isset($body["start"])){ $start = $body["start"]; }
+      if(isset($body["stop"])){ $stop = $body["stop"]; }
+
       if (isset($body["id"])) { //get shots for specific ID
         $id = $body["id"];
         $query = $connection->buildQuery(
           array(
             "statement" => function ($c) {
-              return "SELECT shot FROM aesthetics WHERE id = ? AND ({$c})";
+              return "SELECT shot FROM aesthetics WHERE id = ? AND ($c)";
             },
             "arguments" => $colours,
             "condition" => "LOWER(COLOURS) LIKE ?",
@@ -62,12 +68,11 @@ function aesthetics($connection, $body)
 
       $query = $connection->buildQuery(
         array(
-          "statement" => function ($c) {
-            return "SELECT * FROM aesthetics WHERE {$c} ";
-          },
+          "statement" => function ($c) { return "SELECT * FROM aesthetics WHERE $c"; },
           "arguments" => $colours,
           "condition" => "LOWER(COLOURS) LIKE ?",
-          "operator" => "OR"
+          "operator" => "OR",
+          "suffix" => "ORDER BY shot LIMIT $start,$stop"
         )
       );
 
@@ -76,7 +81,11 @@ function aesthetics($connection, $body)
       function get_movie($ar){
         global $connection;
         $mv = $connection->query('SELECT * FROM movies WHERE id = ?', [$ar['id']]);
-        return array_merge($ar, array("movie" => $mv[0]));
+        return array_merge(
+          $ar, 
+          array("fullpath" => "/assets/movies/{$ar['folder']}/{$ar['shot']}.webp"),
+          array("movie" => $mv[0])
+          );
       }
 
       $result = array_map('get_movie', $result);

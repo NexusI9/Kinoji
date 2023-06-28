@@ -104,3 +104,8 @@ export function setParam(location, param){
   const queryParams =  qs.parse(location.search);
   return {...queryParams, ...param } ;
 }
+
+
+export function scrollReachBottom(){
+  return window.innerHeight + window.pageYOffset >= document.body.offsetHeight-1;
+}
