@@ -3,7 +3,7 @@ from modules.process.updateDatabase import UpdateDatabase
 from modules.process.addMovies import AddMovies
 from modules.process.shotsanalyser import ShotsAnalyser
 from modules.process.wiper import Wiper
-from modules.process.tests.moduledtb import Sandbox
+from modules.process.tests.sandbox import Sandbox
 from lib.utils import clear
 
 

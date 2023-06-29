@@ -1,9 +1,11 @@
 import os
 from datetime import datetime
-from lib.utils import config, downloadPicture, resizePicture, md5
+from lib.utils import config, downloadPicture, resizePicture, md5, getDateTime
 from modules.process.lib.connector import Connector
 import re
 import shutil
+
+from modules.webworkers.workers.perplexity import Perplexity
 
 
 SHOTS_PATH = config("SHOTS_PATH")
@@ -155,11 +157,31 @@ def moveMubiNoPortrait():
             shutil.move(fullpath, destination_dir)
             connector.update('peoples', {'id':id, 'poster':None})
                     
-                    
+def history():
+    events = connector.getJSON("""SELECT * FROM history""")
+    
+    for ev in events:
+        summary = Perplexity().summary({
+            'prompt':'HISTORY',
+            'event':ev['header'],
+            'country':ev['country'],
+            'begin':str(ev['begin'])
+        })
+
+
+        connector.update('history',{
+            **ev,
+            'summary':summary['content'],
+            'sources':";".join(summary['sources']),
+            'last_update':getDateTime()
+        })
+
+
+    return                    
 
 
 def Sandbox():
 
-    moveMubiNoPortrait()
+    history()
 
     return

@@ -59,7 +59,7 @@ class Connector:
     def cleanUp(self,object):
 
         for key, value in dict(object).items():
-            if value == '':
+            if value == ('' or None):
                 del object[key]
         return object
 

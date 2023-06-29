@@ -24,7 +24,10 @@ The paragraph can also eventually include the following information if they are 
 - if the person is dead: the person date and location of death.
 
     """,
-    "HISTORY":"""Write a very short paragraph about the {event} that happened in {country}.""",
+    "HISTORY":"""
+Write a very short paragraph (2/3 sentences maximum) about the {event} historical event from {begin} that happened in {country}.
+Do not start the paragraph by the name of the event. If necessary, rename the event with a more official and known name.
+    """,
 
     "COLLECTION":"""
 Write a mid-length paragraph about the {genre} cinema genre. 
