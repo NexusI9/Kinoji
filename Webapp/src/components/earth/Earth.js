@@ -307,7 +307,7 @@ export default class Earth{
 
 	displayFlag(state){
 
-	this.countries.forEach( country => {
+	this.countries?.forEach( country => {
 		if(state){ country.geo.line.mesh.visible = state; }
 		gsap.to( country.geo.flag.material, 0.3, {opacity: state ? 1 : 0 });
 		gsap.to( country.geo.line.material, 0.3, {opacity: state ? 1 : 0 }).then( () => country.geo.line.mesh.visible = state );

@@ -60,7 +60,7 @@ export default ({ id, popup = true, tag=false }) => {
   return (
     <div className='people-label'>
       {dir.map(({ id, name }) => <Link  onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} key={`dir${id}`} href={`/people/${id}`} className='link' replace>{name}</Link>)}
-      {tag && <InfoTag>{jobFullName(dir.map( ({job}) => job ))}</InfoTag>}
+      {tag && <InfoTag>{ dir.map( ({job}) => jobFullName(job) ) }</InfoTag>}
       {pop && <Popup content={pop.content} event={pop.event} margin={20} />}
     </div>
   );

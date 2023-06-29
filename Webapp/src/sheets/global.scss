@@ -4574,7 +4574,7 @@ img.messy {
 
 }
 
-$rowHeight: 300px;
+$rowHeight: 25vh;
 
 .shot-gallery{
   display: flex;
@@ -4586,13 +4586,20 @@ $rowHeight: 300px;
   & > *{
     height: $rowHeight;
     flex-grow: 1;
-    &:last-of-type{
+    /*&:last-of-type{
       flex-grow: 99999;
       height: auto;
       &> a > img{
         height: auto;
       }
-    }
+    }*/
+  }
+
+  &::after{
+    content: '';
+    height: 0;
+    display: block;
+    flex-shrink: 99999;
   }
 
 }

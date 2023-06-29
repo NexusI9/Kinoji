@@ -20,7 +20,7 @@ export function ObjectToEvent(item){
         header:  <Link href={'/movies/'+item.id} className='link' replace>{item.title}<span className='light'> ({getMovieYear(item)})</span></Link>,
         begin: getMovieYear(item),
         end:null,
-        subtext: <span className='link underline'><PeopleLabel id={item.director} popup={false} /></span>,
+        subtext:<PeopleLabel id={item.director} popup={false} />,
         summary: item.summary ? truncate(item.summary, 120) : '',
         poster: <Poster movie={item} size='small'/> || false,
         id:item.id,

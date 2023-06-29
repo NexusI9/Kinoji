@@ -6,7 +6,7 @@ import ResultText from './ResultText';
 import { scrollReachBottom } from '@/lib/utilities';
 import { loadShots } from './TagSearch.helper';
 
-export default ({ tags, colours, subjects, step=5 }) => {
+export default ({ tags, colours, subjects, step=10 }) => {
 
   const [shots, setShots] = useState([]);
   const [load, setLoad] = useState(false);

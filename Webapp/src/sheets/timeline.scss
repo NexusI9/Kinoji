@@ -276,13 +276,9 @@
   
   .chrono_popup{
   
-    @include card.card();
-    background:var(--blue70);
     display: block;
-
     opacity: 0;
     transition: opacity 0.3s;
-    color: black;
     padding: 10px;
     width: max-content;
     max-width: 400px;
@@ -292,11 +288,11 @@
     overflow: hidden;
     position: relative;
     height: min-content;
-    box-shadow: 0 3px 3px rgba(0 0 0 / 20%);
     box-sizing: border-box;
     padding: 10px 7px;
     text-align: left;
-    color: var(--paper);
+    @include card.card('light');
+    h4,p,a{color: var(--blue80);}
 
     .detail_content{
       display: flex;
@@ -307,8 +303,7 @@
       white-space: break-spaces;
     }
     
-  
-    h4, p, a{ color:var(--paper); }
+
     img{
       max-width: 100%;
       transition: filter 0.3s ease;
