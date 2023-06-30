@@ -29,8 +29,8 @@ export function ObjectToEvent(item){
 
       case 'event':
       return{
-        label: item.header || '',
-        header: <>{item.header} <span className='light'> ({setEventDate(item)})</span></>,
+        label: item.name || '',
+        header: <>{item.name} <span className='light'> ({setEventDate(item)})</span></>,
         begin: item.begin,
         end: item.end || null,
         subtext: '',

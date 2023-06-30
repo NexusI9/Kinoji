@@ -62,6 +62,8 @@ class UpdateDatabase:
                                 self.fetchDataOfPeople(peopleID, job)
                             else:
                                 continue
+                        else:
+                            self.fetchDataOfPeople(peopleID, job)
 
         return
 

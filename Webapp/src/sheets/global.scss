@@ -1342,8 +1342,7 @@ a {
     min-height: 30px;
     max-width: 380px;
     display: block;
-    @include card.card;
-    background: var(--blue80);
+    @include card.card('light');
     transform: translateX(-40px);
     padding: calc($margin/2);
     box-sizing: border-box;
@@ -1358,6 +1357,8 @@ a {
     align-items: center;
     color: var(--blue30);
   }
+
+  p, h3{color: var(--background); }
 
   hr {
     border-color: var(--blue50);
@@ -1386,8 +1387,7 @@ a {
     width: $arrow_size;
     height: $arrow_size;
     display: block;
-    @include card.card;
-    background: var(--blue80);
+    @include card.card('light');
     clip-path: polygon(0 0, 100% 0, 0 100%, 0 100%);
 
     &:first-of-type {
@@ -1404,7 +1404,7 @@ a {
   .bannerFilter {
     max-width: 400px;
     min-height: auto;
-    grid-template-columns: 100px auto;
+    grid-template-columns: 75px auto;
     margin: 0;
     padding: 0;
     margin-bottom: 20px;
@@ -3350,6 +3350,7 @@ a {
   border-radius: 10em;
   background: var(--blue80);
   box-shadow: none;
+  cursor: text;
 
   &.light {
     background: var(--paper);

@@ -5,7 +5,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 
-
 class Perplexity:
 
     def __init__(self):
@@ -13,6 +12,8 @@ class Perplexity:
         self.url = "https://www.perplexity.ai/"
         return None
     
+    def cleanUpProse(self, prose):
+        return re.sub(r'(\n\d|\n\.)','',prose) + '.'
 
     def query(self, prompt, timeout = 10, responseTimeout=30):
         
@@ -53,10 +54,10 @@ class Perplexity:
         sources = map(lambda a : a.get_attribute('href'), sources)
 
         result = self.driver.find_element_by_CSS(".prose")
-        
+        result = self.cleanUpProse(result.text)
 
         return {
-            "content":result.text,
+            "content":result,
             "sources":list(sources)
             }
     
