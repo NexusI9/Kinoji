@@ -18,7 +18,7 @@ export default ({ country }) => {
 			break;
 
 			default:
-				header = element.header;
+				header = element.name;
 				subtext= setEventDate(element);
 		}
 

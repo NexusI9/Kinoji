@@ -16,7 +16,7 @@ export default ({ country, width }) => {
     //map de group into element, returns an array
 
     const ar = [];
-    const map = {
+    const EVENT_MAP = {
       segments: ({item,id}) => <Segment key={id} object={item} width={BAR_WIDTH} minmax={minmax} />,
       
       solo: ({ item, type, id }) => <Event
@@ -41,29 +41,18 @@ export default ({ country, width }) => {
         killswitch={ activePopup === id ? false : true }
         />
     }
+    
 
-    Object.keys(frise).forEach( key => {
-        switch(key){
-          case 'segments':
-            ar.push(...frise[key].map( (sg,i) => map[key]({item:sg, id:'segments'+Math.random()}) ));
-          break;
-
-          case 'group':
-            Object.keys( frise[key] ).forEach(gkey => {
-              ar.push(...frise[key][gkey].map( (gp, i) => map[key]({item: gp, id:JSON.stringify(gp)+i, type:gkey, date:gp.date}) ));
-            });
-          break;
-
-          case 'solo':
-            Object.keys( frise[key] ).forEach(skey => {
-              ar.push(...frise[key][skey].map( (gp, i) => map[key]({item: gp, id:JSON.stringify(gp)+i, type: skey}) ));
-            });
-          break;
-
-          default:
-          break;
-        }
-    });
+    //push elements to array with related key from map
+    Object.keys(frise).forEach( key => ({
+          segments: () => ar.push(...frise[key].map( (sg,i) => EVENT_MAP[key]({item:sg, id:'segments'+i}) )),
+          group: () => Object.keys( frise[key] ).forEach(gkey => {
+              ar.push(...frise[key][gkey].map( (gp, i) => EVENT_MAP[key]({item: gp, id:JSON.stringify(gp)+i, type:gkey, date:gp.date}) ));
+          }),
+          solo: () => Object.keys( frise[key] ).forEach(skey => {
+              ar.push(...frise[key][skey].map( (gp, i) => EVENT_MAP[key]({item: gp, id:JSON.stringify(gp)+i, type: skey}) ));
+          })
+    })[key]() || null);
 
     return ar;
   }

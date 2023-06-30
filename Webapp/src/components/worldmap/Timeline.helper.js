@@ -12,10 +12,8 @@ export function ObjectToEvent(item){
     */
 
     const type = item.folder ? 'movie' : 'event';
-
-    switch(type){
-      case 'movie':
-      return{
+    return {
+      movie:{
         label: item.title|| '',
         header:  <Link href={'/movies/'+item.id} className='link' replace>{item.title}<span className='light'> ({getMovieYear(item)})</span></Link>,
         begin: getMovieYear(item),
@@ -25,10 +23,8 @@ export function ObjectToEvent(item){
         poster: <Poster movie={item} size='small'/> || false,
         id:item.id,
         type:'movie'
-      }
-
-      case 'event':
-      return{
+      },
+      event:{
         label: item.name || '',
         header: <>{item.name} <span className='light'> ({setEventDate(item)})</span></>,
         begin: item.begin,
@@ -39,12 +35,7 @@ export function ObjectToEvent(item){
         id:item.id,
         type:'event'
       }
-
-      default:
-      return null;
-
-
-    }
+    }[type] || null;
 
 }
 

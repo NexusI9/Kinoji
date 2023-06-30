@@ -35,7 +35,7 @@ export const GroupContent = ({ object, type, date}) =>{
 
   const MovieGroup = () => ( //group of movies
         <div className='content_group_movies'>
-          <p><b>{`Movies from (${date})`}</b></p>
+          <p><b>{`Movies from ${date}`}</b></p>
           <div className='carousel'>
             { object.map( ({id,poster}) => <Fragment key={'moviegroup'+id}>{poster}</Fragment> )  }
           </div>
