@@ -40,21 +40,9 @@ export default class Earth {
 		this.camera = null;
 		this.controls = null;
 
-		this.responsive = {
-			smallScreen: () => {
-				this.width = window.innerWidth;
-				this.height = window.innerHeight / 1.7;
-				if (this.cameria) { this.camera.position.z = 0.6; }
-			},
-			largeScreen: () => {
-				this.width = window.innerWidth / 2;
-				this.height = window.innerHeight;
-				if (this.camera) { this.camera.position.z = 0.5; }
-			}
-		}
 
-
-		this.responsive.largeScreen()
+		this.width = document.getElementById('Earth').getBoundingClientRect().width;
+		this.height = document.getElementById('Earth').getBoundingClientRect().height;
 
 		//meshes
 		this.countries = countries;
@@ -64,6 +52,7 @@ export default class Earth {
 		this.loader = new GLTFLoader();
 		this.group = new THREE.Group();
 		this.lastCountry = null;
+		this.newPosition = new THREE.Vector3(15, 0, 0);
 
 		//animation
 		this.show = true;
@@ -97,15 +86,6 @@ export default class Earth {
 
 	}
 	events() {
-		//window.addEventListener( 'scroll', this.onScroll.bind(this) );
-		window.matchMedia('(min-width: 1440px)').addEventListener("change", () => {
-			this.responsive.largeScreen();
-			this.onWindowResize();
-		});
-		window.matchMedia('(max-width: 1440px)').addEventListener("change", () => {
-			this.responsive.smallScreen();
-			this.onWindowResize();
-		});
 
 		//-)window.addEventListener( 'resize', this.onWindowResize.bind(this), false );
 		//document.getElementById('Earth').addEventListener('mousemove', this.onMouseMove.bind(this) );
@@ -130,6 +110,7 @@ export default class Earth {
 
 		this.camera = new THREE.PerspectiveCamera(16, this.width / this.height, 0.1, 1000);
 		this.camera.focalLength = 125;
+		this.camera.setViewOffset(this.width, this.height, -200,0, this.width, this.height);
 
 		const light = new THREE.AmbientLight(0xFFFFFF, 1);
 		this.scene.add(light);
@@ -141,6 +122,7 @@ export default class Earth {
 		//this.addLines();
 		this.addMask();
 
+
 		this.controls = new OrbitControls(this.camera, this.renderer.domElement);
 		this.controls.update();
 
@@ -148,12 +130,11 @@ export default class Earth {
 		this.controls.enableZoom = false;
 		// to disable pan
 		this.controls.enablePan = false;
-		this.controls.enableDamping = true
+		this.controls.enableDamping = true;
+
+
 		this.camera.position.z = 130;
-		this.camera.position.z = 130;
-
-
-
+		this.camera.position.y = 10;
 		this.events();
 
 	}
@@ -251,7 +232,6 @@ export default class Earth {
 
 				this.earth.material = material;
 				this.earth.scale.set(0.1, -0.1, 0.1);
-
 				this.group.add(this.earth);
 
 			}, function (xhr) {
