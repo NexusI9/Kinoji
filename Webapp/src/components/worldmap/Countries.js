@@ -1,6 +1,15 @@
+import taiwan from '@/assets/earth/flags/taiwan.svg';
+import china from '@/assets/earth/flags/china.svg';
+import hongkong from '@/assets/earth/flags/hong kong.svg';
+import southkorea from '@/assets/earth/flags/south korea.svg';
+import japan from '@/assets/earth/flags/japan.svg';
+import russia from '@/assets/earth/flags/russia.svg';
+
+
 export default [
 	{
 		name: "taiwan",
+		flag:taiwan,
 		geo: {
 			location:[8.4,3.4,-2.7],
 			rotate: {x:102, y:27, z:-30}
@@ -15,6 +24,7 @@ export default [
 	},
 	{
 		name: "japan",
+		flag:japan,
 		geo: {
 			location:[6.3,5.2,-4.5],
 			rotate: {x:80, y:58, z:-48}
@@ -22,6 +32,7 @@ export default [
 	},
 	{
 		name: "south korea",
+		flag:southkorea,
 		geo: {
 			location:[7.2,5,-3.3],
 			rotate: {x:86, y:57, z:-39}
@@ -93,6 +104,7 @@ export default [
 	},
 	{
 		name: "hong kong",
+		flag:hongkong,
 		geo: {
 			location:[8.5,3,-1.2],
 			rotate: {x:102, y:38, z:-14}
@@ -100,6 +112,7 @@ export default [
 	},
 	{
 		name: "china",
+		flag:china,
 		geo: {
 			location:[8,4.4,-1.7],
 			rotate: {x:96, y:50, z:-21}
@@ -107,6 +120,7 @@ export default [
 	},
 	{
 		name: "russia",
+		flag:russia,
 		geo: {
 			location:[4.5,7.4,-0.7],
 			rotate: {x:65, y:88, z:7}

@@ -1683,10 +1683,6 @@ a {
   background: radial-gradient(293.86% 186.06% at 50% 0%, var(--background) 0%, #2F4260 100%);
   z-index: 1;
 
-  li:not(:first-of-type) {
-    cursor: default;
-  }
-
   input {
     display: none;
   }

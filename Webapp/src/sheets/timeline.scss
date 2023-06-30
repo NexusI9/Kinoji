@@ -3,14 +3,57 @@
 #Earth{
     position: fixed;
     top: 0;
-    left: 0;
-    transition: filter,opacity, 1s ease;
-    transition-delay: 0.4s;
-  
-    canvas{
-      position: absolute;
-      top:0;
+    right: 0;
+    transition: filter,opacity, 0.5s ease;
+    transition-delay: 0s;
+  }
+
+  .country-list{
+    max-width: 30vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+
+    h2, h3{ margin: 3px 0;}
+    ul{ 
+      list-style: none;
+      padding: 0;
+
+      li{
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+        padding: 5px;
+        padding-top: 0px;
+        box-sizing: border-box;
+        background: transparent;
+        transition: background 0.2s ease;
+        border-bottom: solid 1px var(--blue70);
+        cursor: pointer;
+
+        @media(hover:'hover'){
+          &:hover{
+            background: var(--blue80);
+          }
+        }
+
+        h3{
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          text-transform: capitalize;
+          gap: 10px;
+        }
+        svg{
+          fill:var(--blue50);
+        }
+      }
     }
+
+
   }
   
   
@@ -153,9 +196,7 @@
     }
   
     &:not([data-country='world']){
-      #Earth{
-        opacity: 0.3;
-      }
+      #Earth{ opacity: 0; }
     }
   
   }
