@@ -20,7 +20,7 @@ export default ({ country, width }) => {
   const MARGIN = 200;
   const BAR_WIDTH = window.innerWidth / 100 * width;
   const SCROLL_HEIGHT = window.innerHeight / 200 * 450; //450vh
-  const CONTAINER_HEIGHT = window.innerHeight / 200 * 35; //35vh
+  const CONTAINER_HEIGHT = window.innerHeight; //35vh
 
   function onScroll(e) {
 

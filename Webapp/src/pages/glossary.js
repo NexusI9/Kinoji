@@ -17,7 +17,7 @@ const Glossary = () => {
       preview: (item) => ({
 
           header: <Link href={'/movies/'+item.id}>{item.title}</Link>,
-          subheader: <Link href={'/director/'+item.director} className='link underline'><PeopleLabel id={ item.director } /></Link>,
+          subheader: <Link href={'/people/'+item.director} className='link underline'><PeopleLabel id={ item.director } /></Link>,
           img: item.poster || noposter.src,
           summary: item.summary,
           subcontent: <SubPreview movie={item}/>
@@ -28,10 +28,10 @@ const Glossary = () => {
     {
       category:'director',
       input: { value:'director', label:'directors' },
-      list: {id:'director', query:'GET_ALL_DIRECTORS', value:'name', link: (item) => '/director/'+ item.id },
+      list: {id:'director', query:'GET_ALL_DIRECTORS', value:'name', link: (item) => '/people/'+ item.id },
       preview: (item) => ({
 
-          header: <Link href={'/director/'+item.id} >{item.name}</Link>,
+          header: <Link href={'/people/'+item.id} >{item.name}</Link>,
           subheader: setDate(item) || '&emsp;',
           img: item.poster || require('../assets/noposter.jpg'),
           summary: item.summary,

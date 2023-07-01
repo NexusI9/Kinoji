@@ -6,6 +6,7 @@ import { Countries, Timeline, SideList, SegmentHeader } from '@/components/world
 import { Earth } from '@/components/earth';
 import { AnimatePresence } from 'framer-motion';
 import Head from 'next/head';
+import { useDispatch } from 'react-redux';
 import { CountryList } from '../components/worldmap';
 
 
@@ -15,6 +16,7 @@ function Worldmap() {
 	const [country, setCountry] = useState(); 		//selected country : name
 	const [history, setHistory] = useState();				//History Blob (all countries, 3D coordinate, events, movies, segments, 3D meshes)
 	const scene = useRef();
+	const resetDispatch = useDispatch();
 
 	const handleCountryClick = (ctr) => setCountry(ctr);
 	const handleCountryHover = (ctr) => scene.current && scene.current.goTo(ctr);
@@ -53,6 +55,7 @@ function Worldmap() {
 		//use retrieved name to check history (now fetched and available)
 		switch (country.name) {
 			case 'world':
+				resetDispatch({type:'SET_ACTIVE_SEGMENT', segment:null});
 				return scene.current.reset();
 			default:
 				setCountry(country);
