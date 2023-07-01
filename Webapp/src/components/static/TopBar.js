@@ -2,7 +2,7 @@
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { SearchBar } from '../inputs';
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import * as Routing from '@/lib/routing';
 import SideMenu from './SideMenu';
 
@@ -13,9 +13,10 @@ import { BurgerMenu, Panel } from './TopBar.children';
 import { AnimatePresence } from 'framer-motion';
 
 
+
 export default () => {
 
-  const [ active, setActive ] = useState(true);
+  const [active, setActive] = useState(true);
   const [minimized, setMinimized] = useState(false);
   const [open, setOpen] = useState(false);
   const router = useRouter();
@@ -24,58 +25,80 @@ export default () => {
   useEffect(() => {
     const onMatchMedia = (e) => setMinimized(e.matches)
     const mediaQuery = window.matchMedia('(max-width:800px)');
-    mediaQuery.addEventListener('change',onMatchMedia);
+    mediaQuery.addEventListener('change', onMatchMedia);
 
     onMatchMedia(mediaQuery);
 
-    return () => mediaQuery.removeEventListener('change',onMatchMedia);
-  },[]);
+    return () => mediaQuery.removeEventListener('change', onMatchMedia);
+  }, []);
 
   useEffect(() => {
 
-      const onScroll = () => {
-        if(open){ return; }
-        if(window.pageYOffset > window.innerHeight){ setActive(true); }
-        else{ setActive(false); }
-      }
+    const onScroll = () => {
+      if (open) { return; }
+      if (window.pageYOffset > window.innerHeight) { setActive(true); }
+      else { setActive(false); }
+    }
 
-      if( Routing.isSettings(location) ){ setActive(true); }
-      else if(Routing.isHomepage(location) ){  setActive(false); document.addEventListener('scroll', onScroll); }
-      else{
-         setActive(true);
-         document.removeEventListener('scroll', onScroll);
-       }
+    if (Routing.isSettings(location)) { setActive(true); }
+    else if (Routing.isHomepage(location)) { setActive(false); document.addEventListener('scroll', onScroll); }
+    else {
+      setActive(true);
+      document.removeEventListener('scroll', onScroll);
+    }
 
-       setOpen(false);
+    setOpen(false);
 
-      return () => {
-        document.removeEventListener('scroll', onScroll);
-      }
+    return () => {
+      document.removeEventListener('scroll', onScroll);
+    }
 
-  },[location]);
+  }, [location]);
 
-  useEffect(() => { setActive(true) },[open]);
+  useEffect(() => { setActive(true) }, [open]);
 
-  return(
-        <nav id="topMenu" className={`${active ? '' : 'inactive'} ${Routing.isSettings(location) ? 'transparent' : '' } ${open ? 'open' : ''}` }>
-            <div id='kinoIco'>
-              <Link href='/'>
-              <picture>
-                <source srcSet={minimlogo.src} media="(max-width: 800px)" />
-                <img src={kinojilogo.src} />
-              </picture>
-                </Link>
-              <Link href='/movies'>movies</Link>
-              <Link href='/collections'>collections</Link>
-            </div>
-            <div id='toolsBar'>
-                <SearchBar />
-            </div>
-            {minimized ? <BurgerMenu onClick={e => setOpen(e)}/>  : <SideMenu />}
-            <AnimatePresence mode='wait'>
-              {open && <Panel/> }
-            </AnimatePresence>
-        </nav>
+  return (
+    <nav id="topMenu" className={`${active ? '' : 'inactive'} ${Routing.isSettings(location) ? 'transparent' : ''} ${open ? 'open' : ''}`}>
+      <div id='kinoIco'>
+        <Link href='/'>
+          <picture>
+            <source srcSet={minimlogo.src} media="(max-width: 800px)" />
+            <img src={kinojilogo.src} />
+          </picture>
+        </Link>
+        <Link href='/movies'>movies</Link>
+        <Link href='/collections'>collections</Link>
+      </div>
+      <div id='toolsBar'>
+        <SearchBar />
+
+        <Link href='/worldmap'>
+          <svg width="50" height="36" viewBox="0 0 50 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" className='background' clip-rule="evenodd" d="M3.08062e-06 35.7511C0.97563 35.9148 1.97786 36 3 36H32C41.9411 36 50 27.9411 50 18C50 8.05888 41.9411 0 32 0H3C1.97786 0 0.975626 0.0851964 0 0.248875C8.51314 1.67711 15 9.08101 15 18C15 26.919 8.51314 34.3229 3.08062e-06 35.7511Z" />
+            <path fill-rule="evenodd" className='stroke' clip-rule="evenodd" d="M3 36C1.97786 36 0.97563 35.9148 3.08062e-06 35.7511C1.008 35.582 1.98759 35.3291 2.93137 34.9999C9.95835 32.5483 15 25.8629 15 18C15 10.1371 9.95835 3.45167 2.93137 1.00014C1.98759 0.670874 1.008 0.417986 0 0.248875C0.975626 0.0851964 1.97786 0 3 0H32C41.9411 0 50 8.05888 50 18C50 27.9411 41.9411 36 32 36H3ZM5.494 1H32C41.3888 1 49 8.61116 49 18C49 27.3888 41.3888 35 32 35H5.494C11.7234 31.8816 16 25.4408 16 18C16 10.5592 11.7234 4.11841 5.494 1Z" />
+            <path className='icon' d="M27.7883 14.0938C28.3145 10.6927 29.5556 8.30474 31 8.30474C32.4444 8.30474 33.6855 10.6927 34.2117 14.0938H27.7883ZM34.4839 17.7501C34.4839 18.5956 34.4403 19.4068 34.3641 20.1876H27.6395C27.5633 19.4068 27.5198 18.5956 27.5198 17.7501C27.5198 16.9045 27.5633 16.0933 27.6395 15.3126H34.3641C34.4403 16.0933 34.4839 16.9045 34.4839 17.7501ZM22.7004 14.0938C23.7383 11.5078 25.8395 9.50826 28.4343 8.70083C27.5488 9.98814 26.9391 11.9267 26.6198 14.0938H22.7004ZM33.5694 8.70083C36.1605 9.50826 38.2653 11.5078 39.2996 14.0938H35.3802C35.0645 11.9267 34.4548 9.98814 33.5694 8.70083V8.70083ZM22.3121 15.3126H26.4746C26.3984 16.1124 26.3548 16.9312 26.3548 17.7501C26.3548 18.5689 26.3984 19.3877 26.4746 20.1876H22.3157C22.1161 19.4068 22.0036 18.5956 22.0036 17.7501C22.0036 16.9045 22.1161 16.0933 22.3121 15.3126ZM35.6452 17.7501C35.6452 16.9312 35.6016 16.1124 35.5254 15.3126H39.6879C39.8839 16.0933 40 16.9045 40 17.7501C40 18.5956 39.8839 19.4068 39.6879 20.1876H35.529C35.6016 19.3877 35.6452 18.5689 35.6452 17.7501V17.7501ZM34.2117 21.4063C33.6855 24.8074 32.4444 27.1954 31 27.1954C29.5556 27.1954 28.3145 24.8074 27.7883 21.4063H34.2117ZM28.4306 26.7993C25.8395 25.9919 23.7347 23.9923 22.6968 21.4063H26.6161C26.9355 23.5734 27.5452 25.512 28.4306 26.7993ZM39.2996 21.4063C38.2617 23.9923 36.1605 25.9919 33.5657 26.7993C34.4512 25.512 35.0609 23.5734 35.3802 21.4063H39.2996V21.4063Z" />
+          </svg>
+        </Link>
+
+        <Link href='/glossary'>
+          <svg width="50" height="36" viewBox="0 0 50 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" className='background' clip-rule="evenodd" d="M3.08062e-06 35.7511C0.97563 35.9148 1.97786 36 3 36H32C41.9411 36 50 27.9411 50 18C50 8.05888 41.9411 0 32 0H3C1.97786 0 0.975626 0.0851964 0 0.248875C8.51314 1.67711 15 9.08101 15 18C15 26.919 8.51314 34.3229 3.08062e-06 35.7511Z" />
+            <path fill-rule="evenodd" className='stroke' clip-rule="evenodd" d="M3 36C1.97786 36 0.97563 35.9148 3.08062e-06 35.7511C1.008 35.582 1.98759 35.3291 2.93137 34.9999C9.95835 32.5483 15 25.8629 15 18C15 10.1371 9.95835 3.45167 2.93137 1.00014C1.98759 0.670874 1.008 0.417986 0 0.248875C0.975626 0.0851964 1.97786 0 3 0H32C41.9411 0 50 8.05888 50 18C50 27.9411 41.9411 36 32 36H3ZM5.494 1H32C41.3888 1 49 8.61116 49 18C49 27.3888 41.3888 35 32 35H5.494C11.7234 31.8816 16 25.4408 16 18C16 10.5592 11.7234 4.11841 5.494 1Z" />
+            <path className='icon' d="M26.58 12.4364C26.58 12.1597 26.6875 11.8944 26.8788 11.6987C27.07 11.5031 27.3295 11.3932 27.6 11.3932H38.48C38.7505 11.3932 39.01 11.5031 39.2012 11.6987C39.3925 11.8944 39.5 12.1597 39.5 12.4364C39.5 12.713 39.3925 12.9784 39.2012 13.174C39.01 13.3696 38.7505 13.4795 38.48 13.4795H27.6C27.3295 13.4795 27.07 13.3696 26.8788 13.174C26.6875 12.9784 26.58 12.713 26.58 12.4364ZM38.48 16.9568H27.6005C27.33 16.9568 27.0705 17.0667 26.8793 17.2624C26.688 17.458 26.5805 17.7233 26.5805 18C26.5805 18.2767 26.688 18.542 26.8793 18.7376C27.0705 18.9333 27.33 19.0432 27.6005 19.0432H38.48C38.7505 19.0432 39.01 18.9333 39.2012 18.7376C39.3925 18.542 39.5 18.2767 39.5 18C39.5 17.7233 39.3925 17.458 39.2012 17.2624C39.01 17.0667 38.7505 16.9568 38.48 16.9568ZM38.48 22.5205H27.6005C27.33 22.5205 27.0705 22.6304 26.8793 22.826C26.688 23.0216 26.5805 23.287 26.5805 23.5636C26.5805 23.8403 26.688 24.1056 26.8793 24.3013C27.0705 24.4969 27.33 24.6068 27.6005 24.6068H38.48C38.7505 24.6068 39.01 24.4969 39.2012 24.3013C39.3925 24.1056 39.5 23.8403 39.5 23.5636C39.5 23.287 39.3925 23.0216 39.2012 22.826C39.01 22.6304 38.7505 22.5205 38.48 22.5205ZM23.86 16.6091C23.591 16.6091 23.3281 16.6907 23.1044 16.8435C22.8808 16.9963 22.7065 17.2136 22.6035 17.4677C22.5006 17.7219 22.4737 18.0015 22.5261 18.2714C22.5786 18.5412 22.7081 18.789 22.8983 18.9835C23.0885 19.178 23.3309 19.3105 23.5947 19.3642C23.8585 19.4179 24.1319 19.3903 24.3805 19.285C24.629 19.1798 24.8414 19.0015 24.9908 18.7727C25.1402 18.544 25.22 18.2751 25.22 18C25.22 17.6311 25.0767 17.2773 24.8217 17.0165C24.5666 16.7556 24.2207 16.6091 23.86 16.6091ZM23.86 11.0455C23.591 11.0455 23.3281 11.127 23.1044 11.2799C22.8808 11.4327 22.7065 11.6499 22.6035 11.9041C22.5006 12.1582 22.4737 12.4379 22.5261 12.7077C22.5786 12.9775 22.7081 13.2254 22.8983 13.4199C23.0885 13.6144 23.3309 13.7469 23.5947 13.8005C23.8585 13.8542 24.1319 13.8267 24.3805 13.7214C24.629 13.6161 24.8414 13.4378 24.9908 13.2091C25.1402 12.9804 25.22 12.7115 25.22 12.4364C25.22 12.0675 25.0767 11.7137 24.8217 11.4528C24.5666 11.192 24.2207 11.0455 23.86 11.0455ZM23.86 22.1727C23.591 22.1727 23.3281 22.2543 23.1044 22.4071C22.8808 22.56 22.7065 22.7772 22.6035 23.0314C22.5006 23.2855 22.4737 23.5652 22.5261 23.835C22.5786 24.1048 22.7081 24.3526 22.8983 24.5472C23.0885 24.7417 23.3309 24.8742 23.5947 24.9278C23.8585 24.9815 24.1319 24.9539 24.3805 24.8487C24.629 24.7434 24.8414 24.5651 24.9908 24.3364C25.1402 24.1077 25.22 23.8387 25.22 23.5636C25.22 23.1947 25.0767 22.841 24.8217 22.5801C24.5666 22.3193 24.2207 22.1727 23.86 22.1727Z" />
+          </svg>
+        </Link>
+
+      </div>
+      {minimized ? <BurgerMenu onClick={e => setOpen(e)} /> :
+        <div className='secondary-menu'>
+          <Link href='/contribute'>contribute</Link>
+          <Link href='/about'>about</Link>
+          <Link href='/contact'>contact</Link>
+        </div>}
+      <AnimatePresence mode='wait'>
+        {open && <Panel />}
+      </AnimatePresence>
+    </nav>
   );
 
 }

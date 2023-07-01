@@ -2542,7 +2542,7 @@ a {
   #toolsBar {
     display: flex;
     justify-content: center;
-    width: utils.clamped(170px, 400px);
+    width: utils.clamped(170px, 470px);
     justify-self: center;
     z-index: 1;
     transition: width 0.3s ease;
@@ -2553,6 +2553,35 @@ a {
       width: 100%;
     }
 
+    svg{
+      flex-shrink: 0;
+      cursor: pointer;
+      margin-left: -3px;
+      .background{
+        fill: var(--blue80); 
+        opacity: 0;
+        transition: opacity 0.2 ease;
+      }
+      .stroke{ fill: var(--blue50); }
+      .icon{ fill: var(--paper); }
+
+      @media(hover:'hover'){
+       &:hover{
+        .background{ opacity: 1; }
+       }
+      }
+    }
+
+  }
+
+  .secondary-menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 30px;
+    a{
+      font-weight: 300;
+    }
   }
 
   .burger-menu{
