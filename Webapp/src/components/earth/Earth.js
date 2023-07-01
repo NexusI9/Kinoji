@@ -380,7 +380,8 @@ export default class Earth {
 	}
 
 	reset() {
-		gsap.to(this.camera.position, {
+
+		gsap.to(this.camera?.position, {
 			duration: 1,
 			z: 130,
 			x: 0,
@@ -416,7 +417,7 @@ export default class Earth {
 		this.stopRotate();
 		//this.displayFlag(false);
 
-		gsap.to(this.camera.position, {
+		gsap.to(this.camera?.position, {
 			x: country.geo.rotate.x,
 			y: country.geo.rotate.y,
 			z: country.geo.rotate.z

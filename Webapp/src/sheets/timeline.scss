@@ -70,6 +70,7 @@
     height: 35vh;
     bottom: 0;
     overflow: auto;
+    
   
     &::-webkit-scrollbar{
       width: 0;
@@ -78,12 +79,63 @@
   }
   
   #timeline_settings{
-    position: fixed;
-    margin-right: 3vw;
-    right: 0;
+    left: 0;
     display: flex;
-    flex-direction: column;
+    width: 100%;
+    flex-direction: row;
     gap: 15px;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    
+    & > p{
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      color: var(--blue50);
+      transition: color 0.2s ease;
+      *{ cursor: pointer; }
+      margin: 0;
+
+      svg{
+        fill: var(--blue50);
+        transform: fill 0.2s ease;
+      }
+
+      @media(hover:'hover'){
+        &:hover{
+          color: var(--paper);
+          svg{ fill: var(--paper); }
+        }
+      }
+    }
+
+    header{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 120px;
+      & >*{margin: 0;}
+      h4{
+        text-transform: capitalize;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 6px;
+
+        &[data-country='china']{ color: #ED4C5C; }
+        &[data-country='taiwan']{ color: #ED4C5C; }
+      }
+
+      .timeline-segment-headline{
+        text-align: center;
+        box-sizing: border-box;
+        padding: 0 120px;
+        & > *{margin: 3px;}
+      }
+    }
   
     #country_select{
       margin: 0;
@@ -117,6 +169,7 @@
     }
   
     #history_sidelist{
+      flex-shrink: 0;
       width: 250px;
       transition: opacity 0.2s ease-out;
       ul{
@@ -550,14 +603,27 @@
       margin: 0;
       color:var(--paper);
     }
-  
-    section{
-      position: absolute;
-      width: 100%;
-      text-align: center;
+
+    &.active{
+      z-index: 2;
+      & > section{
+      
+        background: linear-gradient(0deg, var(--paper) -211%, rgba(26, 31, 39, 0) 90%);
+      }
+
+      .chrono_pillar{
+        border-color: var(--paper);
+        p{ color: var(--paper); }
+      }
     }
   
-  
+    & > section{
+      position: absolute;
+      width: 100%;
+      height: 50%;
+      background: transparent;
+      transition: background 0.2s ease;
+    }
   
     .chrono_pillar{
       width: 2px;

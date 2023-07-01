@@ -9,7 +9,7 @@ export default ({ object, type, date, minmax, width, id }) => {
 
   const [opacity, setOpacity] = useState(0);
   let activated = useRef();
-  const lastActive = useSelector(state => state.timeline.token);
+  const lastActive = useSelector(state => state.event.token);
   const setActive = useDispatch();
   const timeout = useRef();
   const SOLO_OR_GROUP = Array.isArray(object) ? 'group' : 'solo';

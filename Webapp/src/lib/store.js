@@ -1,8 +1,9 @@
 import { createStore,combineReducers } from 'redux';
-import { TimelineReducer } from '../components/worldmap';
+import { EventReducer, SegmentReducer } from '@/components/worldmap';
 
 const reducer = combineReducers({
-    timeline: TimelineReducer, 
+    event: EventReducer,
+    segment: SegmentReducer 
 });
 
 export const store = createStore(reducer);

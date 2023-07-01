@@ -1,7 +1,10 @@
-import { getMovieYear, setEventDate, truncate } from '../../lib/utilities';
+import { getMovieYear, setEventDate, truncate } from '@/lib/utilities';
 import { Poster } from '../movie';
 import { PeopleLabel } from '../people';
 import Link from 'next/link';
+import Event from './Event';
+import Segment from './Segment';
+import { useDispatch } from 'react-redux';
 
 
 export function ObjectToEvent(item){
@@ -148,4 +151,79 @@ export function dateToPosition(minMax, date, width, additional_margin = 0){
 
 export function dateToWidth(minMax, begin, end){
   return this.dateToPosition(minMax,end) - this.dateToPosition(minMax,begin);
+}
+
+
+export const generateFrise = (frise, minmax, width) => {
+  //map de group into element, returns an array
+
+  const ar = [];
+  const EVENT_MAP = {
+    segments: ({item,id}) =>
+      <Segment 
+        key={id} 
+        token={id}
+        object={item} 
+        width={width} 
+        minmax={minmax} 
+      />,
+
+    solo: ({ item, type, id }) => 
+      <Event
+        key={id}
+        date={item.begin ? [item.begin, item.end] : [getMovieYear(item)] }
+        object={ ObjectToEvent(item) }
+        type={type}
+        width={width}
+        minmax={minmax}
+        id={id}
+      />,
+
+    group: ({ item, type, date, id}) =>  
+      <Event
+        key={id}
+        date={[date]}
+        object={ item.objects.map(mv => ObjectToEvent(mv)) }
+        type={type}
+        width={width}
+        minmax={minmax}
+        id={id}
+      />
+  }
+  
+
+  //push elements to array with related key from map
+  Object.keys(frise).forEach( key => ({
+        segments: () => 
+            ar.push(...frise[key].map( (sg,i) => 
+                EVENT_MAP[key]({item:sg, id:'segments'+i}) 
+              )),
+        group: () => 
+            Object.keys( frise[key] ).forEach(gkey => {
+              ar.push(...frise[key][gkey].map( (gp, i) => 
+                EVENT_MAP[key]({item: gp, id:JSON.stringify(gp)+i, type:gkey, date:gp.date}) 
+              ));
+            }),
+        solo: () => Object.keys( frise[key] ).forEach(skey => {
+            ar.push(...frise[key][skey].map( (gp, i) => 
+              EVENT_MAP[key]({item: gp, id:JSON.stringify(gp)+i, type: skey}) 
+            ));
+        })
+  })[key]() || null);
+
+  return ar;
+}
+
+
+export const checkActiveSegment = (segments) => {
+
+  let active = null;
+  segments.forEach( segment => {
+    const {x,width} = segment.node.getBoundingClientRect();
+    const medianX = x + (width/2);
+    if( medianX <= window.innerWidth * 2/3 && medianX >= window.innerWidth*1/3){ active = segment; }
+  });
+
+  return active;
+
 }
