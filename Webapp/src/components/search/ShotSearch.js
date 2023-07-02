@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { paramsToArray } from '@/lib/utilities';
 import ResultText from './ResultText';
 import { scrollReachBottom } from '@/lib/utilities';
-import { loadShots } from './TagSearch.helper';
+import { loadShots } from './ShotSearch.helper';
 
 export default ({ tags, colours, subjects, step=10 }) => {
 
@@ -38,7 +38,7 @@ export default ({ tags, colours, subjects, step=10 }) => {
       });
     }
 
-  }, [load, tags, colours]);
+  }, [load, colours]);
 
   return (
     <>
@@ -57,7 +57,7 @@ export default ({ tags, colours, subjects, step=10 }) => {
             total={shots.length}
           />
           <div className='shot-gallery'>
-            {shots.map(shot => <BigThumbnail key={shot.fullpath} {...shot}/>)}
+            {shots?.map(shot => <BigThumbnail key={shot.fullpath} {...shot}/>)}
           </div>
         </>
       }

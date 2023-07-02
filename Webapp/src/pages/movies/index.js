@@ -21,7 +21,7 @@ export default function Movies(){
   return(
     <>
       <Head>
-        <title>KINOJI movies library</title>
+        <title>Movies library | Kinoji</title>
       </Head>
       <PageHeader headline='Movies library' description='Welcome to the movie library, browse Kinoji’s countless international movies. You can class them by name or release date. You can also switch the display mode using the settings bar below.' />
       <AnimatePresence mode='wait'>

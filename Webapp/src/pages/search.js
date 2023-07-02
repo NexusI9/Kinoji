@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { container } from '../lib/variants';
 import { motion } from 'framer-motion';
 import Head from 'next/head';
-import { GlobalSearch, TagSearch } from '@/components/search';
+import { GlobalSearch, ShotSearch } from '@/components/search';
 
 
 export default function Search(){
@@ -29,7 +29,7 @@ export default function Search(){
       className='container'
     >
       <Head>
-        <title>KINOJI search { queries && queries.query && "\""+queries.query+"\""}</title>
+        <title>{`Search ${ ("\""+queries?.query+"\"") || ''} | Kinoji`}</title>
       </Head>
       { queries && queries.query && <GlobalSearch query={queries.query} /> }
       { queries &&
@@ -37,7 +37,7 @@ export default function Search(){
         queries.colours || 
         queries.subjects) && 
         !queries.query && 
-        <TagSearch tags={queries.tags} colours={queries.colours}  subjects={queries.subjects} />
+        <ShotSearch tags={queries.tags} colours={queries.colours}  subjects={queries.subjects} />
       }
     </motion.div>
   );

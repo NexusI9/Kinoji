@@ -18,7 +18,7 @@ function search($connection, $body)
       $arResult = array(
         "movies" => $connection->query("SELECT * FROM movies WHERE title LIKE ?", [$query]),
         "peoples" => $connection->query("SELECT * FROM peoples WHERE name LIKE ?", [$query]),
-        "collections" => $connection->query("SELECT * FROM genres WHERE name LIKE ?", [$query]),
+        "collections" => $connection->query("SELECT * FROM collections WHERE name LIKE ?", [$query]),
         "colours" => $connection->query("SELECT DISTINCT family FROM colors WHERE family LIKE ?", [$query]),
       );
       $totalResult = array("total" => setTotal($arResult));

@@ -3616,6 +3616,7 @@ a {
     transform: translateX(-50%);
     flex-direction: column;
     @include card.card();
+    background: var(--blue90);
 
     input {
       font-size: 16px;
@@ -3636,17 +3637,9 @@ a {
 
     &>.arrowlabel {
       margin-left: auto;
-      padding-bottom: 10px;
-
-      svg {
-        fill: var(--paper);
-      }
-    }
-
-
-
-    a:last-of-type {
-      margin-top: 10px;
+      margin-top: 20px;
+      padding-bottom: 6px;
+      gap: 3px;
     }
 
     .suggest {

@@ -36,7 +36,7 @@ export default () => {
 
     const onScroll = () => {
       if (open) { return; }
-      if (window.pageYOffset > window.innerHeight) { setActive(true); }
+      if (window.pageYOffset > (window.innerHeight * 1/3) ) { setActive(true); }
       else { setActive(false); }
     }
 

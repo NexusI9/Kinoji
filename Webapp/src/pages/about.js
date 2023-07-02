@@ -14,7 +14,7 @@ const About = () => {
         exit='exit'
         className='page-about casual_content'>
         <Head>
-          <title>About KINOJI</title>
+          <title>About | Kinoji</title>
         </Head>
         <AboutKinoji />
         <h2>Kinoji it's...</h2>

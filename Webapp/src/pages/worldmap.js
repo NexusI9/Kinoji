@@ -68,7 +68,7 @@ function Worldmap() {
 	return (
 		<div id="date_container" className="settings_container" data-country={country && country.name || 'world'}>
 			<Head>
-				<title>Movies and history Worldmap</title>
+				<title>Movies & history worldmap | Kinoji</title>
 			</Head>
 			{!country?.history && history &&
 				<CountryList

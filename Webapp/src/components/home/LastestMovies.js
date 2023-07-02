@@ -20,7 +20,7 @@ export default ({ number }) => {
     return(
       <section id='latest' className='container'>
         <LabelBar 
-          label='New on Kinoji' 
+          label='New movies on Kinoji' 
           hyperlink= { <Cta href='/movies' type='secondary'>See all movies</Cta> } 
           underline={false}
           />

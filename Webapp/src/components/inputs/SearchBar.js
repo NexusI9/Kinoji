@@ -86,7 +86,7 @@ export default ({ limit = 5, theme='default' }) => {
     });
 
     listing.push(
-      <ArrowLabel key='searchtotal' link={'/search?query=' + query} ><small>{sug.total} total items found</small></ArrowLabel>
+      <ArrowLabel key='searchtotal' link={'/search?query=' + query} ><small>See all ({sug.total})</small></ArrowLabel>
     );
     return listing;
   };
