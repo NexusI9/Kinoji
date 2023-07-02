@@ -1,4 +1,4 @@
-export default () => {
+export default ({main=true}) => {
 
     return(
       <section id='aboutKinoji' className='container'>
@@ -10,7 +10,8 @@ export default () => {
         </svg>
   
           <div>
-            <h3>About Kinoji</h3>
+            {main ? <h1>About Kinoji</h1> : <h3>About Kinoji</h3>}
+            
            <p>
             Kinoji is an online cinematography library that focuses on Asian and author cinema. 
             <br/>

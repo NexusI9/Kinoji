@@ -689,7 +689,6 @@ a {
   @include padding-content;
   margin-bottom: 10%;
   margin-top: 10%;
-  min-height: 50vh;
 }
 
 .movie_contain {
@@ -1497,6 +1496,29 @@ a {
   @include padding-content;
 }
 
+.page-about{
+
+  &.casual_content{
+    margin-bottom: 0;
+  }
+  #aboutKinoji{
+    margin-bottom: 15%;
+    margin-top: 10%;
+  }
+
+  & > h2{
+    text-align: center;
+    font-size: utils.clamped(90px, 140px);
+    margin-bottom: 40px;
+  }
+
+  & + .amount-container{
+    margin-bottom: 20%;
+  }
+
+  
+}
+
 #aboutKinoji {
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -1505,6 +1527,11 @@ a {
   margin-top: 20%;
   margin-bottom: 20%;
   justify-content: center;
+
+  h1,h3{
+    margin: 3px;
+    font-size: utils.clamped(50px, 70px);
+  }
 
   &>svg {
     transform: rotate3d(0, 0, 1, 0deg);

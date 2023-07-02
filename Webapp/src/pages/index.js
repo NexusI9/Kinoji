@@ -25,7 +25,7 @@ export default function Home(props){
             <Amount />
             <Highlights/>
             <Newsletter/>
-            <AboutKinoji />
+            <AboutKinoji main={false}/>
         </motion.main>
   </>
 

@@ -91,7 +91,6 @@ export default () => {
       </div>
       {minimized ? <BurgerMenu onClick={e => setOpen(e)} /> :
         <div className='secondary-menu'>
-          <Link href='/contribute'>contribute</Link>
           <Link href='/about'>about</Link>
           <Link href='/contact'>contact</Link>
         </div>}
