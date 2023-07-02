@@ -12,6 +12,8 @@ const variants = {
     }
 }
 
+const MotionLink = motion(Link);
+
 const ShotSlider = ({number=6, nav=false}) => {
 
     const [currentShot, setShot] = useState();
@@ -68,19 +70,19 @@ const ShotSlider = ({number=6, nav=false}) => {
             <div id='shotSlider'>
             {
                 currentShot && <>
-      
-                        <motion.div
+                        <MotionLink
                             key={currentShot.path}
                             variants={variants.content}
                             initial='initial'
                             animate='animate'
                             exit='exit'
                             className="shotslider-mainpicture"
+                            href={`/movies/${currentShot.movie.id}/shot/${currentShot.name}`}
                         >
                             <img src={currentShot.path} />
                             <span></span>
                             <img src={currentShot.path} />
-                        </motion.div>
+                        </MotionLink>
                     <section>
                             <div className="shotslider-navigation">
                                     

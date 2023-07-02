@@ -33,7 +33,6 @@
         flex-direction: row;
         align-items: center;
         padding: 5px;
-        padding-top: 0px;
         box-sizing: border-box;
         background: transparent;
         transition: background 0.2s ease;
@@ -42,7 +41,8 @@
 
         @media(hover:'hover'){
           &:hover{
-            background: var(--blue80);
+            background: linear-gradient(45deg, #4248636e, transparent);
+            svg{ fill: var(--paper); }
           }
         }
 
