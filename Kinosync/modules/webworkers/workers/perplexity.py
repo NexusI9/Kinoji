@@ -1,5 +1,5 @@
 import re
-from modules.webworkers.lib.prompts import PROMPTS
+from modules.webworkers.webworkers_prompts import PROMPTS
 from modules.webworkers.lib.webdriver import Webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -13,7 +13,9 @@ class Perplexity:
         return None
     
     def cleanUpProse(self, prose):
-        return re.sub(r'(\n\d|\n\.)','',prose) + '.'
+        prose = re.sub(r'(\n\d|\n\.)','.',prose)
+        prose = re.sub(r'(\.+)','.',prose)
+        return prose
 
     def query(self, prompt, timeout = 10, responseTimeout=30):
         

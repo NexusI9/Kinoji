@@ -11,8 +11,8 @@ export default ({label, ico , hyperlink, hero=true, underline=true, sticky=false
         
         if(!ref.current){ return; }
         const { top } = ref.current.getBoundingClientRect();
-        if(top === 59){ setStuck(true);  }
-        else if(top > 59){ setStuck(false); }
+        if(top === 46){ setStuck(true);  }
+        else if(top > 46){ setStuck(false); }
       }
 
       if(sticky && ref.current){

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useSelector, useDispatch } from 'react-redux';
 import { container } from '@/lib/variants';
 import { generateFrise, group, minMax, checkActiveSegment } from './Timeline.helper';
-
+import { useRouter } from 'next/router';
 
 //CORE
 export default ({ country, width }) => {
@@ -14,6 +14,7 @@ export default ({ country, width }) => {
   const [frise, setFrise] = useState();
   const [minmax, setMinMax] = useState();
   const segments = useSelector( state => state.segment.array );
+  const paramCountry = useRouter().query.country;
   const dispatch = useDispatch();
 
   //scroll

@@ -70,7 +70,6 @@
     height: 100%;
     top: 0;
     overflow: auto;
-    
   
     &::-webkit-scrollbar{
       width: 0;
@@ -541,6 +540,7 @@
   .chrono_mixed{
     &.group{
       & > span{
+        z-index: 4;
         background-image: linear-gradient(var(--lightblue) 49%, var(--red) 50%);
         border: none;
         width: 28px;
@@ -620,12 +620,13 @@
       .chrono_pillar{
         border-color: var(--paper);
         p{ color: var(--paper); }
+
       }
     }
   
     & > section{
       position: absolute;
-      width: 100%;
+      width: calc(100% - 2px);
       height: 50%;
       background: transparent;
       transition: background 0.2s ease;

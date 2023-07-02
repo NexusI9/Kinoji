@@ -2652,6 +2652,7 @@ a {
     display: flex;
     flex-direction: row;
     gap: 30px;
+    align-items: center;
 
     img {
       height: 22px;
@@ -3215,7 +3216,7 @@ a {
 
   &.sticky {
     position: sticky;
-    top: 59px;
+    top: 46px;
     z-index: 2;
     background: transparent;
     transition: background 0.12s linear;

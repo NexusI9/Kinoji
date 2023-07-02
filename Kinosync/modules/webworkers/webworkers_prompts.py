@@ -26,11 +26,12 @@ The paragraph can also eventually include the following information if they are 
     """,
     "HISTORY":"""
 Write a very short paragraph (2/3 sentences maximum) about the {event} historical event from {begin} that happened in {country}.
-Do not start the paragraph by the name of the event. If necessary, rename the event with a more official and known name.
+Do not start the paragraph by the name of the event. If necessary, rename the event with a more official and historically accurate name.
+The paragraph must capture the influence of social, political, and cultural factors on the development and evolution of Cinema the industry.
     """,
 
     "COLLECTION":"""
-Write a mid-length paragraph about the {genre} cinema genre. 
+Write a mid-length paragraph about the {collection} cinema genre. 
 Use a formal and neutral tone. The paragraph should suit an audience well educated about cinema and can include technical terms as well as in-depth insights. 
 
 This short paragraph may include each of the following list items:
