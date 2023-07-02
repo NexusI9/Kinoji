@@ -1,16 +1,16 @@
-import { container } from '../lib/variants.js';
-import { motion } from 'framer-motion';
+import { ContactLayout } from '@/components/layout';
 import Head from 'next/head.js';
 
-const Contact = (props) => {
 
-  return(
-    <>
-    <Head>
-      <title>Contact Us</title>
-    </Head>
-        <h1>Contact</h1>
-    </>
+const Contact = ({ main = true }) => {
+
+  return (
+    <div className='page-contact'>
+      <Head>
+        <title>Contact Us</title>
+      </Head>
+      <ContactLayout/>
+    </div>
 
   );
 }

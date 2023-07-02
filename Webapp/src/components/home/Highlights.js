@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { ArrowLabel } from '../inputs';
 import { Mosaic, Banner } from '../movie';
 import { LabelBar } from '../header';
-import useAPI from '../../lib/api';
+import useAPI from '@/lib/api';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const variants = {

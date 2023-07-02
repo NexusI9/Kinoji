@@ -246,13 +246,15 @@ hr {
   color: var(--paper);
 }
 
-input {
-  cursor: pointer;
-  border: none;
-
+input, textarea{
   &:focus {
     outline: none;
   }
+}
+
+input {
+  cursor: pointer;
+  border: none;
 
   &[type='checkbox']:checked+label {
     background: var(--red);
@@ -359,14 +361,27 @@ small {
 
 
 label {
-  &:has(input[type='text']) {
+
+  &:has(input[type='text']), &:has(textarea){
     cursor: text;
     position: relative;
-
+    display: block;
     &.required {
       .placeholder::after {
         content: '*';
         color: var(--red);
+      }
+    }
+
+    &.active {
+
+      .placeholder{
+        transform: translateY(-18px) scale3d(0.8, 0.8, 0.8);
+        color:var(--paper);
+      }
+
+      input, textarea{
+        border-color: var(--blue30);
       }
     }
 
@@ -379,15 +394,11 @@ label {
       left: 0;
       width: max-content;
       margin: 0;
-      color: var(--paper);
+      color: var(--blue30);
       font-weight: 300;
       transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
       transform-origin: left;
       transition: transform 0.14s ease-out;
-
-      &.active {
-        transform: translateY(-18px) scale3d(0.8, 0.8, 0.8);
-      }
 
     }
 
@@ -397,13 +408,30 @@ label {
       margin-top: 5px;
     }
 
-
-    input {
-      border-bottom: solid 1px var(--red);
-      background: transparent;
+    input, textarea{
       width: 100%;
       cursor: text;
       color: var(--paper);
+      background: transparent;
+      box-sizing: border-box;
+    }
+    input {
+      border-bottom: solid 1px var(--blue50);
+    }
+
+    textarea{
+    
+      border: solid 1px var(--blue50);
+      resize: vertical;
+      min-height: 200px;
+      padding: 10px;
+      font-family: 'Fira Sans';
+
+      & + .placeholder{
+        background-color: var(--background);
+        left: 7px;
+        top: 7px;
+      }
     }
   }
 }
@@ -445,8 +473,7 @@ label {
   -ms-user-select: none;
   /* Internet Webworkers/Edge */
   user-select: none;
-  /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
+  /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 
 .mock {
@@ -462,6 +489,60 @@ label {
     padding: 10% 20%;
     padding-bottom: 5%;
     overflow: visible;
+  }
+}
+
+.contact-container{
+
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 100px;
+
+  & > *{
+    flex-basis: 50%;
+    box-sizing: border-box;
+    padding: 0 5%;
+  }
+
+  h3,h1{ margin: 10px 0; }
+
+  .contact-form-container{
+
+    display: flex;
+    gap: 70px;
+    flex-direction: column;
+    align-items: center;
+
+    & > img[alt='logo']{
+      width: 60%;
+    }
+    form{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      justify-items: center;
+      gap: 10px 20px;
+      width: 100%;
+  
+      label:has(input){ width: 100%; }
+      label:has(textarea), fieldset{ grid-column: span 2; }
+      label:has(textarea){ width:100%; }
+
+      .submitted{
+        text-align: center;
+      }
+    }
+
+  }
+
+  header{
+
+    & > a{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 4px;
+    }
   }
 }
 

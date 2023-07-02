@@ -1,10 +1,15 @@
-import Cta from './Cta';
 import Text from './Text';
-import { useRef, useState, Fragment } from 'react';
+import { useRef, useState } from 'react';
 
 export default (props) => {
 
     const [entries, setEntries] = useState(props.entries);
+    /*{
+        name:string 
+        placeholder:string
+        required:boolean
+    }*/
+
     const [submitted, setSubmitted] = useState(false);
 
     const handleOnSumbit = () => {
@@ -31,7 +36,7 @@ export default (props) => {
 
     return (
         <form onSubmit={e => e.preventDefault()}>
-            {entries?.map(entry => <Fragment key={entry.name+'form_entry'}><Text {...entry} warning={entry.warning} innerRef={e => entry.ref = e} /></Fragment>)}
+            {entries?.map(entry => <Text key={entry.name+'form_entry'}  {...entry}  warning={entry.warning} innerRef={e => entry.ref = e} />)}
             <fieldset>
                 <button className='cta primary' onClick={handleOnSumbit}>{props.submit?.content}</button>
                 {submitted && <p className='submitted'><small><b>Thank you!</b></small></p>}

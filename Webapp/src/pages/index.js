@@ -1,8 +1,8 @@
-
-import React, { useEffect }  from 'react';
 import { motion } from 'framer-motion';
 import { container } from '@/lib/variants.js';
-import { HomeHeader, LatestMovies, ListSelection, AboutKinoji, Highlights, Amount, Newsletter } from '@/components/home';
+import { HomeHeader, LatestMovies, ListSelection, Highlights, Newsletter } from '@/components/home';
+import { AboutKinoji, Amount } from '@/components/layout';
+
 import Head from 'next/head';
 
 

@@ -1,9 +1,7 @@
 import { container } from '@/lib/variants.js';
 import { motion } from 'framer-motion';
 import Head from 'next/head';
-import { AboutKinoji, Amount } from '@/components/home';
-
-
+import { AboutKinoji, Amount } from '@/components/layout';
 
 const About = () => {
 

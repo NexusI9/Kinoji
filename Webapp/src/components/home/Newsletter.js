@@ -14,7 +14,6 @@ export default () => {
         if (name[0] && email[0]) {
             post({ type: 'ADD_LEAD', name: name[0].ref?.value || 'NULL', email: email[0].ref?.value || 'NULL' });
         }
-
     }
 
     return (

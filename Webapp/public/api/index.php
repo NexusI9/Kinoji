@@ -8,6 +8,7 @@ require_once 'actions/history.php';
 require_once 'actions/peoples.php';
 require_once 'actions/movies.php';
 require_once 'actions/search.php';
+require_once 'lib/mail.php';
 
 
 $connection = new Connection();
@@ -20,3 +21,4 @@ history($connection, $body);
 peoples($connection, $body);
 movies($connection, $body);
 search($connection, $body);
+sendmail($body);
