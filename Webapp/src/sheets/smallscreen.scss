@@ -30,6 +30,15 @@
     }
   }
 
+  .contact-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .contact-form-container{
+      width: 100%;
+    }
+  }
+
   .category_header{
     align-items: flex-start;
     #displayOptions{

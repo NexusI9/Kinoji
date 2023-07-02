@@ -5,9 +5,9 @@ import Head from 'next/head.js';
 const Contact = ({ main = true }) => {
 
   return (
-    <div className='page-contact'>
+    <div className='page-contact container'>
       <Head>
-        <title>Contact Us</title>
+        <title>Contact Us | Kinoji</title>
       </Head>
       <ContactLayout/>
     </div>

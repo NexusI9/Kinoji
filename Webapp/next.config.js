@@ -1,6 +1,7 @@
 module.exports = {
     output: 'export',
     distDir: 'build',
+    trailingSlash: true,
     webpack: (config, options) => {
         config.module.rules.push({
           test: /\.(gltf)$/,
