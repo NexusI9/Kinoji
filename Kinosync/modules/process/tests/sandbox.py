@@ -7,6 +7,8 @@ import shutil
 
 from modules.webworkers.workers.perplexity import Perplexity
 
+from modules.process.lib.spotlight import Spotlight
+
 
 SHOTS_PATH = config("SHOTS_PATH")
 USERNAME = config("USERNAME")
@@ -226,8 +228,13 @@ def cleanSummary():
     return            
 
 
-def Sandbox():
 
-    collection()
+def Sandbox():
+    
+    sp = Spotlight();
+    root = '/Users/elkhantour/Sites/Kinoji/Webapp/public/assets/movies/2001 Space Odyssey-62/thumbnails/'
+    for file in os.listdir(root):
+        fullpath = f'/Users/elkhantour/Sites/Kinoji/Webapp/public/assets/movies/2001 Space Odyssey-62/thumbnails/{file}'
+        print('{:20} {:5}'.format(file, sp.vibrance(fullpath)));
 
     return

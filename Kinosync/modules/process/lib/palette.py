@@ -3,7 +3,6 @@ import webcolors
 import os
 from lib.utils import config, clear
 from modules.process.lib.connector import Connector
-#from modules.process.lib.classifier import Classifier
 
 SHOTS_PATH = config("SHOTS_PATH")
 USERNAME = config("USERNAME")
