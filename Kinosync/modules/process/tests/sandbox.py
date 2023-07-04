@@ -235,6 +235,6 @@ def Sandbox():
     root = '/Users/elkhantour/Sites/Kinoji/Webapp/public/assets/movies/2001 Space Odyssey-62/thumbnails/'
     for file in os.listdir(root):
         fullpath = f'/Users/elkhantour/Sites/Kinoji/Webapp/public/assets/movies/2001 Space Odyssey-62/thumbnails/{file}'
-        print('{:20} {:5}'.format(file, sp.vibrance(fullpath)));
+        print('{:20} {:>5}'.format(file, sp.contrast(fullpath)));
 
     return

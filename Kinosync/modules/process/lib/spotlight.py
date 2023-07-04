@@ -21,8 +21,9 @@ class Spotlight:
         return
     
     def contrast(self, path):
-
-        return None
+        picture = cv2.imread(path)
+        img_grey = cv2.cvtColor(picture, cv2.COLOR_BGR2GRAY)
+        return round( img_grey.std()/100 ,2)
     
     def vibrance(self, path):
 
