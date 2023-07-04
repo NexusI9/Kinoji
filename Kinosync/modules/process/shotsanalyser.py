@@ -7,6 +7,7 @@ import sys
 from lib.utils import config, clear, beautyprint, getDateTime
 from modules.process.lib.connector import Connector
 from modules.process.lib.palette import Palette
+from modules.process.lib.spotlight import Spotlight
 #from modules.process.lib.classifier import Classifier
 
 SHOTS_PATH = config("SHOTS_PATH")
@@ -41,6 +42,7 @@ class ShotsAnalyser:
             subjects = None
             #subjects = Classifier().getSubject(picFullPath)
             colours = Palette(maxColor=6).getColours(picFullPath)
+            spotlight = Spotlight();
 
             result = {
                 "folder": folder,
@@ -48,6 +50,8 @@ class ShotsAnalyser:
                 "name": os.path.splitext(pic)[0],
                 "subjects": ';'.join(subjects) if subjects else None,
                 "colours": ';'.join(colours) if colours else None,
+                "contrast": spotlight.contrast(picFullPath),
+                "vibrance": spotlight.vibrance(picFullPath),
                 "last_update": getDateTime()
             }
 
@@ -55,7 +59,7 @@ class ShotsAnalyser:
             self.connector.update("shots",result)
 
     def analyse(self, id=None):
-        print(id)
+     
         folders = self.connector.getJSON("""SELECT folder, id FROM movies""")
         if(id):
             folders = self.connector.getJSON("""SELECT folder, id FROM movies WHERE id = %s""", [id])
@@ -65,7 +69,7 @@ class ShotsAnalyser:
             return self.start()
         else:
             for mv in folders:
-                if(os.path.isdir(self.folderToFullpath(mv['folder']))): #check if folder exists on computer
+                if(os.path.isdir(self.folderToFullpath(mv['folder']))): #check if directory exists locally
                     self.scanFolder(mv['id'],mv['folder'])
                 else:
                     print("%s directory not found" % (mv['folder']))
