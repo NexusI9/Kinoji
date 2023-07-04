@@ -2,7 +2,7 @@
 
 require_once 'lib/connection.php';
 require_once 'actions/account.php';
-require_once 'actions/aesthetics.php';
+require_once 'actions/shots.php';
 require_once 'actions/collections.php';
 require_once 'actions/history.php';
 require_once 'actions/peoples.php';
@@ -15,7 +15,7 @@ $connection = new Connection();
 $body = json_decode(file_get_contents('php://input'), true);
 
 account($connection, $body);
-aesthetics($connection, $body);
+shots($connection, $body);
 collections($connection, $body);
 history($connection, $body);
 peoples($connection, $body);

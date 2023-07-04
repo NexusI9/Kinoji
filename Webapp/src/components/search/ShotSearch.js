@@ -32,13 +32,14 @@ export default ({ tags, colours, subjects, step=10 }) => {
         tags:tags,
         stop: start
       }).then( shots => { 
+        console.log(shots);
         setShots(shots);
         setLoad(false);
         setStart(start + step); 
       });
     }
 
-  }, [load, colours]);
+  }, [load,tags,colours]);
 
   return (
     <>

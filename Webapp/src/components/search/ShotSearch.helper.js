@@ -8,7 +8,7 @@ export async function loadShots({ colours, tags, start=0, stop=10 }) {
 
     if (tags) {
         promiseArray.push(
-            post({ type: 'GET_MOVIES_FROM_TAGS', tags: paramsToArray(tags), stop:stop })
+            post({ type: 'GET_SHOTS_WITH_TAGS', tags: paramsToArray(tags), stop:stop })
             .then(({ data }) => ({ tags: data || [] }))
         );
     }

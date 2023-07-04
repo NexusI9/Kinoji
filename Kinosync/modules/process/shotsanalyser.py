@@ -4,7 +4,7 @@
 import os
 import re
 import sys
-from lib.utils import config, clear, beautyprint
+from lib.utils import config, clear, beautyprint, getDateTime
 from modules.process.lib.connector import Connector
 from modules.process.lib.palette import Palette
 #from modules.process.lib.classifier import Classifier
@@ -45,13 +45,14 @@ class ShotsAnalyser:
             result = {
                 "folder": folder,
                 "id": id,
-                "shot": os.path.splitext(pic)[0],
+                "name": os.path.splitext(pic)[0],
                 "subjects": ';'.join(subjects) if subjects else None,
-                "colours": ';'.join(colours) if colours else None
+                "colours": ';'.join(colours) if colours else None,
+                "last_update": getDateTime()
             }
 
             beautyprint(result)
-            self.connector.update("aesthetics",result)
+            self.connector.update("shots",result)
 
     def analyse(self, id=None):
         print(id)
@@ -74,7 +75,7 @@ class ShotsAnalyser:
         
         movies = self.connector.getJSON("""SELECT DISTINCT id, folder from movies""")
         
-        shotsID = [s[0] for s in self.connector.execute("""SELECT DISTINCT id from aesthetics""")]
+        shotsID = [s[0] for s in self.connector.execute("""SELECT DISTINCT id from shots""")]
         moviesID = [mv['id'] for mv in movies]
 
         missingID = [id for id in moviesID if id not in shotsID]

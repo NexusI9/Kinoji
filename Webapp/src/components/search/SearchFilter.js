@@ -16,7 +16,7 @@ export default ({onChange=e=>0, items={} }) => {
                 movies:false,
                 personnalities:false,
                 collections:false,
-                aesthetics:false
+                shots:false
               }
 
             //set search filters
@@ -24,7 +24,7 @@ export default ({onChange=e=>0, items={} }) => {
                 if(key === 'movies' && items[key].length ){ filters.movies = true; }
                 if( (key === 'dop' || key === 'directors') && items[key].length ){ filters.personnalities = true; }
                 if( key === 'genres' && items[key].length ){ filters.collections = true; }
-                if( key === 'colours' && items[key].length ){ filters.aesthetics = true; }
+                if( key === 'colours' && items[key].length ){ filters.shots = true; }
             });
 
             setFilter(filters);

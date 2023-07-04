@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__.'/../lib/utilities.php';
+require_once __DIR__ . '/../lib/utilities.php';
 
-function aesthetics($connection, $body)
+function shots($connection, $body)
 {
   switch ($body['type']) {
 
@@ -46,15 +46,19 @@ function aesthetics($connection, $body)
       $start = 0;
       $stop = 10;
 
-      if(isset($body["start"])){ $start = $body["start"]; }
-      if(isset($body["stop"])){ $stop = $body["stop"]; }
+      if (isset($body["start"])) {
+        $start = $body["start"];
+      }
+      if (isset($body["stop"])) {
+        $stop = $body["stop"];
+      }
 
       if (isset($body["id"])) { //get shots for specific ID
         $id = $body["id"];
         $query = $connection->buildQuery(
           array(
             "statement" => function ($c) {
-              return "SELECT shot FROM aesthetics WHERE id = ? AND ($c)";
+              return "SELECT name FROM shots WHERE id = ? AND ($c)";
             },
             "arguments" => $colours,
             "condition" => "LOWER(COLOURS) LIKE ?",
@@ -68,24 +72,27 @@ function aesthetics($connection, $body)
 
       $query = $connection->buildQuery(
         array(
-          "statement" => function ($c) { return "SELECT * FROM aesthetics WHERE $c"; },
+          "statement" => function ($c) {
+            return "SELECT * FROM shots WHERE $c";
+          },
           "arguments" => $colours,
           "condition" => "LOWER(COLOURS) LIKE ?",
           "operator" => "OR",
-          "suffix" => "ORDER BY shot LIMIT $start,$stop"
+          "suffix" => "ORDER BY name LIMIT $start,$stop"
         )
       );
 
       $result = $connection->query($query, add_percent($colours));
 
-      function get_movie($ar){
+      function get_movie($ar)
+      {
         global $connection;
         $mv = $connection->query('SELECT * FROM movies WHERE id = ?', [$ar['id']]);
         return array_merge(
-          $ar, 
-          array("fullpath" => "/assets/movies/{$ar['folder']}/{$ar['shot']}.webp"),
+          $ar,
+          array("fullpath" => "/assets/movies/{$ar['folder']}/{$ar['name']}.webp"),
           array("movie" => $mv[0])
-          );
+        );
       }
 
       $result = array_map('get_movie', $result);
@@ -103,10 +110,10 @@ function aesthetics($connection, $body)
       $query = $connection->buildQuery(
         array(
           "statement" => function ($c) {
-            return "SELECT DISTINCT movies.* , GROUP_CONCAT(DISTINCT aesthetics.shots SEPARATOR ';') as shot FROM movies INNER JOIN aesthetics WHERE movies.id = aesthetics.id AND ({$c}) GROUP BY movies.id";
+            return "SELECT DISTINCT movies.* , GROUP_CONCAT(DISTINCT shots.name SEPARATOR ';') as shot FROM movies INNER JOIN shots WHERE movies.id = shots.id AND ({$c}) GROUP BY movies.id";
           },
           "arguments" => $colours,
-          "condition" => "aesthetics.colours LIKE ?",
+          "condition" => "shots.colours LIKE ?",
           "operator" => 'OR'
         )
       );
@@ -115,6 +122,11 @@ function aesthetics($connection, $body)
       echo json_encode($result);
 
       break;
+
+    case "GET_SHOTS_WITH_TAGS":
+      
+
+    break;
 
     default:
   }

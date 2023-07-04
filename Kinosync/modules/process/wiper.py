@@ -76,8 +76,8 @@ class Wiper:
         return
 
     def deleteFromAesthetic(self,MovieId):
-        print('[-] Cleaning aesthetics tables')
-        self.connector.execute("""DELETE FROM aesthetics WHERE id = %s""", (MovieId,))
+        print('[-] Cleaning shots tables')
+        self.connector.execute("""DELETE FROM shots WHERE id = %s""", (MovieId,))
         print('> Done !\n\n')
         return
 
