@@ -12,6 +12,8 @@ pillow = "*"
 requests = "*"
 colorthief = "*"
 webcolors = "*"
+opencv-python = "*"
+numpy = "*"
 
 [dev-packages]
 

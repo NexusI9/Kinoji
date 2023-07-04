@@ -14,7 +14,7 @@ DTBNAME = config("DTBNAME")
 class Palette:
 
     """
-    Get main colors of a given picture using the ColorThief library
+    Get prmiary colors of a given picture using the ColorThief library
     """
 
     def __init__(self, maxColor=2):
