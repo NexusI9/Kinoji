@@ -485,7 +485,7 @@ label {
   display: none !important;
 }
 
-.page-contact{
+.page-contact {
   min-height: 70vh;
 }
 
@@ -4535,11 +4535,6 @@ img.messy {
     font-size: 6em;
   }
 
-  h1,
-  h3,
-  small {
-    margin: 0;
-  }
 
   ul {
     list-style: none;
@@ -4584,6 +4579,10 @@ img.messy {
   .label-bar {
     margin-left: 0;
     width: 100%;
+
+    h4 {
+      color: var(--paper);
+    }
   }
 
   h2 {
@@ -4591,11 +4590,25 @@ img.messy {
     text-transform: capitalize;
   }
 
+  &-content {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  input[type='checkbox']:checked+label.tag {
+    background: var(--blue50);
+    border-color: var(--blue50);
+  }
+
   .tag {
     @include thin-paper-border;
     margin: 4px;
     transition: background, border, 0.2s ease;
     @include hover-highlight;
+    display: flex;
+    padding: 0 10px;
+    box-sizing: border-box;
+
 
     &.pop {
       transform: scale(0);
@@ -4609,26 +4622,15 @@ img.messy {
     }
   }
 
-  input {
-
-    @each $colour,
-    $hex in $colours {
-      @include tag-color($colour, $hex);
-    }
-  }
-
 }
 
 
 #tagbox_wrapper {
-  left: 2*$margin;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 70vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  padding-right: 30px;
+  border-right: solid 1px var(--blue70);
+  h1{ font-size: 32px; }
 }
 
 #no_blck {

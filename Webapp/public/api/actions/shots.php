@@ -100,6 +100,14 @@ function shots($connection, $body)
       echo json_encode($result);
       break;
 
+    case 'GET_LIGHTS':
+      echo json_encode( array("Vibrant", "Natural", "High Contrast", "Low Contrast") );
+      break;
+
+    case 'GET_SUBJECTS':
+      echo json_encode( array() );
+      break;
+
     case 'GET_TAG_SUMMARY':
       echo json_encode($connection->query('SELECT summary FROM tags WHERE name = ?', [$body['tag']]));
       break;

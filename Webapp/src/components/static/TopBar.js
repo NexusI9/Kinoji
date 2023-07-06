@@ -88,7 +88,7 @@ export default () => {
           </svg>
         </Link>
 
-        <Link href='/shot'>
+        <Link href='/shots'>
 
           <svg width="50" height="36" viewBox="0 0 50 36" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fillRule="evenodd" className='background' clipRule="evenodd" d="M3.08062e-06 35.7511C0.97563 35.9148 1.97786 36 3 36H32C41.9411 36 50 27.9411 50 18C50 8.05888 41.9411 0 32 0H3C1.97786 0 0.975626 0.0851964 0 0.248875C8.51314 1.67711 15 9.08101 15 18C15 26.919 8.51314 34.3229 3.08062e-06 35.7511Z" />
