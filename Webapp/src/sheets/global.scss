@@ -1730,7 +1730,7 @@ a {
 
   img[alt='kinojiLogo'] {
     max-width: none;
-    width: 400px;
+    width: 350px;
     margin-bottom: 10px;
   }
 
@@ -1771,6 +1771,7 @@ a {
     flex-direction: row;
     border-radius: 10em;
     font-size: 3em;
+    box-sizing: content-box;
   }
 
   #tools_search_bar {

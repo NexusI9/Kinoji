@@ -58,7 +58,7 @@ export default ({ limit = 5, theme='default' }) => {
         </Link>,
 
       colours: ({family}) =>
-        <Link key={'suggestcolors' + family} href={'/search?colours=' + family} onClick={onClick}>
+        <Link key={'suggestcolors' + family} href={'/shots?colours=' + family} onClick={onClick}>
           <li className='suggest suggest_poster'>
             <div className='suggest_color_wrap'>
               <span className='ico colours' name={family.toLowerCase()}></span>
