@@ -49,9 +49,13 @@ $colours: (
   "brown": #75563a,
   "green": #5b9a48,
   "cyan": #43c8b1,
-  "white": #dbdbdb,
-  "black": #202020,
-  "orange": #ff8a00
+  "light": #dbdbdb,
+  "dark": #202020,
+  "orange": #ff8a00,
+  "high contrast": linear-gradient(145deg, #000 50%, #FFF 50%),
+  "low contrast": linear-gradient(145deg, #B0B0B0 50%, #555 50%),
+  "vibrant": url('../assets/tags/vibrant-icon.png'),
+  "natural": url('../assets/tags/natural-icon.png')
 );
 
 @mixin footer-margin {
@@ -127,11 +131,11 @@ $colours: (
 }
 
 
-@mixin tag-color($value, $color, $text: var(--paper)) {
-  &[type='checkbox'][value=#{$value}]:checked+label {
-    color: $text;
-    background: $color;
-    border-color: $color;
+@mixin tag-color($value, $color) {
+  &[type='checkbox'][value='#{$value}']+label {
+    &::before{
+      background: $color;
+    }
   }
 }
 
@@ -2411,7 +2415,7 @@ a {
 
     @each $colour,
     $hex in $colours {
-      &[name=#{$colour}] {
+      &[name='#{$colour}'] {
         background: $hex;
       }
     }
@@ -4574,7 +4578,6 @@ img.messy {
 .tagbox {
   color: var(--paper);
   position: relative;
-  width: 40vw;
   display: block;
 
   .label-bar {
@@ -4596,21 +4599,41 @@ img.messy {
     flex-wrap: wrap;
   }
 
-  input[type='checkbox']:checked+label.tag {
-    background: var(--blue50);
-    border-color: var(--blue50);
+  input{
+
+    &[type='checkbox']:checked+label.tag {
+      background: var(--blue50);
+      border-color: var(--blue50);
+    }
+
+    @each $colour, $hex in $colours{
+      @include tag-color($colour, $hex);
+    }
   }
 
-  .tag {
+
+  label.tag {
+    cursor: pointer;
     @include thin-paper-border;
     margin: 4px;
     transition: background, border, 0.2s ease;
     @include hover-highlight;
+    border-radius: 3px;
     display: flex;
-    padding: 0 10px;
+    gap: 10px;
+    padding: 5px 15px 5px 10px;
     box-sizing: border-box;
+    align-items: center;
+    letter-spacing: 1px;
+    & > small { font-weight: 600; }
 
-
+    &::before{
+      content:'';
+      width: 15px;
+      height: 15px;
+      display: block;
+      border-radius: 100%;
+    }
     &.pop {
       transform: scale(0);
       animation-name: popTag;
@@ -4625,14 +4648,6 @@ img.messy {
 
 }
 
-
-#tagbox_wrapper {
-  display: flex;
-  flex-direction: column;
-  padding-right: 30px;
-  border-right: solid 1px var(--blue70);
-  h1{ font-size: 32px; }
-}
 
 #no_blck {
   display: none;
@@ -4771,35 +4786,66 @@ img.messy {
 
 }
 
-$rowHeight: 25vh;
+$rowHeight: 20vh;
 
-.shot-gallery {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 1em;
-  overflow: hidden;
+.shot{ 
 
-  &>* {
-    height: $rowHeight;
-    flex-grow: 1;
-    /*&:last-of-type{
-      flex-grow: 99999;
-      height: auto;
-      &> a > img{
-        height: auto;
-      }
-    }*/
+  &-container{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 30px;
+
+    &.settings_container{
+      padding: 70px 40px;
+      padding-right: 0;
+      padding-bottom: 0;
+    }
+
+    #tagbox_wrapper {
+      display: flex;
+      flex-direction: column;
+      padding-right: 40px;
+      padding-top: 6%;
+      border-right: solid 1px var(--blue70);
+      h1{ font-size: 32px; }
+    }
   }
 
-  &::after {
-    content: '';
-    height: 0;
-    display: block;
-    flex-shrink: 99999;
+  &-gallery {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1em;
+    overflow: hidden;
+  
+    &>* {
+      height: $rowHeight;
+      flex-grow: 1;
+      /*&:last-of-type{
+        flex-grow: 99999;
+        height: auto;
+        &> a > img{
+          height: auto;
+        }
+      }*/
+    }
+  
+    &::after {
+      content: '';
+      height: 0;
+      display: block;
+      flex-shrink: 99999;
+    }
+  
+  }
+
+  &-scroll-wrapper{
+    height: 100%;
+    overflow:auto;
   }
 
 }
+
 
 .big-thumbnail {
 
@@ -4845,6 +4891,7 @@ $rowHeight: 25vh;
 
     h4 {
       margin: 3px 0;
+      font-size: 20px;
     }
 
     img {

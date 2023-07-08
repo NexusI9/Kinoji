@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
 import noposter from '@/assets/noposter.jpg';
 import { PeopleLabel } from "../people";
 import Link from "next/link";

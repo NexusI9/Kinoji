@@ -131,8 +131,63 @@ function shots($connection, $body)
 
       break;
 
-    case "GET_SHOTS_WITH_TAGS":
+    case "GET_SHOTS_FROM_QUERIES":
       
+      $colours = isset($body['colours']) ? str_replace(' ','|',$body['colours']) : null;
+      $lights = isset($body['lights']) ? $body['lights'] : null;
+      $subjects = isset($body['subjects']) ? array($body['subjects']) : null;
+
+      $start = isset($body['start']) ? $body['start'] : 0;
+      $stop = isset($body['stop']) ? $body['stop'] : 10;
+
+      $lightThreshold = 0.5;
+
+      if(!$colours && !$lights && !$subjects){ 
+        echo json_encode(array()); 
+        return;
+      }
+
+      
+      $query = "SELECT * FROM shots";
+
+      //set filters condifitons query
+      $filters = array();
+      if($colours){ array_push($filters, "REGEXP_LIKE(LOWER(colours),'".$colours."')"); }
+      if($lights){ 
+        if( stripos($lights, "high contrast") !== false ){ array_push($filters, "contrast > ". $lightThreshold);  }
+        if( stripos($lights, "low contrast") !== false ){ array_push($filters, "contrast < ". $lightThreshold);  }
+        if( stripos($lights, "vibrant") !== false ){ array_push($filters, "vibrance > ". $lightThreshold);  }
+        if( stripos($lights, "natural") !== false ){ array_push($filters, "vibrance < ". $lightThreshold);  }
+      }
+      
+      //concat filter with AND
+      if(count($filters)){
+        $query .=  " WHERE ";
+        $query .= implode(" AND ", $filters);
+      }
+
+      $query .= " LIMIT $start,$stop";
+
+      $shots = $connection->query($query);
+
+      //add movies to shots objects
+      if($shots && count($shots)){
+
+        function get_movie($ar)
+        {
+          global $connection;
+          $mv = $connection->query('SELECT * FROM movies WHERE id = ?', [$ar['id']]);
+          return array_merge(
+            $ar,
+            array("fullpath" => "/assets/movies/{$ar['folder']}/{$ar['name']}.webp"),
+            array("movie" => $mv[0])
+          );
+        }
+
+        $shots = array_map('get_movie', $shots);
+      }
+
+      echo json_encode($shots);
 
     break;
 

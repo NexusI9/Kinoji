@@ -18,7 +18,7 @@ import { loadShots } from './ShotSearch.helper';
   }
   total={shots.length}
 />*/
-export default ({ tags, colours, subjects, step = 10 }) => {
+export default ({ shotsList, tags, colours, subjects, step = 10 }) => {
 
   const [shots, setShots] = useState([]);
   const [load, setLoad] = useState(false);

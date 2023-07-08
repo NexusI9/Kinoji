@@ -2,81 +2,136 @@ import { useState, useEffect } from 'react';
 import { TagBox, Counter } from '@/components/tags';
 import useAPI from '@/lib/api';
 import Head from 'next/head';
-import { ShotSearch } from '@/components/search';
+import { BigThumbnail } from '@/components/movie';
+import { useRouter } from 'next/router';
+import { removeUndefined } from '@/lib/utilities';
+import { encodeQueries } from '@/components/tags/Tag.helper';
 
-function Tags() {
+function Shots() {
 
+  const router = useRouter();
+
+  //main objects
   const [tags, setTags] = useState([]);
-  const [shots, setShots] = useState({});
+  const [shots, setShots] = useState([]);
+
+  //filters objects
   const [lights, setLights] = useState([]);
   const [colours, setColours] = useState([]);
   const [subjects, setSubjects] = useState([]);
 
-  const spliceTitle = (array, limit) => {
+  //loading process
+  const STEP = 10;
+  const [stop, setStop] = useState(STEP);
+  const [load, setLoad] = useState(false);
 
-    if (array.length > limit) { array = array.splice(0, limit); }
-    return array.map(movie => movie.title);
+  const FILTERS = [
+    { header: 'Hues', choices: 'GET_COLORS', type: 'colour', state: setColours, getArray: () => colours },
+    { header: 'Lighting', choices: 'GET_LIGHTS', type: 'light', state: setLights, getArray: () => lights },
+    { header: 'Subjects', choices: 'GET_SUBJECTS', type: 'subject', state: setSubjects, getArray: () => subjects }
+  ];
 
+  const getShots = async (queries, start = 0, stop = 10) => {
+    queries = removeUndefined(queries);
+    const { post } = useAPI();
+    return post({ type: 'GET_SHOTS_FROM_QUERIES', start: start, stop: stop, ...queries }).then(({ data }) => setShots(data));
+  };
+
+  const onChange = (input) => {
+
+    try {
+      //get Filters objects depending on the input type
+      const type = FILTERS.filter(item => item.type === input.type)[0];
+
+      //getCurrent useState value
+      let currentArray = type.getArray();
+      //find (potential) index in useState array
+      const index = currentArray.indexOf(input.value);
+
+
+      if (input.checked && index < 0) {
+        //push to array if checked and not exists already
+        currentArray.push(input.value);
+      } else if (!input.checked && index >= 0) {
+        //remove from array if unchecked and exists
+        currentArray.splice(index, 1);
+      }
+
+      //update useState
+      type.state([...currentArray]);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
-  const onChange = (val) => ({
-    'light': () => setLights([...val.actives]),
-    'colour': () => setColours([...val.actives]),
-    'subject': () => setSubjects([...val.actives])
-  })[val.type]() || null;
+  useEffect(() => {
+    //prepare queries for api request
+    const queries = encodeQueries({ colours: colours, lights: lights, subjects: subjects });
+
+    const onScroll = () => (scrollReachBottom() && !load) && setLoad(true);
+
+    //update router
+    router.push({
+      pathname: router.pathname,
+      query: removeUndefined(queries)
+    });
+
+    //reset states on filters change & init load
+    setShots([]);
+    setStop(STEP);
+    setLoad(true);
+
+    //events
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+
+  }, [colours, lights, subjects]);
+
+  useEffect(() => {
+    if (load) {
+      const queries = encodeQueries({ colours: colours, lights: lights, subjects: subjects });
+      getShots(queries)
+        .then(_ => {
+          setLoad(false); //allow loading again
+          setStop(stop + STEP); //increment stop
+        });
+    }
+  }, [load]);
 
 
   useEffect(() => {
-
     //set Tax Boxes
     const { post } = useAPI();
-    const FILTERS = [
-      { header: 'Hues', action: 'GET_COLORS', type: 'colour' },
-      { header: 'Lighting', action: 'GET_LIGHTS', type: 'colour' },
-      { header: 'Subjects', action: 'GET_SUBJECTS', type:'tag' }
-  ];
+    const fetchAllTags = FILTERS.map(tag => post({ type: tag.choices }).then(result => ({ ...tag, tags: result.data })));
+    Promise.all(fetchAllTags).then(result => setTags(result));
+  }, []);
 
-  const fetchAllTags = FILTERS.map( tag => post({ type:tag.action }).then(result => ({...tag, tags: result.data}) ) );
-
-  Promise.all(fetchAllTags).then(result => setTags(result));
-
-
-},[]);
-
-
-useEffect(()=>{
-
-    /*const colourResults = colourChain.length > 0 ? FetchAPI.post({type:'GET_SHOTS_WITH_COLORS', colours:colourChain, tags:lightChain}).then(result => result.data) : new Promise(resolve => resolve([]));
-  const tagResults = lightChain.length > 0 ? FetchAPI.post({type:'GET_MOVIES_FROM_TAGS', tags:lightChain}).then(result => result.data) : new Promise(resolve => resolve([]));
-
-  Promise.all([tagResults, colourResults]).then( result => {
-
-    setResults({
-    lightChain:lightChain,
-    colourChain:colourChain,
-    tags: result[0],
-    colours: result[1].shots,
-    total: setTotalResult(colourChain, lightChain, result[0], result[1].movies)
-  })
-});*/
-
-},[lights, colours, subjects]);
-
-return (
-  <>
-    <Head>
-      <title>Search shots | Kinoji</title>
-    </Head>
-    <div id="tag_container" className="settings_container">
-      <div id="tagbox_wrapper">
-        <h1>Search shots</h1>
-        <p className='discrete'>Look up shots depending on their moods, aesthetics or subjects</p>
-        {tags.map(item => item.tags.length ? <TagBox key={'tagbox_' + item.header} header={item.header} tags={item.tags} onChange={onChange} type={item.type} /> : <></> )}
+  return (
+    <>
+      <Head>
+        <title>Search shots | Kinoji</title>
+      </Head>
+      <div className="shot-container settings_container">
+        <div id="tagbox_wrapper">
+          <h1>Search shots</h1>
+          <p className='discrete'>Look up shots depending on their moods, aesthetics or subjects</p>
+          {tags.map(item => item.tags.length ?
+            <TagBox
+              key={'tagbox_' + item.header}
+              header={item.header}
+              tags={item.tags}
+              onChange={onChange}
+              type={item.type}
+            /> : <></>)}
+        </div>
+        <div className='shot-scroll-wrapper'>
+          <div className='shot-gallery'>
+            {shots?.map(shot => <BigThumbnail key={shot.fullpath} {...shot} />)}
+          </div>
+        </div>
       </div>
-      <ShotSearch />
-    </div>
-  </>
-);
+    </>
+  );
 }
 
-export default Tags;
+export default Shots;
