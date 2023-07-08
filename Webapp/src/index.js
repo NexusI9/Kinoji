@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
-import './sheets/style.scss';
 import './sheets/smallscreen.scss';
 import App from './pages';
 import reportWebVitals from './reportWebVitals';

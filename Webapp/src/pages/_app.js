@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { store } from '@/lib/store';
 import { useEffect } from 'react';
 
-import '../sheets/style.scss';
+import '../sheets/index.scss';
 import '../sheets/smallscreen.scss';
 import '../sheets/timeline.scss';
 
