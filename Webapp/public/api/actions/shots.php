@@ -152,7 +152,7 @@ function shots($connection, $body)
 
       //set filters condifitons query
       $filters = array();
-      if($colours){ array_push($filters, "REGEXP_LIKE(LOWER(colours),'".$colours."')"); }
+      if($colours){ array_push($filters, "colours REGEXP '$colours'"); }
       if($lights){ 
         if( stripos($lights, "high contrast") !== false ){ array_push($filters, "contrast > ". $lightThreshold);  }
         if( stripos($lights, "low contrast") !== false ){ array_push($filters, "contrast < ". $lightThreshold);  }

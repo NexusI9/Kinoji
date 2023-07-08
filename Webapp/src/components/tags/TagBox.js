@@ -14,7 +14,7 @@ export default (props) => {
     <div className='tagbox' id={'tagbox_' + header}>
       <LabelBar label={header} hero={false} />
       <div className='tagbox-content'>
-        {tags.map((item,i) => <Tag key={'tag_' + item+i} value={item.toLowerCase()} onChange={onChange} />)}
+        {tags.map((item,i) => <Tag key={'tag_' + item+i} value={item.toLowerCase()} onChange={onChange} defaultChecked={!!props.defaultChecked}/>)}
       </div>
     </div>
   );

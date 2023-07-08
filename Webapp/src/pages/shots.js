@@ -16,9 +16,9 @@ function Shots() {
   const [shots, setShots] = useState([]);
 
   //filters objects
-  const [lights, setLights] = useState([]);
-  const [colours, setColours] = useState([]);
-  const [subjects, setSubjects] = useState([]);
+  const [lights, setLights] = useState();
+  const [colours, setColours] = useState();
+  const [subjects, setSubjects] = useState();
 
   //loading process
   const STEP = 20;
@@ -46,6 +46,8 @@ function Shots() {
 
       //getCurrent useState value
       let currentArray = type.getArray();
+      if(!currentArray){ currentArray = []; }
+
       //find (potential) index in useState array
       const index = currentArray.indexOf(input.value);
 
@@ -65,7 +67,24 @@ function Shots() {
     }
   }
 
+  useEffect(() =>{
+    //load from url query
+
+    if(!colours && !lights && !subjects){
+      Object.keys(router.query).forEach( key =>{
+        const value = router.query[key];
+        return {
+          colours: () => setColours([value]),
+          lights: () => setLights([value]),
+          subjects: () => setSubjects([value]),
+        }[key]() || null;
+      });
+    }
+  },[{...router.query}]);
+
+
   useEffect(() => {
+    
     //prepare queries for api request
     const queries = encodeQueries({ colours: colours, lights: lights, subjects: subjects });
 

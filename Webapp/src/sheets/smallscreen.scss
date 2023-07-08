@@ -262,6 +262,17 @@
     padding: 20% 5% 0%;
   }
 
+  .shot{
+    &-container{
+      grid-template-columns: auto;
+    }
+
+    &-scroll-wrapper{
+      overflow: initial;
+    }
+
+  }
+
 
   #displayOptions{
     flex-direction: column;

@@ -20,7 +20,7 @@ export default ({ query }) => {
     movies: (ar) => ar.map(movie => <MoviePoster key={'querySearchmovie' + movie.id} movie={movie} />),
     peoples: (ar, title) => (<><h4>{title}</h4><div className='people-cardlist default-grid'>{ar.map(ppl => <PeoplePoster key={'dircard' + ppl.id} people={ppl} />)}</div></>),
     collections: (ar) => ar.map(genre => <Rubrique key={'rubriquesearch' + genre.name} genre={genre} direction={'horizontal'} />),
-    colours: (ar) => ar.map(colour => <Card key={'colourbox' + colour.family} label={colour.family} link={'/search?colours=' + colour.family.toLowerCase()} visual={<span name={colour.family.toLowerCase()} className='ico colours' style={{ width: '50px', height: '50px' }}></span>} subtext={'Lookup shots with ' + colour.family + ' hues'} />)
+    colours: (ar) => ar.map(colour => <Card key={'colourbox' + colour.family} label={colour.family} link={'/shots/?colours=' + colour.family.toLowerCase()} visual={<span name={colour.family.toLowerCase()} className='ico colours' style={{ width: '50px', height: '50px' }}></span>} subtext={'Lookup shots with ' + colour.family + ' hues'} />)
   }
 
   const [content, setContent] = useState();

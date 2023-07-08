@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect,useRef } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { getMovieYear, jobFullName } from '@/lib/utilities';
@@ -13,6 +13,7 @@ export default ({ limit = 5, theme='default' }) => {
   const [suggest, setSuggest] = useState();
   const [value, setValue] = useState();
   const router = useRouter();
+  const input = useRef();
 
   const onClick = () => setSuggest();
 
@@ -58,7 +59,7 @@ export default ({ limit = 5, theme='default' }) => {
         </Link>,
 
       colours: ({family}) =>
-        <Link key={'suggestcolors' + family} href={'/shots?colours=' + family} onClick={onClick}>
+        <Link key={'suggestcolors' + family} href={'/shots/?colours=' + family.toLowerCase()} onClick={onClick}>
           <li className='suggest suggest_poster'>
             <div className='suggest_color_wrap'>
               <span className='ico colours' name={family.toLowerCase()}></span>
@@ -109,13 +110,20 @@ export default ({ limit = 5, theme='default' }) => {
 
   useEffect(() => {
     return () => window.removeEventListener('click', onClick);
-  }, [onClick]);
+  }, []);
+
+  useEffect(() => { 
+    setSuggest(); 
+    if(input.current){
+      input.current.value = '';
+    }
+  },[router.asPath]);
 
 
   return (
     <section className={'search_bar suggest_container ' + (theme !== 'default' && theme) } onKeyDown={onKeyDown}>
       <span className="ico search"></span>
-      <input className="field" id="search_input" autoComplete="off" placeholder="Type a movie, director, or a subject" type="text" onChange={onChange} />
+      <input className="field" id="search_input" autoComplete="off" ref={input} placeholder="Type a movie, director, or a subject" type="text" onChange={onChange} />
       {
         suggest?.length && <ul className='suggest_list'>{suggest.map(item => item)}</ul>
       }

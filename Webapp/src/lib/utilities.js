@@ -106,7 +106,7 @@ export function setParam(location, param){
 }
 
 
-export function scrollReachBottom(obj){
+export function scrollReachBottom(obj=window){
   return obj.scrollTop >= (obj.scrollHeight - obj.offsetHeight)-1;
 }
 

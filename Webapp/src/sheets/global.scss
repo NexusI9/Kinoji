@@ -567,10 +567,15 @@ label {
 
   header {
 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
     &>a {
       display: flex;
       flex-direction: row;
       align-items: center;
+      margin-top: 20px;
       gap: 4px;
     }
   }

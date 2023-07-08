@@ -31,14 +31,7 @@ export default function Search(){
       <Head>
         <title>{`Search ${ ("\""+queries?.query+"\"") || ''} | Kinoji`}</title>
       </Head>
-      { queries && queries.query && <GlobalSearch query={queries.query} /> }
-      { queries &&
-        (queries.tags || 
-        queries.colours || 
-        queries.subjects) && 
-        !queries.query && 
-        <ShotSearch tags={queries.tags} colours={queries.colours}  subjects={queries.subjects} />
-      }
+      { queries?.query && <GlobalSearch query={queries.query} /> }
     </motion.div>
   );
 }
