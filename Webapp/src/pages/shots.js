@@ -85,9 +85,7 @@ function Shots() {
   useEffect(() => {
 
     const onScroll = () => (scrollReachBottom(gallery.current) && !load) && setLoad(true);
-
     if (gallery.current) {
-      //events
       gallery.current.addEventListener('scroll', onScroll);
     }
     return () => gallery.current?.removeEventListener('scroll', onScroll);

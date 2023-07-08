@@ -9,7 +9,7 @@ export default (shot) => (
             initial={{opacity:0}}
             animate={{opacity:1, transition:{duration:1}}}
             >
-            <Link href={`/movies/${shot.id}/shot/${shot.shot}`}><img src={shot.fullpath}/></Link>
+            <Link href={`/movies/${shot.id}/shot/${shot.name}`}><img src={shot.fullpath}/></Link>
             { shot.movie && <div className="big-thumbnail-movie">
                 <img src={shot.movie.poster || noposter.src} /> 
                 <div>

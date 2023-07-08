@@ -65,7 +65,7 @@ const Flow = ({ movies }) => {
           (last.bottom < threshold && sec.bottom > window.innerHeight/2)
       ){ 
           return setLoad(true);
-      }else if ( scrollReachBottom() ) { //classical scheme
+      }else if ( scrollReachBottom(window) ) { //classical scheme
           return setLoad(true);
       }
     }

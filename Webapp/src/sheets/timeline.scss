@@ -367,6 +367,7 @@
     z-index: 2;
     transition: transform 0.2s ease;
     pointer-events: auto;
+    box-sizing: content-box;
     &, *{ cursor: pointer; }
     
     &.small{
