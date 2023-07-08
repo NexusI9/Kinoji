@@ -4817,6 +4817,7 @@ $rowHeight: 20vh;
     flex-wrap: wrap;
     gap: 1em;
     overflow: hidden;
+    padding-right: 30px;
   
     &>* {
       height: $rowHeight;

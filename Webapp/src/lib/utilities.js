@@ -106,8 +106,8 @@ export function setParam(location, param){
 }
 
 
-export function scrollReachBottom(){
-  return window.innerHeight + window.pageYOffset >= document.body.offsetHeight-1;
+export function scrollReachBottom(obj){
+  return obj.scrollTop === (obj.scrollHeight - obj.offsetHeight);
 }
 
 export function removeUndefined(obj){

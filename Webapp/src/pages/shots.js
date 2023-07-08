@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { TagBox, Counter } from '@/components/tags';
 import useAPI from '@/lib/api';
 import Head from 'next/head';
 import { BigThumbnail } from '@/components/movie';
 import { useRouter } from 'next/router';
-import { removeUndefined } from '@/lib/utilities';
+import { removeUndefined, scrollReachBottom } from '@/lib/utilities';
 import { encodeQueries } from '@/components/tags/Tag.helper';
 
 function Shots() {
@@ -21,9 +21,10 @@ function Shots() {
   const [subjects, setSubjects] = useState([]);
 
   //loading process
-  const STEP = 10;
+  const STEP = 20;
   const [stop, setStop] = useState(STEP);
   const [load, setLoad] = useState(false);
+  const gallery = useRef();
 
   const FILTERS = [
     { header: 'Hues', choices: 'GET_COLORS', type: 'colour', state: setColours, getArray: () => colours },
@@ -31,10 +32,10 @@ function Shots() {
     { header: 'Subjects', choices: 'GET_SUBJECTS', type: 'subject', state: setSubjects, getArray: () => subjects }
   ];
 
-  const getShots = async (queries, start = 0, stop = 10) => {
+  const getShots = async (queries, start = 0, stp = STEP) => {
     queries = removeUndefined(queries);
     const { post } = useAPI();
-    return post({ type: 'GET_SHOTS_FROM_QUERIES', start: start, stop: stop, ...queries }).then(({ data }) => setShots(data));
+    return post({ type: 'GET_SHOTS_FROM_QUERIES', start: start, stop: stp, ...queries }).then(({ data }) => setShots(data));
   };
 
   const onChange = (input) => {
@@ -68,8 +69,6 @@ function Shots() {
     //prepare queries for api request
     const queries = encodeQueries({ colours: colours, lights: lights, subjects: subjects });
 
-    const onScroll = () => (scrollReachBottom() && !load) && setLoad(true);
-
     //update router
     router.push({
       pathname: router.pathname,
@@ -81,16 +80,25 @@ function Shots() {
     setStop(STEP);
     setLoad(true);
 
-    //events
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-
   }, [colours, lights, subjects]);
 
   useEffect(() => {
+
+    const onScroll = () => (scrollReachBottom(gallery.current) && !load) && setLoad(true);
+
+    if (gallery.current) {
+      //events
+      gallery.current.addEventListener('scroll', onScroll);
+    }
+    return () => gallery.current?.removeEventListener('scroll', onScroll);
+
+  }, [gallery]);
+
+  useEffect(() => {
+
     if (load) {
       const queries = encodeQueries({ colours: colours, lights: lights, subjects: subjects });
-      getShots(queries)
+      getShots(queries, 0, stop)
         .then(_ => {
           setLoad(false); //allow loading again
           setStop(stop + STEP); //increment stop
@@ -115,16 +123,16 @@ function Shots() {
         <div id="tagbox_wrapper">
           <h1>Search shots</h1>
           <p className='discrete'>Look up shots depending on their moods, aesthetics or subjects</p>
-          {tags.map(item => item.tags.length ?
+          {tags.map((item,i) => item.tags.length ?
             <TagBox
-              key={'tagbox_' + item.header}
+              key={'tagbox_' + item.header+i}
               header={item.header}
               tags={item.tags}
               onChange={onChange}
               type={item.type}
             /> : <></>)}
         </div>
-        <div className='shot-scroll-wrapper'>
+        <div className='shot-scroll-wrapper' ref={gallery}>
           <div className='shot-gallery'>
             {shots?.map(shot => <BigThumbnail key={shot.fullpath} {...shot} />)}
           </div>
