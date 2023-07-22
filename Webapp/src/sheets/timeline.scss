@@ -42,7 +42,7 @@
         @media(hover:'hover'){
           &:hover{
             background: linear-gradient(45deg, #4248636e, transparent);
-            svg{ fill: var(--paper); }
+            svg{ fill: var(--blue10); }
           }
         }
 
@@ -109,8 +109,8 @@
 
       @media(hover:'hover'){
         &:hover{
-          color: var(--paper);
-          svg{ fill: var(--paper); }
+          color: var(--blue10);
+          svg{ fill: var(--blue10); }
         }
       }
     }
@@ -214,7 +214,7 @@
                 height: 100%;
                 position: absolute;
                 top: 0;
-                background: var(--paper);
+                background: var(--blue10);
             }
           }
         }
@@ -253,7 +253,7 @@
     overflow-y: scroll;
     overflow-x: hidden;
     position: fixed;
-    color: var(--paper);
+    color: var(--blue10);
   
     & > section{
       position: fixed;
@@ -309,7 +309,7 @@
         display: block;
         height: 100%;
         transform: translateX(-2%);
-        background: linear-gradient(90deg,transparent, var(--paper) 5%, var(--paper) 95%, transparent);
+        background: linear-gradient(90deg,transparent, var(--blue10) 5%, var(--blue10) 95%, transparent);
       }
     }
   }
@@ -362,7 +362,7 @@
     width: 10px;
     height: 10px;
     border-radius: 100%;
-    background: var(--paper);
+    background: var(--blue10);
     border: solid 4px;
     z-index: 2;
     transition: transform 0.2s ease;
@@ -503,7 +503,7 @@
       justify-content: center;
   
       *{
-        color: var(--paper);
+        color: var(--blue10);
         font-weight: bold;
       }
     }
@@ -552,7 +552,7 @@
           width: 75%;
           height: 75%;
           position: absolute;
-          background: var(--paper);
+          background: var(--blue10);
           border-radius: 100%;
         }
       }
@@ -608,19 +608,19 @@
   
     h4, p{
       margin: 0;
-      color:var(--paper);
+      color:var(--blue10);
     }
 
     &.active{
       z-index: 2;
       & > section{
       
-        background: linear-gradient(0deg, var(--paper) -211%, rgba(26, 31, 39, 0) 90%);
+        background: linear-gradient(0deg, var(--blue10) -211%, rgba(26, 31, 39, 0) 90%);
       }
 
       .chrono_pillar{
-        border-color: var(--paper);
-        p{ color: var(--paper); }
+        border-color: var(--blue10);
+        p{ color: var(--blue10); }
 
       }
     }

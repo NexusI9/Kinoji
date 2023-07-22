@@ -4,17 +4,17 @@
 
     @include round.round-border;
     border: solid 1px;
-    box-shadow: rgb(0 0 0 / 60%) 0px 4px 4px;
+    box-shadow: 0 5px 7px #00000054;
 
 
     @if $theme == 'default'{
       background: linear-gradient(341.13deg, rgb(79 135 177 / 16%) 0.43%, rgb(130 168 255 / 15%) 117.66%);
       background: linear-gradient(341.13deg, #0f1520 0.43%, #262b38 117.66%);
-      color: var(--paper);
+      color: var(--blue10);
       border-color: var(--blue50);
     }
     @if $theme == 'light'{
-      background: var(--paper);
+      background: var(--blue0);
       border-color: var(--blue20);
       color: var(--blue80);
     }

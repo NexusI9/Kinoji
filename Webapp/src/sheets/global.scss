@@ -24,11 +24,12 @@ $container_margin: 3% 0;
   --blue50: #3c4658;
   --blue30: #66799d;
   --blue20: #c8d3e8;
+  --blue10: #DBE4F2;
+  --blue0: #F2F7FF;
 
   --gradient-blue: #264370;
   --red: #B81E1E;
   --lightblue: #4989ff;
-  --paper: #DBE4F2;
   --settings_back: #ddd;
   --settingsDark: #606572;
   --settingsDark: #4d505a;
@@ -133,7 +134,7 @@ $colours: (
 
 @mixin tag-color($value, $color) {
   &[type='checkbox'][value='#{$value}']+label {
-    &::before{
+    &::before {
       background: $color;
     }
   }
@@ -177,7 +178,7 @@ $colours: (
 body {
   background: var(--background);
   margin: 0;
-  color: var(--paper);
+  color: var(--blue0);
   font-weight: lighter;
   font-style: normal;
   font-family: 'Fira Sans', sans-serif;
@@ -191,7 +192,7 @@ h3,
 h4 {
   font-family: 'Fira Sans', sans-serif;
   font-weight: 600;
-  color: var(--paper);
+  color: var(--blue0);
 
   &.big {
     font-size: 64px;
@@ -246,7 +247,7 @@ hr {
 }
 
 .paper {
-  color: var(--paper);
+  color: var(--blue10);
 }
 
 input,
@@ -383,7 +384,7 @@ label {
 
       .placeholder {
         transform: translateY(-18px) scale3d(0.8, 0.8, 0.8);
-        color: var(--paper);
+        color: var(--blue10);
       }
 
       input,
@@ -419,7 +420,7 @@ label {
     textarea {
       width: 100%;
       cursor: text;
-      color: var(--paper);
+      color: var(--blue10);
       background: transparent;
       box-sizing: border-box;
     }
@@ -594,7 +595,7 @@ label {
     transition: background 0.2s ease;
     background-color: var(--red);
     border: none;
-    color: var(--paper);
+    color: var(--blue10);
 
     @media(hover:'hover') {
       &:hover {
@@ -610,14 +611,14 @@ label {
     @media(hover:hover) {
       &:hover {
         background: var(--blue70);
-        color: var(--paper);
+        color: var(--blue10);
       }
     }
   }
 }
 
 a {
-  color: var(--paper);
+  color: var(--blue10);
   text-decoration: none;
   cursor: pointer;
   transition: color 0.2s ease;
@@ -648,7 +649,7 @@ a {
     height: 1px;
     width: 20%;
     display: none;
-    background: var(--paper);
+    background: var(--blue10);
     transition: background 0.2s linear;
 
   }
@@ -669,7 +670,7 @@ a {
 }
 
 .arrowlabel {
-  color: var(--paper);
+  color: var(--blue10);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -679,7 +680,7 @@ a {
   font-weight: 500;
 
   svg {
-    fill: var(--paper);
+    fill: var(--blue10);
     transition: fill 0.2s ease;
   }
 
@@ -855,7 +856,7 @@ a {
 }
 
 .movie_banner {
-  color: var(--paper);
+  color: var(--blue10);
   display: grid;
   grid-template-columns: 130px auto;
   margin-bottom: 10px;
@@ -1044,7 +1045,7 @@ a {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    color: var(--paper);
+    color: var(--blue10);
     font-size: clamp(120px, 8vw, 170px);
     font-style: italic;
     font-weight: 800;
@@ -1341,7 +1342,7 @@ a {
 
         @media(hover:hover) {
           &:hover {
-            fill: var(--paper);
+            fill: var(--blue10);
           }
         }
       }
@@ -1772,16 +1773,20 @@ a {
   }
 
   .search_bar {
-    min-width: 30vw;
-    height: 3vh;
     margin-top: 2%;
-    padding: 10px 20px;
-    display: flex;
-    flex-direction: row;
-    border-radius: 10em;
-    font-size: 3em;
-    box-sizing: content-box;
+    display: inline-flex;
+    & > label{
+      min-width: 30vw;
+      height: 3vh;
+      padding: 10px 20px;
+      display: flex;
+      flex-direction: row;
+      border-radius: 10em;
+      font-size: 3em;
+      box-sizing: content-box;
+    }
   }
+
 
   #tools_search_bar {
     display: grid;
@@ -1806,7 +1811,7 @@ a {
 
       svg.ico {
         background: transparent;
-        fill: var(--paper);
+        fill: var(--blue10);
       }
 
       @media(hover:hover) {
@@ -1877,7 +1882,7 @@ a {
       flex-shrink: 1;
       width: 100%;
       height: fit-content;
-      color: var(--paper);
+      color: var(--blue10);
     }
 
     h1 {
@@ -1913,7 +1918,7 @@ a {
   width: 35vw;
   box-shadow: rgb(28 27 39 / 60%) 0px 4px 17px;
   background: linear-gradient(341.13deg, rgb(175 180 184 / 16%) 0.43%, rgb(93 93 93 / 15%) 117.66%);
-  color: var(--paper);
+  color: var(--blue10);
   align-items: flex-start;
   justify-content: center;
   overflow: hidden;
@@ -2068,7 +2073,7 @@ a {
   }
 
   a:hover {
-    color: var(--paper);
+    color: var(--blue10);
   }
 
   p {
@@ -2158,12 +2163,12 @@ a {
 
   svg.ico {
     background: transparent;
-    fill: var(--paper);
+    fill: var(--blue10);
   }
 
   p,
   small {
-    color: var(--paper);
+    color: var(--blue10);
     transition: color 0.2s ease;
   }
 
@@ -2200,7 +2205,7 @@ a {
   margin:0 5px;
   width: max-content;
   float: left;
-  color: var(--paper);
+  color: var(--blue10);
   font-weight: 500;
 
   &.grey,
@@ -2235,7 +2240,7 @@ a {
   width: 15px;
   float: left;
   box-sizing: border-box;
-  background-color: var(--paper);
+  background-color: var(--blue10);
   mask-repeat: no-repeat;
   mask-size: contain;
   mask-position: center;
@@ -2706,8 +2711,14 @@ a {
     height: 36px;
 
     .search_bar {
-      background: transparent;
       width: 100%;
+      & > label{
+        background: transparent;
+      }
+      ul.suggest_list{
+          border-radius: 20px;
+          padding-top: 38px;
+      }
     }
 
     svg {
@@ -2726,7 +2737,7 @@ a {
       }
 
       .icon {
-        fill: var(--paper);
+        fill: var(--blue10);
       }
 
       @media(hover:'hover') {
@@ -2825,7 +2836,7 @@ a {
       width: 100%;
       height: 3px;
       display: block;
-      background: var(--paper);
+      background: var(--blue10);
       transition: width 0.13s ease-out;
     }
   }
@@ -3162,7 +3173,7 @@ a {
     padding: 15px 5px;
     color: var(--blue30);
     transition: color 0.2s ease, border 0.2s ease;
-    border-bottom: solid 0px var(--paper);
+    border-bottom: solid 0px var(--blue10);
     position: relative;
 
     &.inactive {
@@ -3176,7 +3187,7 @@ a {
       width: 100%;
       height: 0px;
       display: block;
-      background-color: var(--paper);
+      background-color: var(--blue10);
       bottom: 0;
       left: 0;
       transition: height 0.2s ease;
@@ -3190,7 +3201,7 @@ a {
 
     &:checked {
       +label {
-        color: var(--paper);
+        color: var(--blue10);
 
         &::after {
           height: 3px;
@@ -3208,7 +3219,7 @@ a {
   padding: 1px 10px;
   font-size: small;
   margin-left: 8px;
-  color: var(--paper);
+  color: var(--blue10);
 }
 
 
@@ -3547,35 +3558,54 @@ a {
 
 
 .search_bar {
-  float: right;
+
   position: relative;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-self: end;
-  padding: 10px 15px;
-  gap: 10px;
-  @include card.card;
-  border-radius: 10em;
-  background: var(--blue80);
-  box-shadow: none;
-  cursor: text;
+
+  &>label {
+    width: 100%;
+    float: right;
+    position: relative;
+    flex-direction: row;
+    align-items: center;
+    justify-self: end;
+    padding: 10px 15px;
+    gap: 10px;
+    @include card.card;
+    border-radius: 10em;
+    background: var(--blue80);
+    box-shadow: none;
+    cursor: text;
+    z-index: 2;
+    &:has(input[type='text']){
+      display: flex;
+    }
+
+    input[type='text'] {
+      border: none;
+      display: inherit;
+    }
+  }
+
 
   &.light {
-    background: var(--paper);
-    border-color: var(--blue20);
+    &>label {
+      background: var(--blue0);
+      border-color: var(--blue20);
 
-    &,
-    input {
-      color: var(--blue80);
+      &,
+      input {
+        color: var(--blue80);
+      }
     }
+
 
     .suggest_list {
       @include card.card('light');
+      border-radius: 30px;
 
       .suggest {
         color: var(--blue80);
-        border-bottom-color: var(--blue30);
+        border-bottom-color: var(--blue10);
 
         &:hover {
           background: var(--blue20);
@@ -3613,18 +3643,20 @@ a {
     overflow-y: auto;
     box-sizing: border-box;
     position: absolute;
-    width: 90%;
-    padding: 3%;
+    width: 100%;
+    padding: 50px 0 15px;
     top: 110%;
     transition: opacity 0.3s ease, width 0.2s ease;
     z-index: 99;
     display: flex;
-    grid-template-columns: 1fr 1fr;
     column-gap: 2%;
+    z-index: 1;
     left: 50%;
+    top: 0;
     transform: translateX(-50%);
     flex-direction: column;
     @include card.card();
+    border-radius: 30px;
     background: var(--blue90);
 
     input {
@@ -3634,7 +3666,7 @@ a {
     li {
       transition: opacity 0.3s ease, transform 0.25s ease, box-shadow 0.25s ease;
       box-sizing: border-box;
-      padding: 10px 5px;
+      padding: 10px 15px;
       cursor: pointer;
 
       &>div {
@@ -3649,10 +3681,11 @@ a {
       margin-top: 20px;
       padding-bottom: 6px;
       gap: 3px;
+      padding-right: 15px;
     }
 
     .suggest {
-      color: var(--paper);
+      color: var(--blue10);
       border-bottom: solid 1px var(--blue50);
       box-sizing: border-box;
       transition: background 0.2s;
@@ -3832,7 +3865,7 @@ a {
       height: 8px;
       border-radius: 3em;
       display: block;
-      background: var(--paper);
+      background: var(--blue10);
       position: absolute;
       transition: width, height, border, 0.2s;
 
@@ -4041,7 +4074,7 @@ a {
   column-gap: 20px;
   //min-height: 50vh;
   background: transparent;
-  color: var(--paper);
+  color: var(--blue10);
   position: relative;
 
 
@@ -4254,7 +4287,7 @@ img.messy {
   position: relative;
   left: 50%;
   top: 100%;
-  background: var(--paper);
+  background: var(--blue10);
   border-radius: 1px;
   flex-direction: row;
   justify-content: center;
@@ -4496,7 +4529,7 @@ img.messy {
   width: 300px;
   position: absolute;
   right: 15%;
-  color: var(--paper);
+  color: var(--blue10);
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -4581,7 +4614,7 @@ img.messy {
 
 
 .tagbox {
-  color: var(--paper);
+  color: var(--blue10);
   position: relative;
   display: block;
 
@@ -4590,7 +4623,7 @@ img.messy {
     width: 100%;
 
     h4 {
-      color: var(--paper);
+      color: var(--blue10);
     }
   }
 
@@ -4604,14 +4637,15 @@ img.messy {
     flex-wrap: wrap;
   }
 
-  input{
+  input {
 
     &[type='checkbox']:checked+label.tag {
       background: var(--blue50);
       border-color: var(--blue50);
     }
 
-    @each $colour, $hex in $colours{
+    @each $colour,
+    $hex in $colours {
       @include tag-color($colour, $hex);
     }
   }
@@ -4630,15 +4664,19 @@ img.messy {
     box-sizing: border-box;
     align-items: center;
     letter-spacing: 1px;
-    & > small { font-weight: 600; }
 
-    &::before{
-      content:'';
+    &>small {
+      font-weight: 600;
+    }
+
+    &::before {
+      content: '';
       width: 15px;
       height: 15px;
       display: block;
       border-radius: 100%;
     }
+
     &.pop {
       transform: scale(0);
       animation-name: popTag;
@@ -4793,14 +4831,14 @@ img.messy {
 
 $rowHeight: 20vh;
 
-.shot{ 
+.shot {
 
-  &-container{
+  &-container {
     display: grid;
     grid-template-columns: 1fr 3fr;
     gap: 30px;
 
-    &.settings_container{
+    &.settings_container {
       padding: 70px 40px;
       padding-right: 0;
       padding-bottom: 0;
@@ -4812,7 +4850,10 @@ $rowHeight: 20vh;
       padding-right: 40px;
       padding-top: 6%;
       border-right: solid 1px var(--blue70);
-      h1{ font-size: 32px; }
+
+      h1 {
+        font-size: 32px;
+      }
     }
   }
 
@@ -4823,7 +4864,7 @@ $rowHeight: 20vh;
     gap: 1em;
     overflow: hidden;
     padding-right: 30px;
-  
+
     &>* {
       height: $rowHeight;
       flex-grow: 1;
@@ -4835,19 +4876,19 @@ $rowHeight: 20vh;
         }
       }*/
     }
-  
+
     &::after {
       content: '';
       height: 0;
       display: block;
       flex-shrink: 99999;
     }
-  
+
   }
 
-  &-scroll-wrapper{
+  &-scroll-wrapper {
     height: 100%;
-    overflow:auto;
+    overflow: auto;
   }
 
 }

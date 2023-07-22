@@ -1,4 +1,4 @@
-import { useState, useEffect,useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { getMovieYear, jobFullName } from '@/lib/utilities';
@@ -8,7 +8,7 @@ import ArrowLabel from './ArrowLabel';
 
 import noposter from '@/assets/noposter.jpg';
 
-export default ({ limit = 5, theme='default' }) => {
+export default ({ limit = 5, theme = 'default' }) => {
 
   const [suggest, setSuggest] = useState();
   const [value, setValue] = useState();
@@ -38,7 +38,7 @@ export default ({ limit = 5, theme='default' }) => {
           </li>
         </Link>,
 
-      peoples: ({id, poster, name, job}) =>
+      peoples: ({ id, poster, name, job }) =>
         <Link key={'suggestdir' + id} href={'/people/' + id} onClick={onClick}>
           <li className='suggest suggest_poster'>
             <img src={poster || noposter.src} />
@@ -49,7 +49,7 @@ export default ({ limit = 5, theme='default' }) => {
           </li>
         </Link>,
 
-      collections: ({name}) =>
+      collections: ({ name }) =>
         <Link key={'suggestgenre' + name} href={'/collections/' + name} onClick={onClick}>
           <li className='suggest'>
             <div> <p>{name}</p>
@@ -58,7 +58,7 @@ export default ({ limit = 5, theme='default' }) => {
           </li>
         </Link>,
 
-      colours: ({family}) =>
+      colours: ({ family }) =>
         <Link key={'suggestcolors' + family} href={'/shots/?colours=' + family.toLowerCase()} onClick={onClick}>
           <li className='suggest suggest_poster'>
             <div className='suggest_color_wrap'>
@@ -73,7 +73,7 @@ export default ({ limit = 5, theme='default' }) => {
     }
     let count = 0;
     const listing = [];
- 
+
     Object.keys(sug).forEach(key => {
       if (Array.isArray(sug[key])) {
         sug[key].map(item => {
@@ -97,7 +97,7 @@ export default ({ limit = 5, theme='default' }) => {
 
     if (query.length > 1) {
       const { post } = useAPI();
-      post({ type: 'GET_SUGGESTION', suggestion: query }).then(result => setSuggest(list(result.data, query)) );
+      post({ type: 'GET_SUGGESTION', suggestion: query }).then(result => setSuggest(list(result.data, query)));
       window.addEventListener('click', onClick);
       setValue(query);
     } else {
@@ -112,21 +112,21 @@ export default ({ limit = 5, theme='default' }) => {
     return () => window.removeEventListener('click', onClick);
   }, []);
 
-  useEffect(() => { 
-    setSuggest(); 
-    if(input.current){
+  useEffect(() => {
+    setSuggest();
+    if (input.current) {
       input.current.value = '';
     }
-  },[router.asPath]);
+  }, [router.asPath]);
 
 
   return (
-    <section className={'search_bar suggest_container ' + (theme !== 'default' && theme) } onKeyDown={onKeyDown}>
-      <span className="ico search"></span>
-      <input className="field" id="search_input" autoComplete="off" ref={input} placeholder="Type a movie, director, or a subject" type="text" onChange={onChange} />
-      {
-        suggest?.length && <ul className='suggest_list'>{suggest.map(item => item)}</ul>
-      }
+    <section className={'search_bar suggest_container ' + (theme !== 'default' && theme)} onKeyDown={onKeyDown}>
+      <label>
+        <span className="ico search"></span>
+        <input className="field" id="search_input" autoComplete="off" ref={input} placeholder="Type a movie, director, or a subject" type="text" onChange={onChange} />
+      </label>
+      { suggest?.length && <ul className='suggest_list'>{suggest.map(item => item)}</ul> }
     </section>
   );
 }
