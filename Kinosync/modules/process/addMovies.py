@@ -44,7 +44,7 @@ class AddMovies:
 
     def addMovieIdToGenre(self, genre_id, movie_id):
         #Update Genres Id column with current processed movie
-        genreMovie = self.connector.execute("""SELECT movies FROM genres WHERE id = %s""", [genre_id])[0][0]
+        genreMovie = self.connector.execute("""SELECT movies FROM collections WHERE id = %s""", [genre_id])[0][0]
 
         if (genreMovie):
             genreMovie = genreMovie.split(";")
@@ -61,7 +61,7 @@ class AddMovies:
             genreMovie = movie_id
 
 
-        self.connector.execute("""UPDATE genres SET movies = %s WHERE id = %s""", [genreMovie, genre_id])
+        self.connector.execute("""UPDATE collections SET movies = %s WHERE id = %s""", [genreMovie, genre_id])
 
 
     def setManualInfo(self,folder):
@@ -95,7 +95,7 @@ class AddMovies:
            \n
        => """)
 
-        genres = self.connector.execute("""SELECT id, name FROM genres""")
+        genres = self.connector.execute("""SELECT id, name FROM collections""")
         #prepare list from database genres
         if genres:
             for g in range(len(genres)):

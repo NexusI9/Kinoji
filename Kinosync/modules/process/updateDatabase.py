@@ -51,19 +51,24 @@ class UpdateDatabase:
 
                 #retrieving peoples data
                 peoples = ['director','dop','artdir']
+      
                 for job in peoples:
-                    peopleID = movieData[job]
-                    alreadyExists = self.connector.execute("""SELECT * FROM peoples WHERE id = %s""", [peopleID])
-                    if(peopleID):
-                        if(len(alreadyExists)):
-                            userUpdate = input("People with id %s already exists, do you want to update? (y/n)" % (peopleID))
-                            if(userUpdate == 'y' or not len(userUpdate)):
-                                print('\nRetrieving %s data...' % (job))
-                                self.fetchDataOfPeople(peopleID, job)
+                    try:
+                        peopleID = movieData[job]
+                    except:
+                        print('Could not find %s, skipping...' % (job))
+                    else:
+                        if(peopleID):
+                            alreadyExists = self.connector.execute("""SELECT * FROM peoples WHERE id = %s""", [peopleID])
+                            if(len(alreadyExists)):
+                                userUpdate = input("People with id %s already exists, do you want to update? (y/n)" % (peopleID))
+                                if(userUpdate == 'y' or not len(userUpdate)):
+                                    print('\nRetrieving %s data...' % (job))
+                                    self.fetchDataOfPeople(peopleID, job)
+                                else:
+                                    continue
                             else:
-                                continue
-                        else:
-                            self.fetchDataOfPeople(peopleID, job)
+                                self.fetchDataOfPeople(peopleID, job)
 
         return
 

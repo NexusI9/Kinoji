@@ -19,12 +19,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "boot": "mysql.server start && sudo apachectl start",
-    "sync": "pipenv run python3.7 ../Kinosync/main.py",
-    "dump": "cd /Users/elkhantour/Desktop && mysqldump -u root -p elkha997290 > kinoji.sql",
-    "start": "next start",
-    "build": "next build",
-    "dev": "next dev"
+    "dev:boot": "mysql.server start && sudo apachectl start",
+    "dev:start": "next dev",
+    "dev:sync": "pipenv run python3.7 ../Kinosync/main.py",
+    "dev:dump": "cd /Users/elkhantour/Desktop && mysqldump -u root -p elkha997290 > kinoji.sql",
+    "build": "next build"
   },
   "eslintConfig": {
     "extends": [
