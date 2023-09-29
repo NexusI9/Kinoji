@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__.'/../lib/utilities.php';
+require_once __DIR__.'/../lib/constants.php';
 
 function peoples($connection, $body)
 {
@@ -55,7 +56,14 @@ function peoples($connection, $body)
       break;
 
     case 'GET_PEOPLE_FROM_ID':
-      echo json_encode($connection->query("SELECT * FROM peoples WHERE id = ?", [$body['id']]));
+      global $EMAIL;
+      $people = $connection->query("SELECT * FROM peoples WHERE id = ?", [$body['id']]);
+
+      if(!isset($people[0]['summary'])){
+        $people[0]["summary"] = "(It seems like there is not enough data for this article, feel free to contribute and provide more info by using the mail $EMAIL)";
+      }
+
+      echo json_encode($people);
       break;
 
     case 'GET_MOVIES_FROM_PEOPLE':

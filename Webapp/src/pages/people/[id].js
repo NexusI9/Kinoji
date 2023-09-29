@@ -15,7 +15,7 @@ return(
       <title>{`${props.people[0].name} biography and movies | Kinoji`}</title>
     </Head>
   {
-    props.people.map( infos => <Banner
+    props.people?.map( infos => <Banner
         key={'director_banner_'+infos.id}
         visual={<img alt={'poster_banner_'+infos.name} src={infos.poster || noposter.src } /> }
         category={ jobFullName(infos.job) }
@@ -54,7 +54,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({params}) {
   const people = await useAPI().fetch({type:'GET_PEOPLE_FROM_ID', id:params.id});
   const peopleMovie = await useAPI().fetch({type:'GET_MOVIES_FROM_PEOPLE', id:params.id});
-
+  console.log(people);
   return {
     props: {
       people:people,

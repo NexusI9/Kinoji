@@ -21,7 +21,7 @@ export default ({ id, popup = true, tag=false }) => {
 
   useEffect(() => {
     const { post } = useAPI();
-    post({ type: 'GET_PEOPLE_FROM_ID', id: id }).then(({ data }) => setDir(data));
+    post({ type: 'GET_PEOPLE_FROM_ID', id: id }).then(({ data }) => setDir(data) );
 
     if (hover && dir.length && popup) {
       post({ type: 'GET_MOVIES_FROM_PEOPLE', id: id }).then(result => {
