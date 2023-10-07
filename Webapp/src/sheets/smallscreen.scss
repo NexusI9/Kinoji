@@ -67,6 +67,9 @@
 
     #toolsBar{
       width: 100%;
+      a{
+        display: none;
+      }
     }
 
     #sideFilter{
@@ -119,10 +122,6 @@
     & > .alphaList{
       width: 100%;
     }
-  }
-  .movie-poster{
-      width: calc((100vw / 4.9));
-      height: 30vw;
   }
 
   .highlight_wrapper{
@@ -250,10 +249,13 @@
   }
 
   .label-bar{
+
+    flex-direction: column;
+    align-items: center;
+    gap:10px;
+
     &:has(#displayOptions){
-      flex-direction: column;
       align-items: flex-start;
-      gap:10px;
     }
 
   }
@@ -342,9 +344,5 @@
   }
 
 
-  .movie-poster{
-      width: calc((100vw / 3.65));
-      height: 40vw;
-  }
 
 }
