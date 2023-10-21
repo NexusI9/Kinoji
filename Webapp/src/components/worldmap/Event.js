@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { dateToPosition } from './Timeline.helper';
 import { SoloContent, GroupContent } from './Event.children';
 import { AnimatePresence, motion } from 'framer-motion';
+import Link from 'next/link';
 
 
 export default ({ object, type, date, minmax, width, id }) => {
@@ -13,6 +14,8 @@ export default ({ object, type, date, minmax, width, id }) => {
   const setActive = useDispatch();
   const timeout = useRef();
   const SOLO_OR_GROUP = Array.isArray(object) ? 'group' : 'solo';
+
+  const DynamicDot = type === 'movies' && SOLO_OR_GROUP === 'solo' ? Link : 'span';
 
   useEffect(() => setOpacity(lastActive === id ? 1 : 0), [lastActive]);
 
@@ -55,16 +58,18 @@ export default ({ object, type, date, minmax, width, id }) => {
       style={{ left: dateToPosition(minmax, date[0], width, 10) + 'px' }}
     >
 
-      <span className='dot_events'
+      <DynamicDot 
+        className='dot_events'
         onMouseEnter={() => {
           activated.current = true;
           setOpacity(1);
           setActive({ type: 'SET_ACTIVE_POPUP', token: id });
         }}
         onMouseLeave={handleOnMouseLeave}
+        {...(type === 'movies' && SOLO_OR_GROUP === 'solo' && {href:`/movies/${object.id}`}) }
       >
         <Number />
-      </span>
+      </DynamicDot>
       <Label />
       <AnimatePresence mode='wait'>
         {opacity &&

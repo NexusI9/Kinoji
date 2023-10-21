@@ -29,7 +29,7 @@ export default () => {
                         { name: 'name', placeholder: 'Your name', required: true },
                         { name: 'email', placeholder: 'Your email', required: true },
                     ]}
-                    submit={{ content: 'subscribe', onSubmit: handleOnSumbit }}
+                    submit={{ content: 'Subscribe', onSubmit: handleOnSumbit }}
                 />
                 <p className="discrete">
                     <small>

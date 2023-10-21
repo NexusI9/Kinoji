@@ -137,8 +137,9 @@
       .timeline-segment-headline{
         text-align: center;
         box-sizing: border-box;
-        padding: 0 120px;
+        padding: 0 100px;
         pointer-events: none;
+        h2{font-size: 2rem;}
         & > *{margin: 3px;}
       }
     }
@@ -514,6 +515,11 @@
   .chrono_movies{
     color:var(--red);
     z-index: 4;
+
+    .dot_events{
+      color:var(--red);
+    }
+
     &.group{
       & > span{ background-color: var(--red); }
       .chrono_popup{
