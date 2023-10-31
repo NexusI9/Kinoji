@@ -22,6 +22,7 @@ $container_margin: 3% 0;
   --blue80: #1B222A;
   --blue70: #1f242d;
   --blue50: #3c4658;
+  --blue60: #2D3542;
   --blue30: #66799d;
   --blue20: #c8d3e8;
   --blue10: #DBE4F2;
@@ -605,13 +606,14 @@ label {
   }
 
   &.secondary {
-    transition: background 0.08s linear, color 0.08s linear;
+    transition: background, border, 0.08s linear, color 0.08s linear;
     background: transparent;
 
     @media(hover:hover) {
       &:hover {
-        background: var(--blue70);
+        background: var(--blue60);
         color: var(--blue10);
+        border-color: var(--blue30);
       }
     }
   }
@@ -1088,11 +1090,17 @@ a {
     @include round.round-border;
     padding: 10px 40px;
 
-    form {
+    form {  
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 15px;
       justify-content: flex-start;
+      fieldset{
+        padding: 0;
+      }
+      .cta{
+        width: 100%;
+      }
     }
 
 
@@ -2731,7 +2739,7 @@ a {
       width: auto;
       border: solid 1px var(--blue50);
       background-color: transparent;
-      transition: background 0.2s ease;
+      transition: background,border, 0.2s ease;
       border-radius: 100%;
       display: flex;
       align-items: center;
@@ -2748,7 +2756,8 @@ a {
           svg{
             fill: var(--blue0);
           }
-          background-color: var(--blue80);
+          background-color: var(--blue60);
+          border-color:var(--blue30);
 
         }
       }
@@ -2984,7 +2993,7 @@ a {
     }
 
     &:hover {
-      background: var(--blue50);
+      background: var(--blue70);
     }
 
   }
@@ -2994,8 +3003,8 @@ a {
     display: none;
 
     &:checked+label {
-      background: var(--red);
-      border-color: var(--red);
+      background: var(--blue60);
+      border-color: var(--blue30);
     }
   }
 
