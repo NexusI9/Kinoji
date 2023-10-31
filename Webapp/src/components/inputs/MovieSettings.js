@@ -41,7 +41,7 @@ export default ({onChange, defaultCheck}) => {
     return(
       <div id='displayOptions'>
         <section>
-          <small>Order by:</small>
+          <small>Sort by:</small>
           <div id='microFilters'>
             { filter.map( ({name, ico}) => 
               <MicroFilters 
