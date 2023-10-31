@@ -16,14 +16,14 @@ export default ({ hero = true, visual, header, summary, sources, spheros = false
         <ExpandableText
           paragraph={summary}
           height={200}
-          footer={sources &&
+        />
+      </div>
+      {sources &&
             <div className='sources'>
               <h5>Sources</h5>
               <ul>{sources.split(';').map( src => <li key={src}><a href={src} target='_blank'><small>{src}</small></a></li> )}</ul>
             </div>
           }
-        />
-      </div>
     </header>
 
   );

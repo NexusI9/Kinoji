@@ -4078,7 +4078,7 @@ a {
   margin-top: 6%;
   height: fit-content;
   display: grid;
-  grid-template-columns: 170px auto;
+  grid-template-columns: 170px 4fr 1fr;
   column-gap: 20px;
   //min-height: 50vh;
   background: transparent;
@@ -4158,9 +4158,6 @@ a {
     position: relative;
   }
 
-  .expandable {
-    width: 70%;
-  }
 }
 
 #dirPopups,
