@@ -501,7 +501,7 @@ label {
     box-sizing: border-box;
     text-align: center;
     padding: 10% 20%;
-    padding-bottom: 5%;
+    padding-bottom: 0%;
     overflow: visible;
   }
 }
@@ -1147,7 +1147,7 @@ a {
 
     display: grid;
     margin: 0 auto;
-    margin-top: 100px;
+    margin-top: 54px;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
     min-height: 550px;
