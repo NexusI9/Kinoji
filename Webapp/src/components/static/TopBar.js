@@ -40,22 +40,23 @@ export default () => {
       else { setActive(false); }
     }
 
-    if (Routing.isSettings(location)) { setActive(true); }
-    else if (Routing.isHomepage(location)) { setActive(false); document.addEventListener('scroll', onScroll); }
+    if (Routing.isSettings(location)) { 
+      setActive(true); 
+    }
+    else if (Routing.isHomepage(location)) { 
+      setActive(false); 
+      document.addEventListener('scroll', onScroll); 
+    }
     else {
       setActive(true);
       document.removeEventListener('scroll', onScroll);
     }
-
-    setOpen(false);
 
     return () => {
       document.removeEventListener('scroll', onScroll);
     }
 
   }, [location]);
-
-  useEffect(() => { setActive(true) }, [open]);
 
   return (
     <nav id="topMenu" className={`${active ? '' : 'inactive'} ${Routing.isSettings(location) ? 'transparent' : ''} ${open ? 'open' : ''}`}>
